@@ -792,7 +792,9 @@
   "base": "https://repo.almalinux.org/almalinux/10/isos/aarch64/",
   "pattern": "AlmaLinux-(10\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "almalinux-10-dvd-aarch64",
@@ -804,7 +806,9 @@
   "base": "https://repo.almalinux.org/almalinux/10/isos/aarch64/",
   "pattern": "AlmaLinux-(10\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-dvd\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "almalinux-10-boot-aarch64",
@@ -816,7 +820,9 @@
   "base": "https://repo.almalinux.org/almalinux/10/isos/aarch64/",
   "pattern": "AlmaLinux-(10\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "almalinux-9-minimal-x86_64",
@@ -864,7 +870,9 @@
   "base": "https://repo.almalinux.org/almalinux/9/isos/aarch64/",
   "pattern": "AlmaLinux-(9\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "almalinux-9-dvd-aarch64",
@@ -876,7 +884,9 @@
   "base": "https://repo.almalinux.org/almalinux/9/isos/aarch64/",
   "pattern": "AlmaLinux-(9\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-dvd\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "almalinux-9-boot-aarch64",
@@ -888,7 +898,9 @@
   "base": "https://repo.almalinux.org/almalinux/9/isos/aarch64/",
   "pattern": "AlmaLinux-(9\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "almalinux-8-minimal-x86_64",
@@ -936,7 +948,9 @@
   "base": "https://repo.almalinux.org/almalinux/8/isos/aarch64/",
   "pattern": "AlmaLinux-(8\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "almalinux-8-dvd-aarch64",
@@ -948,7 +962,9 @@
   "base": "https://repo.almalinux.org/almalinux/8/isos/aarch64/",
   "pattern": "AlmaLinux-(8\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-dvd\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "almalinux-8-boot-aarch64",
@@ -960,7 +976,9 @@
   "base": "https://repo.almalinux.org/almalinux/8/isos/aarch64/",
   "pattern": "AlmaLinux-(8\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "rockylinux-10-minimal-x86_64",
@@ -1008,7 +1026,9 @@
   "base": "https://download.rockylinux.org/pub/rocky/10/isos/aarch64/",
   "pattern": "Rocky-(10\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "rockylinux-10-dvd-aarch64",
@@ -1020,7 +1040,9 @@
   "base": "https://download.rockylinux.org/pub/rocky/10/isos/aarch64/",
   "pattern": "Rocky-(10\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-dvd1?\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "rockylinux-10-boot-aarch64",
@@ -1032,7 +1054,9 @@
   "base": "https://download.rockylinux.org/pub/rocky/10/isos/aarch64/",
   "pattern": "Rocky-(10\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "rockylinux-9-minimal-x86_64",
@@ -1080,7 +1104,9 @@
   "base": "https://download.rockylinux.org/pub/rocky/9/isos/aarch64/",
   "pattern": "Rocky-(9\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "rockylinux-9-dvd-aarch64",
@@ -1092,7 +1118,9 @@
   "base": "https://download.rockylinux.org/pub/rocky/9/isos/aarch64/",
   "pattern": "Rocky-(9\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-dvd1?\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "rockylinux-9-boot-aarch64",
@@ -1104,7 +1132,9 @@
   "base": "https://download.rockylinux.org/pub/rocky/9/isos/aarch64/",
   "pattern": "Rocky-(9\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "rockylinux-8-minimal-x86_64",
@@ -1152,7 +1182,9 @@
   "base": "https://download.rockylinux.org/pub/rocky/8/isos/aarch64/",
   "pattern": "Rocky-(8\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "rockylinux-8-dvd-aarch64",
@@ -1164,7 +1196,9 @@
   "base": "https://download.rockylinux.org/pub/rocky/8/isos/aarch64/",
   "pattern": "Rocky-(8\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-dvd1?\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "rockylinux-8-boot-aarch64",
@@ -1176,7 +1210,9 @@
   "base": "https://download.rockylinux.org/pub/rocky/8/isos/aarch64/",
   "pattern": "Rocky-(8\\.\\d+)(?:-\\d+\\.\\d+)?-aarch64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
  },
  {
   "id": "arch-rolling-x86_64",
@@ -1484,5 +1520,486 @@
   "direct": "https://templeos.org/Downloads/TempleOS.ISO",
   "usb_boot": false,
   "note": "CD or virtual machine only: the file has no USB boot sector. Hash computed from the publisher's file; it matches the MD5 the publisher lists."
+ },
+ {
+  "id": "manjaro-kde-x86_64",
+  "family": "manjaro",
+  "name": "Manjaro",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://manjaro.org/",
+  "edition": "kde",
+  "page": "https://manjaro.org/products/download/x86",
+  "pattern": "(?P<url>//download\\.manjaro\\.org/kde/(?P<version>[\\d.]+)/manjaro-kde-[\\w.-]+\\.iso)",
+  "hash_suffix": ".sha256"
+ },
+ {
+  "id": "manjaro-gnome-x86_64",
+  "family": "manjaro",
+  "name": "Manjaro",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://manjaro.org/",
+  "edition": "gnome",
+  "page": "https://manjaro.org/products/download/x86",
+  "pattern": "(?P<url>//download\\.manjaro\\.org/gnome/(?P<version>[\\d.]+)/manjaro-gnome-[\\w.-]+\\.iso)",
+  "hash_suffix": ".sha256"
+ },
+ {
+  "id": "manjaro-xfce-x86_64",
+  "family": "manjaro",
+  "name": "Manjaro",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://manjaro.org/",
+  "edition": "xfce",
+  "page": "https://manjaro.org/products/download/x86",
+  "pattern": "(?P<url>//download\\.manjaro\\.org/xfce/(?P<version>[\\d.]+)/manjaro-xfce-[\\w.-]+\\.iso)",
+  "hash_suffix": ".sha256"
+ },
+ {
+  "id": "manjaro-arm-generic-efi-kde-aarch64",
+  "family": "manjaro",
+  "name": "Manjaro ARM",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://manjaro.org/products/download/arm",
+  "edition": "kde generic EFI",
+  "page": "https://api.github.com/repos/manjaro-arm/generic-efi-images/releases/latest",
+  "pattern": "(?P<url>https://github\\.com/manjaro-arm/[^\"]*Manjaro-ARM-kde-plasma-generic-efi-(?P<version>[\\d.]+)\\.img\\.xz)\"",
+  "verify_suffix": ".sha1",
+  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1."
+ },
+ {
+  "id": "manjaro-arm-generic-kde-aarch64",
+  "family": "manjaro",
+  "name": "Manjaro ARM",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://manjaro.org/products/download/arm",
+  "edition": "kde generic",
+  "page": "https://api.github.com/repos/manjaro-arm/generic-images/releases/latest",
+  "pattern": "(?P<url>https://github\\.com/manjaro-arm/[^\"]*Manjaro-ARM-kde-plasma-generic-(?P<version>[\\d.]+)\\.img\\.xz)\"",
+  "verify_suffix": ".sha1",
+  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1."
+ },
+ {
+  "id": "manjaro-arm-generic-gnome-aarch64",
+  "family": "manjaro",
+  "name": "Manjaro ARM",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://manjaro.org/products/download/arm",
+  "edition": "gnome generic",
+  "page": "https://api.github.com/repos/manjaro-arm/generic-images/releases/latest",
+  "pattern": "(?P<url>https://github\\.com/manjaro-arm/[^\"]*Manjaro-ARM-gnome-generic-(?P<version>[\\d.]+)\\.img\\.xz)\"",
+  "verify_suffix": ".sha1",
+  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1."
+ },
+ {
+  "id": "manjaro-arm-rpi4-kde-aarch64",
+  "family": "manjaro",
+  "name": "Manjaro ARM",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://manjaro.org/products/download/arm",
+  "edition": "kde Raspberry Pi 4",
+  "page": "https://api.github.com/repos/manjaro-arm/rpi4-images/releases/latest",
+  "pattern": "(?P<url>https://github\\.com/manjaro-arm/[^\"]*Manjaro-ARM-kde-plasma-rpi4-(?P<version>[\\d.]+)\\.img\\.xz)\"",
+  "verify_suffix": ".sha1",
+  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1."
+ },
+ {
+  "id": "manjaro-arm-rpi4-gnome-aarch64",
+  "family": "manjaro",
+  "name": "Manjaro ARM",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://manjaro.org/products/download/arm",
+  "edition": "gnome Raspberry Pi 4",
+  "page": "https://api.github.com/repos/manjaro-arm/rpi4-images/releases/latest",
+  "pattern": "(?P<url>https://github\\.com/manjaro-arm/[^\"]*Manjaro-ARM-gnome-rpi4-(?P<version>[\\d.]+)\\.img\\.xz)\"",
+  "verify_suffix": ".sha1",
+  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1."
+ },
+ {
+  "id": "popos-24.04-intel-x86_64",
+  "family": "popos",
+  "name": "Pop!_OS",
+  "channel": "lts",
+  "arch": "x86_64",
+  "homepage": "https://system76.com/pop/",
+  "edition": "intel",
+  "page": "https://api.pop-os.org/builds/24.04/intel",
+  "pattern": "\"version\":\"(?P<version>[\\d.]+)\",\"url\":\"(?P<url>https://[^\"]+)\".*?\"sha_sum\":\"(?P<sha256>\\w+)\""
+ },
+ {
+  "id": "popos-24.04-nvidia-x86_64",
+  "family": "popos",
+  "name": "Pop!_OS",
+  "channel": "lts",
+  "arch": "x86_64",
+  "homepage": "https://system76.com/pop/",
+  "edition": "nvidia",
+  "page": "https://api.pop-os.org/builds/24.04/nvidia",
+  "pattern": "\"version\":\"(?P<version>[\\d.]+)\",\"url\":\"(?P<url>https://[^\"]+)\".*?\"sha_sum\":\"(?P<sha256>\\w+)\""
+ },
+ {
+  "id": "zorin-18-core-x86_64",
+  "family": "zorin",
+  "name": "Zorin OS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://zorin.com/os/",
+  "edition": "core",
+  "page": "https://mirrors.edge.kernel.org/zorinos-isos/18/",
+  "pattern": "href=\"(?P<url>Zorin-OS-(?P<version>18(?:\\.\\d+)?)-Core-64-bit(?:-r\\d+)?\\.iso)\"",
+  "url_prefix": "https://mirrors.edge.kernel.org/zorinos-isos/18/",
+  "note": "Hash computed from the publisher's mirror file."
+ },
+ {
+  "id": "zorin-17-core-x86_64",
+  "family": "zorin",
+  "name": "Zorin OS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://zorin.com/os/",
+  "edition": "core",
+  "page": "https://mirrors.edge.kernel.org/zorinos-isos/17/",
+  "pattern": "href=\"(?P<url>Zorin-OS-(?P<version>17(?:\\.\\d+)?)-Core-64-bit(?:-r\\d+)?\\.iso)\"",
+  "url_prefix": "https://mirrors.edge.kernel.org/zorinos-isos/17/",
+  "note": "Hash computed from the publisher's mirror file."
+ },
+ {
+  "id": "tails-stable-img-x86_64",
+  "family": "tails",
+  "name": "Tails",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://tails.net/",
+  "edition": "USB image",
+  "page": "https://tails.net/install/v2/Tails/amd64/stable/latest.json",
+  "pattern": "\"sha256\":\\s*\"(?P<sha256>\\w+)\",\\s*\"size\":\\s*(?P<size>\\d+),\\s*\"url\":\\s*\"(?P<url>https://[^\"]+tails-amd64-(?P<version>[\\d.~a-z]+)\\.img)\""
+ },
+ {
+  "id": "raspios-lite-aarch64",
+  "family": "raspios",
+  "name": "Raspberry Pi OS",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://www.raspberrypi.com/software/",
+  "edition": "lite",
+  "latest": "https://downloads.raspberrypi.com/raspios_lite_arm64_latest",
+  "pattern": "(?P<url>https://\\S+/(?P<version>\\d{4}-\\d{2}-\\d{2})-raspios-\\S+\\.img\\.xz)",
+  "hash_suffix": ".sha256"
+ },
+ {
+  "id": "raspios-desktop-aarch64",
+  "family": "raspios",
+  "name": "Raspberry Pi OS",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://www.raspberrypi.com/software/",
+  "edition": "desktop",
+  "latest": "https://downloads.raspberrypi.com/raspios_arm64_latest",
+  "pattern": "(?P<url>https://\\S+/(?P<version>\\d{4}-\\d{2}-\\d{2})-raspios-\\S+\\.img\\.xz)",
+  "hash_suffix": ".sha256"
+ },
+ {
+  "id": "parrot-home-x86_64",
+  "family": "parrot",
+  "name": "Parrot OS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://parrotsec.org/",
+  "edition": "home",
+  "latest": "https://deb.parrot.sh/parrot/iso/7.4/Parrot-home-7.4_amd64.iso",
+  "pattern": "(?P<url>https://\\S+Parrot-home-(?P<version>[\\d.]+)_amd64\\.iso)",
+  "note": "Hash computed from the publisher's file."
+ },
+ {
+  "id": "opensuse-leap-16.0-offline-x86_64",
+  "family": "opensuse",
+  "name": "openSUSE Leap",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.opensuse.org/",
+  "edition": "offline",
+  "version": "16.0",
+  "latest": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso",
+  "pattern": "(?P<url>https://\\S+\\.iso)",
+  "verify_suffix": ".sha512",
+  "note": "Hash computed from the publisher's file and checked against its SHA-512."
+ },
+ {
+  "id": "opensuse-leap-16.0-offline-aarch64",
+  "family": "opensuse",
+  "name": "openSUSE Leap",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://www.opensuse.org/",
+  "edition": "offline",
+  "version": "16.0",
+  "latest": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-aarch64.install.iso",
+  "pattern": "(?P<url>https://\\S+\\.iso)",
+  "verify_suffix": ".sha512",
+  "note": "Hash computed from the publisher's file and checked against its SHA-512."
+ },
+ {
+  "id": "opensuse-leap-16.0-online-x86_64",
+  "family": "opensuse",
+  "name": "openSUSE Leap",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.opensuse.org/",
+  "edition": "online",
+  "version": "16.0",
+  "latest": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-online-installer-x86_64.install.iso",
+  "pattern": "(?P<url>https://\\S+\\.iso)",
+  "verify_suffix": ".sha512",
+  "note": "Hash computed from the publisher's file and checked against its SHA-512."
+ },
+ {
+  "id": "opensuse-leap-16.0-online-aarch64",
+  "family": "opensuse",
+  "name": "openSUSE Leap",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://www.opensuse.org/",
+  "edition": "online",
+  "version": "16.0",
+  "latest": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-online-installer-aarch64.install.iso",
+  "pattern": "(?P<url>https://\\S+\\.iso)",
+  "verify_suffix": ".sha512",
+  "note": "Hash computed from the publisher's file and checked against its SHA-512."
+ },
+ {
+  "id": "endeavouros-x86_64",
+  "family": "endeavouros",
+  "name": "EndeavourOS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://endeavouros.com/",
+  "page": "https://mirror.alpix.eu/endeavouros/iso/",
+  "pattern": "href=\"(?P<url>EndeavourOS_Titan-Nova-(?P<version>[\\d.]+)\\.iso)\"",
+  "url_prefix": "https://mirror.alpix.eu/endeavouros/iso/",
+  "verify_suffix": ".sha512sum",
+  "note": "Hash computed from the publisher's file and checked against its SHA-512."
+ },
+ {
+  "id": "nixos-26.05-minimal-x86_64",
+  "family": "nixos",
+  "name": "NixOS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://nixos.org/",
+  "edition": "minimal",
+  "latest": "https://channels.nixos.org/nixos-26.05/latest-nixos-minimal-x86_64-linux.iso",
+  "pattern": "(?P<url>https://\\S+nixos-minimal-(?P<version>26.05\\.\\d+)\\.\\w+-x86_64-linux\\.iso)",
+  "hash_suffix": ".sha256"
+ },
+ {
+  "id": "nixos-26.05-minimal-aarch64",
+  "family": "nixos",
+  "name": "NixOS",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://nixos.org/",
+  "edition": "minimal",
+  "latest": "https://channels.nixos.org/nixos-26.05/latest-nixos-minimal-aarch64-linux.iso",
+  "pattern": "(?P<url>https://\\S+nixos-minimal-(?P<version>26.05\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
+  "hash_suffix": ".sha256",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
+ },
+ {
+  "id": "nixos-26.05-graphical-x86_64",
+  "family": "nixos",
+  "name": "NixOS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://nixos.org/",
+  "edition": "graphical",
+  "latest": "https://channels.nixos.org/nixos-26.05/latest-nixos-graphical-x86_64-linux.iso",
+  "pattern": "(?P<url>https://\\S+nixos-graphical-(?P<version>26.05\\.\\d+)\\.\\w+-x86_64-linux\\.iso)",
+  "hash_suffix": ".sha256"
+ },
+ {
+  "id": "nixos-26.05-graphical-aarch64",
+  "family": "nixos",
+  "name": "NixOS",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://nixos.org/",
+  "edition": "graphical",
+  "latest": "https://channels.nixos.org/nixos-26.05/latest-nixos-graphical-aarch64-linux.iso",
+  "pattern": "(?P<url>https://\\S+nixos-graphical-(?P<version>26.05\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
+  "hash_suffix": ".sha256",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
+ },
+ {
+  "id": "nixos-25.11-minimal-x86_64",
+  "family": "nixos",
+  "name": "NixOS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://nixos.org/",
+  "edition": "minimal",
+  "latest": "https://channels.nixos.org/nixos-25.11/latest-nixos-minimal-x86_64-linux.iso",
+  "pattern": "(?P<url>https://\\S+nixos-minimal-(?P<version>25.11\\.\\d+)\\.\\w+-x86_64-linux\\.iso)",
+  "hash_suffix": ".sha256"
+ },
+ {
+  "id": "nixos-25.11-minimal-aarch64",
+  "family": "nixos",
+  "name": "NixOS",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://nixos.org/",
+  "edition": "minimal",
+  "latest": "https://channels.nixos.org/nixos-25.11/latest-nixos-minimal-aarch64-linux.iso",
+  "pattern": "(?P<url>https://\\S+nixos-minimal-(?P<version>25.11\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
+  "hash_suffix": ".sha256",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
+ },
+ {
+  "id": "nixos-25.11-graphical-x86_64",
+  "family": "nixos",
+  "name": "NixOS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://nixos.org/",
+  "edition": "graphical",
+  "latest": "https://channels.nixos.org/nixos-25.11/latest-nixos-graphical-x86_64-linux.iso",
+  "pattern": "(?P<url>https://\\S+nixos-graphical-(?P<version>25.11\\.\\d+)\\.\\w+-x86_64-linux\\.iso)",
+  "hash_suffix": ".sha256"
+ },
+ {
+  "id": "nixos-25.11-graphical-aarch64",
+  "family": "nixos",
+  "name": "NixOS",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://nixos.org/",
+  "edition": "graphical",
+  "latest": "https://channels.nixos.org/nixos-25.11/latest-nixos-graphical-aarch64-linux.iso",
+  "pattern": "(?P<url>https://\\S+nixos-graphical-(?P<version>25.11\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
+  "hash_suffix": ".sha256",
+  "usb_boot": false,
+  "note": "DVD or virtual machine only: this file has no USB disk boot."
+ },
+ {
+  "id": "truenas-scale-x86_64",
+  "family": "truenas",
+  "name": "TrueNAS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.truenas.com/",
+  "page": "https://www.truenas.com/download/",
+  "pattern": "(?P<url>//download\\.sys\\.truenas\\.net/TrueNAS-SCALE-Goldeye/(?P<version>[\\d.]+)/TrueNAS-SCALE-[\\d.]+\\.iso)",
+  "hash_suffix": ".sha256"
+ },
+ {
+  "id": "void-base-x86_64",
+  "family": "void",
+  "name": "Void Linux",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://voidlinux.org/",
+  "edition": "base",
+  "base": "https://repo-default.voidlinux.org/live/current/",
+  "sums": "sha256sum.txt",
+  "pattern": "void-live-x86_64-(\\d+)-base\\.iso"
+ },
+ {
+  "id": "void-xfce-x86_64",
+  "family": "void",
+  "name": "Void Linux",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://voidlinux.org/",
+  "edition": "xfce",
+  "base": "https://repo-default.voidlinux.org/live/current/",
+  "sums": "sha256sum.txt",
+  "pattern": "void-live-x86_64-(\\d+)-xfce\\.iso"
+ },
+ {
+  "id": "gentoo-minimal-x86_64",
+  "family": "gentoo",
+  "name": "Gentoo",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.gentoo.org/",
+  "edition": "minimal",
+  "page": "https://distfiles.gentoo.org/releases/amd64/autobuilds/latest-iso.txt",
+  "pattern": "(?P<url>\\d+T\\d+Z/install-amd64-minimal-(?P<version>\\d+)T\\d+Z\\.iso)",
+  "url_prefix": "https://distfiles.gentoo.org/releases/amd64/autobuilds/",
+  "hash_suffix": ".sha256"
+ },
+ {
+  "id": "openbsd-8.0-x86_64",
+  "family": "openbsd",
+  "name": "OpenBSD",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.openbsd.org/",
+  "version": "8.0",
+  "edition": "USB image",
+  "base": "https://cdn.openbsd.org/pub/OpenBSD/8.0/amd64/",
+  "sums": "SHA256",
+  "pattern": "install(80)\\.img"
+ },
+ {
+  "id": "openbsd-8.0-aarch64",
+  "family": "openbsd",
+  "name": "OpenBSD",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://www.openbsd.org/",
+  "version": "8.0",
+  "edition": "USB image",
+  "base": "https://cdn.openbsd.org/pub/OpenBSD/8.0/arm64/",
+  "sums": "SHA256",
+  "pattern": "install(80)\\.img"
+ },
+ {
+  "id": "openbsd-7.9-x86_64",
+  "family": "openbsd",
+  "name": "OpenBSD",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.openbsd.org/",
+  "version": "7.9",
+  "edition": "USB image",
+  "base": "https://cdn.openbsd.org/pub/OpenBSD/7.9/amd64/",
+  "sums": "SHA256",
+  "pattern": "install(79)\\.img"
+ },
+ {
+  "id": "openbsd-7.9-aarch64",
+  "family": "openbsd",
+  "name": "OpenBSD",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://www.openbsd.org/",
+  "version": "7.9",
+  "edition": "USB image",
+  "base": "https://cdn.openbsd.org/pub/OpenBSD/7.9/arm64/",
+  "sums": "SHA256",
+  "pattern": "install(79)\\.img"
+ },
+ {
+  "id": "haiku-r1beta6-x86_64",
+  "family": "haiku",
+  "name": "Haiku",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.haiku-os.org/",
+  "version": "R1 beta 6",
+  "page": "https://www.haiku-os.org/get-haiku/",
+  "pattern": "(?P<url>https://[^\\\"' ]+haiku-r1beta6-x86_64-anyboot\\.iso)",
+  "hash_suffix": ".sha256"
  }
 ]

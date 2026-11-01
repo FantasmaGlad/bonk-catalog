@@ -118,14 +118,70 @@ def resolve_computed(source, image, previous, compute):
     return image
 
 
-def hash_url(url):
+def hash_url(url, algorithm=None, expected=None):
+    """The file's SHA-256, while checking the weaker or longer hash its publisher lists, if any."""
     digest = hashlib.sha256()
+    check = hashlib.new(algorithm) if algorithm else None
     with urllib.request.urlopen(
         urllib.request.Request(url, headers={"User-Agent": USER_AGENT}), timeout=TIMEOUT_SECONDS
     ) as response:
         while chunk := response.read(1 << 20):
             digest.update(chunk)
+            if check:
+                check.update(chunk)
+    if check and check.hexdigest() != expected:
+        raise SourceError(f"{url}: does not match the publisher's {algorithm}")
     return digest.hexdigest()
+
+
+def first_hash(text, length):
+    match = re.search(rf"\b[0-9a-fA-F]{{{length}}}\b", text)
+    if not match:
+        raise SourceError("no hash in the publisher's file")
+    return match[0].lower()
+
+
+def resolve_read(source, image, previous, fetch, stat, compute):
+    """Publishers without a hash list for a directory: the address comes from a page, a JSON answer or
+    a redirect to the latest file, and the hash from that answer or from a file next to the image."""
+    if "latest" in source:
+        with request(source["latest"], "HEAD") as response:
+            text = response.geturl()
+    else:
+        text = fetch(source["page"])
+    match = re.search(source["pattern"], text, re.DOTALL)
+    if not match:
+        raise SourceError(f"no address matches {source['pattern']}")
+    groups = match.groupdict()
+    url = source.get("url_prefix", "") + groups.get("url", match[0])
+    if url.startswith("//"):
+        url = "https:" + url
+    if not url.startswith("https://"):
+        raise SourceError(f"{url}: not https")
+    size = groups.get("size")
+    released = None
+    if groups.get("sha256"):
+        sha256 = groups["sha256"].lower()
+    elif "hash_suffix" in source:
+        sha256 = first_hash(fetch(url + source["hash_suffix"]), 64)
+    elif previous.get("url") == url:
+        sha256 = previous["sha256"]
+    elif "verify_suffix" in source:
+        algorithm = source["verify_suffix"].strip(".").removesuffix("sum")
+        lengths = {"sha1": 40, "sha512": 128}
+        expected = first_hash(fetch(url + source["verify_suffix"]), lengths[algorithm])
+        sha256 = compute(url, algorithm, expected)
+    else:
+        sha256 = compute(url)
+    size_bytes, released = stat(url)
+    image.update(
+        version=source.get("version", groups.get("version")),
+        released=released,
+        url=url,
+        sha256=sha256,
+        size_bytes=int(size) if size else size_bytes,
+    )
+    return image
 
 
 def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url):
@@ -144,6 +200,8 @@ def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url
         return image
     if "fwlink" in source or "direct" in source:
         return resolve_computed(source, image, previous or {}, compute)
+    if "page" in source or "latest" in source:
+        return resolve_read(source, image, previous or {}, fetch, stat, compute)
     base = source["base"]
     if not base.startswith("https://"):
         raise SourceError(f"{base}: not https")
@@ -151,6 +209,7 @@ def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url
     name, version, sha256 = pick_file(parse_sums(fetch(base + sums)), source["pattern"])
     url = base + name
     size, released = stat(url)
+    version = source.get("version", version)
     image.update(version=version, released=released, url=url, sha256=sha256, size_bytes=size)
     return image
 
@@ -220,7 +279,7 @@ def main():
 
     catalog, failures = build(
         sources, families, hashes, previous_catalog(args.previous), int(time.time()),
-        (lambda _url: "0" * 64) if args.no_compute else hash_url,
+        (lambda *_: "0" * 64) if args.no_compute else hash_url,
     )
     if not any("url" in image for image in catalog["images"]):
         print("no image could be read: nothing to publish", file=sys.stderr)

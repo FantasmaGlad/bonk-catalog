@@ -79,6 +79,54 @@ class Building(unittest.TestCase):
         self.assertEqual(len(failures), 1)
 
 
+class Read(unittest.TestCase):
+    SOURCE = {"id": "r", "family": "f", "name": "F", "channel": "stable", "arch": "x86_64", "homepage": "https://h/"}
+
+    def resolve(self, extra, fetch, **kwargs):
+        return generer.resolve({**self.SOURCE, **extra}, fetch=fetch, stat=lambda _: (5, "2026-01-02"), **kwargs)
+
+    def test_address_and_hash_from_a_json_answer(self):
+        answer = f'{{"url":"https://h/a-7.iso","sha_sum":"{HASH_A}"}}'
+        image = self.resolve(
+            {"page": "https://h/j", "pattern": r'"url":"(?P<url>[^"]*a-(?P<version>\d+)\.iso)","sha_sum":"(?P<sha256>\w+)"'},
+            lambda _: answer,
+        )
+        self.assertEqual((image["url"], image["version"], image["sha256"]), ("https://h/a-7.iso", "7", HASH_A))
+
+    def test_hash_file_next_to_the_image(self):
+        pages = {"https://h/p": "//h/a-7.iso", "https://h/a-7.iso.sha256": f"{HASH_B}  a-7.iso"}
+        image = self.resolve(
+            {"page": "https://h/p", "pattern": r"(?P<url>//h/a-(?P<version>\d+)\.iso)", "hash_suffix": ".sha256"},
+            pages.__getitem__,
+        )
+        self.assertEqual((image["url"], image["sha256"]), ("https://h/a-7.iso", HASH_B))
+
+    def test_a_listed_sha512_is_checked_during_the_computation(self):
+        expected = "c" * 128
+        seen = []
+        pages = {"https://h/p": "https://h/a.iso", "https://h/a.iso.sha512": expected}
+
+        def compute(*args):
+            seen.append(args)
+            return HASH_A
+
+        extra = {"page": "https://h/p", "pattern": r"https://h/a\.iso", "verify_suffix": ".sha512", "version": "1"}
+        self.resolve(extra, pages.__getitem__, compute=compute)
+        self.assertEqual(seen, [("https://h/a.iso", "sha512", expected)])
+
+    def test_a_wrong_publisher_hash_refuses_the_file(self):
+        body = mock.MagicMock()
+        body.__enter__.return_value = body
+        body.read.side_effect = [b"data", b""]
+        with mock.patch.object(generer.urllib.request, "urlopen", return_value=body):
+            with self.assertRaises(generer.SourceError):
+                generer.hash_url("https://h/a.iso", "sha1", "0" * 40)
+
+    def test_plain_http_is_refused(self):
+        with self.assertRaises(generer.SourceError):
+            self.resolve({"page": "https://h/p", "pattern": r"http://h/a\.iso", "hash_suffix": ".s"}, lambda _: "http://h/a.iso")
+
+
 class Windows(unittest.TestCase):
     SOURCE = {
         "id": "w",
