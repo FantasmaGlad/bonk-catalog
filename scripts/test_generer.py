@@ -79,6 +79,22 @@ class Building(unittest.TestCase):
         self.assertEqual(len(failures), 1)
 
 
+class Listing(unittest.TestCase):
+    def test_the_hash_file_is_found_in_the_stable_listing(self):
+        source = {
+            "id": "f", "family": "f", "name": "F", "channel": "stable", "arch": "x86_64", "homepage": "https://h/",
+            "base": "https://mirror/", "listing": "https://primary/",
+            "sums_pattern": r"F-\d+-CHECKSUM", "pattern": r"f-(\d+)\.iso",
+        }
+        pages = {
+            "https://primary/": "F-1-CHECKSUM",
+            "https://mirror/": "F-1-CHEC..>",
+            "https://mirror/F-1-CHECKSUM": f"{HASH_A}  f-1.iso",
+        }
+        image = generer.resolve(source, fetch=pages.__getitem__, stat=lambda _: (5, "2026-01-02"))
+        self.assertEqual(image["url"], "https://mirror/f-1.iso")
+
+
 class Read(unittest.TestCase):
     SOURCE = {"id": "r", "family": "f", "name": "F", "channel": "stable", "arch": "x86_64", "homepage": "https://h/"}
 

@@ -205,7 +205,9 @@ def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url
     base = source["base"]
     if not base.startswith("https://"):
         raise SourceError(f"{base}: not https")
-    sums = source.get("sums") or find_in_listing(fetch(base), source["sums_pattern"])
+    sums = source.get("sums") or find_in_listing(
+        fetch(source.get("listing", base)), source["sums_pattern"]
+    )
     name, version, sha256 = pick_file(parse_sums(fetch(base + sums)), source["pattern"])
     url = base + name
     size, released = stat(url)
