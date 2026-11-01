@@ -79,5 +79,43 @@ class Building(unittest.TestCase):
         self.assertEqual(len(failures), 1)
 
 
+class Windows(unittest.TestCase):
+    SOURCE = {
+        "id": "w",
+        "family": "windows",
+        "name": "Windows",
+        "channel": "lts",
+        "arch": "x86_64",
+        "homepage": "https://h/",
+        "version": "11",
+        "fwlink": 1,
+        "note": "evaluation",
+    }
+
+    def response(self, url):
+        answer = mock.MagicMock()
+        answer.__enter__.return_value = answer
+        answer.geturl.return_value = url
+        answer.headers = {"Content-Length": "5", "Last-Modified": "Thu, 17 Sep 2026 10:00:00 GMT"}
+        return answer
+
+    def test_hash_computed_once_then_kept(self):
+        url = "https://software-static.download.prss.microsoft.com/x/w.iso"
+        with mock.patch.object(generer, "request", return_value=self.response(url)):
+            first = generer.resolve(self.SOURCE, compute=lambda _: HASH_A)
+            kept = generer.resolve(
+                self.SOURCE,
+                previous={"url": url, "size_bytes": 5, "sha256": HASH_B},
+                compute=lambda _: self.fail("must not download again"),
+            )
+        self.assertEqual((first["sha256"], kept["sha256"]), (HASH_A, HASH_B))
+        self.assertEqual(first["note"], "evaluation")
+
+    def test_a_link_leaving_microsoft_is_refused(self):
+        with mock.patch.object(generer, "request", return_value=self.response("https://evil.example/w.iso")):
+            with self.assertRaises(generer.SourceError):
+                generer.resolve(self.SOURCE, compute=lambda _: HASH_A)
+
+
 if __name__ == "__main__":
     unittest.main()
