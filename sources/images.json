@@ -660,7 +660,8 @@
   "base": "https://download.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/x86_64/iso/",
   "pattern": "Fedora-Workstation-Live-(?:x86_64-)?(44(?:-[\\d.]+)?)(?:\\.x86_64)?\\.iso",
   "edition": "workstation",
-  "sums_pattern": "Fedora-Workstation-44-[\\d.]+-x86_64-CHECKSUM"
+  "sums_pattern": "Fedora-Workstation-44-[\\d.]+-x86_64-CHECKSUM",
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/x86_64/iso/"
  },
  {
   "id": "fedora-44-kde-x86_64",
@@ -672,7 +673,8 @@
   "base": "https://download.fedoraproject.org/pub/fedora/linux/releases/44/KDE/x86_64/iso/",
   "pattern": "Fedora-KDE-Desktop-Live-(?:x86_64-)?(44(?:-[\\d.]+)?)(?:\\.x86_64)?\\.iso",
   "edition": "kde",
-  "sums_pattern": "Fedora-KDE-44-[\\d.]+-x86_64-CHECKSUM"
+  "sums_pattern": "Fedora-KDE-44-[\\d.]+-x86_64-CHECKSUM",
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/KDE/x86_64/iso/"
  },
  {
   "id": "fedora-44-server-x86_64",
@@ -684,7 +686,8 @@
   "base": "https://download.fedoraproject.org/pub/fedora/linux/releases/44/Server/x86_64/iso/",
   "pattern": "Fedora-Server-dvd-x86_64-(44-[\\d.]+)\\.iso",
   "edition": "server",
-  "sums_pattern": "Fedora-Server-44-[\\d.]+-x86_64-CHECKSUM"
+  "sums_pattern": "Fedora-Server-44-[\\d.]+-x86_64-CHECKSUM",
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Server/x86_64/iso/"
  },
  {
   "id": "fedora-44-workstation-aarch64",
@@ -696,7 +699,8 @@
   "base": "https://download.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/aarch64/iso/",
   "pattern": "Fedora-Workstation-Live-(?:aarch64-)?(44(?:-[\\d.]+)?)(?:\\.aarch64)?\\.iso",
   "edition": "workstation",
-  "sums_pattern": "Fedora-Workstation-44-[\\d.]+-aarch64-CHECKSUM"
+  "sums_pattern": "Fedora-Workstation-44-[\\d.]+-aarch64-CHECKSUM",
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/aarch64/iso/"
  },
  {
   "id": "fedora-43-workstation-x86_64",
@@ -708,7 +712,8 @@
   "base": "https://download.fedoraproject.org/pub/fedora/linux/releases/43/Workstation/x86_64/iso/",
   "pattern": "Fedora-Workstation-Live-(?:x86_64-)?(43(?:-[\\d.]+)?)(?:\\.x86_64)?\\.iso",
   "edition": "workstation",
-  "sums_pattern": "Fedora-Workstation-43-[\\d.]+-x86_64-CHECKSUM"
+  "sums_pattern": "Fedora-Workstation-43-[\\d.]+-x86_64-CHECKSUM",
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Workstation/x86_64/iso/"
  },
  {
   "id": "fedora-43-kde-x86_64",
@@ -720,7 +725,8 @@
   "base": "https://download.fedoraproject.org/pub/fedora/linux/releases/43/KDE/x86_64/iso/",
   "pattern": "Fedora-KDE-Desktop-Live-(?:x86_64-)?(43(?:-[\\d.]+)?)(?:\\.x86_64)?\\.iso",
   "edition": "kde",
-  "sums_pattern": "Fedora-KDE-43-[\\d.]+-x86_64-CHECKSUM"
+  "sums_pattern": "Fedora-KDE-43-[\\d.]+-x86_64-CHECKSUM",
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/KDE/x86_64/iso/"
  },
  {
   "id": "fedora-43-server-x86_64",
@@ -732,7 +738,8 @@
   "base": "https://download.fedoraproject.org/pub/fedora/linux/releases/43/Server/x86_64/iso/",
   "pattern": "Fedora-Server-dvd-x86_64-(43-[\\d.]+)\\.iso",
   "edition": "server",
-  "sums_pattern": "Fedora-Server-43-[\\d.]+-x86_64-CHECKSUM"
+  "sums_pattern": "Fedora-Server-43-[\\d.]+-x86_64-CHECKSUM",
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Server/x86_64/iso/"
  },
  {
   "id": "fedora-43-workstation-aarch64",
@@ -744,7 +751,8 @@
   "base": "https://download.fedoraproject.org/pub/fedora/linux/releases/43/Workstation/aarch64/iso/",
   "pattern": "Fedora-Workstation-Live-(?:aarch64-)?(43(?:-[\\d.]+)?)(?:\\.aarch64)?\\.iso",
   "edition": "workstation",
-  "sums_pattern": "Fedora-Workstation-43-[\\d.]+-aarch64-CHECKSUM"
+  "sums_pattern": "Fedora-Workstation-43-[\\d.]+-aarch64-CHECKSUM",
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Workstation/aarch64/iso/"
  },
  {
   "id": "almalinux-10-minimal-x86_64",
