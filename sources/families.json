@@ -1,8 +1,86 @@
 [
-  {"id": "ubuntu", "name": "Ubuntu", "icon": "ubuntu.png"},
-  {"id": "debian", "name": "Debian", "icon": "debian.png"},
-  {"id": "fedora", "name": "Fedora", "icon": "fedora.png"},
-  {"id": "arch", "name": "Arch Linux", "icon": "arch.png"},
-  {"id": "linuxmint", "name": "Linux Mint", "icon": "linuxmint.png"},
-  {"id": "windows", "name": "Windows", "icon": "windows.png"}
+ {
+  "id": "ubuntu",
+  "name": "Ubuntu",
+  "category": "Debian derivatives",
+  "icon": "ubuntu.png"
+ },
+ {
+  "id": "debian",
+  "name": "Debian",
+  "category": "Debian derivatives",
+  "icon": "debian.png"
+ },
+ {
+  "id": "linuxmint",
+  "name": "Linux Mint",
+  "category": "Debian derivatives",
+  "icon": "linuxmint.png"
+ },
+ {
+  "id": "kali",
+  "name": "Kali Linux",
+  "category": "Debian derivatives",
+  "icon": "kali.png"
+ },
+ {
+  "id": "fedora",
+  "name": "Fedora",
+  "category": "Red Hat family",
+  "icon": "fedora.png"
+ },
+ {
+  "id": "almalinux",
+  "name": "AlmaLinux",
+  "category": "Red Hat family",
+  "icon": "almalinux.png"
+ },
+ {
+  "id": "rockylinux",
+  "name": "Rocky Linux",
+  "category": "Red Hat family",
+  "icon": "rockylinux.png"
+ },
+ {
+  "id": "arch",
+  "name": "Arch Linux",
+  "category": "Arch family",
+  "icon": "arch.png"
+ },
+ {
+  "id": "opensuse",
+  "name": "openSUSE",
+  "category": "SUSE family",
+  "icon": "opensuse.png"
+ },
+ {
+  "id": "alpine",
+  "name": "Alpine Linux",
+  "category": "Independent Linux",
+  "icon": "alpine.png"
+ },
+ {
+  "id": "proxmox",
+  "name": "Proxmox VE",
+  "category": "Servers",
+  "icon": "proxmox.png"
+ },
+ {
+  "id": "freebsd",
+  "name": "FreeBSD",
+  "category": "BSD",
+  "icon": "freebsd.png"
+ },
+ {
+  "id": "windows",
+  "name": "Windows",
+  "category": "Windows",
+  "icon": "windows.png"
+ },
+ {
+  "id": "templeos",
+  "name": "TempleOS",
+  "category": "Other systems",
+  "icon": "templeos.png"
+ }
 ]

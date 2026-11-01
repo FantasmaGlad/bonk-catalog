@@ -61,7 +61,7 @@ def parse_sums(text):
     for line in text.splitlines():
         line = line.strip()
         if match := SUMS_LINE.match(line):
-            found[match[2]] = match[1].lower()
+            found[match[2].removeprefix("./")] = match[1].lower()
         elif match := SUMS_BSD.match(line):
             found[match[1]] = match[2].lower()
     return found
@@ -90,11 +90,49 @@ def find_in_listing(listing, pattern):
     return names[-1]
 
 
-def resolve(source, fetch=fetch_text, stat=head):
+def resolve_computed(source, image, previous, compute):
+    """The publisher lists no SHA-256 (Microsoft evaluation images, TempleOS): it is computed once from
+    its own file, and kept as long as the address and the size do not change."""
+    if "direct" in source:
+        link = source["direct"]
+    else:
+        link = f"https://go.microsoft.com/fwlink/?linkid={source['fwlink']}&clcid=0x409&culture=en-us&country=us"
+    with request(link, "HEAD") as response:
+        url = response.geturl()
+        size = int(response.headers.get("Content-Length") or 0)
+        modified = response.headers.get("Last-Modified")
+    trusted_host = "fwlink" not in source or ".microsoft.com/" in url
+    if not url.startswith("https://") or not trusted_host or not url.lower().endswith(".iso"):
+        raise SourceError(f"{link}: leads to {url}")
+    if size <= 0 or not modified:
+        raise SourceError(f"{url}: no size or date")
+    known = previous.get("url") == url and previous.get("size_bytes") == size
+    sha256 = previous["sha256"] if known else compute(url)
+    image.update(
+        version=source["version"],
+        released=parsedate_to_datetime(modified).date().isoformat(),
+        url=url,
+        sha256=sha256,
+        size_bytes=size,
+    )
+    return image
+
+
+def hash_url(url):
+    digest = hashlib.sha256()
+    with urllib.request.urlopen(
+        urllib.request.Request(url, headers={"User-Agent": USER_AGENT}), timeout=TIMEOUT_SECONDS
+    ) as response:
+        while chunk := response.read(1 << 20):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url):
     """Turn a source into a catalog image, reading only official files."""
     image = {
         key: source[key]
-        for key in ("id", "family", "name", "channel", "arch", "homepage", "edition")
+        for key in ("id", "family", "name", "channel", "arch", "homepage", "edition", "note", "usb_boot")
         if key in source
     }
     if "official_page" in source:
@@ -104,6 +142,8 @@ def resolve(source, fetch=fetch_text, stat=head):
             official_page=source["official_page"],
         )
         return image
+    if "fwlink" in source or "direct" in source:
+        return resolve_computed(source, image, previous or {}, compute)
     base = source["base"]
     if not base.startswith("https://"):
         raise SourceError(f"{base}: not https")
@@ -125,13 +165,13 @@ def previous_catalog(url):
         return {}
 
 
-def build(sources, families, icon_hashes, previous, now):
+def build(sources, families, icon_hashes, previous, now, compute=hash_url):
     """The catalog and the sources that failed."""
     kept = {image["id"]: image for image in previous.get("images", [])}
     images, failures = [], []
     for source in sources:
         try:
-            images.append(resolve(source))
+            images.append(resolve(source, previous=kept.get(source["id"]), compute=compute))
         except (SourceError, OSError, ValueError) as error:
             failures.append({"id": source["id"], "error": str(error)})
             if source["id"] in kept:
@@ -145,6 +185,7 @@ def build(sources, families, icon_hashes, previous, now):
             {
                 "id": family["id"],
                 "name": family["name"],
+                "category": family["category"],
                 "icon": "icons/" + family["icon"],
                 "icon_sha256": icon_hashes[family["icon"]],
             }
@@ -159,6 +200,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=Path("site/v1"))
     parser.add_argument("--previous", help="address of the catalog published so far")
+    parser.add_argument(
+        "--no-compute",
+        action="store_true",
+        help="check links only: do not download images to compute a missing hash",
+    )
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parent.parent
@@ -173,7 +219,8 @@ def main():
         shutil.copyfile(source, icons / family["icon"])
 
     catalog, failures = build(
-        sources, families, hashes, previous_catalog(args.previous), int(time.time())
+        sources, families, hashes, previous_catalog(args.previous), int(time.time()),
+        (lambda _url: "0" * 64) if args.no_compute else hash_url,
     )
     if not any("url" in image for image in catalog["images"]):
         print("no image could be read: nothing to publish", file=sys.stderr)
