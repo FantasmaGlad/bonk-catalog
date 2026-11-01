@@ -1,0 +1,8 @@
+[
+  {"id": "ubuntu", "name": "Ubuntu", "icon": "ubuntu.svg"},
+  {"id": "debian", "name": "Debian", "icon": "debian.svg"},
+  {"id": "fedora", "name": "Fedora", "icon": "fedora.svg"},
+  {"id": "arch", "name": "Arch Linux", "icon": "arch.svg"},
+  {"id": "linuxmint", "name": "Linux Mint", "icon": "linuxmint.svg"},
+  {"id": "windows", "name": "Windows", "icon": "windows.svg"}
+]

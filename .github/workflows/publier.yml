@@ -1,0 +1,98 @@
+# Lit les sources officielles chaque jour, signe le catalogue et le publie sur GitHub Pages.
+name: publier
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "23 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publier-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  controle:
+    name: controle
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Tests
+        run: python3 -m unittest discover -s scripts -v
+      - name: Lire les vraies sources, sans signer
+        run: python3 scripts/generer.py --output "$RUNNER_TEMP/site/v1"
+
+  construire:
+    name: construire
+    if: github.event_name != 'pull_request'
+    needs: controle
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Générer
+        run: python3 scripts/generer.py --output site/v1 --previous https://catalog.bonk-os.app/v1/catalog.json
+      - name: Signer et relire la signature
+        env:
+          CLE: ${{ secrets.CATALOG_SIGNING_KEY }}
+        run: |
+          fichier=$(mktemp)
+          printf '%s\n' "$CLE" > "$fichier"
+          openssl pkeyutl -sign -rawin -inkey "$fichier" -in site/v1/catalog.json -out site/v1/catalog.json.sig
+          rm -f "$fichier"
+          openssl pkeyutl -verify -rawin -pubin -inkey keys/courante.pub.pem -in site/v1/catalog.json -sigfile site/v1/catalog.json.sig
+      - name: Signaler les sources en échec
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: python3 scripts/signaler.py site/failures.json
+      - name: Retirer le rapport du site
+        run: rm -f site/failures.json
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: site
+
+  publication:
+    name: publication
+    if: github.event_name != 'pull_request'
+    needs: construire
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    steps:
+      - id: pages
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+  relecture:
+    name: relecture
+    if: github.event_name != 'pull_request'
+    needs: publication
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Relire la signature depuis l'adresse publique
+        run: |
+          curl -fsSL --retry 5 --retry-all-errors -o catalog.json https://catalog.bonk-os.app/v1/catalog.json
+          curl -fsSL --retry 5 --retry-all-errors -o catalog.json.sig https://catalog.bonk-os.app/v1/catalog.json.sig
+          openssl pkeyutl -verify -rawin -pubin -inkey keys/courante.pub.pem -in catalog.json -sigfile catalog.json.sig
