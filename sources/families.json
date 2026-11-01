@@ -18,6 +18,36 @@
   "icon": "linuxmint.png"
  },
  {
+  "id": "popos",
+  "name": "Pop!_OS",
+  "category": "Debian derivatives",
+  "icon": "popos.png"
+ },
+ {
+  "id": "zorin",
+  "name": "Zorin OS",
+  "category": "Debian derivatives",
+  "icon": "zorin.png"
+ },
+ {
+  "id": "tails",
+  "name": "Tails",
+  "category": "Debian derivatives",
+  "icon": "tails.png"
+ },
+ {
+  "id": "parrot",
+  "name": "Parrot OS",
+  "category": "Debian derivatives",
+  "icon": "parrot.png"
+ },
+ {
+  "id": "raspios",
+  "name": "Raspberry Pi OS",
+  "category": "Debian derivatives",
+  "icon": "raspios.png"
+ },
+ {
   "id": "kali",
   "name": "Kali Linux",
   "category": "Debian derivatives",
@@ -48,6 +78,18 @@
   "icon": "arch.png"
  },
  {
+  "id": "manjaro",
+  "name": "Manjaro",
+  "category": "Arch family",
+  "icon": "manjaro.png"
+ },
+ {
+  "id": "endeavouros",
+  "name": "EndeavourOS",
+  "category": "Arch family",
+  "icon": "endeavouros.png"
+ },
+ {
   "id": "opensuse",
   "name": "openSUSE",
   "category": "SUSE family",
@@ -60,16 +102,46 @@
   "icon": "alpine.png"
  },
  {
+  "id": "nixos",
+  "name": "NixOS",
+  "category": "Independent Linux",
+  "icon": "nixos.png"
+ },
+ {
+  "id": "void",
+  "name": "Void Linux",
+  "category": "Independent Linux",
+  "icon": "void.png"
+ },
+ {
+  "id": "gentoo",
+  "name": "Gentoo",
+  "category": "Independent Linux",
+  "icon": "gentoo.png"
+ },
+ {
   "id": "proxmox",
   "name": "Proxmox VE",
   "category": "Servers",
   "icon": "proxmox.png"
  },
  {
+  "id": "truenas",
+  "name": "TrueNAS",
+  "category": "Servers",
+  "icon": "truenas.png"
+ },
+ {
   "id": "freebsd",
   "name": "FreeBSD",
   "category": "BSD",
   "icon": "freebsd.png"
+ },
+ {
+  "id": "openbsd",
+  "name": "OpenBSD",
+  "category": "BSD",
+  "icon": "openbsd.png"
  },
  {
   "id": "windows",
@@ -82,5 +154,11 @@
   "name": "TempleOS",
   "category": "Other systems",
   "icon": "templeos.png"
+ },
+ {
+  "id": "haiku",
+  "name": "Haiku",
+  "category": "Other systems",
+  "icon": "haiku.png"
  }
 ]
