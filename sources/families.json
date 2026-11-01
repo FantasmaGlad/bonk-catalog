@@ -1,8 +1,8 @@
 [
-  {"id": "ubuntu", "name": "Ubuntu", "icon": "ubuntu.svg"},
-  {"id": "debian", "name": "Debian", "icon": "debian.svg"},
-  {"id": "fedora", "name": "Fedora", "icon": "fedora.svg"},
-  {"id": "arch", "name": "Arch Linux", "icon": "arch.svg"},
-  {"id": "linuxmint", "name": "Linux Mint", "icon": "linuxmint.svg"},
-  {"id": "windows", "name": "Windows", "icon": "windows.svg"}
+  {"id": "ubuntu", "name": "Ubuntu", "icon": "ubuntu.png"},
+  {"id": "debian", "name": "Debian", "icon": "debian.png"},
+  {"id": "fedora", "name": "Fedora", "icon": "fedora.png"},
+  {"id": "arch", "name": "Arch Linux", "icon": "arch.png"},
+  {"id": "linuxmint", "name": "Linux Mint", "icon": "linuxmint.png"},
+  {"id": "windows", "name": "Windows", "icon": "windows.png"}
 ]
