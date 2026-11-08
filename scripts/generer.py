@@ -8,6 +8,7 @@ reported, so one publisher's outage neither removes an image nor publishes an un
 
 import argparse
 import hashlib
+import html
 import json
 import re
 import shutil
@@ -257,6 +258,70 @@ def build(sources, families, icon_hashes, previous, now, compute=hash_url):
     return catalog, failures
 
 
+def index_page(catalog):
+    """A readable view of the catalog, for people: Bonk itself only reads the signed JSON."""
+    e = html.escape
+    day = lambda unix: time.strftime("%Y-%m-%d", time.gmtime(unix))
+    names = {family["id"]: family for family in catalog["families"]}
+    sections = []
+    for category in dict.fromkeys(family["category"] for family in catalog["families"]):
+        rows = []
+        for image in catalog["images"]:
+            family = names.get(image["family"])
+            if family is None or family["category"] != category:
+                continue
+            link = image.get("url") or image.get("official_page", "")
+            label = link.rsplit("/", 1)[-1] or link
+            size = f"{image['size_bytes'] / 1e9:.1f} GB" if "size_bytes" in image else ""
+            rows.append(
+                f'<tr><td><a href="{e(image["homepage"])}">{e(image["name"])}</a></td>'
+                f"<td>{e(image['version'])}</td><td>{e(image.get('edition', ''))}</td>"
+                f"<td>{e(image['arch'])}</td><td>{size}</td>"
+                f'<td><a href="{e(link)}">{e(label)}</a></td></tr>'
+            )
+        sections.append(
+            f"<section>\n<h2>{e(category)}</h2>\n<table>\n<thead><tr><th>System</th><th>Version</th>"
+            "<th>Edition</th><th>Architecture</th><th>Size</th><th>Download</th></tr></thead>\n"
+            "<tbody>\n" + "\n".join(rows) + "\n</tbody>\n</table>\n</section>"
+        )
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bonk image catalog</title>
+<meta name="description" content="Signed list of the bootable images Bonk can write, with each publisher's link.">
+<link rel="canonical" href="https://catalog.bonk-os.app/">
+<link rel="icon" href="/logo.png">
+<link rel="stylesheet" href="/site.css">
+</head>
+<body>
+<main>
+<header>
+<h1>Bonk image catalog</h1>
+<p class="lead">Signed list of the bootable images Bonk can write. Every link points to the publisher.</p>
+</header>
+<section>
+<h2>API</h2>
+<dl>
+<dt>Catalog</dt><dd><a href="/v1/catalog.json">/v1/catalog.json</a></dd>
+<dt>Signature</dt><dd><a href="/v1/catalog.json.sig">/v1/catalog.json.sig</a> (Ed25519, over the exact bytes)</dd>
+<dt>Keys</dt><dd><a href="https://github.com/FantasmaGlad/bonk-catalog/tree/main/keys">keys/</a></dd>
+<dt>Published</dt><dd>{day(catalog["sequence"])}</dd>
+<dt>Expires</dt><dd>{day(catalog["expires_unix"])}</dd>
+<dt>Content</dt><dd>{len(catalog["images"])} images, {len(catalog["families"])} systems</dd>
+</dl>
+</section>
+{chr(10).join(sections)}
+</main>
+<footer>
+<p><a href="https://bonk-os.app">bonk-os.app</a> · <a href="https://bonk-os.app/images/">Systems</a> · <a href="https://packages.bonk-os.app">packages</a> · <a href="https://security.bonk-os.app">security</a> · <a href="https://github.com/FantasmaGlad/bonk-catalog">GitHub</a></p>
+</footer>
+</body>
+</html>
+"""
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=Path("site/v1"))
@@ -287,6 +352,11 @@ def main():
         print("no image could be read: nothing to publish", file=sys.stderr)
         return 1
     (args.output / "catalog.json").write_text(json.dumps(catalog, indent=1) + "\n")
+    page = index_page(catalog)
+    for target in (args.output.parent, args.output):
+        (target / "index.html").write_text(page)
+    for asset in ("site.css", "logo.png"):
+        shutil.copyfile(root / "page" / asset, args.output.parent / asset)
     (args.output.parent / "failures.json").write_text(json.dumps(failures, indent=1) + "\n")
     for failure in failures:
         print(f"FAILED {failure['id']}: {failure['error']}", file=sys.stderr)

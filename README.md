@@ -1,17 +1,45 @@
-# bonk-catalog
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FantasmaGlad/Bonk/main/crates/bonk/assets/icons/128x128/bonk.png" width="96" height="96" alt="Bonk">
+</p>
 
-The signed list of bootable images offered by [Bonk](https://bonk-os.app), published at `https://catalog.bonk-os.app/v1/`.
+<h1 align="center">bonk-catalog</h1>
+
+<p align="center">
+  <b>The signed list of bootable images offered by Bonk.</b>
+</p>
+
+<p align="center">
+  <a href="https://catalog.bonk-os.app"><b>catalog.bonk-os.app</b></a> &nbsp;·&nbsp;
+  <a href="https://catalog.bonk-os.app/v1/catalog.json"><b>catalog.json</b></a> &nbsp;·&nbsp;
+  <a href="https://bonk-os.app/images/"><b>Systems</b></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/FantasmaGlad/bonk-catalog/actions/workflows/publier.yml"><img src="https://github.com/FantasmaGlad/bonk-catalog/actions/workflows/publier.yml/badge.svg?branch=main" alt="Publish"></a>
+</p>
+
+---
+
+## Files
 
 | File | Content |
-|---|---|
-| `v1/catalog.json` | systems, versions, official links, SHA-256 hashes |
-| `v1/catalog.json.sig` | raw Ed25519 signature of the exact bytes of `catalog.json` |
+| :--- | :--- |
+| [`v1/catalog.json`](https://catalog.bonk-os.app/v1/catalog.json) | systems, versions, official links, SHA-256 hashes |
+| [`v1/catalog.json.sig`](https://catalog.bonk-os.app/v1/catalog.json.sig) | Ed25519 signature of the exact bytes of `catalog.json` |
 | `v1/icons/` | system logos, covered by their hash in the catalog |
+| [`index.html`](https://catalog.bonk-os.app) | the same list, readable in a browser |
 
-No image is hosted here. Links and hashes are read every day from each publisher's own published hash file (`sources/images.json`), never typed by hand. Bonk checks the signature with public keys built into it, then downloads directly from the publisher and checks the hash before writing.
+## How it works
 
-A publisher that cannot be read keeps its last published entry, and an issue reports it. The catalog expires after 14 days: if publishing stops, clients refuse it rather than trust stale links.
+- No image is hosted here. Links and hashes are read every day from each publisher's own hash file.
+- Bonk checks the signature with keys built into it, downloads from the publisher, then checks the hash before writing.
+- A publisher that cannot be read keeps its last entry, and an issue reports it.
+- The catalog expires after 14 days: if publishing stops, Bonk refuses stale links.
 
-Adding an image: add a source to `sources/images.json`; `python3 -m unittest` in `scripts/` runs the tests, and `scripts/generer.py --output /tmp/site/v1` reads the real sources.
+Logos are trademarks of their respective owners, used to identify their systems.
 
-Logos are trademarks of their respective owners, used to identify their systems. Code under the MIT license.
+---
+
+License: view-only, all rights reserved ([LICENSE](LICENSE)) · Security: [SECURITY.md](SECURITY.md) · Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
+
+<sub>Related repositories: [Bonk](https://github.com/FantasmaGlad/Bonk) (application) · [BonkWeb](https://github.com/FantasmaGlad/BonkWeb) (website) · [bonk-packages](https://github.com/FantasmaGlad/bonk-packages) (package repositories) · [homebrew-bonk](https://github.com/FantasmaGlad/homebrew-bonk) (Homebrew tap) · [bonk-security](https://github.com/FantasmaGlad/bonk-security) (security site) · Security policy: [security.bonk-os.app](https://security.bonk-os.app), [`/.well-known/security.txt`](https://bonk-os.app/.well-known/security.txt)</sub>

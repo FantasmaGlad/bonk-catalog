@@ -1,10 +1,174 @@
-Copyright (c) 2026 FantasmaGlad. All rights reserved.
+LICENCE DE CONSULTATION - TOUS DROITS RÉSERVÉS
+VIEW-ONLY LICENSE - ALL RIGHTS RESERVED
 
-The contents of this repository (source code, text, images and logo) are published for viewing only.
+Copyright (c) 2026 Bonk. Tous droits réservés. / All rights reserved.
 
-You may read them in this repository and visit the website. You may not copy, modify, redistribute, host,
-or reuse them, in whole or in part, without prior written permission from the copyright holder.
+Ce dépôt (le « Dépôt ») contient le code source, les scripts, les sources de
+données et la documentation du catalogue https://catalog.bonk-os.app. Il est
+publié pour être LU, et uniquement pour cela. Ce n'est pas un logiciel libre
+ni un logiciel open source.
 
-Contributions are accepted under the terms stated in CONTRIBUTING.md.
+La version française de cette licence fait foi. Une traduction anglaise suit.
 
-The Bonk application is a separate project under the MIT license: https://github.com/FantasmaGlad/Bonk
+
+=========================================================================
+VERSION FRANÇAISE
+=========================================================================
+
+1. Droit accordé
+
+   Vous pouvez consulter et lire le Dépôt, en ligne sur GitHub, à titre
+   personnel et à des fins de lecture, d'information ou d'évaluation du
+   travail réalisé.
+
+   Vous pouvez aussi télécharger et lire le catalogue signé publié sur
+   https://catalog.bonk-os.app, directement ou par le logiciel Bonk.
+
+2. Ce qui est interdit
+
+   Sans autorisation écrite préalable de Bonk, il est interdit de :
+
+   a) copier, reproduire ou télécharger le Dépôt, en tout ou en partie,
+      autrement que ce qui est strictement nécessaire à sa lecture ;
+   b) utiliser le Dépôt : l'exécuter, le compiler, le déployer, l'héberger, le
+      mettre en ligne, l'intégrer à un autre projet ou en tirer un service ;
+   c) modifier, adapter, traduire ou créer une oeuvre dérivée du Dépôt ;
+   d) distribuer, publier, communiquer au public, prêter, louer, vendre ou
+      sous-licencier le Dépôt, en tout ou en partie ;
+   e) reprendre le nom, l'identité visuelle, les textes, la structure ou le
+      design du Dépôt pour un autre site ou produit, ni créer une confusion
+      avec Bonk, bonk-os.app ou catalog.bonk-os.app ;
+   f) retirer ou modifier les mentions de droits d'auteur et de propriété.
+
+   Rendre une copie accessible à d'autres n'est pas permis, même gratuitement.
+
+3. Conditions d'utilisation de GitHub
+
+   Les droits que les conditions d'utilisation de GitHub accordent aux
+   utilisateurs de la plateforme (consultation, copie au sein de GitHub dans
+   la mesure où elles l'imposent) subsistent uniquement dans cette mesure. Ils
+   ne donnent aucun droit d'utiliser le Dépôt hors de GitHub.
+
+4. Recherche de vulnérabilités
+
+   La recherche de failles menée de bonne foi, dans le périmètre et selon les
+   règles de la politique publiée sur https://security.bonk-os.app, n'est pas
+   une violation de la présente licence.
+
+5. Éléments tiers
+
+   Le Dépôt contient ou utilise des éléments qui n'appartiennent pas à Bonk
+   (bibliothèques, marques, logos). Ils restent soumis à leurs propres
+   licences et à leurs propres titulaires ; la présente licence ne leur donne
+   ni ne leur retire aucun droit.
+
+6. Le logiciel Bonk
+
+   Le logiciel Bonk (dépôt https://github.com/FantasmaGlad/Bonk) est un projet
+   distinct, diffusé sous sa propre licence (MIT). La présente licence ne
+   s'applique pas à lui, et sa licence ne s'applique pas à ce Dépôt.
+
+7. Contributions
+
+   Une contribution n'est acceptée qu'avec l'accord écrit de Bonk, qui en
+   précise les conditions, dont la cession des droits sur la contribution.
+
+8. Absence de garantie
+
+   Le Dépôt est fourni « en l'état », sans garantie d'aucune sorte, expresse
+   ou implicite. Bonk n'est responsable d'aucun dommage résultant de sa
+   lecture ou de son utilisation non autorisée.
+
+9. Fin
+
+   Toute violation de la présente licence met fin immédiatement au droit de
+   consultation accordé au point 1, sans préjudice des autres recours.
+
+10. Droit applicable
+
+    La présente licence est régie par le droit français.
+
+11. Autorisation
+
+    Pour toute autre utilisation, écrivez à security@bonk-os.app en décrivant
+    l'usage envisagé. Une autorisation n'est valable que si elle est écrite.
+
+
+=========================================================================
+ENGLISH VERSION (courtesy translation)
+=========================================================================
+
+1. Permission granted
+
+   You may view and read the Repository, online on GitHub, for personal
+   purposes: reading, information, or evaluating the work.
+
+   You may also download and read the signed catalog published at
+   https://catalog.bonk-os.app, directly or through the Bonk software.
+
+2. What is prohibited
+
+   Without prior written permission from Bonk, you may not:
+
+   a) copy, reproduce or download the Repository, in whole or in part, beyond
+      what is strictly necessary to read it;
+   b) use the Repository: run it, build it, deploy it, host it, put it online,
+      integrate it into another project or derive a service from it;
+   c) modify, adapt, translate or create a derivative work of the Repository;
+   d) distribute, publish, communicate to the public, lend, rent, sell or
+      sublicense the Repository, in whole or in part;
+   e) reuse the name, visual identity, texts, structure or design of the
+      Repository for another site or product, or create confusion with Bonk,
+      bonk-os.app or catalog.bonk-os.app;
+   f) remove or alter copyright and ownership notices.
+
+   Making a copy available to others is not permitted, even free of charge.
+
+3. GitHub terms of service
+
+   The rights that GitHub's terms of service grant to users of the platform
+   (viewing, copying within GitHub to the extent those terms require) remain
+   only to that extent. They give no right to use the Repository outside
+   GitHub.
+
+4. Vulnerability research
+
+   Good-faith security research within the scope and rules published at
+   https://security.bonk-os.app is not a violation of this license.
+
+5. Third-party components
+
+   The Repository contains or uses components that do not belong to Bonk
+   (libraries, trademarks, logos). They remain subject to their own licenses
+   and owners; this license neither grants nor removes any right on them.
+
+6. The Bonk software
+
+   The Bonk software (https://github.com/FantasmaGlad/Bonk) is a separate
+   project released under its own license (MIT). This license does not apply
+   to it, and its license does not apply to this Repository.
+
+7. Contributions
+
+   A contribution is accepted only with Bonk's written agreement, which sets
+   its terms, including the assignment of rights in the contribution.
+
+8. No warranty
+
+   The Repository is provided "as is", without warranty of any kind, express
+   or implied. Bonk is not liable for any damage resulting from its reading or
+   from unauthorized use.
+
+9. Termination
+
+   Any violation of this license immediately ends the right to view granted in
+   section 1, without prejudice to other remedies.
+
+10. Governing law
+
+    This license is governed by French law.
+
+11. Permission
+
+    For any other use, write to security@bonk-os.app describing the intended
+    use. A permission is valid only if written.
