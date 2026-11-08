@@ -29,7 +29,7 @@ SUMS_BSD = re.compile(r"^SHA256 \((.+)\) = ([0-9a-fA-F]{64})$")
 
 
 class SourceError(Exception):
-    """A source that cannot be trusted or read."""
+    pass
 
 
 def request(url, method="GET"):
@@ -57,7 +57,6 @@ def head(url):
 
 
 def parse_sums(text):
-    """File name to hash, from either format publishers use."""
     found = {}
     for line in text.splitlines():
         line = line.strip()
@@ -73,7 +72,6 @@ def version_key(version):
 
 
 def pick_file(hashes, pattern):
-    """The highest version matching the pattern, as (file, version, hash)."""
     matches = []
     for name, sha256 in hashes.items():
         if match := re.fullmatch(pattern, name):
@@ -186,7 +184,6 @@ def resolve_read(source, image, previous, fetch, stat, compute):
 
 
 def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url):
-    """Turn a source into a catalog image, reading only official files."""
     image = {
         key: source[key]
         for key in ("id", "family", "name", "channel", "arch", "homepage", "edition", "note", "usb_boot")
@@ -228,7 +225,6 @@ def previous_catalog(url):
 
 
 def build(sources, families, icon_hashes, previous, now, compute=hash_url):
-    """The catalog and the sources that failed."""
     kept = {image["id"]: image for image in previous.get("images", [])}
     images, failures = [], []
     for source in sources:

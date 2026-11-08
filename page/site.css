@@ -1,4 +1,3 @@
-/* Noir sur blanc, une colonne, sans encadré. Sur ordinateur la page tient dans la hauteur de la fenêtre ; sur téléphone elle défile. */
 *, *::before, *::after { box-sizing: border-box; }
 html { height: 100%; }
 body {

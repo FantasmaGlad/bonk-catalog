@@ -1,4 +1,3 @@
-# Lit les sources officielles chaque jour, signe le catalogue et le publie sur GitHub Pages.
 name: publier
 
 on:
