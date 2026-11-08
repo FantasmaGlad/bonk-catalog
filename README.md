@@ -9,6 +9,7 @@
 </p>
 
 <p align="center">
+  <a href="https://catalog.bonk-os.app"><b>catalog.bonk-os.app</b></a> &nbsp;·&nbsp;
   <a href="https://catalog.bonk-os.app/v1/catalog.json"><b>catalog.json</b></a> &nbsp;·&nbsp;
   <a href="https://bonk-os.app/images/"><b>Systems</b></a>
 </p>
@@ -26,6 +27,7 @@
 | [`v1/catalog.json`](https://catalog.bonk-os.app/v1/catalog.json) | systems, versions, official links, SHA-256 hashes |
 | [`v1/catalog.json.sig`](https://catalog.bonk-os.app/v1/catalog.json.sig) | Ed25519 signature of the exact bytes of `catalog.json` |
 | `v1/icons/` | system logos, covered by their hash in the catalog |
+| [`index.html`](https://catalog.bonk-os.app) | the same list, readable in a browser |
 
 ## How it works
 

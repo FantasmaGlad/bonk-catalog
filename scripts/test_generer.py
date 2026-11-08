@@ -181,5 +181,25 @@ class Windows(unittest.TestCase):
                 generer.resolve(self.SOURCE, compute=lambda _: HASH_A)
 
 
+class Page(unittest.TestCase):
+    def test_lists_every_image_with_its_publisher_link_and_no_script(self):
+        catalog = {
+            "sequence": 0,
+            "expires_unix": 86400,
+            "families": [{"id": "ubuntu", "name": "Ubuntu", "category": "Debian <derivatives>"}],
+            "images": [
+                dict(SOURCE, version="26.04.1", url="https://example.org/a.iso", size_bytes=10**9),
+                {"id": "w", "family": "ubuntu", "name": "W", "arch": "x86_64", "version": "1",
+                 "homepage": "https://example.org/", "official_page": "https://example.org/get"},
+            ],
+        }
+        page = generer.index_page(catalog)
+        self.assertIn('href="https://example.org/a.iso"', page)
+        self.assertIn('href="https://example.org/get"', page)
+        self.assertIn("Debian &lt;derivatives&gt;", page)
+        self.assertIn("1970-01-02", page)
+        self.assertNotIn("<script", page)
+
+
 if __name__ == "__main__":
     unittest.main()
