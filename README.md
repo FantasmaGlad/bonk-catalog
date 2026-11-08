@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FantasmaGlad/Bonk/main/crates/bonk/assets/icons/128x128/bonk.png" width="96" height="96" alt="Bonk">
+  <img src="docs/icons/bonk.png" width="96" height="96" alt="Bonk">
 </p>
 
 <h1 align="center">bonk-catalog</h1>
