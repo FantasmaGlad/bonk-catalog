@@ -42,6 +42,12 @@ def fetch_text(url):
         return response.read(TEXT_LIMIT).decode("utf-8", "replace")
 
 
+def reachable(url):
+    with request(url) as response:
+        if not response.geturl().startswith("https://"):
+            raise SourceError(f"{url}: redirected out of https")
+
+
 def head(url):
     """Size and date of a file; the final address must still be https after redirects."""
     with request(url, "HEAD") as response:
@@ -183,13 +189,14 @@ def resolve_read(source, image, previous, fetch, stat, compute):
     return image
 
 
-def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url):
+def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url, reach=reachable):
     image = {
         key: source[key]
         for key in ("id", "family", "name", "channel", "arch", "homepage", "edition", "note", "usb_boot")
         if key in source
     }
     if "official_page" in source:
+        reach(source["official_page"])
         image.update(
             version=source["version"],
             released=source["released"],
@@ -214,6 +221,45 @@ def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url
     return image
 
 
+DATED_BASE = re.compile(r"^(https://.+/)(\d+(?:\.\d+)+)/(.*)$")
+LISTED_VERSION = re.compile(r'href="(\d+(?:\.\d+)+)/"')
+
+
+def newer_releases(sources, fetch=fetch_text):
+    groups = {}
+    for source in sources:
+        match = DATED_BASE.match(source.get("base", ""))
+        if not match or "sums" not in source:
+            continue
+        parent, version, rest = match.groups()
+        group = groups.setdefault((parent, rest, source["sums"]), {"family": source["family"], "versions": []})
+        group["versions"].append(version)
+    series = lambda version: version_key(version)[:2]
+    newest = {}
+    for group in groups.values():
+        for version in group["versions"]:
+            newest[group["family"]] = max(newest.get(group["family"], []), series(version))
+    found, listings = [], {}
+    for (parent, rest, sums), group in groups.items():
+        try:
+            if parent not in listings:
+                listings[parent] = set(LISTED_VERSION.findall(fetch(parent)))
+            listed = listings[parent]
+        except (OSError, ValueError) as error:
+            print(f"{parent}: release listing unreadable: {error}", file=sys.stderr)
+            continue
+        for version in sorted(listed, key=version_key):
+            if series(version) <= newest[group["family"]]:
+                continue
+            where = f"{parent}{version}/{rest}"
+            try:
+                fetch(where + sums)
+            except (OSError, ValueError):
+                continue
+            found.append({"family": group["family"], "version": version, "where": where})
+    return found
+
+
 def previous_catalog(url):
     if not url:
         return {}
@@ -227,13 +273,15 @@ def previous_catalog(url):
 def build(sources, families, icon_hashes, previous, now, compute=hash_url):
     kept = {image["id"]: image for image in previous.get("images", [])}
     images, failures = [], []
+    today = time.strftime("%Y-%m-%d", time.gmtime(now))
     for source in sources:
         try:
-            images.append(resolve(source, previous=kept.get(source["id"]), compute=compute))
+            image = resolve(source, previous=kept.get(source["id"]), compute=compute)
+            images.append(dict(image, status="online", checked=today))
         except (SourceError, OSError, ValueError) as error:
             failures.append({"id": source["id"], "error": str(error)})
             if source["id"] in kept:
-                images.append(kept[source["id"]])
+                images.append(dict(kept[source["id"]], status="stale"))
     catalog = {
         "schema_version": SCHEMA_VERSION,
         # The clock only moves forward between runs: a mirror cannot pass off an older file.
@@ -254,7 +302,25 @@ def build(sources, families, icon_hashes, previous, now, compute=hash_url):
     return catalog, failures
 
 
-def index_page(catalog):
+def newer_section(updates):
+    if not updates:
+        return ""
+    e = html.escape
+    items = "\n".join(
+        f'<li>{e(u["family"])} {e(u["version"])}: <a href="{e(u["where"])}">{e(u["where"])}</a></li>'
+        for u in updates
+    )
+    return f"<section>\n<h2>Newer releases not yet in the catalog</h2>\n<ul>\n{items}\n</ul>\n</section>"
+
+
+def status(image):
+    state, checked = image.get("status", "unknown"), image.get("checked")
+    if state == "online":
+        return f"online on {checked}" if checked else "online"
+    return f"{state} since {checked}" if checked else state
+
+
+def index_page(catalog, updates=()):
     """A readable view of the catalog, for people: Bonk itself only reads the signed JSON."""
     e = html.escape
     day = lambda unix: time.strftime("%Y-%m-%d", time.gmtime(unix))
@@ -273,11 +339,11 @@ def index_page(catalog):
                 f'<tr><td><a href="{e(image["homepage"])}">{e(image["name"])}</a></td>'
                 f"<td>{e(image['version'])}</td><td>{e(image.get('edition', ''))}</td>"
                 f"<td>{e(image['arch'])}</td><td>{size}</td>"
-                f'<td><a href="{e(link)}">{e(label)}</a></td></tr>'
+                f'<td><a href="{e(link)}">{e(label)}</a></td><td>{e(status(image))}</td></tr>'
             )
         sections.append(
             f"<section>\n<h2>{e(category)}</h2>\n<table>\n<thead><tr><th>System</th><th>Version</th>"
-            "<th>Edition</th><th>Architecture</th><th>Size</th><th>Download</th></tr></thead>\n"
+            "<th>Edition</th><th>Architecture</th><th>Size</th><th>Download</th><th>Link</th></tr></thead>\n"
             "<tbody>\n" + "\n".join(rows) + "\n</tbody>\n</table>\n</section>"
         )
     return f"""<!doctype html>
@@ -301,13 +367,16 @@ def index_page(catalog):
 <h2>API</h2>
 <dl>
 <dt>Catalog</dt><dd><a href="/v1/catalog.json">/v1/catalog.json</a></dd>
+<dt>Updates</dt><dd><a href="/v1/updates.json">/v1/updates.json</a> (newer releases found at publishers, not yet in the catalog)</dd>
 <dt>Signature</dt><dd><a href="/v1/catalog.json.sig">/v1/catalog.json.sig</a> (Ed25519, over the exact bytes)</dd>
 <dt>Keys</dt><dd><a href="https://github.com/FantasmaGlad/bonk-catalog/tree/main/keys">keys/</a></dd>
 <dt>Published</dt><dd>{day(catalog["sequence"])}</dd>
 <dt>Expires</dt><dd>{day(catalog["expires_unix"])}</dd>
 <dt>Content</dt><dd>{len(catalog["images"])} images, {len(catalog["families"])} systems</dd>
+<dt>Links</dt><dd>{sum(i.get("status") == "online" for i in catalog["images"])} online, {sum(i.get("status") == "stale" for i in catalog["images"])} stale (checked at each daily run)</dd>
 </dl>
 </section>
+{newer_section(updates)}
 {chr(10).join(sections)}
 </main>
 <footer>
@@ -348,7 +417,9 @@ def main():
         print("no image could be read: nothing to publish", file=sys.stderr)
         return 1
     (args.output / "catalog.json").write_text(json.dumps(catalog, indent=1) + "\n")
-    page = index_page(catalog)
+    updates = newer_releases(sources)
+    (args.output / "updates.json").write_text(json.dumps(updates, indent=1) + "\n")
+    page = index_page(catalog, updates)
     for target in (args.output.parent, args.output):
         (target / "index.html").write_text(page)
     for asset in ("site.css", "logo.png"):

@@ -33,7 +33,8 @@
 
 - No image is hosted here. Links and hashes are read every day from each publisher's own hash file.
 - Bonk checks the signature with keys built into it, downloads from the publisher, then checks the hash before writing.
-- A publisher that cannot be read keeps its last entry, and an issue reports it.
+- Each image carries `status` and `checked`: `online` when its link answered on that date, `stale` when its publisher could not be read and the last entry was kept. An issue lists the stale ones.
+- Newer releases found at a publisher but not yet listed are reported in `v1/updates.json` and in an issue.
 - The catalog expires after 14 days: if publishing stops, Bonk refuses stale links.
 
 Logos are trademarks of their respective owners, used to identify their systems.

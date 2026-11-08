@@ -47,7 +47,7 @@ class Resolving(unittest.TestCase):
         with self.assertRaises(generer.SourceError):
             generer.resolve({**SOURCE, "base": "http://example.org/"}, None, None)
 
-    def test_official_page_needs_no_network(self):
+    def test_official_page_is_checked_not_downloaded(self):
         source = {
             "id": "w",
             "family": "windows",
@@ -59,18 +59,28 @@ class Resolving(unittest.TestCase):
             "released": "2021-10-05",
             "official_page": "https://p/",
         }
-        self.assertEqual(generer.resolve(source, None, None)["official_page"], "https://p/")
+        seen = []
+        image = generer.resolve(source, None, None, reach=seen.append)
+        self.assertEqual(image["official_page"], "https://p/")
+        self.assertEqual(seen, ["https://p/"])
 
 
 class Building(unittest.TestCase):
-    def test_failed_source_keeps_its_last_entry_and_is_reported(self):
-        previous = {"images": [{"id": SOURCE["id"], "url": "https://old/"}]}
+    def test_failed_source_keeps_its_last_entry_marked_stale(self):
+        old = {"id": SOURCE["id"], "url": "https://old/", "status": "online", "checked": "1970-01-01"}
+        previous = {"images": [old]}
         with mock.patch.object(generer, "resolve", side_effect=generer.SourceError("down")):
             catalog, failures = generer.build([SOURCE], [], {}, previous, 100)
-        self.assertEqual(catalog["images"], previous["images"])
+        self.assertEqual(catalog["images"], [dict(old, status="stale")])
         self.assertEqual(failures, [{"id": SOURCE["id"], "error": "down"}])
         self.assertEqual(catalog["sequence"], 100)
         self.assertEqual(catalog["expires_unix"], 100 + generer.LIFETIME_SECONDS)
+
+    def test_a_resolved_link_is_online_and_dated(self):
+        with mock.patch.object(generer, "resolve", return_value={"id": SOURCE["id"], "url": "https://new/"}):
+            catalog, _ = generer.build([SOURCE], [], {}, {}, 86400 * 2)
+        self.assertEqual(catalog["images"][0]["status"], "online")
+        self.assertEqual(catalog["images"][0]["checked"], "1970-01-03")
 
     def test_failed_source_without_history_is_left_out(self):
         with mock.patch.object(generer, "resolve", side_effect=OSError("down")):
@@ -198,7 +208,70 @@ class Page(unittest.TestCase):
         self.assertIn('href="https://example.org/get"', page)
         self.assertIn("Debian &lt;derivatives&gt;", page)
         self.assertIn("1970-01-02", page)
+        self.assertIn("stale since 1970-01-01", generer.index_page(dict(catalog, images=[dict(catalog["images"][0], status="stale", checked="1970-01-01")])))
         self.assertNotIn("<script", page)
+        update = {"family": "ubuntu", "version": "26.10", "where": "https://example.org/26.10/"}
+        self.assertIn("ubuntu 26.10", generer.index_page(catalog, [update]))
+
+
+class Newer(unittest.TestCase):
+    def sources(self):
+        return [
+            dict(SOURCE, id=f"u-{v}", base=f"https://example.org/{v}/", sums="SHA256SUMS")
+            for v in ("24.04", "26.04")
+        ]
+
+    def test_a_published_newer_release_is_reported(self):
+        listing = '<a href="22.04/">x</a><a href="24.04/">x</a><a href="26.04/">x</a><a href="26.10/">x</a><a href="27.04/">x</a>'
+        pages = {"https://example.org/": listing, "https://example.org/26.10/SHA256SUMS": "ok"}
+
+        def fetch(url):
+            if url not in pages:
+                raise OSError("404")
+            return pages[url]
+
+        self.assertEqual(
+            generer.newer_releases(self.sources(), fetch),
+            [{"family": "ubuntu", "version": "26.10", "where": "https://example.org/26.10/"}],
+        )
+
+    def test_point_releases_and_old_archives_are_not_newer(self):
+        sources = self.sources() + [
+            dict(SOURCE, id="old", base="https://old.example.org/18.04/", sums="SHA256SUMS")
+        ]
+        pages = {
+            "https://example.org/": '<a href="26.04/">x</a><a href="26.04.1/">x</a>',
+            "https://example.org/26.04.1/SHA256SUMS": "ok",
+            "https://old.example.org/": '<a href="18.04/">x</a><a href="24.04/">x</a>',
+            "https://old.example.org/24.04/SHA256SUMS": "ok",
+        }
+
+        def fetch(url):
+            if url not in pages:
+                raise OSError("404")
+            return pages[url]
+
+        self.assertEqual(generer.newer_releases(sources, fetch), [])
+
+    def test_a_shared_listing_is_read_once(self):
+        sources = [
+            dict(SOURCE, id=f"{v}-{a}", base=f"https://example.org/{v}/", sums=f"SUMS-{a}")
+            for v in ("1.0",) for a in ("amd64", "arm64")
+        ]
+        seen = []
+
+        def fetch(url):
+            seen.append(url)
+            return '<a href="1.0/">x</a>'
+
+        generer.newer_releases(sources, fetch)
+        self.assertEqual(seen, ["https://example.org/"])
+
+    def test_an_unreadable_listing_reports_nothing(self):
+        def fetch(url):
+            raise OSError("down")
+
+        self.assertEqual(generer.newer_releases(self.sources(), fetch), [])
 
 
 if __name__ == "__main__":
