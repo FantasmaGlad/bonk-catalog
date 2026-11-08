@@ -81,6 +81,26 @@ jobs:
       - id: pages
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
 
+  menage:
+    name: menage
+    needs: publication
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      deployments: write
+    steps:
+      - name: Garder les trois derniers déploiements
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh api --paginate "repos/$GH_REPO/deployments?environment=github-pages&per_page=100" --jq '.[].id' \
+            | tail -n +4 \
+            | while read -r id; do
+                gh api -X POST "repos/$GH_REPO/deployments/$id/statuses" -f state=inactive > /dev/null
+                gh api -X DELETE "repos/$GH_REPO/deployments/$id"
+              done
+
   relecture:
     name: relecture
     if: github.event_name != 'pull_request'
