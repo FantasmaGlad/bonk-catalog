@@ -58,7 +58,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: python3 scripts/signaler.py site/failures.json
+        run: |
+          python3 scripts/signaler.py site/failures.json
+          python3 scripts/signaler.py site/v1/updates.json "Nouvelles versions hors du catalogue"
       - name: Retirer le rapport du site
         run: rm -f site/failures.json
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
