@@ -12,12 +12,15 @@ import html
 import json
 import re
 import shutil
+import subprocess
 import sys
 import time
 import urllib.error
 import urllib.request
 from email.utils import parsedate_to_datetime
 from pathlib import Path
+
+import grub
 
 SCHEMA_VERSION = 1
 LIFETIME_SECONDS = 14 * 24 * 3600
@@ -396,6 +399,7 @@ def main():
         action="store_true",
         help="check links only: do not download images to compute a missing hash",
     )
+    parser.add_argument("--grub", action="store_true", help="add GRUB for the vault (built or reused)")
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parent.parent
@@ -409,10 +413,23 @@ def main():
         hashes[family["icon"]] = hashlib.sha256(source.read_bytes()).hexdigest()
         shutil.copyfile(source, icons / family["icon"])
 
+    previous = previous_catalog(args.previous)
     catalog, failures = build(
-        sources, families, hashes, previous_catalog(args.previous), int(time.time()),
+        sources, families, hashes, previous, int(time.time()),
         (lambda *_: "0" * 64) if args.no_compute else hash_url,
     )
+    if args.grub:
+        error = None
+        try:
+            catalog["grub"], error = grub.prepare(args.output, previous.get("grub"))
+        except (grub.GrubError, OSError, subprocess.CalledProcessError) as failure:
+            error = str(failure)
+        if error:
+            failures.append({"id": "grub", "error": error})
+        today = time.strftime("%Y-%m-%d", time.gmtime())
+        report = grub.status_report(catalog.get("grub"), args.output, error, today)
+        (args.output.parent / "grub.json").write_text(json.dumps(report, indent=1) + "\n")
+        (args.output.parent / "grub.txt").write_text(grub.status_text(report))
     if not any("url" in image for image in catalog["images"]):
         print("no image could be read: nothing to publish", file=sys.stderr)
         return 1

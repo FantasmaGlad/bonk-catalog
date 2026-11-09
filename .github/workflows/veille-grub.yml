@@ -1,0 +1,58 @@
+name: veille-grub
+
+on:
+  schedule:
+    - cron: "41 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  veille:
+    name: veille
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Chercher une version signée plus récente
+        id: veille
+        run: |
+          version=$(python3 scripts/grub.py watch)
+          echo "$version"
+          if git diff --quiet sources/grub.json; then
+            echo "nouvelle=" >> "$GITHUB_OUTPUT"
+          else
+            echo "nouvelle=$version" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Outils de construction
+        if: steps.veille.outputs.nouvelle != ''
+        run: sudo apt-get install -y --no-install-recommends bison flex gawk
+      - name: Construire la nouvelle version
+        if: steps.veille.outputs.nouvelle != ''
+        run: python3 scripts/grub.py build --output "$RUNNER_TEMP/grub"
+      # Never merged here: a boot loader is published only after the maintainer reviews it.
+      - name: Proposer la mise à jour
+        if: steps.veille.outputs.nouvelle != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.veille.outputs.nouvelle }}
+        run: |
+          branche="grub/$VERSION"
+          if git ls-remote --exit-code --heads "https://github.com/$GITHUB_REPOSITORY" "$branche" > /dev/null; then
+            echo "branche $branche déjà proposée"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branche"
+          git commit -am "feat(grub): passer à GRUB $VERSION"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/$GITHUB_REPOSITORY" "$branche"
+          corps="GRUB $VERSION : archive vérifiée par la signature GPG du signataire de sources/grub.json, construite sans erreur par la veille. À relire puis fusionner : le catalogue publiera ce chargeur."
+          gh pr create --base main --head "$branche" --title "feat(grub): passer à GRUB $VERSION" --body "$corps" \
+            || gh issue create --title "GRUB $VERSION disponible" --body "$corps (PR impossible, branche $branche poussée)"
