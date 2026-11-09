@@ -102,7 +102,6 @@ class Status(unittest.TestCase):
             report = grub.status_report(entry, output, None, "2026-11-09", published="https://c/")
         self.assertEqual((report["status"], report["signed"]), ("ok", "2026-01-14"))
         self.assertEqual(report["efi_x86_64"]["url"], "https://c/efi_x86_64")
-        self.assertIn("GNU signature: valid", grub.status_text(report))
 
     def test_a_bad_signature_is_failed(self):
         output = Path(tempfile.mkdtemp())
@@ -111,13 +110,11 @@ class Status(unittest.TestCase):
             (output / key).write_bytes(b"x")
             entry[key] = dict(entry_for(b"x"), path=key)
         report = grub.status_report(entry, output, None, "2026-11-09")
-        self.assertEqual(report["status"], "failed")
-        self.assertIn("NOT VERIFIED", grub.status_text(report))
+        self.assertEqual((report["status"], report["signature_verified"]), ("failed", False))
 
     def test_no_entry_is_missing(self):
         report = grub.status_report(None, Path("."), "miroirs absents", "2026-11-09")
-        self.assertEqual(report["status"], "missing")
-        self.assertIn("miroirs absents", grub.status_text(report))
+        self.assertEqual((report["status"], report["error"]), ("missing", "miroirs absents"))
 
 
 class Archive(unittest.TestCase):

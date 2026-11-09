@@ -42,7 +42,6 @@
 | File | Content |
 | :--- | :--- |
 | [`grub.json`](https://catalog.bonk-os.app/grub.json) | status of the published GRUB: version, links, hashes, signature check |
-| [`grub.txt`](https://catalog.bonk-os.app/grub.txt) | the same, as text |
 | `v1/grub/<version>/` | `BOOTX64.EFI`, the GNU source archive and its signature |
 
 - **Source**: the GNU release archive named in [`sources/grub.json`](sources/grub.json), with its SHA-256 and the fingerprint of its signer.

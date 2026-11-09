@@ -162,21 +162,6 @@ def status_report(entry, output, error, today, published=PUBLISHED):
     return report
 
 
-def status_text(report):
-    lines = [f"GRUB for the Bonk vault: {report['status']}", f"Checked: {report['checked']}"]
-    if "version" in report:
-        lines += [
-            f"Version: {report['version']}, released {report['released']}, build {report['build']}",
-            f"GNU signature: {'valid' if report['signature_verified'] else 'NOT VERIFIED'}, "
-            f"signed {report['signed']} by {report['signer']}",
-        ]
-        for key, label in (("efi_x86_64", "EFI x86_64"), ("source", "Source"), ("source_signature", "Signature")):
-            lines.append(f"{label}: {report[key]['url']} ({report[key]['size_bytes']} bytes, sha256 {report[key]['sha256']})")
-    if report["error"]:
-        lines.append(f"Error: {report['error']}")
-    return "\n".join(lines) + "\n"
-
-
 def check_published(base=PUBLISHED.removesuffix("v1/")):
     """After deployment: the public status page, then every file it names, downloaded and checked."""
     report = json.loads(download(base + "grub.json"))

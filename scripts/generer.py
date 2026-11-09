@@ -429,7 +429,6 @@ def main():
         today = time.strftime("%Y-%m-%d", time.gmtime())
         report = grub.status_report(catalog.get("grub"), args.output, error, today)
         (args.output.parent / "grub.json").write_text(json.dumps(report, indent=1) + "\n")
-        (args.output.parent / "grub.txt").write_text(grub.status_text(report))
     if not any("url" in image for image in catalog["images"]):
         print("no image could be read: nothing to publish", file=sys.stderr)
         return 1
