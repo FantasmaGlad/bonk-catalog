@@ -87,13 +87,18 @@ def asset(output, path):
     return {"path": path, "sha256": sha256(data), "size_bytes": len(data)}
 
 
+def files(entry):
+    """Every published file of an entry: one EFI image per architecture, then the source and its signature."""
+    return [entry["efi"][arch] for arch in sorted(entry["efi"])] + [entry["source"], entry["source_signature"]]
+
+
 def reuse(previous, output, published):
     """The bytes already published, checked against the signed catalog: no rebuild, no new hash."""
-    for key in ("efi_x86_64", "source", "source_signature"):
-        data = download(published + previous[key]["path"])
-        if sha256(data) != previous[key]["sha256"]:
-            raise GrubError(f"published {previous[key]['path']} differs from the previous catalog")
-        target = output / previous[key]["path"]
+    for item in files(previous):
+        data = download(published + item["path"])
+        if sha256(data) != item["sha256"]:
+            raise GrubError(f"published {item['path']} differs from the previous catalog")
+        target = output / item["path"]
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(data)
 
@@ -106,7 +111,7 @@ def prepare(output, previous, published=PUBLISHED, build=None):
         "version": source["version"],
         "released": source["released"],
         "build": build_id(),
-        "efi_x86_64": {"path": folder + "BOOTX64.EFI"},
+        "efi": {"x86_64": {"path": folder + "BOOTX64.EFI"}},
         "source": {"path": folder + source["archive"]},
         "source_signature": {"path": folder + source["archive"] + ".sig"},
     }
@@ -119,7 +124,7 @@ def prepare(output, previous, published=PUBLISHED, build=None):
     (output / folder).mkdir(parents=True, exist_ok=True)
     try:
         fetch_archive(source, output / folder)
-        (build or run_build)(output / entry["source"]["path"], output / entry["efi_x86_64"]["path"])
+        (build or run_build)(output / entry["source"]["path"], output / entry["efi"]["x86_64"]["path"])
     except (OSError, GrubError, subprocess.CalledProcessError) as error:
         # A mirror outage must not take GRUB out of the catalog: the last published one stays.
         if not previous:
@@ -127,7 +132,8 @@ def prepare(output, previous, published=PUBLISHED, build=None):
         print(f"GRUB {source['version']} not built, previous one kept: {error}", file=sys.stderr)
         reuse(previous, output, published)
         return previous, f"GRUB {source['version']} not built: {error}"
-    for key in ("efi_x86_64", "source", "source_signature"):
+    entry["efi"] = {arch: asset(output, item["path"]) for arch, item in entry["efi"].items()}
+    for key in ("source", "source_signature"):
         entry[key] = asset(output, entry[key]["path"])
     return entry, None
 
@@ -138,9 +144,9 @@ def run_build(archive, efi):
 
 def check(entry, output, signer):
     """What is about to be published, checked again: every hash, and the GNU signature of the archive."""
-    for key in ("efi_x86_64", "source", "source_signature"):
-        if asset(output, entry[key]["path"])["sha256"] != entry[key]["sha256"]:
-            raise GrubError(f"{entry[key]['path']}: hash differs from the catalog entry")
+    for item in files(entry):
+        if asset(output, item["path"])["sha256"] != item["sha256"]:
+            raise GrubError(f"{item['path']}: hash differs from the catalog entry")
     return verify_signature(output / entry["source"]["path"], output / entry["source_signature"]["path"], signer)
 
 
@@ -157,8 +163,10 @@ def status_report(entry, output, error, today, published=PUBLISHED):
         signed, state, report["error"] = None, "failed", str(failure)
     report.update(status=state, version=entry["version"], released=entry["released"], build=entry["build"],
                   signature_verified=signed is not None, signed=signed)
-    for key in ("efi_x86_64", "source", "source_signature"):
-        report[key] = dict(entry[key], url=published + entry[key]["path"])
+    with_url = lambda item: dict(item, url=published + item["path"])
+    report["efi"] = {arch: with_url(item) for arch, item in entry["efi"].items()}
+    for key in ("source", "source_signature"):
+        report[key] = with_url(entry[key])
     return report
 
 
@@ -168,11 +176,13 @@ def check_published(base=PUBLISHED.removesuffix("v1/")):
     if report["status"] != "ok":
         raise GrubError(f"published GRUB status is {report['status']}: {report['error']}")
     with tempfile.TemporaryDirectory() as work:
-        for key in ("efi_x86_64", "source", "source_signature"):
-            data = download(report[key]["url"])
-            if sha256(data) != report[key]["sha256"]:
-                raise GrubError(f"{report[key]['url']}: published bytes differ from grub.json")
-            (Path(work) / key).write_bytes(data)
+        fetched = {}
+        for item in files(report):
+            fetched[item["path"]] = download(item["url"])
+            if sha256(fetched[item["path"]]) != item["sha256"]:
+                raise GrubError(f"{item['url']}: published bytes differ from grub.json")
+        for key in ("source", "source_signature"):
+            (Path(work) / key).write_bytes(fetched[report[key]["path"]])
         verify_signature(Path(work) / "source", Path(work) / "source_signature", report["signer"])
     return report["version"]
 
