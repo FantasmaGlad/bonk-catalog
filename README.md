@@ -37,6 +37,21 @@
 - Newer releases found at a publisher but not yet listed are reported in `v1/updates.json` and in an issue.
 - The catalog expires after 14 days: if publishing stops, Bonk refuses stale links.
 
+## GRUB for the vault
+
+| File | Content |
+| :--- | :--- |
+| [`grub.json`](https://catalog.bonk-os.app/grub.json) | status of the published GRUB: version, links, hashes, signature check |
+| `v1/grub/<version>/` | `BOOTX64.EFI`, the GNU source archive and its signature |
+
+- **Source**: the GNU release archive named in [`sources/grub.json`](sources/grub.json), with its SHA-256 and the fingerprint of its signer.
+- **Signature**: checked with `gpgv` against [`keys/grub-signataire.asc`](keys/grub-signataire.asc) before anything is built, and again at each publication.
+- **Build**: [`scripts/grub-build.sh`](scripts/grub-build.sh) builds one standalone `BOOTX64.EFI` for x86_64. It is rebuilt only when the version or the build files change; otherwise the published bytes are reused and checked.
+- **Publication**: the catalog entry `grub` names each file and its hash, covered by the catalog signature. After deployment, every file is downloaded from the public address and checked again.
+- **Updates**: every Monday a workflow looks for a newer signed GRUB, builds it and opens a pull request. Nothing is published before it is merged.
+
+GRUB is free software under the GPL-3.0-or-later; its source is published next to each build.
+
 Logos are trademarks of their respective owners, used to identify their systems.
 
 ---

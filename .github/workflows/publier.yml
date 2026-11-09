@@ -29,10 +29,23 @@ jobs:
       - name: Lire les vraies sources, sans signer
         run: python3 scripts/generer.py --no-compute --output "$RUNNER_TEMP/site/v1"
 
+  grub:
+    name: grub
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Outils de construction
+        run: sudo apt-get install -y --no-install-recommends bison flex gawk
+      - name: Vérifier l'archive GNU et construire
+        run: python3 scripts/grub.py build --output "$RUNNER_TEMP/grub"
+
   construire:
     name: construire
     if: github.event_name != 'pull_request'
-    needs: controle
+    needs: [controle, grub]
     runs-on: ubuntu-24.04
     # A new Windows image is downloaded whole to compute its hash.
     timeout-minutes: 240
@@ -43,8 +56,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: Outils de construction de GRUB
+        run: sudo apt-get install -y --no-install-recommends bison flex gawk
       - name: Générer
-        run: python3 scripts/generer.py --output site/v1 --previous https://catalog.bonk-os.app/v1/catalog.json
+        run: python3 scripts/generer.py --grub --output site/v1 --previous https://catalog.bonk-os.app/v1/catalog.json
       - name: Signer et relire la signature
         env:
           CLE: ${{ secrets.CATALOG_SIGNING_KEY }}
@@ -118,3 +133,5 @@ jobs:
           curl -fsSL --retry 5 --retry-all-errors -o catalog.json https://catalog.bonk-os.app/v1/catalog.json
           curl -fsSL --retry 5 --retry-all-errors -o catalog.json.sig https://catalog.bonk-os.app/v1/catalog.json.sig
           openssl pkeyutl -verify -rawin -pubin -inkey keys/courante.pub.pem -in catalog.json -sigfile catalog.json.sig
+      - name: Relire GRUB depuis l'adresse publique
+        run: python3 scripts/grub.py check-published
