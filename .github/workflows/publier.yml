@@ -34,7 +34,7 @@ jobs:
     if: github.event_name != 'pull_request'
     needs: controle
     runs-on: ubuntu-24.04
-    # Une image Windows nouvelle se télécharge en entier pour calculer son empreinte.
+    # A new Windows image is downloaded whole to compute its hash.
     timeout-minutes: 240
     permissions:
       contents: read
