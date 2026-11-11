@@ -17,7 +17,7 @@ SOURCE = ROOT / "sources/grub.json"
 EARLY = ROOT / "sources/grub/depart.cfg"
 BUILD = ROOT / "scripts/grub-build.sh"
 KEY = ROOT / "keys/grub-signataire.asc"
-PUBLISHED = "https://catalog.bonk-os.app/v1/"
+PUBLISHED = "https://catalog.bonk-os.app/v2/"
 ARCHIVE = re.compile(r"grub-(\d+\.\d+(?:\.\d+)?)\.tar\.xz(?![.\w])")
 # Removable-media names: the firmware of each processor loads its own.
 ARCHITECTURES = {"x86_64": "BOOTX64.EFI", "aarch64": "BOOTAA64.EFI"}
@@ -174,7 +174,7 @@ def status_report(entry, output, error, today, published=PUBLISHED):
     return report
 
 
-def check_published(base=PUBLISHED.removesuffix("v1/")):
+def check_published(base=PUBLISHED.removesuffix("v2/")):
     """After deployment: the public status page, then every file it names, downloaded and checked."""
     report = json.loads(download(base + "grub.json"))
     if report["status"] != "ok":
