@@ -9,7 +9,12 @@
   "base": "https://releases.ubuntu.com/26.04/",
   "pattern": "ubuntu-(26\\.04(?:\\.\\d+)*)-desktop-amd64\\.iso",
   "edition": "desktop",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "gnome",
+  "kind": "live",
+  "ram_mb": 6144,
+  "ram_source": "https://ubuntu.com/download/desktop",
+  "media": "usb"
  },
  {
   "id": "ubuntu-26.04-server-x86_64",
@@ -21,7 +26,12 @@
   "base": "https://releases.ubuntu.com/26.04/",
   "pattern": "ubuntu-(26\\.04(?:\\.\\d+)*)-live-server-amd64\\.iso",
   "edition": "server",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "none",
+  "kind": "installer",
+  "ram_mb": 1536,
+  "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
+  "media": "usb"
  },
  {
   "id": "ubuntu-25.10-desktop-x86_64",
@@ -33,7 +43,12 @@
   "base": "https://releases.ubuntu.com/25.10/",
   "pattern": "ubuntu-(25\\.10(?:\\.\\d+)*)-desktop-amd64\\.iso",
   "edition": "desktop",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "gnome",
+  "kind": "live",
+  "ram_mb": 6144,
+  "ram_source": "https://ubuntu.com/download/desktop",
+  "media": "usb"
  },
  {
   "id": "ubuntu-25.10-server-x86_64",
@@ -45,7 +60,12 @@
   "base": "https://releases.ubuntu.com/25.10/",
   "pattern": "ubuntu-(25\\.10(?:\\.\\d+)*)-live-server-amd64\\.iso",
   "edition": "server",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "none",
+  "kind": "installer",
+  "ram_mb": 1536,
+  "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
+  "media": "usb"
  },
  {
   "id": "ubuntu-24.04-desktop-x86_64",
@@ -57,7 +77,12 @@
   "base": "https://releases.ubuntu.com/24.04/",
   "pattern": "ubuntu-(24\\.04(?:\\.\\d+)*)-desktop-amd64\\.iso",
   "edition": "desktop",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "gnome",
+  "kind": "live",
+  "ram_mb": 6144,
+  "ram_source": "https://ubuntu.com/download/desktop",
+  "media": "usb"
  },
  {
   "id": "ubuntu-24.04-server-x86_64",
@@ -69,7 +94,12 @@
   "base": "https://releases.ubuntu.com/24.04/",
   "pattern": "ubuntu-(24\\.04(?:\\.\\d+)*)-live-server-amd64\\.iso",
   "edition": "server",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "none",
+  "kind": "installer",
+  "ram_mb": 1536,
+  "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
+  "media": "usb"
  },
  {
   "id": "ubuntu-22.04-desktop-x86_64",
@@ -81,7 +111,12 @@
   "base": "https://releases.ubuntu.com/22.04/",
   "pattern": "ubuntu-(22\\.04(?:\\.\\d+)*)-desktop-amd64\\.iso",
   "edition": "desktop",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "gnome",
+  "kind": "live",
+  "ram_mb": 6144,
+  "ram_source": "https://ubuntu.com/download/desktop",
+  "media": "usb"
  },
  {
   "id": "ubuntu-22.04-server-x86_64",
@@ -93,7 +128,12 @@
   "base": "https://releases.ubuntu.com/22.04/",
   "pattern": "ubuntu-(22\\.04(?:\\.\\d+)*)-live-server-amd64\\.iso",
   "edition": "server",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "none",
+  "kind": "installer",
+  "ram_mb": 1536,
+  "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
+  "media": "usb"
  },
  {
   "id": "ubuntu-26.04-desktop-aarch64",
@@ -105,7 +145,12 @@
   "base": "https://cdimage.ubuntu.com/releases/26.04/release/",
   "pattern": "ubuntu-(26\\.04(?:\\.\\d+)*)-desktop-arm64\\.iso",
   "edition": "desktop",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "gnome",
+  "kind": "live",
+  "ram_mb": 6144,
+  "ram_source": "https://ubuntu.com/download/desktop",
+  "media": "usb"
  },
  {
   "id": "ubuntu-26.04-server-aarch64",
@@ -117,7 +162,12 @@
   "base": "https://cdimage.ubuntu.com/releases/26.04/release/",
   "pattern": "ubuntu-(26\\.04(?:\\.\\d+)*)-live-server-arm64\\.iso",
   "edition": "server",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "none",
+  "kind": "installer",
+  "ram_mb": 1536,
+  "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
+  "media": "usb"
  },
  {
   "id": "kubuntu-26.04-x86_64",
@@ -128,7 +178,10 @@
   "homepage": "https://ubuntu.com/download",
   "base": "https://cdimage.ubuntu.com/kubuntu/releases/26.04/release/",
   "pattern": "kubuntu-(26\\.04(?:\\.\\d+)*)-(?:desktop|dvd)-amd64\\.iso",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "kde",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "xubuntu-26.04-x86_64",
@@ -139,7 +192,10 @@
   "homepage": "https://ubuntu.com/download",
   "base": "https://cdimage.ubuntu.com/xubuntu/releases/26.04/release/",
   "pattern": "xubuntu-(26\\.04(?:\\.\\d+)*)-(?:desktop|dvd)-amd64\\.iso",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "xfce",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "lubuntu-26.04-x86_64",
@@ -150,7 +206,10 @@
   "homepage": "https://ubuntu.com/download",
   "base": "https://cdimage.ubuntu.com/lubuntu/releases/26.04/release/",
   "pattern": "lubuntu-(26\\.04(?:\\.\\d+)*)-(?:desktop|dvd)-amd64\\.iso",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "lxqt",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "ubuntustudio-26.04-x86_64",
@@ -161,7 +220,10 @@
   "homepage": "https://ubuntu.com/download",
   "base": "https://cdimage.ubuntu.com/ubuntustudio/releases/26.04/release/",
   "pattern": "ubuntustudio-(26\\.04(?:\\.\\d+)*)-(?:desktop|dvd)-amd64\\.iso",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "kde",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "ubuntu-24.04-desktop-aarch64",
@@ -173,7 +235,12 @@
   "base": "https://cdimage.ubuntu.com/releases/24.04/release/",
   "pattern": "ubuntu-(24\\.04(?:\\.\\d+)*)-desktop-arm64\\.iso",
   "edition": "desktop",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "gnome",
+  "kind": "live",
+  "ram_mb": 6144,
+  "ram_source": "https://ubuntu.com/download/desktop",
+  "media": "usb"
  },
  {
   "id": "ubuntu-24.04-server-aarch64",
@@ -185,7 +252,12 @@
   "base": "https://cdimage.ubuntu.com/releases/24.04/release/",
   "pattern": "ubuntu-(24\\.04(?:\\.\\d+)*)-live-server-arm64\\.iso",
   "edition": "server",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "none",
+  "kind": "installer",
+  "ram_mb": 1536,
+  "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
+  "media": "usb"
  },
  {
   "id": "kubuntu-24.04-x86_64",
@@ -196,7 +268,10 @@
   "homepage": "https://ubuntu.com/download",
   "base": "https://cdimage.ubuntu.com/kubuntu/releases/24.04/release/",
   "pattern": "kubuntu-(24\\.04(?:\\.\\d+)*)-(?:desktop|dvd)-amd64\\.iso",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "kde",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "xubuntu-24.04-x86_64",
@@ -207,7 +282,10 @@
   "homepage": "https://ubuntu.com/download",
   "base": "https://cdimage.ubuntu.com/xubuntu/releases/24.04/release/",
   "pattern": "xubuntu-(24\\.04(?:\\.\\d+)*)-(?:desktop|dvd)-amd64\\.iso",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "xfce",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "lubuntu-24.04-x86_64",
@@ -218,7 +296,10 @@
   "homepage": "https://ubuntu.com/download",
   "base": "https://cdimage.ubuntu.com/lubuntu/releases/24.04/release/",
   "pattern": "lubuntu-(24\\.04(?:\\.\\d+)*)-(?:desktop|dvd)-amd64\\.iso",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "lxqt",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "ubuntu-mate-24.04-x86_64",
@@ -229,7 +310,10 @@
   "homepage": "https://ubuntu.com/download",
   "base": "https://cdimage.ubuntu.com/ubuntu-mate/releases/24.04/release/",
   "pattern": "ubuntu-mate-(24\\.04(?:\\.\\d+)*)-(?:desktop|dvd)-amd64\\.iso",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "mate",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "ubuntustudio-24.04-x86_64",
@@ -240,7 +324,10 @@
   "homepage": "https://ubuntu.com/download",
   "base": "https://cdimage.ubuntu.com/ubuntustudio/releases/24.04/release/",
   "pattern": "ubuntustudio-(24\\.04(?:\\.\\d+)*)-(?:desktop|dvd)-amd64\\.iso",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "kde",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "ubuntu-20.04-desktop-x86_64",
@@ -252,7 +339,12 @@
   "base": "https://releases.ubuntu.com/20.04/",
   "pattern": "ubuntu-(20\\.04(?:\\.\\d+)*)-desktop-amd64\\.iso",
   "edition": "desktop",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "gnome",
+  "kind": "live",
+  "ram_mb": 6144,
+  "ram_source": "https://ubuntu.com/download/desktop",
+  "media": "usb"
  },
  {
   "id": "ubuntu-18.04-desktop-x86_64",
@@ -264,7 +356,12 @@
   "base": "https://old-releases.ubuntu.com/releases/18.04/",
   "pattern": "ubuntu-(18\\.04(?:\\.\\d+)*)-desktop-amd64\\.iso",
   "edition": "desktop",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "gnome",
+  "kind": "live",
+  "ram_mb": 6144,
+  "ram_source": "https://ubuntu.com/download/desktop",
+  "media": "usb"
  },
  {
   "id": "ubuntu-16.04-desktop-x86_64",
@@ -276,7 +373,12 @@
   "base": "https://releases.ubuntu.com/16.04/",
   "pattern": "ubuntu-(16\\.04(?:\\.\\d+)*)-desktop-amd64\\.iso",
   "edition": "desktop",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "gnome",
+  "kind": "live",
+  "ram_mb": 6144,
+  "ram_source": "https://ubuntu.com/download/desktop",
+  "media": "usb"
  },
  {
   "id": "debian-13-netinst-x86_64",
@@ -288,7 +390,10 @@
   "base": "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/",
   "pattern": "debian-(13\\.\\d+\\.\\d+)-amd64-netinst\\.iso",
   "edition": "netinst",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "debian-13-netinst-aarch64",
@@ -300,7 +405,10 @@
   "base": "https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/",
   "pattern": "debian-(13\\.\\d+\\.\\d+)-arm64-netinst\\.iso",
   "edition": "netinst",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "debian-13-netinst-riscv64",
@@ -312,7 +420,10 @@
   "base": "https://cdimage.debian.org/debian-cd/current/riscv64/iso-cd/",
   "pattern": "debian-(13\\.\\d+\\.\\d+)-riscv64-netinst\\.iso",
   "edition": "netinst",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "debian-13-live-gnome-x86_64",
@@ -324,7 +435,12 @@
   "base": "https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/",
   "pattern": "debian-live-(13\\.\\d+\\.\\d+)-amd64-gnome\\.iso",
   "edition": "live gnome",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "gnome",
+  "kind": "live",
+  "ram_mb": 1024,
+  "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
+  "media": "usb"
  },
  {
   "id": "debian-13-live-kde-x86_64",
@@ -336,7 +452,12 @@
   "base": "https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/",
   "pattern": "debian-live-(13\\.\\d+\\.\\d+)-amd64-kde\\.iso",
   "edition": "live kde",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "kde",
+  "kind": "live",
+  "ram_mb": 1024,
+  "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
+  "media": "usb"
  },
  {
   "id": "debian-13-live-xfce-x86_64",
@@ -348,7 +469,12 @@
   "base": "https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/",
   "pattern": "debian-live-(13\\.\\d+\\.\\d+)-amd64-xfce\\.iso",
   "edition": "live xfce",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "xfce",
+  "kind": "live",
+  "ram_mb": 1024,
+  "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
+  "media": "usb"
  },
  {
   "id": "debian-13-live-cinnamon-x86_64",
@@ -360,7 +486,12 @@
   "base": "https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/",
   "pattern": "debian-live-(13\\.\\d+\\.\\d+)-amd64-cinnamon\\.iso",
   "edition": "live cinnamon",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "cinnamon",
+  "kind": "live",
+  "ram_mb": 1024,
+  "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
+  "media": "usb"
  },
  {
   "id": "debian-13-live-mate-x86_64",
@@ -372,7 +503,12 @@
   "base": "https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/",
   "pattern": "debian-live-(13\\.\\d+\\.\\d+)-amd64-mate\\.iso",
   "edition": "live mate",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "mate",
+  "kind": "live",
+  "ram_mb": 1024,
+  "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
+  "media": "usb"
  },
  {
   "id": "debian-13-live-lxqt-x86_64",
@@ -384,7 +520,12 @@
   "base": "https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/",
   "pattern": "debian-live-(13\\.\\d+\\.\\d+)-amd64-lxqt\\.iso",
   "edition": "live lxqt",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "lxqt",
+  "kind": "live",
+  "ram_mb": 1024,
+  "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
+  "media": "usb"
  },
  {
   "id": "debian-13-live-standard-x86_64",
@@ -396,7 +537,10 @@
   "base": "https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/",
   "pattern": "debian-live-(13\\.\\d+\\.\\d+)-amd64-standard\\.iso",
   "edition": "live standard",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "none",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "debian-13-dvd-x86_64",
@@ -408,7 +552,10 @@
   "base": "https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/",
   "pattern": "debian-(13\\.\\d+\\.\\d+)-amd64-DVD-1\\.iso",
   "edition": "DVD",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "debian-12-netinst-x86_64",
@@ -420,7 +567,10 @@
   "base": "https://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/",
   "pattern": "debian-(12\\.\\d+\\.\\d+)-amd64-netinst\\.iso",
   "edition": "netinst",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "debian-11-netinst-x86_64",
@@ -432,7 +582,10 @@
   "base": "https://cdimage.debian.org/cdimage/archive/latest-oldoldstable/amd64/iso-cd/",
   "pattern": "debian-(11\\.\\d+\\.\\d+)-amd64-netinst\\.iso",
   "edition": "netinst",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22.3-cinnamon-x86_64",
@@ -444,7 +597,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22.3/",
   "pattern": "linuxmint-(22\\.3)-cinnamon-64bit\\.iso",
   "edition": "cinnamon",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "cinnamon",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22.3-mate-x86_64",
@@ -456,7 +612,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22.3/",
   "pattern": "linuxmint-(22\\.3)-mate-64bit\\.iso",
   "edition": "mate",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "mate",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22.3-xfce-x86_64",
@@ -468,7 +627,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22.3/",
   "pattern": "linuxmint-(22\\.3)-xfce-64bit\\.iso",
   "edition": "xfce",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "xfce",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22.2-cinnamon-x86_64",
@@ -480,7 +642,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22.2/",
   "pattern": "linuxmint-(22\\.2)-cinnamon-64bit\\.iso",
   "edition": "cinnamon",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "cinnamon",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22.2-mate-x86_64",
@@ -492,7 +657,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22.2/",
   "pattern": "linuxmint-(22\\.2)-mate-64bit\\.iso",
   "edition": "mate",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "mate",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22.2-xfce-x86_64",
@@ -504,7 +672,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22.2/",
   "pattern": "linuxmint-(22\\.2)-xfce-64bit\\.iso",
   "edition": "xfce",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "xfce",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22.1-cinnamon-x86_64",
@@ -516,7 +687,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22.1/",
   "pattern": "linuxmint-(22\\.1)-cinnamon-64bit\\.iso",
   "edition": "cinnamon",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "cinnamon",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22.1-mate-x86_64",
@@ -528,7 +702,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22.1/",
   "pattern": "linuxmint-(22\\.1)-mate-64bit\\.iso",
   "edition": "mate",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "mate",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22.1-xfce-x86_64",
@@ -540,7 +717,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22.1/",
   "pattern": "linuxmint-(22\\.1)-xfce-64bit\\.iso",
   "edition": "xfce",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "xfce",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22-cinnamon-x86_64",
@@ -552,7 +732,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22/",
   "pattern": "linuxmint-(22)-cinnamon-64bit\\.iso",
   "edition": "cinnamon",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "cinnamon",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22-mate-x86_64",
@@ -564,7 +747,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22/",
   "pattern": "linuxmint-(22)-mate-64bit\\.iso",
   "edition": "mate",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "mate",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-22-xfce-x86_64",
@@ -576,7 +762,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/22/",
   "pattern": "linuxmint-(22)-xfce-64bit\\.iso",
   "edition": "xfce",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "xfce",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-21.3-cinnamon-x86_64",
@@ -588,7 +777,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/21.3/",
   "pattern": "linuxmint-(21\\.3)-cinnamon-64bit\\.iso",
   "edition": "cinnamon",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "cinnamon",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-21.3-mate-x86_64",
@@ -600,7 +792,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/21.3/",
   "pattern": "linuxmint-(21\\.3)-mate-64bit\\.iso",
   "edition": "mate",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "mate",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "linuxmint-21.3-xfce-x86_64",
@@ -612,7 +807,10 @@
   "base": "https://mirrors.edge.kernel.org/linuxmint/stable/21.3/",
   "pattern": "linuxmint-(21\\.3)-xfce-64bit\\.iso",
   "edition": "xfce",
-  "sums": "sha256sum.txt"
+  "sums": "sha256sum.txt",
+  "desktop": "xfce",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "kali-rolling-installer-x86_64",
@@ -624,7 +822,10 @@
   "base": "https://cdimage.kali.org/current/",
   "pattern": "kali-linux-(\\d{4}\\.\\d+)-installer-amd64\\.iso",
   "edition": "installer",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "kali-rolling-netinst-x86_64",
@@ -636,7 +837,10 @@
   "base": "https://cdimage.kali.org/current/",
   "pattern": "kali-linux-(\\d{4}\\.\\d+)-installer-netinst-amd64\\.iso",
   "edition": "netinst",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "kali-rolling-installer-aarch64",
@@ -648,7 +852,10 @@
   "base": "https://cdimage.kali.org/current/",
   "pattern": "kali-linux-(\\d{4}\\.\\d+)-installer-arm64\\.iso",
   "edition": "installer",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "fedora-44-workstation-x86_64",
@@ -661,7 +868,10 @@
   "pattern": "Fedora-Workstation-Live-(?:x86_64-)?(44(?:-[\\d.]+)?)(?:\\.x86_64)?\\.iso",
   "edition": "workstation",
   "sums_pattern": "Fedora-Workstation-44-[\\d.]+-x86_64-CHECKSUM",
-  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/x86_64/iso/"
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/x86_64/iso/",
+  "desktop": "gnome",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "fedora-44-kde-x86_64",
@@ -674,7 +884,10 @@
   "pattern": "Fedora-KDE-Desktop-Live-(?:x86_64-)?(44(?:-[\\d.]+)?)(?:\\.x86_64)?\\.iso",
   "edition": "kde",
   "sums_pattern": "Fedora-KDE-44-[\\d.]+-x86_64-CHECKSUM",
-  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/KDE/x86_64/iso/"
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/KDE/x86_64/iso/",
+  "desktop": "kde",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "fedora-44-server-x86_64",
@@ -687,7 +900,10 @@
   "pattern": "Fedora-Server-dvd-x86_64-(44-[\\d.]+)\\.iso",
   "edition": "server",
   "sums_pattern": "Fedora-Server-44-[\\d.]+-x86_64-CHECKSUM",
-  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Server/x86_64/iso/"
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Server/x86_64/iso/",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "fedora-44-workstation-aarch64",
@@ -700,7 +916,10 @@
   "pattern": "Fedora-Workstation-Live-(?:aarch64-)?(44(?:-[\\d.]+)?)(?:\\.aarch64)?\\.iso",
   "edition": "workstation",
   "sums_pattern": "Fedora-Workstation-44-[\\d.]+-aarch64-CHECKSUM",
-  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/aarch64/iso/"
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/aarch64/iso/",
+  "desktop": "gnome",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "fedora-43-workstation-x86_64",
@@ -713,7 +932,10 @@
   "pattern": "Fedora-Workstation-Live-(?:x86_64-)?(43(?:-[\\d.]+)?)(?:\\.x86_64)?\\.iso",
   "edition": "workstation",
   "sums_pattern": "Fedora-Workstation-43-[\\d.]+-x86_64-CHECKSUM",
-  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Workstation/x86_64/iso/"
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Workstation/x86_64/iso/",
+  "desktop": "gnome",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "fedora-43-kde-x86_64",
@@ -726,7 +948,10 @@
   "pattern": "Fedora-KDE-Desktop-Live-(?:x86_64-)?(43(?:-[\\d.]+)?)(?:\\.x86_64)?\\.iso",
   "edition": "kde",
   "sums_pattern": "Fedora-KDE-43-[\\d.]+-x86_64-CHECKSUM",
-  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/KDE/x86_64/iso/"
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/KDE/x86_64/iso/",
+  "desktop": "kde",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "fedora-43-server-x86_64",
@@ -739,7 +964,10 @@
   "pattern": "Fedora-Server-dvd-x86_64-(43-[\\d.]+)\\.iso",
   "edition": "server",
   "sums_pattern": "Fedora-Server-43-[\\d.]+-x86_64-CHECKSUM",
-  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Server/x86_64/iso/"
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Server/x86_64/iso/",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "fedora-43-workstation-aarch64",
@@ -752,7 +980,10 @@
   "pattern": "Fedora-Workstation-Live-(?:aarch64-)?(43(?:-[\\d.]+)?)(?:\\.aarch64)?\\.iso",
   "edition": "workstation",
   "sums_pattern": "Fedora-Workstation-43-[\\d.]+-aarch64-CHECKSUM",
-  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Workstation/aarch64/iso/"
+  "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Workstation/aarch64/iso/",
+  "desktop": "gnome",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "almalinux-10-minimal-x86_64",
@@ -764,7 +995,10 @@
   "base": "https://repo.almalinux.org/almalinux/10/isos/x86_64/",
   "pattern": "AlmaLinux-(10\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "almalinux-10-dvd-x86_64",
@@ -776,7 +1010,10 @@
   "base": "https://repo.almalinux.org/almalinux/10/isos/x86_64/",
   "pattern": "AlmaLinux-(10\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-dvd\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "almalinux-10-boot-x86_64",
@@ -788,7 +1025,10 @@
   "base": "https://repo.almalinux.org/almalinux/10/isos/x86_64/",
   "pattern": "AlmaLinux-(10\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "almalinux-10-minimal-aarch64",
@@ -802,7 +1042,10 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "almalinux-10-dvd-aarch64",
@@ -816,7 +1059,10 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "almalinux-10-boot-aarch64",
@@ -830,7 +1076,10 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "optical"
  },
  {
   "id": "almalinux-9-minimal-x86_64",
@@ -842,7 +1091,10 @@
   "base": "https://repo.almalinux.org/almalinux/9/isos/x86_64/",
   "pattern": "AlmaLinux-(9\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "almalinux-9-dvd-x86_64",
@@ -854,7 +1106,10 @@
   "base": "https://repo.almalinux.org/almalinux/9/isos/x86_64/",
   "pattern": "AlmaLinux-(9\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-dvd\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "almalinux-9-boot-x86_64",
@@ -866,7 +1121,10 @@
   "base": "https://repo.almalinux.org/almalinux/9/isos/x86_64/",
   "pattern": "AlmaLinux-(9\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "almalinux-9-minimal-aarch64",
@@ -880,7 +1138,10 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "almalinux-9-dvd-aarch64",
@@ -894,7 +1155,10 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "almalinux-9-boot-aarch64",
@@ -908,7 +1172,10 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "optical"
  },
  {
   "id": "almalinux-8-minimal-x86_64",
@@ -920,7 +1187,10 @@
   "base": "https://repo.almalinux.org/almalinux/8/isos/x86_64/",
   "pattern": "AlmaLinux-(8\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "almalinux-8-dvd-x86_64",
@@ -932,7 +1202,10 @@
   "base": "https://repo.almalinux.org/almalinux/8/isos/x86_64/",
   "pattern": "AlmaLinux-(8\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-dvd\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "almalinux-8-boot-x86_64",
@@ -944,7 +1217,10 @@
   "base": "https://repo.almalinux.org/almalinux/8/isos/x86_64/",
   "pattern": "AlmaLinux-(8\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "almalinux-8-minimal-aarch64",
@@ -958,7 +1234,10 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "almalinux-8-dvd-aarch64",
@@ -972,7 +1251,10 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "almalinux-8-boot-aarch64",
@@ -986,7 +1268,10 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "optical"
  },
  {
   "id": "rockylinux-10-minimal-x86_64",
@@ -998,7 +1283,10 @@
   "base": "https://download.rockylinux.org/pub/rocky/10/isos/x86_64/",
   "pattern": "Rocky-(10\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "rockylinux-10-dvd-x86_64",
@@ -1010,7 +1298,10 @@
   "base": "https://download.rockylinux.org/pub/rocky/10/isos/x86_64/",
   "pattern": "Rocky-(10\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-dvd1?\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "rockylinux-10-boot-x86_64",
@@ -1022,7 +1313,10 @@
   "base": "https://download.rockylinux.org/pub/rocky/10/isos/x86_64/",
   "pattern": "Rocky-(10\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "rockylinux-10-minimal-aarch64",
@@ -1036,7 +1330,10 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "rockylinux-10-dvd-aarch64",
@@ -1050,7 +1347,10 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "rockylinux-10-boot-aarch64",
@@ -1064,7 +1364,10 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "optical"
  },
  {
   "id": "rockylinux-9-minimal-x86_64",
@@ -1076,7 +1379,10 @@
   "base": "https://download.rockylinux.org/pub/rocky/9/isos/x86_64/",
   "pattern": "Rocky-(9\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "rockylinux-9-dvd-x86_64",
@@ -1088,7 +1394,10 @@
   "base": "https://download.rockylinux.org/pub/rocky/9/isos/x86_64/",
   "pattern": "Rocky-(9\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-dvd1?\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "rockylinux-9-boot-x86_64",
@@ -1100,7 +1409,10 @@
   "base": "https://download.rockylinux.org/pub/rocky/9/isos/x86_64/",
   "pattern": "Rocky-(9\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "rockylinux-9-minimal-aarch64",
@@ -1114,7 +1426,10 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "rockylinux-9-dvd-aarch64",
@@ -1128,7 +1443,10 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "rockylinux-9-boot-aarch64",
@@ -1142,7 +1460,10 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "optical"
  },
  {
   "id": "rockylinux-8-minimal-x86_64",
@@ -1154,7 +1475,10 @@
   "base": "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/",
   "pattern": "Rocky-(8\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-minimal\\.iso",
   "edition": "minimal",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "rockylinux-8-dvd-x86_64",
@@ -1166,7 +1490,10 @@
   "base": "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/",
   "pattern": "Rocky-(8\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-dvd1?\\.iso",
   "edition": "dvd",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "rockylinux-8-boot-x86_64",
@@ -1178,7 +1505,10 @@
   "base": "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/",
   "pattern": "Rocky-(8\\.\\d+)(?:-\\d+\\.\\d+)?-x86_64-boot\\.iso",
   "edition": "boot",
-  "sums": "CHECKSUM"
+  "sums": "CHECKSUM",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "rockylinux-8-minimal-aarch64",
@@ -1192,7 +1522,10 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "rockylinux-8-dvd-aarch64",
@@ -1206,7 +1539,10 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "rockylinux-8-boot-aarch64",
@@ -1220,7 +1556,10 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "optical"
  },
  {
   "id": "arch-rolling-x86_64",
@@ -1231,7 +1570,10 @@
   "homepage": "https://archlinux.org/download/",
   "base": "https://geo.mirror.pkgbuild.com/iso/latest/",
   "pattern": "archlinux-(\\d{4}\\.\\d{2}\\.\\d{2})-x86_64\\.iso",
-  "sums": "sha256sums.txt"
+  "sums": "sha256sums.txt",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "opensuse-tumbleweed-dvd-x86_64",
@@ -1243,7 +1585,10 @@
   "base": "https://download.opensuse.org/tumbleweed/iso/",
   "pattern": "openSUSE-Tumbleweed-DVD-x86_64-Snapshot(\\d+)-Media\\.iso",
   "edition": "dvd",
-  "sums": "openSUSE-Tumbleweed-DVD-x86_64-Current.iso.sha256"
+  "sums": "openSUSE-Tumbleweed-DVD-x86_64-Current.iso.sha256",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "opensuse-tumbleweed-net-x86_64",
@@ -1255,7 +1600,10 @@
   "base": "https://download.opensuse.org/tumbleweed/iso/",
   "pattern": "openSUSE-Tumbleweed-NET-x86_64-Snapshot(\\d+)-Media\\.iso",
   "edition": "net",
-  "sums": "openSUSE-Tumbleweed-NET-x86_64-Current.iso.sha256"
+  "sums": "openSUSE-Tumbleweed-NET-x86_64-Current.iso.sha256",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "alpine-latest-standard-x86_64",
@@ -1267,7 +1615,10 @@
   "base": "https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/",
   "pattern": "alpine-standard-(\\d+\\.\\d+\\.\\d+)-x86_64\\.iso",
   "edition": "standard",
-  "sums_pattern": "alpine-standard-\\d+\\.\\d+\\.\\d+-x86_64\\.iso\\.sha256"
+  "sums_pattern": "alpine-standard-\\d+\\.\\d+\\.\\d+-x86_64\\.iso\\.sha256",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "alpine-latest-standard-aarch64",
@@ -1279,7 +1630,10 @@
   "base": "https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/aarch64/",
   "pattern": "alpine-standard-(\\d+\\.\\d+\\.\\d+)-aarch64\\.iso",
   "edition": "standard",
-  "sums_pattern": "alpine-standard-\\d+\\.\\d+\\.\\d+-aarch64\\.iso\\.sha256"
+  "sums_pattern": "alpine-standard-\\d+\\.\\d+\\.\\d+-aarch64\\.iso\\.sha256",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "alpine-latest-extended-x86_64",
@@ -1291,7 +1645,10 @@
   "base": "https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/",
   "pattern": "alpine-extended-(\\d+\\.\\d+\\.\\d+)-x86_64\\.iso",
   "edition": "extended",
-  "sums_pattern": "alpine-extended-\\d+\\.\\d+\\.\\d+-x86_64\\.iso\\.sha256"
+  "sums_pattern": "alpine-extended-\\d+\\.\\d+\\.\\d+-x86_64\\.iso\\.sha256",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "alpine-latest-virt-x86_64",
@@ -1303,7 +1660,10 @@
   "base": "https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/",
   "pattern": "alpine-virt-(\\d+\\.\\d+\\.\\d+)-x86_64\\.iso",
   "edition": "virt",
-  "sums_pattern": "alpine-virt-\\d+\\.\\d+\\.\\d+-x86_64\\.iso\\.sha256"
+  "sums_pattern": "alpine-virt-\\d+\\.\\d+\\.\\d+-x86_64\\.iso\\.sha256",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "alpine-latest-virt-aarch64",
@@ -1315,7 +1675,10 @@
   "base": "https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/aarch64/",
   "pattern": "alpine-virt-(\\d+\\.\\d+\\.\\d+)-aarch64\\.iso",
   "edition": "virt",
-  "sums_pattern": "alpine-virt-\\d+\\.\\d+\\.\\d+-aarch64\\.iso\\.sha256"
+  "sums_pattern": "alpine-virt-\\d+\\.\\d+\\.\\d+-aarch64\\.iso\\.sha256",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "proxmox-ve-9-x86_64",
@@ -1326,7 +1689,10 @@
   "homepage": "https://www.proxmox.com/",
   "base": "https://enterprise.proxmox.com/iso/",
   "pattern": "proxmox-ve_(9\\.\\d+-\\d+)\\.iso",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "proxmox-ve-8-x86_64",
@@ -1337,7 +1703,10 @@
   "homepage": "https://www.proxmox.com/",
   "base": "https://enterprise.proxmox.com/iso/",
   "pattern": "proxmox-ve_(8\\.\\d+-\\d+)\\.iso",
-  "sums": "SHA256SUMS"
+  "sums": "SHA256SUMS",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "freebsd-15.1-disc1-x86_64",
@@ -1349,7 +1718,10 @@
   "base": "https://download.freebsd.org/releases/ISO-IMAGES/15.1/",
   "pattern": "FreeBSD-(15\\.1)-RELEASE-amd64-disc1\\.iso",
   "edition": "disc1",
-  "sums": "CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-amd64"
+  "sums": "CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-amd64",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "freebsd-15.1-dvd1-x86_64",
@@ -1361,7 +1733,10 @@
   "base": "https://download.freebsd.org/releases/ISO-IMAGES/15.1/",
   "pattern": "FreeBSD-(15\\.1)-RELEASE-amd64-dvd1\\.iso",
   "edition": "dvd1",
-  "sums": "CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-amd64"
+  "sums": "CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-amd64",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "freebsd-15.1-disc1-aarch64",
@@ -1373,7 +1748,10 @@
   "base": "https://download.freebsd.org/releases/ISO-IMAGES/15.1/",
   "pattern": "FreeBSD-(15\\.1)-RELEASE-arm64-aarch64-disc1\\.iso",
   "edition": "disc1",
-  "sums": "CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-arm64-aarch64"
+  "sums": "CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-arm64-aarch64",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "freebsd-14.5-disc1-x86_64",
@@ -1385,7 +1763,10 @@
   "base": "https://download.freebsd.org/releases/ISO-IMAGES/14.5/",
   "pattern": "FreeBSD-(14\\.5)-RELEASE-amd64-disc1\\.iso",
   "edition": "disc1",
-  "sums": "CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-amd64"
+  "sums": "CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-amd64",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "freebsd-14.5-dvd1-x86_64",
@@ -1397,7 +1778,10 @@
   "base": "https://download.freebsd.org/releases/ISO-IMAGES/14.5/",
   "pattern": "FreeBSD-(14\\.5)-RELEASE-amd64-dvd1\\.iso",
   "edition": "dvd1",
-  "sums": "CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-amd64"
+  "sums": "CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-amd64",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "freebsd-14.5-disc1-aarch64",
@@ -1409,7 +1793,10 @@
   "base": "https://download.freebsd.org/releases/ISO-IMAGES/14.5/",
   "pattern": "FreeBSD-(14\\.5)-RELEASE-arm64-aarch64-disc1\\.iso",
   "edition": "disc1",
-  "sums": "CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-arm64-aarch64"
+  "sums": "CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-arm64-aarch64",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "windows-11-enterprise-26h2-x86_64",
@@ -1421,7 +1808,9 @@
   "arch": "x86_64",
   "homepage": "https://www.microsoft.com/evalcenter/",
   "fwlink": 2382600,
-  "note": "90-day evaluation; hash computed from Microsoft's file, none is published"
+  "note": "90-day evaluation; hash computed from Microsoft's file, none is published",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "windows-11-enterprise-ltsc-2024-x86_64",
@@ -1433,7 +1822,9 @@
   "arch": "x86_64",
   "homepage": "https://www.microsoft.com/evalcenter/",
   "fwlink": 2289029,
-  "note": "90-day evaluation; hash computed from Microsoft's file, none is published"
+  "note": "90-day evaluation; hash computed from Microsoft's file, none is published",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "windows-11-iot-ltsc-2024-x86_64",
@@ -1445,7 +1836,9 @@
   "arch": "x86_64",
   "homepage": "https://www.microsoft.com/evalcenter/",
   "fwlink": 2270353,
-  "note": "90-day evaluation; hash computed from Microsoft's file, none is published"
+  "note": "90-day evaluation; hash computed from Microsoft's file, none is published",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "windows-11-iot-ltsc-2024-aarch64",
@@ -1457,7 +1850,9 @@
   "arch": "aarch64",
   "homepage": "https://www.microsoft.com/evalcenter/",
   "fwlink": 2269595,
-  "note": "90-day evaluation; hash computed from Microsoft's file, none is published"
+  "note": "90-day evaluation; hash computed from Microsoft's file, none is published",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "windows-10-enterprise-ltsc-2021-x86_64",
@@ -1469,7 +1864,9 @@
   "arch": "x86_64",
   "homepage": "https://www.microsoft.com/evalcenter/",
   "fwlink": 2195404,
-  "note": "90-day evaluation; hash computed from Microsoft's file, none is published"
+  "note": "90-day evaluation; hash computed from Microsoft's file, none is published",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "windows-server-2025-x86_64",
@@ -1481,7 +1878,9 @@
   "arch": "x86_64",
   "homepage": "https://www.microsoft.com/evalcenter/",
   "fwlink": 2345730,
-  "note": "90-day evaluation; hash computed from Microsoft's file, none is published"
+  "note": "90-day evaluation; hash computed from Microsoft's file, none is published",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "windows-server-2022-x86_64",
@@ -1493,7 +1892,9 @@
   "arch": "x86_64",
   "homepage": "https://www.microsoft.com/evalcenter/",
   "fwlink": 2195280,
-  "note": "90-day evaluation; hash computed from Microsoft's file, none is published"
+  "note": "90-day evaluation; hash computed from Microsoft's file, none is published",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "windows-11-x86_64",
@@ -1504,7 +1905,9 @@
   "released": "2021-10-05",
   "arch": "x86_64",
   "homepage": "https://www.microsoft.com/windows/",
-  "official_page": "https://www.microsoft.com/software-download/windows11"
+  "official_page": "https://www.microsoft.com/software-download/windows11",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "windows-10-x86_64",
@@ -1515,7 +1918,9 @@
   "released": "2015-07-29",
   "arch": "x86_64",
   "homepage": "https://www.microsoft.com/windows/",
-  "official_page": "https://www.microsoft.com/software-download/windows10"
+  "official_page": "https://www.microsoft.com/software-download/windows10",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "templeos-5.03-x86_64",
@@ -1527,7 +1932,9 @@
   "homepage": "https://templeos.org/",
   "direct": "https://templeos.org/Downloads/TempleOS.ISO",
   "usb_boot": false,
-  "note": "CD or virtual machine only: the file has no USB boot sector. Hash computed from the publisher's file; it matches the MD5 the publisher lists."
+  "note": "CD or virtual machine only: the file has no USB boot sector. Hash computed from the publisher's file; it matches the MD5 the publisher lists.",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "manjaro-kde-x86_64",
@@ -1539,7 +1946,10 @@
   "edition": "kde",
   "page": "https://manjaro.org/products/download/x86",
   "pattern": "(?P<url>//download\\.manjaro\\.org/kde/(?P<version>[\\d.]+)/manjaro-kde-[\\w.-]+\\.iso)",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "desktop": "kde",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "manjaro-gnome-x86_64",
@@ -1551,7 +1961,10 @@
   "edition": "gnome",
   "page": "https://manjaro.org/products/download/x86",
   "pattern": "(?P<url>//download\\.manjaro\\.org/gnome/(?P<version>[\\d.]+)/manjaro-gnome-[\\w.-]+\\.iso)",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "desktop": "gnome",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "manjaro-xfce-x86_64",
@@ -1563,7 +1976,10 @@
   "edition": "xfce",
   "page": "https://manjaro.org/products/download/x86",
   "pattern": "(?P<url>//download\\.manjaro\\.org/xfce/(?P<version>[\\d.]+)/manjaro-xfce-[\\w.-]+\\.iso)",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "desktop": "xfce",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "manjaro-arm-generic-efi-kde-aarch64",
@@ -1576,7 +1992,10 @@
   "page": "https://api.github.com/repos/manjaro-arm/generic-efi-images/releases/latest",
   "pattern": "(?P<url>https://github\\.com/manjaro-arm/[^\"]*Manjaro-ARM-kde-plasma-generic-efi-(?P<version>[\\d.]+)\\.img\\.xz)\"",
   "verify_suffix": ".sha1",
-  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1."
+  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1.",
+  "desktop": "kde",
+  "kind": "preinstalled",
+  "media": "usb"
  },
  {
   "id": "manjaro-arm-generic-kde-aarch64",
@@ -1589,7 +2008,10 @@
   "page": "https://api.github.com/repos/manjaro-arm/generic-images/releases/latest",
   "pattern": "(?P<url>https://github\\.com/manjaro-arm/[^\"]*Manjaro-ARM-kde-plasma-generic-(?P<version>[\\d.]+)\\.img\\.xz)\"",
   "verify_suffix": ".sha1",
-  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1."
+  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1.",
+  "desktop": "kde",
+  "kind": "preinstalled",
+  "media": "usb"
  },
  {
   "id": "manjaro-arm-generic-gnome-aarch64",
@@ -1602,7 +2024,10 @@
   "page": "https://api.github.com/repos/manjaro-arm/generic-images/releases/latest",
   "pattern": "(?P<url>https://github\\.com/manjaro-arm/[^\"]*Manjaro-ARM-gnome-generic-(?P<version>[\\d.]+)\\.img\\.xz)\"",
   "verify_suffix": ".sha1",
-  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1."
+  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1.",
+  "desktop": "gnome",
+  "kind": "preinstalled",
+  "media": "usb"
  },
  {
   "id": "manjaro-arm-rpi4-kde-aarch64",
@@ -1615,7 +2040,10 @@
   "page": "https://api.github.com/repos/manjaro-arm/rpi4-images/releases/latest",
   "pattern": "(?P<url>https://github\\.com/manjaro-arm/[^\"]*Manjaro-ARM-kde-plasma-rpi4-(?P<version>[\\d.]+)\\.img\\.xz)\"",
   "verify_suffix": ".sha1",
-  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1."
+  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1.",
+  "desktop": "kde",
+  "kind": "preinstalled",
+  "media": "sd"
  },
  {
   "id": "manjaro-arm-rpi4-gnome-aarch64",
@@ -1628,7 +2056,10 @@
   "page": "https://api.github.com/repos/manjaro-arm/rpi4-images/releases/latest",
   "pattern": "(?P<url>https://github\\.com/manjaro-arm/[^\"]*Manjaro-ARM-gnome-rpi4-(?P<version>[\\d.]+)\\.img\\.xz)\"",
   "verify_suffix": ".sha1",
-  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1."
+  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its SHA-1.",
+  "desktop": "gnome",
+  "kind": "preinstalled",
+  "media": "sd"
  },
  {
   "id": "popos-24.04-intel-x86_64",
@@ -1639,7 +2070,10 @@
   "homepage": "https://system76.com/pop/",
   "edition": "intel",
   "page": "https://api.pop-os.org/builds/24.04/intel",
-  "pattern": "\"version\":\"(?P<version>[\\d.]+)\",\"url\":\"(?P<url>https://[^\"]+)\".*?\"sha_sum\":\"(?P<sha256>\\w+)\""
+  "pattern": "\"version\":\"(?P<version>[\\d.]+)\",\"url\":\"(?P<url>https://[^\"]+)\".*?\"sha_sum\":\"(?P<sha256>\\w+)\"",
+  "desktop": "cosmic",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "popos-24.04-nvidia-x86_64",
@@ -1650,7 +2084,10 @@
   "homepage": "https://system76.com/pop/",
   "edition": "nvidia",
   "page": "https://api.pop-os.org/builds/24.04/nvidia",
-  "pattern": "\"version\":\"(?P<version>[\\d.]+)\",\"url\":\"(?P<url>https://[^\"]+)\".*?\"sha_sum\":\"(?P<sha256>\\w+)\""
+  "pattern": "\"version\":\"(?P<version>[\\d.]+)\",\"url\":\"(?P<url>https://[^\"]+)\".*?\"sha_sum\":\"(?P<sha256>\\w+)\"",
+  "desktop": "cosmic",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "zorin-18-core-x86_64",
@@ -1663,7 +2100,10 @@
   "page": "https://mirrors.edge.kernel.org/zorinos-isos/18/",
   "pattern": "href=\"(?P<url>Zorin-OS-(?P<version>18(?:\\.\\d+)?)-Core-64-bit(?:-r\\d+)?\\.iso)\"",
   "url_prefix": "https://mirrors.edge.kernel.org/zorinos-isos/18/",
-  "note": "Hash computed from the publisher's mirror file."
+  "note": "Hash computed from the publisher's mirror file.",
+  "desktop": "gnome",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "zorin-17-core-x86_64",
@@ -1676,7 +2116,10 @@
   "page": "https://mirrors.edge.kernel.org/zorinos-isos/17/",
   "pattern": "href=\"(?P<url>Zorin-OS-(?P<version>17(?:\\.\\d+)?)-Core-64-bit(?:-r\\d+)?\\.iso)\"",
   "url_prefix": "https://mirrors.edge.kernel.org/zorinos-isos/17/",
-  "note": "Hash computed from the publisher's mirror file."
+  "note": "Hash computed from the publisher's mirror file.",
+  "desktop": "gnome",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "tails-stable-img-x86_64",
@@ -1687,7 +2130,10 @@
   "homepage": "https://tails.net/",
   "edition": "USB image",
   "page": "https://tails.net/install/v2/Tails/amd64/stable/latest.json",
-  "pattern": "\"sha256\":\\s*\"(?P<sha256>\\w+)\",\\s*\"size\":\\s*(?P<size>\\d+),\\s*\"url\":\\s*\"(?P<url>https://[^\"]+tails-amd64-(?P<version>[\\d.~a-z]+)\\.img)\""
+  "pattern": "\"sha256\":\\s*\"(?P<sha256>\\w+)\",\\s*\"size\":\\s*(?P<size>\\d+),\\s*\"url\":\\s*\"(?P<url>https://[^\"]+tails-amd64-(?P<version>[\\d.~a-z]+)\\.img)\"",
+  "desktop": "gnome",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "raspios-lite-aarch64",
@@ -1699,7 +2145,10 @@
   "edition": "lite",
   "latest": "https://downloads.raspberrypi.com/raspios_lite_arm64_latest",
   "pattern": "(?P<url>https://\\S+/(?P<version>\\d{4}-\\d{2}-\\d{2})-raspios-\\S+\\.img\\.xz)",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "desktop": "none",
+  "kind": "preinstalled",
+  "media": "sd"
  },
  {
   "id": "raspios-desktop-aarch64",
@@ -1711,7 +2160,10 @@
   "edition": "desktop",
   "latest": "https://downloads.raspberrypi.com/raspios_arm64_latest",
   "pattern": "(?P<url>https://\\S+/(?P<version>\\d{4}-\\d{2}-\\d{2})-raspios-\\S+\\.img\\.xz)",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "desktop": "pixel",
+  "kind": "preinstalled",
+  "media": "sd"
  },
  {
   "id": "parrot-home-x86_64",
@@ -1723,7 +2175,9 @@
   "edition": "home",
   "latest": "https://deb.parrot.sh/parrot/iso/7.4/Parrot-home-7.4_amd64.iso",
   "pattern": "(?P<url>https://\\S+Parrot-home-(?P<version>[\\d.]+)_amd64\\.iso)",
-  "note": "Hash computed from the publisher's file."
+  "note": "Hash computed from the publisher's file.",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "opensuse-leap-16.0-offline-x86_64",
@@ -1737,7 +2191,10 @@
   "latest": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso",
   "pattern": "(?P<url>https://\\S+\\.iso)",
   "verify_suffix": ".sha512",
-  "note": "Hash computed from the publisher's file and checked against its SHA-512."
+  "note": "Hash computed from the publisher's file and checked against its SHA-512.",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "opensuse-leap-16.0-offline-aarch64",
@@ -1751,7 +2208,10 @@
   "latest": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-aarch64.install.iso",
   "pattern": "(?P<url>https://\\S+\\.iso)",
   "verify_suffix": ".sha512",
-  "note": "Hash computed from the publisher's file and checked against its SHA-512."
+  "note": "Hash computed from the publisher's file and checked against its SHA-512.",
+  "desktop": "choice",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "opensuse-leap-16.0-online-x86_64",
@@ -1765,7 +2225,10 @@
   "latest": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-online-installer-x86_64.install.iso",
   "pattern": "(?P<url>https://\\S+\\.iso)",
   "verify_suffix": ".sha512",
-  "note": "Hash computed from the publisher's file and checked against its SHA-512."
+  "note": "Hash computed from the publisher's file and checked against its SHA-512.",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "opensuse-leap-16.0-online-aarch64",
@@ -1779,7 +2242,10 @@
   "latest": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-online-installer-aarch64.install.iso",
   "pattern": "(?P<url>https://\\S+\\.iso)",
   "verify_suffix": ".sha512",
-  "note": "Hash computed from the publisher's file and checked against its SHA-512."
+  "note": "Hash computed from the publisher's file and checked against its SHA-512.",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
  },
  {
   "id": "endeavouros-x86_64",
@@ -1792,7 +2258,10 @@
   "pattern": "href=\"(?P<url>EndeavourOS_Titan-Nova-(?P<version>[\\d.]+)\\.iso)\"",
   "url_prefix": "https://mirror.alpix.eu/endeavouros/iso/",
   "verify_suffix": ".sha512sum",
-  "note": "Hash computed from the publisher's file and checked against its SHA-512."
+  "note": "Hash computed from the publisher's file and checked against its SHA-512.",
+  "desktop": "choice",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "nixos-26.05-minimal-x86_64",
@@ -1804,7 +2273,10 @@
   "edition": "minimal",
   "latest": "https://channels.nixos.org/nixos-26.05/latest-nixos-minimal-x86_64-linux.iso",
   "pattern": "(?P<url>https://\\S+nixos-minimal-(?P<version>26.05\\.\\d+)\\.\\w+-x86_64-linux\\.iso)",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "nixos-26.05-minimal-aarch64",
@@ -1818,7 +2290,10 @@
   "pattern": "(?P<url>https://\\S+nixos-minimal-(?P<version>26.05\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
   "hash_suffix": ".sha256",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "nixos-26.05-graphical-x86_64",
@@ -1830,7 +2305,10 @@
   "edition": "graphical",
   "latest": "https://channels.nixos.org/nixos-26.05/latest-nixos-graphical-x86_64-linux.iso",
   "pattern": "(?P<url>https://\\S+nixos-graphical-(?P<version>26.05\\.\\d+)\\.\\w+-x86_64-linux\\.iso)",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "desktop": "choice",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "nixos-26.05-graphical-aarch64",
@@ -1844,7 +2322,10 @@
   "pattern": "(?P<url>https://\\S+nixos-graphical-(?P<version>26.05\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
   "hash_suffix": ".sha256",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "live",
+  "media": "optical"
  },
  {
   "id": "nixos-25.11-minimal-x86_64",
@@ -1856,7 +2337,10 @@
   "edition": "minimal",
   "latest": "https://channels.nixos.org/nixos-25.11/latest-nixos-minimal-x86_64-linux.iso",
   "pattern": "(?P<url>https://\\S+nixos-minimal-(?P<version>25.11\\.\\d+)\\.\\w+-x86_64-linux\\.iso)",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "nixos-25.11-minimal-aarch64",
@@ -1870,7 +2354,10 @@
   "pattern": "(?P<url>https://\\S+nixos-minimal-(?P<version>25.11\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
   "hash_suffix": ".sha256",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "optical"
  },
  {
   "id": "nixos-25.11-graphical-x86_64",
@@ -1882,7 +2369,10 @@
   "edition": "graphical",
   "latest": "https://channels.nixos.org/nixos-25.11/latest-nixos-graphical-x86_64-linux.iso",
   "pattern": "(?P<url>https://\\S+nixos-graphical-(?P<version>25.11\\.\\d+)\\.\\w+-x86_64-linux\\.iso)",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "desktop": "choice",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "nixos-25.11-graphical-aarch64",
@@ -1896,7 +2386,10 @@
   "pattern": "(?P<url>https://\\S+nixos-graphical-(?P<version>25.11\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
   "hash_suffix": ".sha256",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot."
+  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "desktop": "choice",
+  "kind": "live",
+  "media": "optical"
  },
  {
   "id": "truenas-scale-x86_64",
@@ -1907,7 +2400,10 @@
   "homepage": "https://www.truenas.com/",
   "page": "https://www.truenas.com/download/",
   "pattern": "(?P<url>//download\\.sys\\.truenas\\.net/TrueNAS-SCALE-Goldeye/(?P<version>[\\d.]+)/TrueNAS-SCALE-[\\d.]+\\.iso)",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "void-base-x86_64",
@@ -1919,7 +2415,10 @@
   "edition": "base",
   "base": "https://repo-default.voidlinux.org/live/current/",
   "sums": "sha256sum.txt",
-  "pattern": "void-live-x86_64-(\\d+)-base\\.iso"
+  "pattern": "void-live-x86_64-(\\d+)-base\\.iso",
+  "desktop": "none",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "void-xfce-x86_64",
@@ -1931,7 +2430,10 @@
   "edition": "xfce",
   "base": "https://repo-default.voidlinux.org/live/current/",
   "sums": "sha256sum.txt",
-  "pattern": "void-live-x86_64-(\\d+)-xfce\\.iso"
+  "pattern": "void-live-x86_64-(\\d+)-xfce\\.iso",
+  "desktop": "xfce",
+  "kind": "live",
+  "media": "usb"
  },
  {
   "id": "gentoo-minimal-x86_64",
@@ -1944,7 +2446,10 @@
   "page": "https://distfiles.gentoo.org/releases/amd64/autobuilds/latest-iso.txt",
   "pattern": "(?P<url>\\d+T\\d+Z/install-amd64-minimal-(?P<version>\\d+)T\\d+Z\\.iso)",
   "url_prefix": "https://distfiles.gentoo.org/releases/amd64/autobuilds/",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "openbsd-8.0-x86_64",
@@ -1957,7 +2462,10 @@
   "edition": "USB image",
   "base": "https://cdn.openbsd.org/pub/OpenBSD/8.0/amd64/",
   "sums": "SHA256",
-  "pattern": "install(80)\\.img"
+  "pattern": "install(80)\\.img",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "openbsd-8.0-aarch64",
@@ -1970,7 +2478,10 @@
   "edition": "USB image",
   "base": "https://cdn.openbsd.org/pub/OpenBSD/8.0/arm64/",
   "sums": "SHA256",
-  "pattern": "install(80)\\.img"
+  "pattern": "install(80)\\.img",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "openbsd-7.9-x86_64",
@@ -1983,7 +2494,10 @@
   "edition": "USB image",
   "base": "https://cdn.openbsd.org/pub/OpenBSD/7.9/amd64/",
   "sums": "SHA256",
-  "pattern": "install(79)\\.img"
+  "pattern": "install(79)\\.img",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "openbsd-7.9-aarch64",
@@ -1996,7 +2510,10 @@
   "edition": "USB image",
   "base": "https://cdn.openbsd.org/pub/OpenBSD/7.9/arm64/",
   "sums": "SHA256",
-  "pattern": "install(79)\\.img"
+  "pattern": "install(79)\\.img",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  },
  {
   "id": "haiku-r1beta6-x86_64",
@@ -2008,6 +2525,8 @@
   "version": "R1 beta 6",
   "page": "https://www.haiku-os.org/get-haiku/",
   "pattern": "(?P<url>https://[^\\\"' ]+haiku-r1beta6-x86_64-anyboot\\.iso)",
-  "hash_suffix": ".sha256"
+  "hash_suffix": ".sha256",
+  "kind": "live",
+  "media": "usb"
  }
 ]
