@@ -337,8 +337,9 @@ def newer_section(updates):
 
 def status(image):
     state, checked = image.get("status", "unknown"), image.get("checked")
+    # Checked at publication, whose date heads the page: repeating it on every row only widens the table.
     if state == "online":
-        return f"online on {checked}" if checked else "online"
+        return "online"
     return f"{state} since {checked}" if checked else state
 
 
@@ -361,7 +362,7 @@ def index_page(catalog, updates=()):
                 f'<tr><td><a href="{e(image["homepage"])}">{e(image["name"])}</a></td>'
                 f"<td>{e(image['version'])}</td><td>{e(image.get('edition', ''))}</td>"
                 f"<td>{e(image['arch'])}</td><td>{size}</td>"
-                f'<td><a href="{e(link)}">{e(label)}</a></td><td>{e(status(image))}</td></tr>'
+                f'<td class="file"><a href="{e(link)}" title="{e(label)}">{e(label)}</a></td><td>{e(status(image))}</td></tr>'
             )
         sections.append(
             f"<section>\n<h2>{e(category)}</h2>\n<table>\n<thead><tr><th>System</th><th>Version</th>"
