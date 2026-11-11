@@ -38,7 +38,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Outils de construction
-        run: sudo apt-get install -y --no-install-recommends bison flex gawk
+        run: sudo apt-get install -y --no-install-recommends bison flex gawk gcc-aarch64-linux-gnu
       - name: Vérifier l'archive GNU et construire
         run: python3 scripts/grub.py build --output "$RUNNER_TEMP/grub"
 
@@ -57,7 +57,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Outils de construction de GRUB
-        run: sudo apt-get install -y --no-install-recommends bison flex gawk
+        run: sudo apt-get install -y --no-install-recommends bison flex gawk gcc-aarch64-linux-gnu
       - name: Générer
         run: python3 scripts/generer.py --grub --output site/v1 --previous https://catalog.bonk-os.app/v1/catalog.json
       - name: Signer et relire la signature

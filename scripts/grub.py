@@ -19,6 +19,8 @@ BUILD = ROOT / "scripts/grub-build.sh"
 KEY = ROOT / "keys/grub-signataire.asc"
 PUBLISHED = "https://catalog.bonk-os.app/v1/"
 ARCHIVE = re.compile(r"grub-(\d+\.\d+(?:\.\d+)?)\.tar\.xz(?![.\w])")
+# Removable-media names: the firmware of each processor loads its own.
+ARCHITECTURES = {"x86_64": "BOOTX64.EFI", "aarch64": "BOOTAA64.EFI"}
 TIMEOUT_SECONDS = 120
 LISTING_LIMIT = 4 << 20
 
@@ -111,11 +113,12 @@ def prepare(output, previous, published=PUBLISHED, build=None):
         "version": source["version"],
         "released": source["released"],
         "build": build_id(),
-        "efi": {"x86_64": {"path": folder + "BOOTX64.EFI"}},
+        "efi": {arch: {"path": folder + name} for arch, name in ARCHITECTURES.items()},
         "source": {"path": folder + source["archive"]},
         "source_signature": {"path": folder + source["archive"] + ".sig"},
     }
-    if previous and all(previous.get(k) == entry[k] for k in ("version", "build")):
+    same = previous and all(previous.get(k) == entry[k] for k in ("version", "build"))
+    if same and set(previous.get("efi", {})) == set(ARCHITECTURES):
         try:
             reuse(previous, output, published)
             return previous, None
@@ -124,7 +127,8 @@ def prepare(output, previous, published=PUBLISHED, build=None):
     (output / folder).mkdir(parents=True, exist_ok=True)
     try:
         fetch_archive(source, output / folder)
-        (build or run_build)(output / entry["source"]["path"], output / entry["efi"]["x86_64"]["path"])
+        for arch, item in entry["efi"].items():
+            (build or run_build)(output / entry["source"]["path"], arch, output / item["path"])
     except (OSError, GrubError, subprocess.CalledProcessError) as error:
         # A mirror outage must not take GRUB out of the catalog: the last published one stays.
         if not previous:
@@ -138,8 +142,8 @@ def prepare(output, previous, published=PUBLISHED, build=None):
     return entry, None
 
 
-def run_build(archive, efi):
-    subprocess.run(["sh", str(BUILD), str(archive), str(EARLY), str(efi)], check=True)
+def run_build(archive, arch, efi):
+    subprocess.run(["sh", str(BUILD), str(archive), str(EARLY), arch, str(efi)], check=True)
 
 
 def check(entry, output, signer):

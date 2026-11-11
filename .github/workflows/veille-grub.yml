@@ -33,7 +33,7 @@ jobs:
           fi
       - name: Outils de construction
         if: steps.veille.outputs.nouvelle != ''
-        run: sudo apt-get install -y --no-install-recommends bison flex gawk
+        run: sudo apt-get install -y --no-install-recommends bison flex gawk gcc-aarch64-linux-gnu
       - name: Construire la nouvelle version
         if: steps.veille.outputs.nouvelle != ''
         run: python3 scripts/grub.py build --output "$RUNNER_TEMP/grub"
