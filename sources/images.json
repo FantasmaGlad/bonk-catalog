@@ -121,7 +121,7 @@
  },
  {
   "id": "kubuntu-26.04-x86_64",
-  "family": "ubuntu",
+  "family": "kubuntu",
   "name": "Kubuntu",
   "channel": "lts",
   "arch": "x86_64",
@@ -132,7 +132,7 @@
  },
  {
   "id": "xubuntu-26.04-x86_64",
-  "family": "ubuntu",
+  "family": "xubuntu",
   "name": "Xubuntu",
   "channel": "lts",
   "arch": "x86_64",
@@ -143,7 +143,7 @@
  },
  {
   "id": "lubuntu-26.04-x86_64",
-  "family": "ubuntu",
+  "family": "lubuntu",
   "name": "Lubuntu",
   "channel": "lts",
   "arch": "x86_64",
@@ -154,7 +154,7 @@
  },
  {
   "id": "ubuntustudio-26.04-x86_64",
-  "family": "ubuntu",
+  "family": "ubuntustudio",
   "name": "Ubuntu Studio",
   "channel": "lts",
   "arch": "x86_64",
@@ -189,7 +189,7 @@
  },
  {
   "id": "kubuntu-24.04-x86_64",
-  "family": "ubuntu",
+  "family": "kubuntu",
   "name": "Kubuntu",
   "channel": "lts",
   "arch": "x86_64",
@@ -200,7 +200,7 @@
  },
  {
   "id": "xubuntu-24.04-x86_64",
-  "family": "ubuntu",
+  "family": "xubuntu",
   "name": "Xubuntu",
   "channel": "lts",
   "arch": "x86_64",
@@ -211,7 +211,7 @@
  },
  {
   "id": "lubuntu-24.04-x86_64",
-  "family": "ubuntu",
+  "family": "lubuntu",
   "name": "Lubuntu",
   "channel": "lts",
   "arch": "x86_64",
@@ -222,7 +222,7 @@
  },
  {
   "id": "ubuntu-mate-24.04-x86_64",
-  "family": "ubuntu",
+  "family": "ubuntu-mate",
   "name": "Ubuntu MATE",
   "channel": "lts",
   "arch": "x86_64",
@@ -233,7 +233,7 @@
  },
  {
   "id": "ubuntustudio-24.04-x86_64",
-  "family": "ubuntu",
+  "family": "ubuntustudio",
   "name": "Ubuntu Studio",
   "channel": "lts",
   "arch": "x86_64",
