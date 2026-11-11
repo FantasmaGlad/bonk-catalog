@@ -297,5 +297,37 @@ class Newer(unittest.TestCase):
         self.assertEqual(generer.newer_releases(self.sources(), fetch), [])
 
 
+class SourceErrors(unittest.TestCase):
+    FAMILY = {"id": "debian", "name": "Debian", "category": "Debian derivatives", "icon": "debian.png"}
+
+    def errors(self, family=None, image=None):
+        return generer.source_errors([dict(self.FAMILY, **(family or {}))],
+                                     [dict(SOURCE, family="debian", **(image or {}))])
+
+    def test_known_names_and_sourced_memory_pass(self):
+        self.assertEqual(self.errors(
+            {"uses": ["desktop", "server"], "ram_mb": 1024, "ram_source": "https://www.debian.org/"},
+            {"desktop": "xfce", "kind": "live", "media": "usb"},
+        ), [])
+
+    def test_unknown_names_are_refused(self):
+        errors = self.errors({"uses": ["daily"]}, {"desktop": "plasma", "kind": "iso", "media": "cd"})
+        self.assertEqual(len(errors), 4)
+
+    def test_memory_needs_its_publisher_page(self):
+        self.assertEqual(len(self.errors({"ram_mb": 1024})), 1)
+        self.assertEqual(len(self.errors(image={"ram_mb": "1 GB", "ram_source": "https://x.org/"})), 1)
+
+    def test_an_image_of_an_unknown_family_is_refused(self):
+        errors = generer.source_errors([self.FAMILY], [SOURCE])
+        self.assertEqual(errors, ["image ubuntu-26.04-desktop-x86_64: unknown family ubuntu"])
+
+    def test_variant_fields_reach_the_catalog(self):
+        source = dict(SOURCE, desktop="gnome", kind="live", ram_mb=6144, ram_source="https://ubuntu.com/")
+        fetch = lambda url: f"{HASH_A}  ubuntu-26.04.1-desktop-amd64.iso"
+        image = generer.resolve(source, fetch=fetch, stat=lambda url: (1, "2026-01-01"))
+        self.assertEqual((image["desktop"], image["kind"], image["ram_mb"]), ("gnome", "live", 6144))
+
+
 if __name__ == "__main__":
     unittest.main()

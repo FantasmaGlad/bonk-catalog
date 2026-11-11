@@ -3,7 +3,12 @@
   "id": "ubuntu",
   "name": "Ubuntu",
   "category": "Debian derivatives",
-  "icon": "ubuntu.png"
+  "icon": "ubuntu.png",
+  "uses": [
+   "desktop",
+   "beginner",
+   "server"
+  ]
  },
  {
   "id": "kubuntu",
@@ -12,7 +17,10 @@
   "icon": "kubuntu.png",
   "parent": "ubuntu",
   "homepage": "https://kubuntu.org/",
-  "icon_source": "https://kubuntu.org/images/favicon.svg"
+  "icon_source": "https://kubuntu.org/images/favicon.svg",
+  "uses": [
+   "desktop"
+  ]
  },
  {
   "id": "xubuntu",
@@ -21,7 +29,11 @@
   "icon": "xubuntu.png",
   "parent": "ubuntu",
   "homepage": "https://xubuntu.org/",
-  "icon_source": "https://github.com/Xubuntu/xubuntu-artwork/blob/master/usr/share/pixmaps/xubuntu-logo.svg"
+  "icon_source": "https://github.com/Xubuntu/xubuntu-artwork/blob/master/usr/share/pixmaps/xubuntu-logo.svg",
+  "uses": [
+   "desktop",
+   "light"
+  ]
  },
  {
   "id": "lubuntu",
@@ -30,7 +42,11 @@
   "icon": "lubuntu.png",
   "parent": "ubuntu",
   "homepage": "https://lubuntu.me/",
-  "icon_source": "https://github.com/lubuntu-team/artwork/blob/ubuntu/plucky/src/usr/share/grub/themes/lubuntu-grub-theme/icons/lubuntu.png"
+  "icon_source": "https://github.com/lubuntu-team/artwork/blob/ubuntu/plucky/src/usr/share/grub/themes/lubuntu-grub-theme/icons/lubuntu.png",
+  "uses": [
+   "light",
+   "desktop"
+  ]
  },
  {
   "id": "ubuntustudio",
@@ -39,7 +55,10 @@
   "icon": "ubuntustudio.png",
   "parent": "ubuntu",
   "homepage": "https://ubuntustudio.org/",
-  "icon_source": "https://ubuntustudio.org/wp-content/uploads/fbrfg/favicon.svg"
+  "icon_source": "https://ubuntustudio.org/wp-content/uploads/fbrfg/favicon.svg",
+  "uses": [
+   "creative"
+  ]
  },
  {
   "id": "ubuntu-mate",
@@ -48,162 +67,280 @@
   "icon": "ubuntu-mate.png",
   "parent": "ubuntu",
   "homepage": "https://ubuntu-mate.org/",
-  "icon_source": "https://ubuntu-mate.org/assets/favicon/256x256.png"
+  "icon_source": "https://ubuntu-mate.org/assets/favicon/256x256.png",
+  "uses": [
+   "desktop"
+  ],
+  "ram_mb": 2048,
+  "ram_source": "https://ubuntu-mate.org/about/requirements/"
  },
  {
   "id": "debian",
   "name": "Debian",
   "category": "Debian derivatives",
-  "icon": "debian.png"
+  "icon": "debian.png",
+  "uses": [
+   "desktop",
+   "server",
+   "light"
+  ],
+  "ram_mb": 512,
+  "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html"
  },
  {
   "id": "linuxmint",
   "name": "Linux Mint",
   "category": "Debian derivatives",
-  "icon": "linuxmint.png"
+  "icon": "linuxmint.png",
+  "uses": [
+   "beginner",
+   "desktop"
+  ],
+  "ram_mb": 2048,
+  "ram_source": "https://linuxmint.com/faq.php"
  },
  {
   "id": "popos",
   "name": "Pop!_OS",
   "category": "Debian derivatives",
-  "icon": "popos.png"
+  "icon": "popos.png",
+  "uses": [
+   "desktop"
+  ],
+  "ram_mb": 4096,
+  "ram_source": "https://system76.com/support/articles/install-pop/"
  },
  {
   "id": "zorin",
   "name": "Zorin OS",
   "category": "Debian derivatives",
-  "icon": "zorin.png"
+  "icon": "zorin.png",
+  "uses": [
+   "beginner",
+   "desktop"
+  ],
+  "ram_mb": 2048,
+  "ram_source": "https://help.zorin.com/docs/getting-started/system-requirements/"
  },
  {
   "id": "tails",
   "name": "Tails",
   "category": "Debian derivatives",
-  "icon": "tails.png"
+  "icon": "tails.png",
+  "uses": [
+   "privacy"
+  ],
+  "ram_mb": 3072,
+  "ram_source": "https://tails.net/doc/about/requirements/"
  },
  {
   "id": "parrot",
   "name": "Parrot OS",
   "category": "Debian derivatives",
-  "icon": "parrot.png"
+  "icon": "parrot.png",
+  "uses": [
+   "privacy"
+  ]
  },
  {
   "id": "raspios",
   "name": "Raspberry Pi OS",
   "category": "Debian derivatives",
-  "icon": "raspios.png"
+  "icon": "raspios.png",
+  "uses": [
+   "boards"
+  ]
  },
  {
   "id": "kali",
   "name": "Kali Linux",
   "category": "Debian derivatives",
-  "icon": "kali.png"
+  "icon": "kali.png",
+  "uses": [
+   "privacy"
+  ],
+  "ram_mb": 2048,
+  "ram_source": "https://www.kali.org/docs/installation/hard-disk-install/"
  },
  {
   "id": "fedora",
   "name": "Fedora",
   "category": "Red Hat family",
-  "icon": "fedora.png"
+  "icon": "fedora.png",
+  "uses": [
+   "desktop",
+   "server"
+  ]
  },
  {
   "id": "almalinux",
   "name": "AlmaLinux",
   "category": "Red Hat family",
-  "icon": "almalinux.png"
+  "icon": "almalinux.png",
+  "uses": [
+   "server"
+  ],
+  "ram_mb": 1536,
+  "ram_source": "https://wiki.almalinux.org/documentation/installation-guide.html"
  },
  {
   "id": "rockylinux",
   "name": "Rocky Linux",
   "category": "Red Hat family",
-  "icon": "rockylinux.png"
+  "icon": "rockylinux.png",
+  "uses": [
+   "server"
+  ]
  },
  {
   "id": "arch",
   "name": "Arch Linux",
   "category": "Arch family",
-  "icon": "arch.png"
+  "icon": "arch.png",
+  "uses": [
+   "advanced"
+  ]
  },
  {
   "id": "manjaro",
   "name": "Manjaro",
   "category": "Arch family",
-  "icon": "manjaro.png"
+  "icon": "manjaro.png",
+  "uses": [
+   "desktop",
+   "boards"
+  ]
  },
  {
   "id": "endeavouros",
   "name": "EndeavourOS",
   "category": "Arch family",
-  "icon": "endeavouros.png"
+  "icon": "endeavouros.png",
+  "uses": [
+   "desktop",
+   "advanced"
+  ]
  },
  {
   "id": "opensuse",
   "name": "openSUSE",
   "category": "SUSE family",
-  "icon": "opensuse.png"
+  "icon": "opensuse.png",
+  "uses": [
+   "desktop",
+   "server"
+  ]
  },
  {
   "id": "alpine",
   "name": "Alpine Linux",
   "category": "Independent Linux",
-  "icon": "alpine.png"
+  "icon": "alpine.png",
+  "uses": [
+   "server",
+   "light",
+   "advanced"
+  ]
  },
  {
   "id": "nixos",
   "name": "NixOS",
   "category": "Independent Linux",
-  "icon": "nixos.png"
+  "icon": "nixos.png",
+  "uses": [
+   "advanced"
+  ]
  },
  {
   "id": "void",
   "name": "Void Linux",
   "category": "Independent Linux",
-  "icon": "void.png"
+  "icon": "void.png",
+  "uses": [
+   "advanced",
+   "light"
+  ],
+  "ram_mb": 520,
+  "ram_source": "https://docs.voidlinux.org/installation/index.html"
  },
  {
   "id": "gentoo",
   "name": "Gentoo",
   "category": "Independent Linux",
-  "icon": "gentoo.png"
+  "icon": "gentoo.png",
+  "uses": [
+   "advanced"
+  ]
  },
  {
   "id": "proxmox",
   "name": "Proxmox VE",
   "category": "Servers",
-  "icon": "proxmox.png"
+  "icon": "proxmox.png",
+  "uses": [
+   "homelab"
+  ],
+  "ram_mb": 2048,
+  "ram_source": "https://pve.proxmox.com/wiki/System_Requirements"
  },
  {
   "id": "truenas",
   "name": "TrueNAS",
   "category": "Servers",
-  "icon": "truenas.png"
+  "icon": "truenas.png",
+  "uses": [
+   "homelab"
+  ],
+  "ram_mb": 8192,
+  "ram_source": "https://www.truenas.com/docs/scale/gettingstarted/tnhardwareguide/"
  },
  {
   "id": "freebsd",
   "name": "FreeBSD",
   "category": "BSD",
-  "icon": "freebsd.png"
+  "icon": "freebsd.png",
+  "uses": [
+   "server"
+  ],
+  "ram_mb": 256,
+  "ram_source": "https://www.freebsd.org/releases/15.1R/hardware/"
  },
  {
   "id": "openbsd",
   "name": "OpenBSD",
   "category": "BSD",
-  "icon": "openbsd.png"
+  "icon": "openbsd.png",
+  "uses": [
+   "server"
+  ]
  },
  {
   "id": "windows",
   "name": "Windows",
   "category": "Windows",
-  "icon": "windows.png"
+  "icon": "windows.png",
+  "uses": [
+   "windows"
+  ],
+  "ram_mb": 4096,
+  "ram_source": "https://www.microsoft.com/en-us/windows/windows-11-specifications"
  },
  {
   "id": "templeos",
   "name": "TempleOS",
   "category": "Other systems",
-  "icon": "templeos.png"
+  "icon": "templeos.png",
+  "uses": [
+   "other"
+  ]
  },
  {
   "id": "haiku",
   "name": "Haiku",
   "category": "Other systems",
-  "icon": "haiku.png"
+  "icon": "haiku.png",
+  "uses": [
+   "other"
+  ]
  }
 ]

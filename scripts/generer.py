@@ -23,7 +23,22 @@ from pathlib import Path
 import grub
 
 SCHEMA_VERSION = 2
-FAMILY_OPTIONAL = ("parent", "homepage", "icon_source")
+FAMILY_OPTIONAL = ("parent", "homepage", "icon_source", "uses", "ram_mb", "ram_source")
+IMAGE_KEPT = (
+    "id", "family", "name", "channel", "arch", "homepage", "edition", "note", "usb_boot",
+    "desktop", "kind", "media", "ram_mb", "ram_source",
+)
+# Closed lists: clients translate these names, so a typo would show as a raw identifier.
+USES = (
+    "desktop", "beginner", "gaming", "light", "creative", "advanced", "server", "homelab",
+    "privacy", "rescue", "media", "boards", "windows", "other",
+)
+DESKTOPS = (
+    "gnome", "kde", "xfce", "cinnamon", "mate", "lxqt", "lxde", "budgie", "cosmic", "pantheon",
+    "deepin", "enlightenment", "i3", "sway", "pixel", "none", "choice",
+)
+KINDS = ("live", "installer", "netinst", "preinstalled", "rescue")
+MEDIA = ("usb", "sd", "optical")
 LIFETIME_SECONDS = 14 * 24 * 3600
 TIMEOUT_SECONDS = 60
 USER_AGENT = "bonk-catalog"
@@ -196,7 +211,7 @@ def resolve_read(source, image, previous, fetch, stat, compute):
 def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url, reach=reachable):
     image = {
         key: source[key]
-        for key in ("id", "family", "name", "channel", "arch", "homepage", "edition", "note", "usb_boot")
+        for key in IMAGE_KEPT
         if key in source
     }
     if "official_page" in source:
@@ -394,6 +409,33 @@ def index_page(catalog, updates=()):
 """
 
 
+def memory_errors(where, entry):
+    if "ram_mb" not in entry and "ram_source" not in entry:
+        return []
+    ram, source = entry.get("ram_mb"), entry.get("ram_source", "")
+    if not isinstance(ram, int) or ram <= 0 or not source.startswith("https://"):
+        return [f"{where}: ram_mb needs a positive whole number and an https ram_source"]
+    return []
+
+
+def source_errors(families, sources):
+    """Mistakes a reviewer would miss: unknown names in the closed lists, memory without its source."""
+    errors, known = [], {family["id"] for family in families}
+    for family in families:
+        where = f"family {family['id']}"
+        errors += [f"{where}: unknown use {use}" for use in family.get("uses", []) if use not in USES]
+        errors += memory_errors(where, family)
+    for source in sources:
+        where = f"image {source['id']}"
+        if source["family"] not in known:
+            errors.append(f"{where}: unknown family {source['family']}")
+        for key, allowed in (("desktop", DESKTOPS), ("kind", KINDS), ("media", MEDIA)):
+            if key in source and source[key] not in allowed:
+                errors.append(f"{where}: unknown {key} {source[key]}")
+        errors += memory_errors(where, source)
+    return errors
+
+
 def copy_icons(root, families, output):
     hashes = {}
     (output / "icons").mkdir(parents=True, exist_ok=True)
@@ -447,6 +489,11 @@ def main():
     root = Path(__file__).resolve().parent.parent
     sources = json.loads((root / "sources/images.json").read_text())
     families = json.loads((root / "sources/families.json").read_text())
+    errors = source_errors(families, sources)
+    for error in errors:
+        print(f"INVALID {error}", file=sys.stderr)
+    if errors:
+        return 1
     hashes = copy_icons(root, families, args.output)
     previous = previous_catalog(args.previous)
     catalog, failures = build(
