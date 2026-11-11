@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://catalog.bonk-os.app"><b>catalog.bonk-os.app</b></a> &nbsp;·&nbsp;
-  <a href="https://catalog.bonk-os.app/v1/catalog.json"><b>catalog.json</b></a> &nbsp;·&nbsp;
+  <a href="https://catalog.bonk-os.app/v2/catalog.json"><b>catalog.json</b></a> &nbsp;·&nbsp;
   <a href="https://bonk-os.app/images/"><b>Systems</b></a>
 </p>
 
@@ -24,10 +24,9 @@
 
 | File | Content |
 | :--- | :--- |
-| [`v2/catalog.json`](https://catalog.bonk-os.app/v2/catalog.json) | systems and their flavours, versions, archives, official links, SHA-256 hashes (Bonk 0.1.0 and later) |
-| [`v1/catalog.json`](https://catalog.bonk-os.app/v1/catalog.json) | the same without archives nor dynamic sources (older Bonk) |
-| `v2/catalog.json.sig`, `v1/catalog.json.sig` | Ed25519 signature of the exact bytes of each `catalog.json` |
-| `v2/icons/`, `v1/icons/` | system logos, covered by their hash in the catalog |
+| [`v2/catalog.json`](https://catalog.bonk-os.app/v2/catalog.json) | systems and their flavours, versions, archives, official links, SHA-256 hashes |
+| [`v2/catalog.json.sig`](https://catalog.bonk-os.app/v2/catalog.json.sig) | Ed25519 signature of the exact bytes of `catalog.json` |
+| `v2/icons/` | system logos, covered by their hash in the catalog |
 | [`index.html`](https://catalog.bonk-os.app) | the same list, readable in a browser |
 
 ## How it works
@@ -43,7 +42,7 @@
 | File | Content |
 | :--- | :--- |
 | [`grub.json`](https://catalog.bonk-os.app/grub.json) | status of the published GRUB: version, links, hashes, signature check |
-| `v1/grub/<version>/` | `BOOTX64.EFI`, `BOOTAA64.EFI`, the GNU source archive and its signature |
+| `v2/grub/<version>/` | `BOOTX64.EFI`, `BOOTAA64.EFI`, the GNU source archive and its signature |
 
 - **Source**: the GNU release archive named in [`sources/grub.json`](sources/grub.json), with its SHA-256 and the fingerprint of its signer.
 - **Signature**: checked with `gpgv` against [`keys/grub-signataire.asc`](keys/grub-signataire.asc) before anything is built, and again at each publication.

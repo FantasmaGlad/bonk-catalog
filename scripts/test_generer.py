@@ -89,24 +89,7 @@ class Building(unittest.TestCase):
         self.assertEqual(len(failures), 1)
 
 
-class Versions(unittest.TestCase):
-    def catalog(self):
-        images = [
-            {"id": "current", "channel": "lts", "url": "https://x/a.iso"},
-            {"id": "page", "channel": "stable", "official_page": "https://x/"},
-            {"id": "old", "channel": "archive", "url": "https://x/old.iso"},
-            {"id": "resolved", "channel": "stable", "resolver": "microsoft"},
-        ]
-        return {"schema_version": generer.SCHEMA_VERSION, "sequence": 1, "families": [], "images": images}
-
-    def test_v2_keeps_everything_and_v1_only_what_old_clients_read(self):
-        catalog = self.catalog()
-        v1 = generer.for_v1(catalog)
-        self.assertEqual(v1["schema_version"], 1)
-        self.assertEqual([image["id"] for image in v1["images"]], ["current", "page"])
-        self.assertEqual(len(catalog["images"]), 4)
-        self.assertEqual(catalog["schema_version"], 2)
-
+class Families(unittest.TestCase):
     def test_a_flavour_names_its_parent_and_its_logo_source(self):
         family = {"id": "kubuntu", "name": "Kubuntu", "category": "Debian derivatives", "icon": "kubuntu.png",
                   "parent": "ubuntu", "icon_source": "https://kubuntu.org/"}

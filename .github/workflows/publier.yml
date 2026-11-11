@@ -27,7 +27,7 @@ jobs:
       - name: Tests
         run: python3 -m unittest discover -s scripts -v
       - name: Lire les vraies sources, sans signer
-        run: python3 scripts/generer.py --no-compute --output "$RUNNER_TEMP/site/v1"
+        run: python3 scripts/generer.py --no-compute --output "$RUNNER_TEMP/site/v2"
 
   grub:
     name: grub
@@ -60,29 +60,24 @@ jobs:
         run: sudo apt-get install -y --no-install-recommends bison flex gawk gcc-aarch64-linux-gnu
       - name: Générer
         run: >-
-          python3 scripts/generer.py --grub --output site/v1
+          python3 scripts/generer.py --grub --output site/v2
           --previous https://catalog.bonk-os.app/v2/catalog.json
-          --previous https://catalog.bonk-os.app/v1/catalog.json
       - name: Signer et relire la signature
         env:
           CLE: ${{ secrets.CATALOG_SIGNING_KEY }}
         run: |
           fichier=$(mktemp)
           printf '%s\n' "$CLE" > "$fichier"
-          for version in v1 v2; do
-            openssl pkeyutl -sign -rawin -inkey "$fichier" -in "site/$version/catalog.json" -out "site/$version/catalog.json.sig"
-          done
+          openssl pkeyutl -sign -rawin -inkey "$fichier" -in site/v2/catalog.json -out site/v2/catalog.json.sig
           rm -f "$fichier"
-          for version in v1 v2; do
-            openssl pkeyutl -verify -rawin -pubin -inkey keys/courante.pub.pem -in "site/$version/catalog.json" -sigfile "site/$version/catalog.json.sig"
-          done
+          openssl pkeyutl -verify -rawin -pubin -inkey keys/courante.pub.pem -in site/v2/catalog.json -sigfile site/v2/catalog.json.sig
       - name: Signaler les sources en échec
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
           python3 scripts/signaler.py site/failures.json
-          python3 scripts/signaler.py site/v1/updates.json "Nouvelles versions hors du catalogue"
+          python3 scripts/signaler.py site/v2/updates.json "Nouvelles versions hors du catalogue"
       - name: Retirer le rapport du site
         run: rm -f site/failures.json
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
@@ -137,10 +132,8 @@ jobs:
           persist-credentials: false
       - name: Relire la signature depuis l'adresse publique
         run: |
-          for version in v1 v2; do
-            curl -fsSL --retry 5 --retry-all-errors -o catalog.json "https://catalog.bonk-os.app/$version/catalog.json"
-            curl -fsSL --retry 5 --retry-all-errors -o catalog.json.sig "https://catalog.bonk-os.app/$version/catalog.json.sig"
-            openssl pkeyutl -verify -rawin -pubin -inkey keys/courante.pub.pem -in catalog.json -sigfile catalog.json.sig
-          done
+          curl -fsSL --retry 5 --retry-all-errors -o catalog.json https://catalog.bonk-os.app/v2/catalog.json
+          curl -fsSL --retry 5 --retry-all-errors -o catalog.json.sig https://catalog.bonk-os.app/v2/catalog.json.sig
+          openssl pkeyutl -verify -rawin -pubin -inkey keys/courante.pub.pem -in catalog.json -sigfile catalog.json.sig
       - name: Relire GRUB depuis l'adresse publique
         run: python3 scripts/grub.py check-published
