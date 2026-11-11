@@ -6,6 +6,51 @@
   "icon": "ubuntu.png"
  },
  {
+  "id": "kubuntu",
+  "name": "Kubuntu",
+  "category": "Debian derivatives",
+  "icon": "kubuntu.png",
+  "parent": "ubuntu",
+  "homepage": "https://kubuntu.org/",
+  "icon_source": "https://kubuntu.org/images/favicon.svg"
+ },
+ {
+  "id": "xubuntu",
+  "name": "Xubuntu",
+  "category": "Debian derivatives",
+  "icon": "xubuntu.png",
+  "parent": "ubuntu",
+  "homepage": "https://xubuntu.org/",
+  "icon_source": "https://github.com/Xubuntu/xubuntu-artwork/blob/master/usr/share/pixmaps/xubuntu-logo.svg"
+ },
+ {
+  "id": "lubuntu",
+  "name": "Lubuntu",
+  "category": "Debian derivatives",
+  "icon": "lubuntu.png",
+  "parent": "ubuntu",
+  "homepage": "https://lubuntu.me/",
+  "icon_source": "https://github.com/lubuntu-team/artwork/blob/ubuntu/plucky/src/usr/share/grub/themes/lubuntu-grub-theme/icons/lubuntu.png"
+ },
+ {
+  "id": "ubuntustudio",
+  "name": "Ubuntu Studio",
+  "category": "Debian derivatives",
+  "icon": "ubuntustudio.png",
+  "parent": "ubuntu",
+  "homepage": "https://ubuntustudio.org/",
+  "icon_source": "https://ubuntustudio.org/wp-content/uploads/fbrfg/favicon.svg"
+ },
+ {
+  "id": "ubuntu-mate",
+  "name": "Ubuntu MATE",
+  "category": "Debian derivatives",
+  "icon": "ubuntu-mate.png",
+  "parent": "ubuntu",
+  "homepage": "https://ubuntu-mate.org/",
+  "icon_source": "https://ubuntu-mate.org/assets/favicon/256x256.png"
+ },
+ {
   "id": "debian",
   "name": "Debian",
   "category": "Debian derivatives",
