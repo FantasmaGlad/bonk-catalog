@@ -22,7 +22,10 @@ from pathlib import Path
 
 import grub
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
+# Bonk 0.0.5 and 0.0.6 read /v1/: their lists of channels and image sources are closed.
+V1_SCHEMA_VERSION = 1
+FAMILY_OPTIONAL = ("parent", "homepage", "icon_source")
 LIFETIME_SECONDS = 14 * 24 * 3600
 TIMEOUT_SECONDS = 60
 USER_AGENT = "bonk-catalog"
@@ -263,14 +266,14 @@ def newer_releases(sources, fetch=fetch_text):
     return found
 
 
-def previous_catalog(url):
-    if not url:
-        return {}
-    try:
-        return json.loads(fetch_text(url))
-    except (OSError, ValueError) as error:
-        print(f"no previous catalog: {error}", file=sys.stderr)
-        return {}
+def previous_catalog(urls):
+    """The first that answers: v2, then v1 while v2 has never been published."""
+    for url in urls or ():
+        try:
+            return json.loads(fetch_text(url))
+        except (OSError, ValueError) as error:
+            print(f"no previous catalog at {url}: {error}", file=sys.stderr)
+    return {}
 
 
 def build(sources, families, icon_hashes, previous, now, compute=hash_url):
@@ -290,19 +293,31 @@ def build(sources, families, icon_hashes, previous, now, compute=hash_url):
         # The clock only moves forward between runs: a mirror cannot pass off an older file.
         "sequence": now,
         "expires_unix": now + LIFETIME_SECONDS,
-        "families": [
-            {
-                "id": family["id"],
-                "name": family["name"],
-                "category": family["category"],
-                "icon": "icons/" + family["icon"],
-                "icon_sha256": icon_hashes[family["icon"]],
-            }
-            for family in families
-        ],
+        "families": [family_entry(family, icon_hashes) for family in families],
         "images": images,
     }
     return catalog, failures
+
+
+def family_entry(family, icon_hashes):
+    entry = {
+        "id": family["id"],
+        "name": family["name"],
+        "category": family["category"],
+        "icon": "icons/" + family["icon"],
+        "icon_sha256": icon_hashes[family["icon"]],
+    }
+    entry.update({key: family[key] for key in FAMILY_OPTIONAL if key in family})
+    return entry
+
+
+def for_v1(catalog):
+    """The same catalog for older clients: without archived versions nor sources they cannot read."""
+    images = [
+        image for image in catalog["images"]
+        if image.get("channel") != "archive" and ("url" in image or "official_page" in image)
+    ]
+    return dict(catalog, schema_version=V1_SCHEMA_VERSION, images=images)
 
 
 def newer_section(updates):
@@ -369,9 +384,9 @@ def index_page(catalog, updates=()):
 <section>
 <h2>API</h2>
 <dl>
-<dt>Catalog</dt><dd><a href="/v1/catalog.json">/v1/catalog.json</a></dd>
+<dt>Catalog</dt><dd><a href="/v2/catalog.json">/v2/catalog.json</a> (Bonk 0.1.0 and later); <a href="/v1/catalog.json">/v1/catalog.json</a> (older versions: without archives nor dynamic sources)</dd>
 <dt>Updates</dt><dd><a href="/v1/updates.json">/v1/updates.json</a> (newer releases found at publishers, not yet in the catalog)</dd>
-<dt>Signature</dt><dd><a href="/v1/catalog.json.sig">/v1/catalog.json.sig</a> (Ed25519, over the exact bytes)</dd>
+<dt>Signature</dt><dd><a href="/v2/catalog.json.sig">/v2/catalog.json.sig</a>, <a href="/v1/catalog.json.sig">/v1/catalog.json.sig</a> (Ed25519, over the exact bytes)</dd>
 <dt>Keys</dt><dd><a href="https://github.com/FantasmaGlad/bonk-catalog/tree/main/keys">keys/</a></dd>
 <dt>Published</dt><dd>{day(catalog["sequence"])}</dd>
 <dt>Expires</dt><dd>{day(catalog["expires_unix"])}</dd>
@@ -390,10 +405,55 @@ def index_page(catalog, updates=()):
 """
 
 
+def copy_icons(root, families, folders):
+    """Each catalog folder carries its icons: a client never follows a path out of its folder."""
+    hashes = {}
+    for family in families:
+        source = root / "sources/icons" / family["icon"]
+        hashes[family["icon"]] = hashlib.sha256(source.read_bytes()).hexdigest()
+        for folder in folders:
+            (folder / "icons").mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, folder / "icons" / family["icon"])
+    return hashes
+
+
+def add_grub(catalog, output, previous, failures):
+    error = None
+    try:
+        catalog["grub"], error = grub.prepare(output, previous.get("grub"))
+    except (grub.GrubError, OSError, subprocess.CalledProcessError) as failure:
+        error = str(failure)
+    if error:
+        failures.append({"id": "grub", "error": error})
+    today = time.strftime("%Y-%m-%d", time.gmtime())
+    report = grub.status_report(catalog.get("grub"), output, error, today)
+    (output.parent / "grub.json").write_text(json.dumps(report, indent=1) + "\n")
+
+
+def write_site(root, output, catalog, sources, failures):
+    """v1/ and v2/ side by side, each signed later; the page and the reports at the root."""
+    v2 = output.parent / "v2"
+    if (output / "grub").is_dir():
+        shutil.copytree(output / "grub", v2 / "grub", dirs_exist_ok=True)
+    (v2 / "catalog.json").write_text(json.dumps(catalog, indent=1) + "\n")
+    (output / "catalog.json").write_text(json.dumps(for_v1(catalog), indent=1) + "\n")
+    updates = newer_releases(sources)
+    for folder in (output, v2):
+        (folder / "updates.json").write_text(json.dumps(updates, indent=1) + "\n")
+    page = index_page(catalog, updates)
+    for target in (output.parent, output, v2):
+        (target / "index.html").write_text(page)
+    for asset in ("site.css", "logo.png"):
+        shutil.copyfile(root / "page" / asset, output.parent / asset)
+    (output.parent / "failures.json").write_text(json.dumps(failures, indent=1) + "\n")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=Path("site/v1"))
-    parser.add_argument("--previous", help="address of the catalog published so far")
+    parser.add_argument("--output", type=Path, default=Path("site/v1"), help="the v1 folder; v2 goes next to it")
+    parser.add_argument(
+        "--previous", action="append", help="address of the catalog published so far; the first that answers"
+    )
     parser.add_argument(
         "--no-compute",
         action="store_true",
@@ -405,42 +465,18 @@ def main():
     root = Path(__file__).resolve().parent.parent
     sources = json.loads((root / "sources/images.json").read_text())
     families = json.loads((root / "sources/families.json").read_text())
-    icons = args.output / "icons"
-    icons.mkdir(parents=True, exist_ok=True)
-    hashes = {}
-    for family in families:
-        source = root / "sources/icons" / family["icon"]
-        hashes[family["icon"]] = hashlib.sha256(source.read_bytes()).hexdigest()
-        shutil.copyfile(source, icons / family["icon"])
-
+    hashes = copy_icons(root, families, (args.output, args.output.parent / "v2"))
     previous = previous_catalog(args.previous)
     catalog, failures = build(
         sources, families, hashes, previous, int(time.time()),
         (lambda *_: "0" * 64) if args.no_compute else hash_url,
     )
     if args.grub:
-        error = None
-        try:
-            catalog["grub"], error = grub.prepare(args.output, previous.get("grub"))
-        except (grub.GrubError, OSError, subprocess.CalledProcessError) as failure:
-            error = str(failure)
-        if error:
-            failures.append({"id": "grub", "error": error})
-        today = time.strftime("%Y-%m-%d", time.gmtime())
-        report = grub.status_report(catalog.get("grub"), args.output, error, today)
-        (args.output.parent / "grub.json").write_text(json.dumps(report, indent=1) + "\n")
+        add_grub(catalog, args.output, previous, failures)
     if not any("url" in image for image in catalog["images"]):
         print("no image could be read: nothing to publish", file=sys.stderr)
         return 1
-    (args.output / "catalog.json").write_text(json.dumps(catalog, indent=1) + "\n")
-    updates = newer_releases(sources)
-    (args.output / "updates.json").write_text(json.dumps(updates, indent=1) + "\n")
-    page = index_page(catalog, updates)
-    for target in (args.output.parent, args.output):
-        (target / "index.html").write_text(page)
-    for asset in ("site.css", "logo.png"):
-        shutil.copyfile(root / "page" / asset, args.output.parent / asset)
-    (args.output.parent / "failures.json").write_text(json.dumps(failures, indent=1) + "\n")
+    write_site(root, args.output, catalog, sources, failures)
     for failure in failures:
         print(f"FAILED {failure['id']}: {failure['error']}", file=sys.stderr)
     print(f"{len(catalog['images'])} images, {len(failures)} failures")

@@ -89,6 +89,46 @@ class Building(unittest.TestCase):
         self.assertEqual(len(failures), 1)
 
 
+class Versions(unittest.TestCase):
+    def catalog(self):
+        images = [
+            {"id": "current", "channel": "lts", "url": "https://x/a.iso"},
+            {"id": "page", "channel": "stable", "official_page": "https://x/"},
+            {"id": "old", "channel": "archive", "url": "https://x/old.iso"},
+            {"id": "resolved", "channel": "stable", "resolver": "microsoft"},
+        ]
+        return {"schema_version": generer.SCHEMA_VERSION, "sequence": 1, "families": [], "images": images}
+
+    def test_v2_keeps_everything_and_v1_only_what_old_clients_read(self):
+        catalog = self.catalog()
+        v1 = generer.for_v1(catalog)
+        self.assertEqual(v1["schema_version"], 1)
+        self.assertEqual([image["id"] for image in v1["images"]], ["current", "page"])
+        self.assertEqual(len(catalog["images"]), 4)
+        self.assertEqual(catalog["schema_version"], 2)
+
+    def test_a_flavour_names_its_parent_and_its_logo_source(self):
+        family = {"id": "kubuntu", "name": "Kubuntu", "category": "Debian derivatives", "icon": "kubuntu.png",
+                  "parent": "ubuntu", "icon_source": "https://kubuntu.org/"}
+        entry = generer.family_entry(family, {"kubuntu.png": "c" * 64})
+        self.assertEqual(entry["parent"], "ubuntu")
+        self.assertEqual(entry["icon"], "icons/kubuntu.png")
+        self.assertNotIn("homepage", entry)
+
+    def test_the_first_previous_catalog_that_answers_is_read(self):
+        answers = {"https://c/v2/": OSError("404"), "https://c/v1/": '{"images": []}'}
+
+        def fetch(url):
+            answer = answers[url]
+            if isinstance(answer, Exception):
+                raise answer
+            return answer
+
+        with mock.patch.object(generer, "fetch_text", side_effect=fetch):
+            self.assertEqual(generer.previous_catalog(["https://c/v2/", "https://c/v1/"]), {"images": []})
+            self.assertEqual(generer.previous_catalog(None), {})
+
+
 class Listing(unittest.TestCase):
     def test_the_hash_file_is_found_in_the_stable_listing(self):
         source = {

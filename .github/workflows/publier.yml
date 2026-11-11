@@ -59,16 +59,23 @@ jobs:
       - name: Outils de construction de GRUB
         run: sudo apt-get install -y --no-install-recommends bison flex gawk gcc-aarch64-linux-gnu
       - name: Générer
-        run: python3 scripts/generer.py --grub --output site/v1 --previous https://catalog.bonk-os.app/v1/catalog.json
+        run: >-
+          python3 scripts/generer.py --grub --output site/v1
+          --previous https://catalog.bonk-os.app/v2/catalog.json
+          --previous https://catalog.bonk-os.app/v1/catalog.json
       - name: Signer et relire la signature
         env:
           CLE: ${{ secrets.CATALOG_SIGNING_KEY }}
         run: |
           fichier=$(mktemp)
           printf '%s\n' "$CLE" > "$fichier"
-          openssl pkeyutl -sign -rawin -inkey "$fichier" -in site/v1/catalog.json -out site/v1/catalog.json.sig
+          for version in v1 v2; do
+            openssl pkeyutl -sign -rawin -inkey "$fichier" -in "site/$version/catalog.json" -out "site/$version/catalog.json.sig"
+          done
           rm -f "$fichier"
-          openssl pkeyutl -verify -rawin -pubin -inkey keys/courante.pub.pem -in site/v1/catalog.json -sigfile site/v1/catalog.json.sig
+          for version in v1 v2; do
+            openssl pkeyutl -verify -rawin -pubin -inkey keys/courante.pub.pem -in "site/$version/catalog.json" -sigfile "site/$version/catalog.json.sig"
+          done
       - name: Signaler les sources en échec
         env:
           GH_TOKEN: ${{ github.token }}
@@ -130,8 +137,10 @@ jobs:
           persist-credentials: false
       - name: Relire la signature depuis l'adresse publique
         run: |
-          curl -fsSL --retry 5 --retry-all-errors -o catalog.json https://catalog.bonk-os.app/v1/catalog.json
-          curl -fsSL --retry 5 --retry-all-errors -o catalog.json.sig https://catalog.bonk-os.app/v1/catalog.json.sig
-          openssl pkeyutl -verify -rawin -pubin -inkey keys/courante.pub.pem -in catalog.json -sigfile catalog.json.sig
+          for version in v1 v2; do
+            curl -fsSL --retry 5 --retry-all-errors -o catalog.json "https://catalog.bonk-os.app/$version/catalog.json"
+            curl -fsSL --retry 5 --retry-all-errors -o catalog.json.sig "https://catalog.bonk-os.app/$version/catalog.json.sig"
+            openssl pkeyutl -verify -rawin -pubin -inkey keys/courante.pub.pem -in catalog.json -sigfile catalog.json.sig
+          done
       - name: Relire GRUB depuis l'adresse publique
         run: python3 scripts/grub.py check-published
