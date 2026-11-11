@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import hashlib
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -132,34 +133,37 @@ class Archive(unittest.TestCase):
 
 
 class Watch(unittest.TestCase):
+    """On a copy of sources/grub.json: the versioned file is never written by a test."""
+
+    def setUp(self):
+        folder = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, folder)
+        self.source = folder / "grub.json"
+        self.source.write_text(grub.SOURCE.read_text())
+        patch = mock.patch.object(grub, "SOURCE", self.source)
+        patch.start()
+        self.addCleanup(patch.stop)
+        self.original = self.source.read_text()
+
     def test_a_newer_signed_release_updates_the_source(self):
-        original = grub.SOURCE.read_text()
         listing = LISTING.replace("2.12", "2.16")
         served = lambda url, limit=None: listing.encode() if url.endswith("/") else b"new"
-        try:
-            with mock.patch.object(grub, "verify_signature", return_value="2026-07-01"):
-                self.assertEqual(grub.watch(served), "2.16")
-            source = json.loads(grub.SOURCE.read_text())
-            self.assertEqual((source["version"], source["released"]), ("2.16", "2026-07-01"))
-            self.assertEqual(source["sha256"], hashlib.sha256(b"new").hexdigest())
-        finally:
-            grub.SOURCE.write_text(original)
+        with mock.patch.object(grub, "verify_signature", return_value="2026-07-01"):
+            self.assertEqual(grub.watch(served), "2.16")
+        source = json.loads(self.source.read_text())
+        self.assertEqual((source["version"], source["released"]), ("2.16", "2026-07-01"))
+        self.assertEqual(source["sha256"], hashlib.sha256(b"new").hexdigest())
 
     def test_nothing_newer_changes_nothing(self):
-        original = grub.SOURCE.read_text()
         self.assertIsNone(grub.watch(lambda url, limit=None: LISTING.encode()))
-        self.assertEqual(grub.SOURCE.read_text(), original)
+        self.assertEqual(self.source.read_text(), self.original)
 
     def test_an_unsigned_release_is_refused(self):
-        original = grub.SOURCE.read_text()
         listing = LISTING.replace("2.12", "2.16")
         served = lambda url, limit=None: listing.encode() if url.endswith("/") else b"new"
-        try:
-            with self.assertRaises(grub.GrubError):
-                grub.watch(served)
-        finally:
-            self.assertEqual(grub.SOURCE.read_text(), original)
-            grub.SOURCE.write_text(original)
+        with self.assertRaises(grub.GrubError):
+            grub.watch(served)
+        self.assertEqual(self.source.read_text(), self.original)
 
 
 if __name__ == "__main__":
