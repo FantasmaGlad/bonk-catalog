@@ -75,6 +75,66 @@
   "ram_source": "https://ubuntu-mate.org/about/requirements/"
  },
  {
+  "id": "ubuntu-budgie",
+  "name": "Ubuntu Budgie",
+  "category": "Debian derivatives",
+  "icon": "ubuntu-budgie.png",
+  "parent": "ubuntu",
+  "homepage": "https://ubuntubudgie.org/",
+  "icon_source": "https://ubuntubudgie.org/apple-touch-icon.png",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "ubuntucinnamon",
+  "name": "Ubuntu Cinnamon",
+  "category": "Debian derivatives",
+  "icon": "ubuntucinnamon.png",
+  "parent": "ubuntu",
+  "homepage": "https://ubuntucinnamon.org/",
+  "icon_source": "https://ubuntucinnamon.org/wp-content/uploads/2020/04/logo.png",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "ubuntu-unity",
+  "name": "Ubuntu Unity",
+  "category": "Debian derivatives",
+  "icon": "ubuntu-unity.png",
+  "parent": "ubuntu",
+  "homepage": "https://ubuntuunity.org/",
+  "icon_source": "https://ubuntuunity.org/assets/logo.png",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "ubuntukylin",
+  "name": "Ubuntu Kylin",
+  "category": "Debian derivatives",
+  "icon": "ubuntukylin.png",
+  "parent": "ubuntu",
+  "homepage": "https://www.ubuntukylin.com/",
+  "icon_source": "https://www.ubuntukylin.com/upload/logo-%E6%A9%98.png",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "edubuntu",
+  "name": "Edubuntu",
+  "category": "Debian derivatives",
+  "icon": "edubuntu.png",
+  "parent": "ubuntu",
+  "homepage": "https://edubuntu.org/",
+  "icon_source": "https://edubuntu.org/assets/img/edubuntu-logo.svg",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
   "id": "debian",
   "name": "Debian",
   "category": "Debian derivatives",
@@ -341,6 +401,53 @@
   "icon": "haiku.png",
   "uses": [
    "other"
+  ]
+ },
+ {
+  "id": "bazzite",
+  "name": "Bazzite",
+  "category": "Red Hat family",
+  "icon": "bazzite.png",
+  "homepage": "https://bazzite.gg/",
+  "icon_source": "https://bazzite.gg/content/uploads/2024/02/icon.svg",
+  "uses": [
+   "gaming",
+   "desktop"
+  ]
+ },
+ {
+  "id": "cachyos",
+  "name": "CachyOS",
+  "category": "Arch family",
+  "icon": "cachyos.png",
+  "homepage": "https://cachyos.org/",
+  "icon_source": "https://cachyos.org/favicon.svg",
+  "uses": [
+   "gaming",
+   "desktop"
+  ]
+ },
+ {
+  "id": "nobara",
+  "name": "Nobara",
+  "category": "Red Hat family",
+  "icon": "nobara.png",
+  "homepage": "https://nobaraproject.org/",
+  "icon_source": "https://nobaraproject.org/img/nobara-icon.png",
+  "uses": [
+   "gaming",
+   "desktop"
+  ]
+ },
+ {
+  "id": "lakka",
+  "name": "Lakka",
+  "category": "Independent Linux",
+  "icon": "lakka.png",
+  "homepage": "https://www.lakka.tv/",
+  "icon_source": "https://www.lakka.tv/images/fav64.png",
+  "uses": [
+   "gaming"
   ]
  }
 ]
