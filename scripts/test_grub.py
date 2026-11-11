@@ -35,17 +35,29 @@ class Prepare(unittest.TestCase):
 
     def previous(self, files):
         folder = f"grub/{self.source['version']}/"
-        names = {"efi_x86_64": "BOOTX64.EFI", "source": self.source["archive"],
+        names = {"efi_x86_64": "BOOTX64.EFI", "efi_aarch64": "BOOTAA64.EFI", "source": self.source["archive"],
                  "source_signature": self.source["archive"] + ".sig"}
         entry = {"version": self.source["version"], "released": self.source["released"],
                  "build": grub.build_id()}
         for key, name in names.items():
-            entry[key] = dict(entry_for(files[key]), path=folder + name)
-        entry["efi"] = {"x86_64": entry.pop("efi_x86_64")}
+            if key in files:
+                entry[key] = dict(entry_for(files[key]), path=folder + name)
+        entry["efi"] = {arch: entry.pop(f"efi_{arch}") for arch in ("x86_64", "aarch64") if f"efi_{arch}" in entry}
         return entry
 
+    def test_an_entry_missing_an_architecture_is_rebuilt(self):
+        previous = self.previous({"efi_x86_64": b"e", "source": b"s", "source_signature": b"g"})
+        built = []
+        with mock.patch.object(grub, "download") as download, \
+                mock.patch.object(grub, "fetch_archive", side_effect=self.fake_archive):
+            entry, error = grub.prepare(self.output, previous,
+                                        build=lambda a, arch, efi: (built.append(arch), efi.write_bytes(arch.encode())))
+        download.assert_not_called()
+        self.assertEqual(built, ["x86_64", "aarch64"])
+        self.assertEqual(entry["efi"]["aarch64"]["sha256"], hashlib.sha256(b"aarch64").hexdigest())
+
     def test_published_bytes_are_reused_when_nothing_changed(self):
-        files = {"efi_x86_64": b"efi", "source": b"tar", "source_signature": b"sig"}
+        files = {"efi_aarch64": b"arm", "efi_x86_64": b"efi", "source": b"tar", "source_signature": b"sig"}
         previous = self.previous(files)
         by_path = {"https://x/" + item["path"]: data for item, data in zip(grub.files(previous), files.values())}
         build = mock.Mock()
@@ -56,29 +68,30 @@ class Prepare(unittest.TestCase):
         self.assertEqual((self.output / previous["efi"]["x86_64"]["path"]).read_bytes(), b"efi")
 
     def test_a_tampered_published_file_is_rebuilt(self):
-        files = {"efi_x86_64": b"efi", "source": b"tar", "source_signature": b"sig"}
+        files = {"efi_aarch64": b"arm", "efi_x86_64": b"efi", "source": b"tar", "source_signature": b"sig"}
         previous = self.previous(files)
         served = lambda url, limit=None: b"autre" if url.endswith("EFI") else files["source"]
         built = []
         with mock.patch.object(grub, "download", side_effect=served), \
                 mock.patch.object(grub, "fetch_archive", side_effect=self.fake_archive):
             entry, error = grub.prepare(self.output, previous, published="https://x/",
-                                 build=lambda archive, efi: (built.append(efi), efi.write_bytes(b"neuf")))
-        self.assertEqual(len(built), 1)
+                                 build=lambda archive, arch, efi: (built.append(arch), efi.write_bytes(b"neuf")))
+        self.assertEqual(built, ["x86_64", "aarch64"])
         self.assertEqual(entry["efi"]["x86_64"]["sha256"], hashlib.sha256(b"neuf").hexdigest())
+        self.assertEqual(entry["efi"]["aarch64"]["path"], f"grub/{self.source['version']}/BOOTAA64.EFI")
 
     def test_a_new_build_id_rebuilds(self):
         previous = dict(self.previous({"efi_x86_64": b"e", "source": b"s", "source_signature": b"g"}),
                         build="0" * 16)
         with mock.patch.object(grub, "download") as download, \
                 mock.patch.object(grub, "fetch_archive", side_effect=self.fake_archive):
-            entry, error = grub.prepare(self.output, previous, build=lambda a, efi: efi.write_bytes(b"x"))
+            entry, error = grub.prepare(self.output, previous, build=lambda a, arch, efi: efi.write_bytes(b"x"))
         download.assert_not_called()
         self.assertEqual(entry["build"], grub.build_id())
         self.assertEqual(entry["source"]["sha256"], hashlib.sha256(b"archive").hexdigest())
 
     def test_a_failed_build_keeps_the_published_one(self):
-        files = {"efi_x86_64": b"efi", "source": b"tar", "source_signature": b"sig"}
+        files = {"efi_aarch64": b"arm", "efi_x86_64": b"efi", "source": b"tar", "source_signature": b"sig"}
         previous = dict(self.previous(files), build="0" * 16)
         by_path = {"https://x/" + item["path"]: data for item, data in zip(grub.files(previous), files.values())}
         with mock.patch.object(grub, "download", side_effect=lambda url, limit=None: by_path[url]), \
