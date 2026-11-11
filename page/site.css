@@ -39,11 +39,14 @@ footer p { margin: 0; }
   dl { grid-template-columns: 1fr; }
   dt { margin-top: 0.5em; }
 }
-table { border-collapse: collapse; margin: 0.3em 0; }
-th, td { padding: 0.1em 1.2em 0.1em 0; text-align: left; vertical-align: top; }
-td a { overflow-wrap: anywhere; }
-@media (max-width: 600px) {
+table { width: 100%; border-collapse: collapse; margin: 0.3em 0; }
+th, td { padding: 0.1em 1.2em 0.1em 0; text-align: left; vertical-align: top; white-space: nowrap; }
+/* The file name takes what is left of the line and is cut short; the link keeps the full address. */
+td.file { width: 100%; max-width: 0; }
+td.file a { display: block; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 900px) {
   table, tbody, tr, td { display: block; }
   thead { display: none; }
   tr { margin-bottom: 0.6em; }
+  td.file { max-width: none; }
 }
