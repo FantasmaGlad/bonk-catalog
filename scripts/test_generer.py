@@ -297,6 +297,13 @@ class Newer(unittest.TestCase):
         self.assertEqual(generer.newer_releases(self.sources(), fetch), [])
 
 
+class Sizes(unittest.TestCase):
+    def test_megabytes_under_a_gigabyte(self):
+        self.assertEqual(generer.size_label(17_350_656), "17 MB")
+        self.assertEqual(generer.size_label(400), "1 MB")
+        self.assertEqual(generer.size_label(8_191_000_000), "8.2 GB")
+
+
 class SourceErrors(unittest.TestCase):
     FAMILY = {"id": "debian", "name": "Debian", "category": "Debian derivatives", "icon": "debian.png"}
 

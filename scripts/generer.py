@@ -335,6 +335,11 @@ def newer_section(updates):
     return f"<section>\n<h2>Newer releases not yet in the catalog</h2>\n<ul>\n{items}\n</ul>\n</section>"
 
 
+def size_label(size):
+    """Megabytes under a gigabyte: a 17 MB image is not shown as 0.0 GB."""
+    return f"{size / 1e9:.1f} GB" if size >= 1e9 else f"{max(1, round(size / 1e6))} MB"
+
+
 def status(image):
     state, checked = image.get("status", "unknown"), image.get("checked")
     # Checked at publication, whose date heads the page: repeating it on every row only widens the table.
@@ -357,7 +362,7 @@ def index_page(catalog, updates=()):
                 continue
             link = image.get("url") or image.get("official_page", "")
             label = link.rsplit("/", 1)[-1] or link
-            size = f"{image['size_bytes'] / 1e9:.1f} GB" if "size_bytes" in image else ""
+            size = size_label(image["size_bytes"]) if "size_bytes" in image else ""
             rows.append(
                 f'<tr><td><a href="{e(image["homepage"])}">{e(image["name"])}</a></td>'
                 f"<td>{e(image['version'])}</td><td>{e(image.get('edition', ''))}</td>"
