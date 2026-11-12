@@ -706,5 +706,38 @@
   "uses": [
    "light"
   ]
+ },
+ {
+  "id": "centos",
+  "name": "CentOS Stream",
+  "category": "Red Hat family",
+  "icon": "centos.png",
+  "homepage": "https://www.centos.org/",
+  "icon_source": "https://www.centos.org/assets/icons/favicon.svg",
+  "uses": [
+   "server"
+  ]
+ },
+ {
+  "id": "oraclelinux",
+  "name": "Oracle Linux",
+  "category": "Red Hat family",
+  "icon": "oraclelinux.png",
+  "homepage": "https://www.oracle.com/linux/",
+  "icon_source": "https://www.oracle.com/yum.oracle.com/a/yum/img/penguin-updated.png",
+  "uses": [
+   "server"
+  ]
+ },
+ {
+  "id": "openeuler",
+  "name": "openEuler",
+  "category": "Independent Linux",
+  "icon": "openeuler.png",
+  "homepage": "https://www.openeuler.org/en/",
+  "icon_source": "https://www.openeuler.org/assets/logo.XeUCiAZu.svg",
+  "uses": [
+   "server"
+  ]
  }
 ]
