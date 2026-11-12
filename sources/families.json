@@ -739,5 +739,42 @@
   "uses": [
    "server"
   ]
+ },
+ {
+  "id": "netbsd",
+  "name": "NetBSD",
+  "category": "BSD",
+  "icon": "netbsd.png",
+  "homepage": "https://www.netbsd.org/",
+  "icon_source": "https://www.netbsd.org/images/NetBSD-smaller-tb.png",
+  "uses": [
+   "server",
+   "advanced"
+  ]
+ },
+ {
+  "id": "ghostbsd",
+  "name": "GhostBSD",
+  "category": "BSD",
+  "icon": "ghostbsd.png",
+  "homepage": "https://www.ghostbsd.org/",
+  "icon_source": "https://www.ghostbsd.org/sites/default/files/glogo.ico",
+  "uses": [
+   "desktop"
+  ],
+  "ram_mb": 8192,
+  "ram_source": "https://www.ghostbsd.org/download"
+ },
+ {
+  "id": "dragonfly",
+  "name": "DragonFly BSD",
+  "category": "BSD",
+  "icon": "dragonfly.png",
+  "homepage": "https://www.dragonflybsd.org/",
+  "icon_source": "https://www.dragonflybsd.org/images/small_logo.png",
+  "uses": [
+   "server",
+   "advanced"
+  ]
  }
 ]

@@ -4955,5 +4955,177 @@
   "hash_suffix": ".sha256sum",
   "kind": "installer",
   "media": "usb"
+ },
+ {
+  "id": "netbsd-11-amd64-install",
+  "family": "netbsd",
+  "name": "NetBSD",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.netbsd.org/",
+  "page": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/images/",
+  "pattern": "href=\"(?P<url>NetBSD-(?P<version>[\\d.]+)-amd64-install\\.img\\.gz)\"",
+  "url_prefix": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/images/",
+  "edition": "install",
+  "hash_replace": [
+   "[^/]+$",
+   ""
+  ],
+  "verify_suffix": "SHA512",
+  "note": "Hash computed from the publisher's file and checked against its SHA-512.",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "netbsd-11-amd64-bios-install",
+  "family": "netbsd",
+  "name": "NetBSD",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.netbsd.org/",
+  "page": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/images/",
+  "pattern": "href=\"(?P<url>NetBSD-(?P<version>[\\d.]+)-amd64-bios-install\\.img\\.gz)\"",
+  "url_prefix": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/images/",
+  "edition": "install bios",
+  "hash_replace": [
+   "[^/]+$",
+   ""
+  ],
+  "verify_suffix": "SHA512",
+  "note": "Hash computed from the publisher's file and checked against its SHA-512.",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "netbsd-11-amd64-live",
+  "family": "netbsd",
+  "name": "NetBSD",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.netbsd.org/",
+  "page": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/images/",
+  "pattern": "href=\"(?P<url>NetBSD-(?P<version>[\\d.]+)-amd64-live\\.img\\.gz)\"",
+  "url_prefix": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/images/",
+  "edition": "live",
+  "hash_replace": [
+   "[^/]+$",
+   ""
+  ],
+  "verify_suffix": "SHA512",
+  "note": "Hash computed from the publisher's file and checked against its SHA-512.",
+  "kind": "live",
+  "media": "usb"
+ },
+ {
+  "id": "netbsd-11-i386-install",
+  "family": "netbsd",
+  "name": "NetBSD",
+  "channel": "stable",
+  "arch": "i686",
+  "homepage": "https://www.netbsd.org/",
+  "page": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/images/",
+  "pattern": "href=\"(?P<url>NetBSD-(?P<version>[\\d.]+)-i386-install\\.img\\.gz)\"",
+  "url_prefix": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/images/",
+  "edition": "install",
+  "hash_replace": [
+   "[^/]+$",
+   ""
+  ],
+  "verify_suffix": "SHA512",
+  "note": "Hash computed from the publisher's file and checked against its SHA-512.",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "netbsd-11-aarch64-install",
+  "family": "netbsd",
+  "name": "NetBSD",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://www.netbsd.org/",
+  "page": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/images/",
+  "pattern": "href=\"(?P<url>NetBSD-(?P<version>[\\d.]+)-evbarm-aarch64-install\\.img\\.gz)\"",
+  "url_prefix": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/images/",
+  "edition": "install",
+  "hash_replace": [
+   "[^/]+$",
+   ""
+  ],
+  "verify_suffix": "SHA512",
+  "note": "Hash computed from the publisher's file and checked against its SHA-512.",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "netbsd-11-aarch64-arm64",
+  "family": "netbsd",
+  "name": "NetBSD",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://www.netbsd.org/",
+  "page": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/evbarm-aarch64/binary/gzimg/",
+  "pattern": "href=\"(?P<url>arm64\\.img\\.gz)\"",
+  "url_prefix": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-11.1/evbarm-aarch64/binary/gzimg/",
+  "edition": "arm64 image",
+  "hash_replace": [
+   "[^/]+$",
+   ""
+  ],
+  "verify_suffix": "SHA512",
+  "note": "Hash computed from the publisher's file and checked against its SHA-512.",
+  "kind": "preinstalled",
+  "media": "usb",
+  "version": "11.1"
+ },
+ {
+  "id": "ghostbsd-mate-x86_64",
+  "family": "ghostbsd",
+  "name": "GhostBSD",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.ghostbsd.org/",
+  "page": "https://www.ghostbsd.org/download",
+  "pattern": "(?P<url>https://download\\.ghostbsd\\.org/releases/amd64/[\\w.]+/GhostBSD-(?P<version>[\\w.]+)\\.iso)\"",
+  "edition": "mate",
+  "hash_suffix": ".sha256",
+  "desktop": "mate",
+  "kind": "live",
+  "media": "usb"
+ },
+ {
+  "id": "ghostbsd-xfce-x86_64",
+  "family": "ghostbsd",
+  "name": "GhostBSD",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.ghostbsd.org/",
+  "page": "https://www.ghostbsd.org/download",
+  "pattern": "(?P<url>https://download\\.ghostbsd\\.org/releases/amd64/[\\w.]+/GhostBSD-(?P<version>[\\w.]+)-XFCE\\.iso)\"",
+  "edition": "xfce",
+  "hash_suffix": ".sha256",
+  "desktop": "xfce",
+  "kind": "live",
+  "media": "usb"
+ },
+ {
+  "id": "dragonfly-img-x86_64",
+  "family": "dragonfly",
+  "name": "DragonFly BSD",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.dragonflybsd.org/",
+  "page": "https://mirror-master.dragonflybsd.org/iso-images/",
+  "pattern": "href=\"(?P<url>dfly-x86_64-(?P<version>[\\d.]+)_REL\\.img)\"",
+  "url_prefix": "https://mirror-master.dragonflybsd.org/iso-images/",
+  "edition": "usb image",
+  "hash_replace": [
+   "[^/]+$",
+   ""
+  ],
+  "verify_suffix": "md5.txt",
+  "note": "Hash computed from the publisher's file and checked against its MD5.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
  }
 ]
