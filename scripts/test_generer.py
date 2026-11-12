@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import time
 import unittest
 from unittest import mock
 
@@ -81,6 +82,17 @@ class Building(unittest.TestCase):
             catalog, _ = generer.build([SOURCE], [], {}, {}, 86400 * 2)
         self.assertEqual(catalog["images"][0]["status"], "online")
         self.assertEqual(catalog["images"][0]["checked"], "1970-01-03")
+
+    def test_sources_keep_their_order_when_read_side_by_side(self):
+        sources = [dict(SOURCE, id=f"s{n}") for n in range(20)]
+
+        def resolve(source, **_):
+            time.sleep(0.001 * (20 - int(source["id"][1:])))
+            return {"id": source["id"]}
+
+        with mock.patch.object(generer, "resolve", side_effect=resolve):
+            catalog, _ = generer.build(sources, [], {}, {}, 100)
+        self.assertEqual([image["id"] for image in catalog["images"]], [source["id"] for source in sources])
 
     def test_failed_source_without_history_is_left_out(self):
         with mock.patch.object(generer, "resolve", side_effect=OSError("down")):

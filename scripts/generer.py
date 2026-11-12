@@ -7,6 +7,7 @@ reported, so one publisher's outage neither removes an image nor publishes an un
 """
 
 import argparse
+import concurrent.futures
 import hashlib
 import html
 import json
@@ -41,6 +42,7 @@ KINDS = ("live", "installer", "netinst", "preinstalled", "rescue")
 MEDIA = ("usb", "sd", "optical")
 LIFETIME_SECONDS = 14 * 24 * 3600
 TIMEOUT_SECONDS = 60
+WORKERS = 8
 USER_AGENT = "bonk-catalog"
 TEXT_LIMIT = 4 << 20
 SUMS_LINE = re.compile(r"^([0-9a-fA-F]{64})\s+\*?(\S+)$")
@@ -297,14 +299,23 @@ def build(sources, families, icon_hashes, previous, now, compute=hash_url):
     kept = {image["id"]: image for image in previous.get("images", [])}
     images, failures = [], []
     today = time.strftime("%Y-%m-%d", time.gmtime(now))
-    for source in sources:
+
+    def attempt(source):
         try:
-            image = resolve(source, previous=kept.get(source["id"]), compute=compute)
-            images.append(dict(image, status="online", checked=today))
+            return resolve(source, previous=kept.get(source["id"]), compute=compute), None
         except (SourceError, OSError, ValueError) as error:
-            failures.append({"id": source["id"], "error": str(error)})
-            if source["id"] in kept:
-                images.append(dict(kept[source["id"]], status="stale"))
+            return None, error
+
+    # Each source waits on its publisher's servers: read them side by side, in the sources' order.
+    with concurrent.futures.ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        results = list(pool.map(attempt, sources))
+    for source, (image, error) in zip(sources, results):
+        if image is not None:
+            images.append(dict(image, status="online", checked=today))
+            continue
+        failures.append({"id": source["id"], "error": str(error)})
+        if source["id"] in kept:
+            images.append(dict(kept[source["id"]], status="stale"))
     catalog = {
         "schema_version": SCHEMA_VERSION,
         # The clock only moves forward between runs: a mirror cannot pass off an older file.
