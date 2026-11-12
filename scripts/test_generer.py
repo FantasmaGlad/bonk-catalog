@@ -5,6 +5,8 @@ from unittest import mock
 
 import generer
 
+generer.RETRY_PAUSE = 0
+
 HASH_A = "a" * 64
 HASH_B = "b" * 64
 SOURCE = {
@@ -94,6 +96,20 @@ class Building(unittest.TestCase):
             catalog, _ = generer.build(sources, [], {}, {}, 100)
         self.assertEqual([image["id"] for image in catalog["images"]], [source["id"] for source in sources])
 
+    def test_a_network_error_is_tried_once_more(self):
+        calls = []
+
+        def resolve(source, **_):
+            calls.append(source["id"])
+            if len(calls) == 1:
+                raise OSError("dropped")
+            return {"id": source["id"]}
+
+        with mock.patch.object(generer, "resolve", side_effect=resolve):
+            catalog, failures = generer.build([SOURCE], [], {}, {}, 100)
+        self.assertEqual((len(calls), failures), (2, []))
+        self.assertEqual(catalog["images"][0]["status"], "online")
+
     def test_failed_source_without_history_is_left_out(self):
         with mock.patch.object(generer, "resolve", side_effect=OSError("down")):
             catalog, failures = generer.build([SOURCE], [], {}, {}, 100)
@@ -153,6 +169,20 @@ class Read(unittest.TestCase):
             lambda _: answer,
         )
         self.assertEqual((image["url"], image["version"], image["sha256"]), ("https://h/a-7.iso", "7", HASH_A))
+
+    def test_a_published_hash_that_is_not_sha256_is_refused(self):
+        with self.assertRaises(generer.SourceError):
+            self.resolve(
+                {"page": "https://h/j", "pattern": r'"url":"(?P<url>[^"]*a-(?P<version>\d+)\.iso)","sha_sum":"(?P<sha256>\w+)"'},
+                lambda _: '{"url":"https://h/a-7.iso","sha_sum":"abc"}',
+            )
+
+    def test_a_check_file_naming_no_algorithm_is_refused(self):
+        with self.assertRaises(generer.SourceError):
+            self.resolve(
+                {"page": "https://h/p", "pattern": r"(?P<url>//h/a-(?P<version>\d+)\.iso)", "verify_suffix": ".sum"},
+                lambda _: "//h/a-7.iso",
+            )
 
     def test_hash_file_next_to_the_image(self):
         pages = {"https://h/p": "//h/a-7.iso", "https://h/a-7.iso.sha256": f"{HASH_B}  a-7.iso"}
