@@ -776,5 +776,61 @@
    "server",
    "advanced"
   ]
+ },
+ {
+  "id": "systemrescue",
+  "name": "SystemRescue",
+  "category": "Rescue tools",
+  "icon": "systemrescue.png",
+  "homepage": "https://www.system-rescue.org/",
+  "icon_source": "https://www.system-rescue.org/images/logo.png",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "clonezilla",
+  "name": "Clonezilla Live",
+  "category": "Rescue tools",
+  "icon": "clonezilla.png",
+  "homepage": "https://clonezilla.org/",
+  "icon_source": "https://clonezilla.org/images/clonezilla_logo_transparent.gif",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "gparted",
+  "name": "GParted Live",
+  "category": "Rescue tools",
+  "icon": "gparted.png",
+  "homepage": "https://gparted.org/",
+  "icon_source": "https://gitlab.gnome.org/GNOME/gparted/-/raw/master/data/icons/hicolor_apps_scalable_gparted.svg",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "rescuezilla",
+  "name": "Rescuezilla",
+  "category": "Rescue tools",
+  "icon": "rescuezilla.png",
+  "homepage": "https://rescuezilla.com/",
+  "icon_source": "https://github.com/rescuezilla/rescuezilla/blob/master/src/apps/rescuezilla/rescuezilla/usr/share/pixmaps/rescuezilla.svg",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "grml",
+  "name": "Grml",
+  "category": "Rescue tools",
+  "icon": "grml.png",
+  "homepage": "https://grml.org/",
+  "icon_source": "https://grml.org/favicon.svg",
+  "uses": [
+   "rescue",
+   "advanced"
+  ]
  }
 ]
