@@ -7,6 +7,7 @@ reported, so one publisher's outage neither removes an image nor publishes an un
 """
 
 import argparse
+import concurrent.futures
 import hashlib
 import html
 import json
@@ -41,6 +42,7 @@ KINDS = ("live", "installer", "netinst", "preinstalled", "rescue")
 MEDIA = ("usb", "sd", "optical")
 LIFETIME_SECONDS = 14 * 24 * 3600
 TIMEOUT_SECONDS = 60
+WORKERS = 8
 USER_AGENT = "bonk-catalog"
 TEXT_LIMIT = 4 << 20
 SUMS_LINE = re.compile(r"^([0-9a-fA-F]{64})\s+\*?(\S+)$")
@@ -158,11 +160,13 @@ def hash_url(url, algorithm=None, expected=None):
     return digest.hexdigest()
 
 
-def first_hash(text, length):
-    match = re.search(rf"\b[0-9a-fA-F]{{{length}}}\b", text)
-    if not match:
-        raise SourceError("no hash in the publisher's file")
-    return match[0].lower()
+def first_hash(text, length, name=None):
+    """The hash on the line naming the file when the publisher lists several, else the first one."""
+    lines = [line for line in text.splitlines() if name and re.search(rf"[\s(/*]{re.escape(name)}(?:[\s)]|$)", line)]
+    found = re.findall(rf"\b[0-9a-fA-F]{{{length}}}\b", "\n".join(lines) or text)
+    if not found or (not lines and len(set(found)) > 1):
+        raise SourceError(f"no hash for {name} in the publisher's file")
+    return found[0].lower()
 
 
 def resolve_read(source, image, previous, fetch, stat, compute):
@@ -184,16 +188,18 @@ def resolve_read(source, image, previous, fetch, stat, compute):
         raise SourceError(f"{url}: not https")
     size = groups.get("size")
     released = None
+    # Some publishers name the hash file after the image without its extension, or keep it in another folder.
+    hash_base = re.sub(*source["hash_replace"], url) if "hash_replace" in source else url
     if groups.get("sha256"):
         sha256 = groups["sha256"].lower()
     elif "hash_suffix" in source:
-        sha256 = first_hash(fetch(url + source["hash_suffix"]), 64)
+        sha256 = first_hash(fetch(hash_base + source["hash_suffix"]), 64, url.rsplit("/", 1)[-1])
     elif previous.get("url") == url:
         sha256 = previous["sha256"]
     elif "verify_suffix" in source:
-        algorithm = source["verify_suffix"].strip(".").removesuffix("sum")
-        lengths = {"sha1": 40, "sha512": 128}
-        expected = first_hash(fetch(url + source["verify_suffix"]), lengths[algorithm])
+        algorithm = re.search(r"sha(?:1|512)|md5", source["verify_suffix"].lower())[0]
+        lengths = {"md5": 32, "sha1": 40, "sha512": 128}
+        expected = first_hash(fetch(hash_base + source["verify_suffix"]), lengths[algorithm], url.rsplit("/", 1)[-1])
         sha256 = compute(url, algorithm, expected)
     else:
         sha256 = compute(url)
@@ -293,14 +299,23 @@ def build(sources, families, icon_hashes, previous, now, compute=hash_url):
     kept = {image["id"]: image for image in previous.get("images", [])}
     images, failures = [], []
     today = time.strftime("%Y-%m-%d", time.gmtime(now))
-    for source in sources:
+
+    def attempt(source):
         try:
-            image = resolve(source, previous=kept.get(source["id"]), compute=compute)
-            images.append(dict(image, status="online", checked=today))
+            return resolve(source, previous=kept.get(source["id"]), compute=compute), None
         except (SourceError, OSError, ValueError) as error:
-            failures.append({"id": source["id"], "error": str(error)})
-            if source["id"] in kept:
-                images.append(dict(kept[source["id"]], status="stale"))
+            return None, error
+
+    # Each source waits on its publisher's servers: read them side by side, in the sources' order.
+    with concurrent.futures.ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        results = list(pool.map(attempt, sources))
+    for source, (image, error) in zip(sources, results):
+        if image is not None:
+            images.append(dict(image, status="online", checked=today))
+            continue
+        failures.append({"id": source["id"], "error": str(error)})
+        if source["id"] in kept:
+            images.append(dict(kept[source["id"]], status="stale"))
     catalog = {
         "schema_version": SCHEMA_VERSION,
         # The clock only moves forward between runs: a mirror cannot pass off an older file.

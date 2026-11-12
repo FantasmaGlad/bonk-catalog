@@ -449,5 +449,262 @@
   "uses": [
    "gaming"
   ]
+ },
+ {
+  "id": "mxlinux",
+  "name": "MX Linux",
+  "category": "Debian derivatives",
+  "icon": "mxlinux.png",
+  "homepage": "https://mxlinux.org/",
+  "icon_source": "https://github.com/MX-Linux/mx-tools/blob/master/icons/logo.svg",
+  "uses": [
+   "desktop",
+   "light"
+  ]
+ },
+ {
+  "id": "linuxlite",
+  "name": "Linux Lite",
+  "category": "Debian derivatives",
+  "icon": "linuxlite.png",
+  "homepage": "https://www.linuxliteos.com/",
+  "icon_source": "https://www.linuxliteos.com/images/favicon.png",
+  "uses": [
+   "beginner",
+   "light"
+  ],
+  "ram_mb": 4096,
+  "ram_source": "https://www.linuxliteos.com/download.php"
+ },
+ {
+  "id": "kdeneon",
+  "name": "KDE neon",
+  "category": "Debian derivatives",
+  "icon": "kdeneon.png",
+  "homepage": "https://neon.kde.org/",
+  "icon_source": "https://neon.kde.org/media/128x128.svg",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "deepin",
+  "name": "deepin",
+  "category": "Debian derivatives",
+  "icon": "deepin.png",
+  "homepage": "https://www.deepin.org/en/",
+  "icon_source": "https://www.deepin.org/index/assets/icons/deepin.png",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "solus",
+  "name": "Solus",
+  "category": "Independent Linux",
+  "icon": "solus.png",
+  "homepage": "https://getsol.us/",
+  "icon_source": "https://github.com/getsolus/artwork/blob/main/icons/scalable/distributor-logo-solus.svg",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "mageia",
+  "name": "Mageia",
+  "category": "Independent Linux",
+  "icon": "mageia.png",
+  "homepage": "https://www.mageia.org/",
+  "icon_source": "https://www.mageia.org/g/media/logo/mageia-2013.svg",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "openmandriva",
+  "name": "OpenMandriva Lx",
+  "category": "Independent Linux",
+  "icon": "openmandriva.png",
+  "homepage": "https://www.openmandriva.org/",
+  "icon_source": "https://www.openmandriva.org/squelettes/icons/apple-touch-icon.png",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "peppermint",
+  "name": "Peppermint OS",
+  "category": "Debian derivatives",
+  "icon": "peppermint.png",
+  "homepage": "https://peppermintos.com/",
+  "icon_source": "https://peppermintos.com/wp-content/uploads/2020/07/cropped-Peppermint-OS-Logo-270x270.png",
+  "uses": [
+   "light",
+   "desktop"
+  ]
+ },
+ {
+  "id": "bodhi",
+  "name": "Bodhi Linux",
+  "category": "Debian derivatives",
+  "icon": "bodhi.png",
+  "homepage": "https://www.bodhilinux.com/",
+  "icon_source": "https://www.bodhilinux.com/trial/wp-content/uploads/2020/12/cropped-LeafLogo_512x512-3-270x270.png",
+  "uses": [
+   "light"
+  ]
+ },
+ {
+  "id": "q4os",
+  "name": "Q4OS",
+  "category": "Debian derivatives",
+  "icon": "q4os.png",
+  "homepage": "https://www.q4os.org/",
+  "icon_source": "https://github.com/q4os/q4os-base/blob/master/src/filesystem/usr/share/icons/breeze/apps/48/distributor-logo-q4os1.svg",
+  "uses": [
+   "light",
+   "desktop"
+  ],
+  "ram_mb": 512,
+  "ram_source": "https://www.q4os.org/downloads1.html"
+ },
+ {
+  "id": "sparky",
+  "name": "SparkyLinux",
+  "category": "Debian derivatives",
+  "icon": "sparky.png",
+  "homepage": "https://sparkylinux.org/",
+  "icon_source": "https://sparkylinux.org/wp-content/uploads/2022/04/sparky-baner-tekst450.webp",
+  "uses": [
+   "desktop",
+   "light"
+  ]
+ },
+ {
+  "id": "antix",
+  "name": "antiX",
+  "category": "Debian derivatives",
+  "icon": "antix.png",
+  "homepage": "https://antixlinux.com/",
+  "icon_source": "https://antixlinux.com/wp-content/uploads/2017/03/logo_antiX.png",
+  "uses": [
+   "light"
+  ],
+  "ram_mb": 512,
+  "ram_source": "https://antixlinux.com/about/"
+ },
+ {
+  "id": "trisquel",
+  "name": "Trisquel",
+  "category": "Debian derivatives",
+  "icon": "trisquel.png",
+  "homepage": "https://trisquel.info/",
+  "icon_source": "https://trisquel.info/sites/default/themes/trisquel7/favicon.ico",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "devuan",
+  "name": "Devuan",
+  "category": "Debian derivatives",
+  "icon": "devuan.png",
+  "homepage": "https://www.devuan.org/",
+  "icon_source": "https://www.devuan.org/ui/img/devuan-emblem.svg",
+  "uses": [
+   "desktop",
+   "server"
+  ]
+ },
+ {
+  "id": "tuxedo",
+  "name": "TUXEDO OS",
+  "category": "Debian derivatives",
+  "icon": "tuxedo.png",
+  "homepage": "https://www.tuxedocomputers.com/os",
+  "icon_source": "https://os.tuxedocomputers.com/html/icon.svg",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "vanillaos",
+  "name": "Vanilla OS",
+  "category": "Debian derivatives",
+  "icon": "vanillaos.png",
+  "homepage": "https://vanillaos.org/",
+  "icon_source": "https://github.com/Vanilla-OS/vanilla-distrologo/blob/main/usr/share/icons/hicolor/scalable/apps/distributor-logo-vanilla.svg",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "garuda",
+  "name": "Garuda Linux",
+  "category": "Arch family",
+  "icon": "garuda.png",
+  "homepage": "https://garudalinux.org/",
+  "icon_source": "https://garudalinux.org/apple-touch-icon.png",
+  "uses": [
+   "gaming",
+   "desktop"
+  ]
+ },
+ {
+  "id": "ultramarine",
+  "name": "Ultramarine Linux",
+  "category": "Red Hat family",
+  "icon": "ultramarine.png",
+  "homepage": "https://ultramarine-linux.org/",
+  "icon_source": "https://github.com/Ultramarine-Linux/logos/blob/lapis/icons/hicolor/scalable/apps/ultramarine.svg",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "rhino",
+  "name": "Rhino Linux",
+  "category": "Debian derivatives",
+  "icon": "rhino.png",
+  "homepage": "https://rhinolinux.org/",
+  "icon_source": "https://rhinolinux.org/img/logo.png",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
+  "id": "nitrux",
+  "name": "Nitrux",
+  "category": "Debian derivatives",
+  "icon": "nitrux.png",
+  "homepage": "https://nxos.org/",
+  "icon_source": "https://nxos.org/wp-content/uploads/2018/08/nx_logo_footer-min.png",
+  "uses": [
+   "desktop"
+  ],
+  "ram_mb": 4096,
+  "ram_source": "https://nxos.org/documentation/getting-started/system-requirements/minimum/"
+ },
+ {
+  "id": "slackware",
+  "name": "Slackware",
+  "category": "Independent Linux",
+  "icon": "slackware.png",
+  "homepage": "https://www.slackware.com/",
+  "icon_source": "https://mirrors.slackware.com/images/slackware.png",
+  "uses": [
+   "advanced"
+  ]
+ },
+ {
+  "id": "puppy",
+  "name": "Puppy Linux",
+  "category": "Debian derivatives",
+  "icon": "puppy.png",
+  "homepage": "https://puppylinux-woof-ce.github.io/",
+  "icon_source": "https://ftp.nluug.nl/os/Linux/distr/puppylinux/puppy-bookwormpup/puppylogo96.png",
+  "uses": [
+   "light"
+  ]
  }
 ]

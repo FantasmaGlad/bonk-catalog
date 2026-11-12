@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import time
 import unittest
 from unittest import mock
 
@@ -82,6 +83,17 @@ class Building(unittest.TestCase):
         self.assertEqual(catalog["images"][0]["status"], "online")
         self.assertEqual(catalog["images"][0]["checked"], "1970-01-03")
 
+    def test_sources_keep_their_order_when_read_side_by_side(self):
+        sources = [dict(SOURCE, id=f"s{n}") for n in range(20)]
+
+        def resolve(source, **_):
+            time.sleep(0.001 * (20 - int(source["id"][1:])))
+            return {"id": source["id"]}
+
+        with mock.patch.object(generer, "resolve", side_effect=resolve):
+            catalog, _ = generer.build(sources, [], {}, {}, 100)
+        self.assertEqual([image["id"] for image in catalog["images"]], [source["id"] for source in sources])
+
     def test_failed_source_without_history_is_left_out(self):
         with mock.patch.object(generer, "resolve", side_effect=OSError("down")):
             catalog, failures = generer.build([SOURCE], [], {}, {}, 100)
@@ -162,6 +174,56 @@ class Read(unittest.TestCase):
         extra = {"page": "https://h/p", "pattern": r"https://h/a\.iso", "verify_suffix": ".sha512", "version": "1"}
         self.resolve(extra, pages.__getitem__, compute=compute)
         self.assertEqual(seen, [("https://h/a.iso", "sha512", expected)])
+
+    def test_hash_file_named_without_the_image_extension(self):
+        pages = {"https://h/p": "https://h/iso/a-7.iso", "https://h/sums/a-7.sha256.txt": f"{HASH_B}  a-7.iso"}
+        extra = {
+            "page": "https://h/p", "pattern": r"https://h/iso/a-(?P<version>\d+)\.iso",
+            "hash_replace": [r"/iso/(.+)\.iso$", r"/sums/\1"], "hash_suffix": ".sha256.txt",
+        }
+        image = self.resolve(extra, pages.__getitem__)
+        self.assertEqual((image["url"], image["sha256"]), ("https://h/iso/a-7.iso", HASH_B))
+
+    def test_a_listed_sha512_with_another_name_is_checked(self):
+        expected = "c" * 128
+        seen = []
+        pages = {"https://h/p": "https://h/a.iso", "https://h/a-sha512.checksum": expected}
+        extra = {
+            "page": "https://h/p", "pattern": r"https://h/a\.iso", "version": "1",
+            "hash_replace": [r"\.iso$", ""], "verify_suffix": "-sha512.checksum",
+        }
+        self.resolve(extra, pages.__getitem__, compute=lambda *args: seen.append(args) or HASH_A)
+        self.assertEqual(seen, [("https://h/a.iso", "sha512", expected)])
+
+    def test_the_line_naming_the_image_is_read_in_a_shared_list(self):
+        listed = "\n".join((
+            f"SHA512 (a.iso.torrent) = {'a' * 128}",
+            f"SHA512 (b.iso) = {'b' * 128}",
+            f"SHA512 (a.iso) = {'c' * 128}",
+        ))
+        seen = []
+        pages = {"https://h/p": "https://h/d/a.iso", "https://h/d/SHA512": listed}
+        extra = {
+            "page": "https://h/p", "pattern": r"https://h/d/a\.iso", "version": "1",
+            "hash_replace": [r"[^/]+$", ""], "verify_suffix": "SHA512",
+        }
+        self.resolve(extra, pages.__getitem__, compute=lambda *args: seen.append(args) or HASH_A)
+        self.assertEqual(seen, [("https://h/d/a.iso", "sha512", "c" * 128)])
+
+    def test_a_list_that_does_not_name_the_image_is_refused(self):
+        pages = {"https://h/p": "https://h/a-7.iso", "https://h/a-7.iso.sha256": f"{HASH_A}  b.iso\n{HASH_B}  c.iso"}
+        with self.assertRaises(generer.SourceError):
+            self.resolve({"page": "https://h/p", "pattern": r"https://h/a-(?P<version>\d+)\.iso", "hash_suffix": ".sha256"}, pages.__getitem__)
+
+    def test_a_listed_md5_is_checked_during_the_computation(self):
+        seen = []
+        pages = {"https://h/p": "https://h/d/a.img", "https://h/d/md5.txt": f"MD5 (a.img) = {'d' * 32}"}
+        extra = {
+            "page": "https://h/p", "pattern": r"https://h/d/a\.img", "version": "1",
+            "hash_replace": [r"[^/]+$", ""], "verify_suffix": "md5.txt",
+        }
+        self.resolve(extra, pages.__getitem__, compute=lambda *args: seen.append(args) or HASH_A)
+        self.assertEqual(seen, [("https://h/d/a.img", "md5", "d" * 32)])
 
     def test_a_wrong_publisher_hash_refuses_the_file(self):
         body = mock.MagicMock()
