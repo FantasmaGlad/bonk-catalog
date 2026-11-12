@@ -35,7 +35,7 @@ USES = (
 )
 DESKTOPS = (
     "gnome", "kde", "xfce", "cinnamon", "mate", "lxqt", "lxde", "budgie", "cosmic", "pantheon",
-    "deepin", "enlightenment", "i3", "sway", "pixel", "none", "choice",
+    "deepin", "enlightenment", "i3", "sway", "pixel", "unity", "ukui", "none", "choice",
 )
 KINDS = ("live", "installer", "netinst", "preinstalled", "rescue")
 MEDIA = ("usb", "sd", "optical")
