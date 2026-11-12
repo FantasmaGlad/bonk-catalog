@@ -49,6 +49,10 @@ SUMS_LINE = re.compile(r"^([0-9a-fA-F]{64})\s+\*?(\S+)$")
 SUMS_BSD = re.compile(r"^SHA256 \((.+)\) = ([0-9a-fA-F]{64})$")
 
 
+# Publisher servers drop requests now and then: a network error is tried once more after this pause.
+RETRY_PAUSE = 20
+
+
 class SourceError(Exception):
     pass
 
@@ -192,12 +196,17 @@ def resolve_read(source, image, previous, fetch, stat, compute):
     hash_base = re.sub(*source["hash_replace"], url) if "hash_replace" in source else url
     if groups.get("sha256"):
         sha256 = groups["sha256"].lower()
+        if not re.fullmatch(r"[0-9a-f]{64}", sha256):
+            raise SourceError(f"{url}: published SHA-256 is not 64 hexadecimal digits")
     elif "hash_suffix" in source:
         sha256 = first_hash(fetch(hash_base + source["hash_suffix"]), 64, url.rsplit("/", 1)[-1])
     elif previous.get("url") == url:
         sha256 = previous["sha256"]
     elif "verify_suffix" in source:
-        algorithm = re.search(r"sha(?:1|512)|md5", source["verify_suffix"].lower())[0]
+        named = re.search(r"sha(?:1|512)|md5", source["verify_suffix"].lower())
+        if not named:
+            raise SourceError(f"{source['verify_suffix']}: no known hash algorithm in the name")
+        algorithm = named[0]
         lengths = {"md5": 32, "sha1": 40, "sha512": 128}
         expected = first_hash(fetch(hash_base + source["verify_suffix"]), lengths[algorithm], url.rsplit("/", 1)[-1])
         sha256 = compute(url, algorithm, expected)
@@ -301,10 +310,16 @@ def build(sources, families, icon_hashes, previous, now, compute=hash_url):
     today = time.strftime("%Y-%m-%d", time.gmtime(now))
 
     def attempt(source):
-        try:
-            return resolve(source, previous=kept.get(source["id"]), compute=compute), None
-        except (SourceError, OSError, ValueError) as error:
-            return None, error
+        for retry in (True, False):
+            try:
+                return resolve(source, previous=kept.get(source["id"]), compute=compute), None
+            except OSError as error:
+                if not retry:
+                    return None, error
+                time.sleep(RETRY_PAUSE)
+            except (SourceError, ValueError) as error:
+                return None, error
+        raise AssertionError("unreachable")
 
     # Each source waits on its publisher's servers: read them side by side, in the sources' order.
     with concurrent.futures.ThreadPoolExecutor(max_workers=WORKERS) as pool:
