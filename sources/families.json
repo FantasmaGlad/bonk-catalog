@@ -4,6 +4,7 @@
   "name": "Ubuntu",
   "category": "Debian derivatives",
   "icon": "ubuntu.png",
+  "icon_source": "https://assets.ubuntu.com/v1/8114528b-picto-ubuntu-orange.png",
   "uses": [
    "desktop",
    "beginner",
@@ -139,6 +140,7 @@
   "name": "Debian",
   "category": "Debian derivatives",
   "icon": "debian.png",
+  "icon_source": "https://www.debian.org/Pics/debian-logo-1024x576.png",
   "uses": [
    "desktop",
    "server",
@@ -152,6 +154,7 @@
   "name": "Linux Mint",
   "category": "Debian derivatives",
   "icon": "linuxmint.png",
+  "icon_source": "https://github.com/linuxmint/brand-logo/blob/master/ring-mono-green.svg",
   "uses": [
    "beginner",
    "desktop"
@@ -164,6 +167,7 @@
   "name": "Pop!_OS",
   "category": "Debian derivatives",
   "icon": "popos.png",
+  "icon_source": "https://github.com/pop-os/icon-theme/blob/master/Pop/128x128/places/distributor-logo-pop-os.svg",
   "uses": [
    "desktop"
   ],
@@ -175,6 +179,7 @@
   "name": "Zorin OS",
   "category": "Debian derivatives",
   "icon": "zorin.png",
+  "icon_source": "https://zorin.com/favicon-32x32.png",
   "uses": [
    "beginner",
    "desktop"
@@ -198,6 +203,7 @@
   "name": "Parrot OS",
   "category": "Debian derivatives",
   "icon": "parrot.png",
+  "icon_source": "https://github.com/ParrotSec/parrot-themes/blob/master/icons/parrot-logo.svg",
   "uses": [
    "privacy"
   ]
@@ -207,6 +213,7 @@
   "name": "Raspberry Pi OS",
   "category": "Debian derivatives",
   "icon": "raspios.png",
+  "icon_source": "https://github.com/raspberrypi/rpi-imager/blob/main/src/icons/app_icon_macos.icon/Assets/Logo.svg",
   "uses": [
    "boards"
   ]
@@ -216,6 +223,7 @@
   "name": "Kali Linux",
   "category": "Debian derivatives",
   "icon": "kali.png",
+  "icon_source": "https://www.kali.org/images/kali-dragon-icon.svg",
   "uses": [
    "privacy"
   ],
@@ -227,6 +235,7 @@
   "name": "Fedora",
   "category": "Red Hat family",
   "icon": "fedora.png",
+  "icon_source": "https://fedoraproject.org/favicon.ico",
   "uses": [
    "desktop",
    "server"
@@ -237,6 +246,7 @@
   "name": "AlmaLinux",
   "category": "Red Hat family",
   "icon": "almalinux.png",
+  "icon_source": "https://github.com/AlmaLinux/almalinux.org/blob/master/static/branding/AlmaLinux%20Icon.svg",
   "uses": [
    "server"
   ],
@@ -248,6 +258,7 @@
   "name": "Rocky Linux",
   "category": "Red Hat family",
   "icon": "rockylinux.png",
+  "icon_source": "https://rockylinux.org/favicon.png",
   "uses": [
    "server"
   ]
@@ -257,6 +268,7 @@
   "name": "Arch Linux",
   "category": "Arch family",
   "icon": "arch.png",
+  "icon_source": "https://archlinux.org/static/archlinux_common_style/apple-touch-icon-114x114.png",
   "uses": [
    "advanced"
   ]
@@ -266,6 +278,7 @@
   "name": "Manjaro",
   "category": "Arch family",
   "icon": "manjaro.png",
+  "icon_source": "https://manjaro.org/logo.svg",
   "uses": [
    "desktop",
    "boards"
@@ -276,6 +289,7 @@
   "name": "EndeavourOS",
   "category": "Arch family",
   "icon": "endeavouros.png",
+  "icon_source": "https://endeavouros.com/favicon.svg",
   "uses": [
    "desktop",
    "advanced"
@@ -286,6 +300,7 @@
   "name": "openSUSE",
   "category": "SUSE family",
   "icon": "opensuse.png",
+  "icon_source": "https://www.opensuse.org/assets/img/favicon-for-light-192.png",
   "uses": [
    "desktop",
    "server"
@@ -296,6 +311,7 @@
   "name": "Alpine Linux",
   "category": "Independent Linux",
   "icon": "alpine.png",
+  "icon_source": "https://alpinelinux.org/favicon.svg",
   "uses": [
    "server",
    "light",
@@ -307,6 +323,7 @@
   "name": "NixOS",
   "category": "Independent Linux",
   "icon": "nixos.png",
+  "icon_source": "https://github.com/NixOS/nixos-artwork/blob/master/logo/nix-snowflake-colours.svg",
   "uses": [
    "advanced"
   ]
@@ -316,6 +333,7 @@
   "name": "Void Linux",
   "category": "Independent Linux",
   "icon": "void.png",
+  "icon_source": "https://voidlinux.org/assets/img/favicon.png",
   "uses": [
    "advanced",
    "light"
@@ -328,6 +346,7 @@
   "name": "Gentoo",
   "category": "Independent Linux",
   "icon": "gentoo.png",
+  "icon_source": "https://www.gentoo.org/assets/img/logo/gentoo-g.png",
   "uses": [
    "advanced"
   ]
@@ -337,6 +356,7 @@
   "name": "Proxmox VE",
   "category": "Servers",
   "icon": "proxmox.png",
+  "icon_source": "https://www.proxmox.com/favicon.svg",
   "uses": [
    "homelab"
   ],
@@ -348,6 +368,7 @@
   "name": "TrueNAS",
   "category": "Servers",
   "icon": "truenas.png",
+  "icon_source": "https://www.truenas.com/wp-content/uploads/2020/08/cropped-TN-favicon-284x284.png",
   "uses": [
    "homelab"
   ],
@@ -359,6 +380,7 @@
   "name": "FreeBSD",
   "category": "BSD",
   "icon": "freebsd.png",
+  "icon_source": "https://www.freebsd.org/logo/logo-full.png",
   "uses": [
    "server"
   ],
@@ -390,6 +412,7 @@
   "name": "TempleOS",
   "category": "Other systems",
   "icon": "templeos.png",
+  "icon_source": "https://templeos.org/favicon.ico",
   "uses": [
    "other"
   ]
