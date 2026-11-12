@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
+import subprocess
+import tempfile
 import time
 import unittest
+from pathlib import Path
 from unittest import mock
 
 import generer
@@ -127,7 +130,7 @@ class Families(unittest.TestCase):
         self.assertNotIn("homepage", entry)
 
     def test_the_first_previous_catalog_that_answers_is_read(self):
-        answers = {"https://c/v2/": OSError("404"), "https://c/v1/": '{"images": []}'}
+        answers = {"https://c/v2/": OSError("404"), "https://c/v1/": b'{"images": []}', "https://c/v1/.sig": b"s"}
 
         def fetch(url):
             answer = answers[url]
@@ -135,9 +138,30 @@ class Families(unittest.TestCase):
                 raise answer
             return answer
 
-        with mock.patch.object(generer, "fetch_text", side_effect=fetch):
+        with mock.patch.object(generer, "fetch_bytes", side_effect=fetch), mock.patch.object(
+            generer, "signed", return_value=True
+        ):
             self.assertEqual(generer.previous_catalog(["https://c/v2/", "https://c/v1/"]), {"images": []})
             self.assertEqual(generer.previous_catalog(None), {})
+
+    def test_only_a_signed_previous_catalog_is_trusted(self):
+        with tempfile.TemporaryDirectory() as folder:
+            key, public = Path(folder, "k.pem"), Path(folder, "p.pem")
+            subprocess.run(["openssl", "genpkey", "-algorithm", "ed25519", "-out", key], check=True)
+            subprocess.run(["openssl", "pkey", "-in", key, "-pubout", "-out", public], check=True)
+            manifest = Path(folder, "m")
+            manifest.write_bytes(b'{"images": [{"id": "a"}]}')
+            subprocess.run(
+                ["openssl", "pkeyutl", "-sign", "-rawin", "-inkey", key, "-in", manifest, "-out", Path(folder, "s")],
+                check=True,
+            )
+            signature = Path(folder, "s").read_bytes()
+            pages = {"https://c/": manifest.read_bytes(), "https://c/.sig": signature}
+            with mock.patch.object(generer, "fetch_bytes", side_effect=pages.__getitem__):
+                self.assertEqual(generer.previous_catalog(["https://c/"], [public]), {"images": [{"id": "a"}]})
+            pages["https://c/"] = b'{"images": [{"id": "b"}]}'
+            with mock.patch.object(generer, "fetch_bytes", side_effect=pages.__getitem__):
+                self.assertEqual(generer.previous_catalog(["https://c/"], [public]), {})
 
 
 class Listing(unittest.TestCase):

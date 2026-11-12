@@ -15,6 +15,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 import urllib.error
 import urllib.request
@@ -44,6 +45,7 @@ LIFETIME_SECONDS = 14 * 24 * 3600
 TIMEOUT_SECONDS = 60
 WORKERS = 8
 USER_AGENT = "bonk-catalog"
+PUBLIC_KEYS = [Path(__file__).resolve().parent.parent / "keys" / name for name in ("courante.pub.pem", "secours.pub.pem")]
 TEXT_LIMIT = 4 << 20
 SUMS_LINE = re.compile(r"^([0-9a-fA-F]{64})\s+\*?(\S+)$")
 SUMS_BSD = re.compile(r"^SHA256 \((.+)\) = ([0-9a-fA-F]{64})$")
@@ -62,9 +64,13 @@ def request(url, method="GET"):
     return urllib.request.urlopen(req, timeout=TIMEOUT_SECONDS)
 
 
-def fetch_text(url):
+def fetch_bytes(url):
     with request(url) as response:
-        return response.read(TEXT_LIMIT).decode("utf-8", "replace")
+        return response.read(TEXT_LIMIT)
+
+
+def fetch_text(url):
+    return fetch_bytes(url).decode("utf-8", "replace")
 
 
 def reachable(url):
@@ -294,11 +300,30 @@ def newer_releases(sources, fetch=fetch_text):
     return found
 
 
-def previous_catalog(urls):
-    """The first that answers."""
+def signed(manifest, signature, keys):
+    with tempfile.TemporaryDirectory() as folder:
+        data, sig = Path(folder, "manifest"), Path(folder, "signature")
+        data.write_bytes(manifest)
+        sig.write_bytes(signature)
+        return any(
+            subprocess.run(
+                ["openssl", "pkeyutl", "-verify", "-rawin", "-pubin", "-inkey", str(key),
+                 "-in", str(data), "-sigfile", str(sig)],
+                capture_output=True,
+            ).returncode == 0
+            for key in keys
+        )
+
+
+def previous_catalog(urls, keys=PUBLIC_KEYS):
+    """The first that answers with a valid signature: its hashes are carried into the new catalog."""
     for url in urls or ():
         try:
-            return json.loads(fetch_text(url))
+            manifest = fetch_bytes(url)
+            if not signed(manifest, fetch_bytes(url + ".sig"), keys):
+                print(f"previous catalog at {url}: bad signature, ignored", file=sys.stderr)
+                continue
+            return json.loads(manifest)
         except (OSError, ValueError) as error:
             print(f"no previous catalog at {url}: {error}", file=sys.stderr)
     return {}
