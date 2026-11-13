@@ -254,6 +254,17 @@
   ]
  },
  {
+  "id": "fedora-coreos",
+  "name": "Fedora CoreOS",
+  "category": "Red Hat family",
+  "icon": "fedora-coreos.png",
+  "homepage": "https://fedoraproject.org/coreos/",
+  "icon_source": "https://github.com/coreos.png",
+  "uses": [
+   "server"
+  ]
+ },
+ {
   "id": "almalinux",
   "name": "AlmaLinux",
   "category": "Red Hat family",
@@ -429,6 +440,30 @@
   "icon_source": "https://www.ipfire.org/static/img/apple-touch-icon-192x192-precomposed.png",
   "uses": [
    "homelab"
+  ]
+ },
+ {
+  "id": "talos",
+  "name": "Talos Linux",
+  "category": "Servers",
+  "icon": "talos.png",
+  "homepage": "https://www.talos.dev/",
+  "icon_source": "https://github.com/siderolabs.png",
+  "uses": [
+   "server",
+   "homelab"
+  ]
+ },
+ {
+  "id": "yunohost",
+  "name": "YunoHost",
+  "category": "Debian derivatives",
+  "icon": "yunohost.png",
+  "homepage": "https://yunohost.org/",
+  "icon_source": "https://github.com/YunoHost.png",
+  "uses": [
+   "homelab",
+   "server"
   ]
  },
  {
