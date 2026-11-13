@@ -376,6 +376,50 @@
   "ram_source": "https://www.truenas.com/docs/scale/gettingstarted/tnhardwareguide/"
  },
  {
+  "id": "proxmox-backup",
+  "name": "Proxmox Backup Server",
+  "category": "Servers",
+  "icon": "proxmox.png",
+  "homepage": "https://www.proxmox.com/",
+  "icon_source": "https://www.proxmox.com/favicon.svg",
+  "uses": [
+   "homelab"
+  ]
+ },
+ {
+  "id": "xcpng",
+  "name": "XCP-ng",
+  "category": "Servers",
+  "icon": "xcpng.png",
+  "homepage": "https://xcp-ng.org/",
+  "icon_source": "https://xcp-ng.org/assets/img/mainlogo.png",
+  "uses": [
+   "homelab"
+  ]
+ },
+ {
+  "id": "openwrt",
+  "name": "OpenWrt",
+  "category": "Servers",
+  "icon": "openwrt.png",
+  "homepage": "https://openwrt.org/",
+  "icon_source": "https://github.com/openwrt.png",
+  "uses": [
+   "homelab"
+  ]
+ },
+ {
+  "id": "ipfire",
+  "name": "IPFire",
+  "category": "Servers",
+  "icon": "ipfire.png",
+  "homepage": "https://www.ipfire.org/",
+  "icon_source": "https://www.ipfire.org/static/img/apple-touch-icon-192x192-precomposed.png",
+  "uses": [
+   "homelab"
+  ]
+ },
+ {
   "id": "freebsd",
   "name": "FreeBSD",
   "category": "BSD",
