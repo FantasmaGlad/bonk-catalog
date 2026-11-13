@@ -2630,6 +2630,21 @@
   "media": "usb"
  },
  {
+  "id": "omnios-stable-x86_64",
+  "family": "omnios",
+  "name": "OmniOS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://omnios.org/",
+  "page": "https://downloads.omnios.org/media/stable/",
+  "pattern": ".*href=\"(?P<url>omnios-(?P<version>r\\d+)\\.usb-dd)\"",
+  "url_prefix": "https://downloads.omnios.org/media/stable/",
+  "hash_suffix": ".sha256",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
   "id": "ubuntu-budgie-26.04-x86_64",
   "family": "ubuntu-budgie",
   "name": "Ubuntu Budgie",
@@ -5238,6 +5253,21 @@
   ],
   "verify_suffix": "md5.txt",
   "note": "Hash computed from the publisher's file and checked against its MD5.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "midnightbsd-4-amd64-memstick",
+  "family": "midnightbsd",
+  "name": "MidnightBSD",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.midnightbsd.org/",
+  "base": "https://discovery.midnightbsd.org/ftp/releases/amd64/ISO-IMAGES/4.0.8/",
+  "pattern": "MidnightBSD-(4\\.\\d+\\.\\d+)--amd64-memstick\\.img",
+  "sums": "CHECKSUM.SHA256",
+  "edition": "memstick",
   "desktop": "none",
   "kind": "installer",
   "media": "usb"

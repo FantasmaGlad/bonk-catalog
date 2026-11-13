@@ -483,6 +483,18 @@
   ]
  },
  {
+  "id": "omnios",
+  "name": "OmniOS",
+  "category": "Other systems",
+  "icon": "omnios.png",
+  "homepage": "https://omnios.org/",
+  "icon_source": "https://github.com/omniosorg.png",
+  "uses": [
+   "server",
+   "advanced"
+  ]
+ },
+ {
   "id": "bazzite",
   "name": "Bazzite",
   "category": "Red Hat family",
@@ -864,6 +876,18 @@
   "icon_source": "https://www.dragonflybsd.org/images/small_logo.png",
   "uses": [
    "server",
+   "advanced"
+  ]
+ },
+ {
+  "id": "midnightbsd",
+  "name": "MidnightBSD",
+  "category": "BSD",
+  "icon": "midnightbsd.png",
+  "homepage": "https://www.midnightbsd.org/",
+  "icon_source": "https://github.com/MidnightBSD.png",
+  "uses": [
+   "desktop",
    "advanced"
   ]
  },
