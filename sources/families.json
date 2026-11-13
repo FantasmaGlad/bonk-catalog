@@ -1016,5 +1016,29 @@
    "rescue",
    "advanced"
   ]
+ },
+ {
+  "id": "turnkey",
+  "name": "TurnKey Linux",
+  "category": "Servers",
+  "icon": "turnkey.png",
+  "homepage": "https://www.turnkeylinux.org/",
+  "icon_source": "https://www.turnkeylinux.org/favicon.svg",
+  "uses": [
+   "server",
+   "homelab"
+  ]
+ },
+ {
+  "id": "freedombox",
+  "name": "FreedomBox",
+  "category": "Servers",
+  "icon": "freedombox.png",
+  "homepage": "https://freedombox.org/",
+  "icon_source": "https://freedombox.org/images/freedombox-logo-butterfly.png",
+  "uses": [
+   "homelab",
+   "privacy"
+  ]
  }
 ]
