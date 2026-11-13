@@ -1004,5 +1004,17 @@
    "rescue",
    "advanced"
   ]
+ },
+ {
+  "id": "caine",
+  "name": "CAINE",
+  "category": "Debian derivatives",
+  "icon": "caine.png",
+  "homepage": "https://www.caine-live.net/",
+  "icon_source": "https://www.caine-live.net/files/bannersite.png",
+  "uses": [
+   "rescue",
+   "advanced"
+  ]
  }
 ]

@@ -5599,5 +5599,23 @@
   "desktop": "none",
   "media": "usb",
   "kind": "rescue"
+ },
+ {
+  "id": "caine-x86_64",
+  "family": "caine",
+  "name": "CAINE",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.caine-live.net/",
+  "page": "https://www.caine-live.net/page5/page5.html",
+  "pattern": "(?P<url>https://www\\.caine-live\\.net/Downloads/caine(?P<version>[\\d.]+)\\.iso)\"",
+  "hash_replace": [
+   "/Downloads/",
+   "/page5/"
+  ],
+  "hash_suffix": ".sha256.txt",
+  "desktop": "mate",
+  "kind": "live",
+  "media": "usb"
  }
 ]
