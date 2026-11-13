@@ -5617,5 +5617,49 @@
   "desktop": "mate",
   "kind": "live",
   "media": "usb"
+ },
+ {
+  "id": "turnkey-core-x86_64",
+  "family": "turnkey",
+  "name": "TurnKey Core",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.turnkeylinux.org/core",
+  "page": "https://api.github.com/repos/turnkeylinux-apps/core/releases/latest",
+  "pattern": "\"browser_download_url\":\\s*\"(?P<url>https://github\\.com/turnkeylinux-apps/core/releases/download/(?P<version>[\\d.]+)/turnkey-core-[\\d.]+-[a-z]+-amd64\\.iso)\"",
+  "hash_suffix": ".hash",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "freedombox-amd64",
+  "family": "freedombox",
+  "name": "FreedomBox",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://freedombox.org/",
+  "page": "https://ftp.freedombox.org/pub/freedombox/hardware/amd64/stable/",
+  "pattern": "\"(?P<url>freedombox-(?P<version>[a-z]+)_all-amd64\\.img\\.xz)\"",
+  "url_prefix": "https://ftp.freedombox.org/pub/freedombox/hardware/amd64/stable/",
+  "note": "Hash computed from the publisher's file.",
+  "desktop": "none",
+  "kind": "preinstalled",
+  "media": "usb"
+ },
+ {
+  "id": "freedombox-arm64",
+  "family": "freedombox",
+  "name": "FreedomBox",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://freedombox.org/",
+  "page": "https://ftp.freedombox.org/pub/freedombox/hardware/arm64/stable/",
+  "pattern": "\"(?P<url>freedombox-(?P<version>[a-z]+)_all-arm64\\.img\\.xz)\"",
+  "url_prefix": "https://ftp.freedombox.org/pub/freedombox/hardware/arm64/stable/",
+  "note": "Hash computed from the publisher's file.",
+  "desktop": "none",
+  "kind": "preinstalled",
+  "media": "usb"
  }
 ]
