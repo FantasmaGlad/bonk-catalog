@@ -986,6 +986,32 @@
   "media": "usb"
  },
  {
+  "id": "fedora-coreos-stable-x86_64",
+  "family": "fedora-coreos",
+  "name": "Fedora CoreOS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://fedoraproject.org/coreos/",
+  "page": "https://builds.coreos.fedoraproject.org/streams/stable.json",
+  "pattern": "\"location\": \"(?P<url>https://builds\\.coreos\\.fedoraproject\\.org/prod/streams/stable/builds/(?P<version>[\\d.]+)/x86_64/fedora-coreos-[\\d.]+-live-iso\\.x86_64\\.iso)\",\\s*\"signature\": \"[^\"]*\",\\s*\"sha256\": \"(?P<sha256>[0-9a-f]{64})\"",
+  "desktop": "none",
+  "kind": "live",
+  "media": "usb"
+ },
+ {
+  "id": "fedora-coreos-stable-aarch64",
+  "family": "fedora-coreos",
+  "name": "Fedora CoreOS",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://fedoraproject.org/coreos/",
+  "page": "https://builds.coreos.fedoraproject.org/streams/stable.json",
+  "pattern": "\"location\": \"(?P<url>https://builds\\.coreos\\.fedoraproject\\.org/prod/streams/stable/builds/(?P<version>[\\d.]+)/aarch64/fedora-coreos-[\\d.]+-live-iso\\.aarch64\\.iso)\",\\s*\"signature\": \"[^\"]*\",\\s*\"sha256\": \"(?P<sha256>[0-9a-f]{64})\"",
+  "desktop": "none",
+  "kind": "live",
+  "media": "usb"
+ },
+ {
   "id": "almalinux-10-minimal-x86_64",
   "family": "almalinux",
   "name": "AlmaLinux",
@@ -2501,6 +2527,57 @@
   "page": "https://www.ipfire.org/download",
   "pattern": "(?P<url>https://downloads\\.ipfire\\.org/releases/ipfire-2\\.x/[\\w.-]+/ipfire-(?P<version>[\\d.]+-core\\d+)-aarch64\\.iso)",
   "note": "Hash computed from the publisher's file.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "talos-amd64",
+  "family": "talos",
+  "name": "Talos Linux",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.talos.dev/",
+  "page": "https://api.github.com/repos/siderolabs/talos/releases/latest",
+  "pattern": "\"browser_download_url\":\\s*\"(?P<url>https://github\\.com/siderolabs/talos/releases/download/v(?P<version>[\\d.]+)/metal-amd64\\.iso)\"",
+  "hash_replace": [
+   "[^/]+$",
+   "sha256sum.txt"
+  ],
+  "hash_suffix": "",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "talos-arm64",
+  "family": "talos",
+  "name": "Talos Linux",
+  "channel": "stable",
+  "arch": "aarch64",
+  "homepage": "https://www.talos.dev/",
+  "page": "https://api.github.com/repos/siderolabs/talos/releases/latest",
+  "pattern": "\"browser_download_url\":\\s*\"(?P<url>https://github\\.com/siderolabs/talos/releases/download/v(?P<version>[\\d.]+)/metal-arm64\\.iso)\"",
+  "hash_replace": [
+   "[^/]+$",
+   "sha256sum.txt"
+  ],
+  "hash_suffix": "",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "yunohost-12-amd64",
+  "family": "yunohost",
+  "name": "YunoHost",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://yunohost.org/",
+  "page": "https://repo.yunohost.org/images/",
+  "pattern": ".*href=\"(?P<url>yunohost-bookworm-(?P<version>12\\.\\d+)-amd64-stable\\.iso)\"",
+  "url_prefix": "https://repo.yunohost.org/images/",
+  "hash_suffix": ".sha256sum",
   "desktop": "none",
   "kind": "installer",
   "media": "usb"
