@@ -265,6 +265,17 @@
   ]
  },
  {
+  "id": "bluefin",
+  "name": "Bluefin",
+  "category": "Red Hat family",
+  "icon": "bluefin.png",
+  "homepage": "https://projectbluefin.io/",
+  "icon_source": "https://projectbluefin.io/favicons/favicon.svg",
+  "uses": [
+   "desktop"
+  ]
+ },
+ {
   "id": "almalinux",
   "name": "AlmaLinux",
   "category": "Red Hat family",
@@ -293,6 +304,18 @@
   "icon": "arch.png",
   "icon_source": "https://archlinux.org/static/archlinux_common_style/apple-touch-icon-114x114.png",
   "uses": [
+   "advanced"
+  ]
+ },
+ {
+  "id": "artix",
+  "name": "Artix Linux",
+  "category": "Arch family",
+  "icon": "artix.png",
+  "homepage": "https://artixlinux.org/",
+  "icon_source": "https://artixlinux.org/favicons/apple-touch-icon-152x152.png",
+  "uses": [
+   "desktop",
    "advanced"
   ]
  },

@@ -396,6 +396,21 @@
   "media": "usb"
  },
  {
+  "id": "debian-edu-13-netinst-x86_64",
+  "family": "debian",
+  "name": "Debian Edu",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://wiki.debian.org/DebianEdu",
+  "base": "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/",
+  "pattern": "debian-edu-(13\\.\\d+\\.\\d+)-amd64-netinst\\.iso",
+  "edition": "edu-netinst",
+  "sums": "SHA256SUMS",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb"
+ },
+ {
   "id": "debian-13-netinst-aarch64",
   "family": "debian",
   "name": "Debian",
@@ -1012,6 +1027,21 @@
   "media": "usb"
  },
  {
+  "id": "bluefin-stable-x86_64",
+  "family": "bluefin",
+  "name": "Bluefin",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://projectbluefin.io/",
+  "page": "https://download.projectbluefin.io/bluefin-stable-x86_64.iso-CHECKSUM",
+  "pattern": "(?P<sha256>[0-9a-f]{64})\\s+(?P<url>bluefin-stable-x86_64\\.iso)",
+  "url_prefix": "https://download.projectbluefin.io/",
+  "version": "Stable",
+  "desktop": "gnome",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
   "id": "almalinux-10-minimal-x86_64",
   "family": "almalinux",
   "name": "AlmaLinux",
@@ -1599,6 +1629,36 @@
   "sums": "sha256sums.txt",
   "desktop": "none",
   "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "artix-plasma-openrc-x86_64",
+  "family": "artix",
+  "name": "Artix Linux",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://artixlinux.org/",
+  "base": "https://download.artixlinux.org/iso/",
+  "pattern": "artix-plasma-openrc-(\\d{8})-x86_64\\.iso",
+  "sums": "sha256sums",
+  "edition": "plasma-openrc",
+  "desktop": "kde",
+  "kind": "live",
+  "media": "usb"
+ },
+ {
+  "id": "artix-xfce-openrc-x86_64",
+  "family": "artix",
+  "name": "Artix Linux",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://artixlinux.org/",
+  "base": "https://download.artixlinux.org/iso/",
+  "pattern": "artix-xfce-openrc-(\\d{8})-x86_64\\.iso",
+  "sums": "sha256sums",
+  "edition": "xfce-openrc",
+  "desktop": "xfce",
+  "kind": "live",
   "media": "usb"
  },
  {
