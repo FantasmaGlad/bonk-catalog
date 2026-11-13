@@ -2136,6 +2136,21 @@
   "media": "usb"
  },
  {
+  "id": "qubes-4-x86_64",
+  "family": "qubes",
+  "name": "Qubes OS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.qubes-os.org/",
+  "page": "https://mirrors.edge.kernel.org/qubes/iso/",
+  "pattern": ".*href=\"(?P<url>Qubes-R(?P<version>4\\.\\d+\\.\\d+)-x86_64\\.iso)\"",
+  "url_prefix": "https://mirrors.edge.kernel.org/qubes/iso/",
+  "hash_suffix": ".DIGESTS",
+  "desktop": "xfce",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
   "id": "raspios-lite-aarch64",
   "family": "raspios",
   "name": "Raspberry Pi OS",
@@ -2965,6 +2980,20 @@
   "pattern": "Lakka-Generic\\.x86_64-(?P<version>[\\d.]+)\\.img\\.gz(?!.*Lakka-Generic\\.x86_64-[\\d.]+\\.img\\.gz)",
   "url_prefix": "https://le.builds.lakka.tv/Generic.x86_64/",
   "hash_suffix": ".sha256",
+  "kind": "preinstalled",
+  "media": "usb"
+ },
+ {
+  "id": "libreelec-12-x86_64",
+  "family": "libreelec",
+  "name": "LibreELEC",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://libreelec.tv/",
+  "page": "https://releases.libreelec.tv/releases.json",
+  "pattern": ".*\"name\": \"(?P<url>LibreELEC-Generic\\.x86_64-(?P<version>1\\d\\.\\d+\\.\\d+)\\.img\\.gz)\",\\s*\"sha256\": \"(?P<sha256>[0-9a-f]{64})\",\\s*\"size\": \"(?P<size>\\d+)\"",
+  "url_prefix": "https://releases.libreelec.tv/",
+  "desktop": "none",
   "kind": "preinstalled",
   "media": "usb"
  },

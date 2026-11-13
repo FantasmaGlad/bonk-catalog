@@ -199,6 +199,18 @@
   "ram_source": "https://tails.net/doc/about/requirements/"
  },
  {
+  "id": "qubes",
+  "name": "Qubes OS",
+  "category": "Other systems",
+  "icon": "qubes.png",
+  "homepage": "https://www.qubes-os.org/",
+  "icon_source": "https://github.com/QubesOS.png",
+  "uses": [
+   "privacy",
+   "advanced"
+  ]
+ },
+ {
   "id": "parrot",
   "name": "Parrot OS",
   "category": "Debian derivatives",
@@ -515,6 +527,17 @@
   "icon_source": "https://www.lakka.tv/images/fav64.png",
   "uses": [
    "gaming"
+  ]
+ },
+ {
+  "id": "libreelec",
+  "name": "LibreELEC",
+  "category": "Independent Linux",
+  "icon": "libreelec.png",
+  "homepage": "https://libreelec.tv/",
+  "icon_source": "https://github.com/LibreELEC.png",
+  "uses": [
+   "other"
   ]
  },
  {
