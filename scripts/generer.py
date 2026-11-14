@@ -116,10 +116,10 @@ def pick_file(hashes, pattern):
 
 
 def find_in_listing(listing, pattern):
-    names = sorted({match[0] for match in re.finditer(pattern, listing)})
+    names = {match[0] for match in re.finditer(pattern, listing)}
     if not names:
         raise SourceError(f"no hash file matches {pattern}")
-    return names[-1]
+    return max(names, key=lambda name: (version_key(name), name))
 
 
 def resolve_computed(source, image, previous, compute):
@@ -192,8 +192,9 @@ def resolve_read(source, image, previous, fetch, stat, compute):
         url = "https:" + url
     if not url.startswith("https://"):
         raise SourceError(f"{url}: not https")
-    size = groups.get("size")
-    released = None
+    size_bytes, released = stat(url)
+    if groups.get("size"):
+        size_bytes = int(groups["size"])
     # Some publishers name the hash file after the image without its extension, or keep it in another folder.
     hash_base = re.sub(*source["hash_replace"], url) if "hash_replace" in source else url
     if groups.get("sha256"):
@@ -202,7 +203,7 @@ def resolve_read(source, image, previous, fetch, stat, compute):
             raise SourceError(f"{url}: published SHA-256 is not 64 hexadecimal digits")
     elif "hash_suffix" in source:
         sha256 = first_hash(fetch(hash_base + source["hash_suffix"]), 64, url.rsplit("/", 1)[-1])
-    elif previous.get("url") == url:
+    elif previous.get("url") == url and previous.get("size_bytes") == size_bytes:
         sha256 = previous["sha256"]
     elif "verify_suffix" in source:
         named = re.search(r"sha(?:1|512)|md5", source["verify_suffix"].lower())
@@ -214,13 +215,12 @@ def resolve_read(source, image, previous, fetch, stat, compute):
         sha256 = compute(url, algorithm, expected)
     else:
         sha256 = compute(url)
-    size_bytes, released = stat(url)
     image.update(
         version=source.get("version", groups.get("version")),
         released=released,
         url=url,
         sha256=sha256,
-        size_bytes=int(size) if size else size_bytes,
+        size_bytes=size_bytes,
     )
     return image
 
@@ -396,7 +396,7 @@ def status(image):
     # Checked at publication, whose date heads the page: repeating it on every row only widens the table.
     if state == "online":
         return "online"
-    return f"{state} since {checked}" if checked else state
+    return f"{state}, last read {checked}" if checked else state
 
 
 def index_page(catalog, updates=()):
