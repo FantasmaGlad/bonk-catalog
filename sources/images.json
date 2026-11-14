@@ -5820,5 +5820,39 @@
   "desktop": "xfce",
   "kind": "live",
   "media": "usb"
+ },
+ {
+  "id": "slax-x86_64",
+  "family": "slax",
+  "name": "Slax",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.slax.org/",
+  "page": "https://ftp.sh.cvut.cz/slax/Slax-2026/",
+  "pattern": ".*href=\"(?P<url>slax-(?P<version>[\\d.]+)-64bit-\\d+\\.iso)\"",
+  "url_prefix": "https://ftp.sh.cvut.cz/slax/Slax-2026/",
+  "hash_suffix": ".sha256sum.txt",
+  "kind": "live",
+  "media": "usb"
+ },
+ {
+  "id": "altlinux-workstation-11-x86_64",
+  "family": "altlinux",
+  "name": "ALT Workstation",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://getalt.org/en/alt-workstation/",
+  "page": "https://download.basealt.ru/pub/distributions/ALTLinux/p11/images/workstation/x86_64/",
+  "pattern": ".*href=\"(?P<url>alt-workstation-(?P<version>[\\d.]+)-x86_64\\.iso)\"",
+  "url_prefix": "https://download.basealt.ru/pub/distributions/ALTLinux/p11/images/workstation/x86_64/",
+  "hash_replace": [
+   "alt-workstation-[\\d.]+-x86_64\\.iso$",
+   ""
+  ],
+  "verify_suffix": "SHA512SUM",
+  "note": "Hash computed from the publisher's file.",
+  "desktop": "gnome",
+  "kind": "live",
+  "media": "usb"
  }
 ]

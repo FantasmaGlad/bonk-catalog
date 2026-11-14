@@ -1108,5 +1108,27 @@
   "uses": [
    "light"
   ]
+ },
+ {
+  "id": "slax",
+  "name": "Slax",
+  "category": "debian",
+  "icon": "slax.png",
+  "homepage": "https://www.slax.org/",
+  "icon_source": "https://www.slax.org/favicon.ico",
+  "uses": [
+   "light"
+  ]
+ },
+ {
+  "id": "altlinux",
+  "name": "ALT Linux",
+  "category": "independent",
+  "icon": "alt.png",
+  "homepage": "https://www.altlinux.org/",
+  "icon_source": "https://www.basealt.ru/typo3conf/ext/ttmpl/Resources/Public/Tmpl2/logos/ALT%20WS.png",
+  "uses": [
+   "office"
+  ]
  }
 ]
