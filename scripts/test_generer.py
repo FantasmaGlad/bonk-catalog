@@ -122,7 +122,7 @@ class Building(unittest.TestCase):
 
 class Families(unittest.TestCase):
     def test_a_flavour_names_its_parent_and_its_logo_source(self):
-        family = {"id": "kubuntu", "name": "Kubuntu", "category": "Debian derivatives", "icon": "kubuntu.png",
+        family = {"id": "kubuntu", "name": "Kubuntu", "category": "ubuntu", "icon": "kubuntu.png",
                   "parent": "ubuntu", "icon_source": "https://kubuntu.org/"}
         entry = generer.family_entry(family, {"kubuntu.png": "c" * 64})
         self.assertEqual(entry["parent"], "ubuntu")
@@ -335,7 +335,9 @@ class Page(unittest.TestCase):
         catalog = {
             "sequence": 0,
             "expires_unix": 86400,
-            "families": [{"id": "ubuntu", "name": "Ubuntu", "category": "Debian <derivatives>"}],
+            "families": [{"id": "ubuntu", "name": "Ubuntu", "category": "ubuntu"}],
+            "taxonomy": {"bases": [{"id": "debian", "en": "Debian", "fr": "Debian"},
+                                   {"id": "ubuntu", "en": "Ubuntu <LTS>", "fr": "Ubuntu"}]},
             "images": [
                 dict(SOURCE, version="26.04.1", url="https://example.org/a.iso", size_bytes=10**9),
                 {"id": "w", "family": "ubuntu", "name": "W", "arch": "x86_64", "version": "1",
@@ -345,7 +347,8 @@ class Page(unittest.TestCase):
         page = generer.index_page(catalog)
         self.assertIn('href="https://example.org/a.iso"', page)
         self.assertIn('href="https://example.org/get"', page)
-        self.assertIn("Debian &lt;derivatives&gt;", page)
+        self.assertIn("<h2>Ubuntu &lt;LTS&gt;</h2>", page)
+        self.assertNotIn("<h2>Debian</h2>", page)
         self.assertIn("1970-01-02", page)
         self.assertIn("stale since 1970-01-01", generer.index_page(dict(catalog, images=[dict(catalog["images"][0], status="stale", checked="1970-01-01")])))
         self.assertNotIn("<script", page)
@@ -421,28 +424,47 @@ class Sizes(unittest.TestCase):
 
 
 class SourceErrors(unittest.TestCase):
-    FAMILY = {"id": "debian", "name": "Debian", "category": "Debian derivatives", "icon": "debian.png"}
+    FAMILY = {"id": "debian", "name": "Debian", "category": "debian", "icon": "debian.png"}
+    TAXONOMY = {
+        "uses": [{"id": "office", "en": "Office", "fr": "Bureautique"},
+                 {"id": "server", "en": "Servers", "fr": "Serveurs"}],
+        "bases": [{"id": "debian", "en": "Debian", "fr": "Debian"}],
+    }
 
-    def errors(self, family=None, image=None):
+    def errors(self, family=None, image=None, taxonomy=None):
         return generer.source_errors([dict(self.FAMILY, **(family or {}))],
-                                     [dict(SOURCE, family="debian", **(image or {}))])
+                                     [dict(SOURCE, family="debian", **(image or {}))],
+                                     taxonomy or self.TAXONOMY)
 
     def test_known_names_and_sourced_memory_pass(self):
         self.assertEqual(self.errors(
-            {"uses": ["desktop", "server"], "ram_mb": 1024, "ram_source": "https://www.debian.org/"},
+            {"uses": ["office", "server"], "ram_mb": 1024, "ram_source": "https://www.debian.org/"},
             {"desktop": "xfce", "kind": "live", "media": "usb"},
         ), [])
 
     def test_unknown_names_are_refused(self):
-        errors = self.errors({"uses": ["daily"]}, {"desktop": "plasma", "kind": "iso", "media": "cd"})
-        self.assertEqual(len(errors), 4)
+        errors = self.errors({"uses": ["daily"], "category": "Debian derivatives"},
+                             {"desktop": "plasma", "kind": "iso", "media": "cd"})
+        self.assertEqual(len(errors), 5)
+
+    def test_a_term_without_a_label_or_listed_twice_is_refused(self):
+        uses = [{"id": "office", "en": "Office", "fr": ""}, {"id": "office", "en": "Office", "fr": "Bureautique"}]
+        errors = self.errors(taxonomy=dict(self.TAXONOMY, uses=uses))
+        self.assertEqual(errors, ["taxonomy: uses office listed twice", "taxonomy: uses office has no fr label"])
+
+    def test_the_published_taxonomy_labels_every_family(self):
+        root = generer.Path(generer.__file__).resolve().parent.parent
+        load = lambda name: generer.json.loads((root / "sources" / name).read_text())
+        errors = generer.source_errors(load("families.json"), load("images.json"), load("taxonomy.json"))
+        self.assertEqual(errors, [])
+        self.assertTrue(all(family.get("uses") for family in load("families.json")))
 
     def test_memory_needs_its_publisher_page(self):
         self.assertEqual(len(self.errors({"ram_mb": 1024})), 1)
         self.assertEqual(len(self.errors(image={"ram_mb": "1 GB", "ram_source": "https://x.org/"})), 1)
 
     def test_an_image_of_an_unknown_family_is_refused(self):
-        errors = generer.source_errors([self.FAMILY], [SOURCE])
+        errors = generer.source_errors([self.FAMILY], [SOURCE], self.TAXONOMY)
         self.assertEqual(errors, ["image ubuntu-26.04-desktop-x86_64: unknown family ubuntu"])
 
     def test_variant_fields_reach_the_catalog(self):

@@ -31,10 +31,6 @@ IMAGE_KEPT = (
     "desktop", "kind", "media", "ram_mb", "ram_source",
 )
 # Closed lists: clients translate these names, so a typo would show as a raw identifier.
-USES = (
-    "desktop", "beginner", "gaming", "light", "creative", "advanced", "server", "homelab",
-    "privacy", "rescue", "media", "boards", "windows", "other",
-)
 DESKTOPS = (
     "gnome", "kde", "xfce", "cinnamon", "mate", "lxqt", "lxde", "budgie", "cosmic", "pantheon",
     "deepin", "enlightenment", "i3", "sway", "pixel", "unity", "ukui", "none", "choice",
@@ -408,8 +404,10 @@ def index_page(catalog, updates=()):
     e = html.escape
     day = lambda unix: time.strftime("%Y-%m-%d", time.gmtime(unix))
     names = {family["id"]: family for family in catalog["families"]}
+    bases = {base["id"]: base["en"] for base in catalog.get("taxonomy", {}).get("bases", [])}
     sections = []
-    for category in dict.fromkeys(family["category"] for family in catalog["families"]):
+    present = {family["category"] for family in catalog["families"]}
+    for category in [base for base in bases if base in present] + sorted(present - bases.keys()):
         rows = []
         for image in catalog["images"]:
             family = names.get(image["family"])
@@ -425,7 +423,7 @@ def index_page(catalog, updates=()):
                 f'<td class="file"><a href="{e(link)}" title="{e(label)}">{e(label)}</a></td><td>{e(status(image))}</td></tr>'
             )
         sections.append(
-            f"<section>\n<h2>{e(category)}</h2>\n<table>\n<thead><tr><th>System</th><th>Version</th>"
+            f"<section>\n<h2>{e(bases.get(category, category))}</h2>\n<table>\n<thead><tr><th>System</th><th>Version</th>"
             "<th>Edition</th><th>Architecture</th><th>Size</th><th>Download</th><th>Link</th></tr></thead>\n"
             "<tbody>\n" + "\n".join(rows) + "\n</tbody>\n</table>\n</section>"
         )
@@ -479,12 +477,33 @@ def memory_errors(where, entry):
     return []
 
 
-def source_errors(families, sources):
+def taxonomy_errors(taxonomy):
+    """Each list in menu order, every name labelled in both languages the clients show."""
+    errors = []
+    for kind in ("uses", "bases"):
+        terms = taxonomy.get(kind, [])
+        if not terms:
+            errors.append(f"taxonomy: no {kind}")
+        ids = [term.get("id") for term in terms]
+        errors += [f"taxonomy: {kind} {name} listed twice" for name in sorted({i for i in ids if ids.count(i) > 1})]
+        for term in terms:
+            if not (isinstance(term.get("id"), str) and re.fullmatch(r"[a-z]+", term["id"])):
+                errors.append(f"taxonomy: {kind} {term.get('id')!r} is not a lowercase name")
+            errors += [f"taxonomy: {kind} {term.get('id')} has no {lang} label"
+                       for lang in ("en", "fr") if not term.get(lang)]
+    return errors
+
+
+def source_errors(families, sources, taxonomy):
     """Mistakes a reviewer would miss: unknown names in the closed lists, memory without its source."""
-    errors, known = [], {family["id"] for family in families}
+    errors, known = taxonomy_errors(taxonomy), {family["id"] for family in families}
+    uses = {term.get("id") for term in taxonomy.get("uses", [])}
+    bases = {term.get("id") for term in taxonomy.get("bases", [])}
     for family in families:
         where = f"family {family['id']}"
-        errors += [f"{where}: unknown use {use}" for use in family.get("uses", []) if use not in USES]
+        errors += [f"{where}: unknown use {use}" for use in family.get("uses", []) if use not in uses]
+        if family.get("category") not in bases:
+            errors.append(f"{where}: unknown base {family.get('category')}")
         errors += memory_errors(where, family)
     for source in sources:
         where = f"image {source['id']}"
@@ -550,7 +569,8 @@ def main():
     root = Path(__file__).resolve().parent.parent
     sources = json.loads((root / "sources/images.json").read_text())
     families = json.loads((root / "sources/families.json").read_text())
-    errors = source_errors(families, sources)
+    taxonomy = json.loads((root / "sources/taxonomy.json").read_text())
+    errors = source_errors(families, sources, taxonomy)
     for error in errors:
         print(f"INVALID {error}", file=sys.stderr)
     if errors:
@@ -561,6 +581,7 @@ def main():
         sources, families, hashes, previous, int(time.time()),
         (lambda *_: "0" * 64) if args.no_compute else hash_url,
     )
+    catalog["taxonomy"] = taxonomy
     if args.grub:
         add_grub(catalog, args.output, previous, failures)
     if not any("url" in image for image in catalog["images"]):

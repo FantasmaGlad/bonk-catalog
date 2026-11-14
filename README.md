@@ -24,7 +24,7 @@
 
 | File | Content |
 | :--- | :--- |
-| [`v2/catalog.json`](https://catalog.bonk-os.app/v2/catalog.json) | systems and their flavours, versions, archives, official links, SHA-256 hashes |
+| [`v2/catalog.json`](https://catalog.bonk-os.app/v2/catalog.json) | systems and their flavours, versions, archives, official links, SHA-256 hashes, usage and base lists with their labels |
 | [`v2/catalog.json.sig`](https://catalog.bonk-os.app/v2/catalog.json.sig) | Ed25519 signature of the exact bytes of `catalog.json` |
 | `v2/icons/` | system logos, covered by their hash in the catalog |
 | [`index.html`](https://catalog.bonk-os.app) | the same list, readable in a browser |
@@ -34,6 +34,7 @@
 - No image is hosted here. Links and hashes are read every day from each publisher: its hash file, or, when it publishes none, the image downloaded and hashed once per address.
 - Bonk checks the signature with keys built into it, downloads from the publisher, then checks the hash before writing.
 - Each image carries `status` and `checked`: `online` when its publisher was read on that date, `stale` when it could not be and the last entry was kept. An issue lists the sources that failed.
+- Usages and bases are listed with their English and French labels in `sources/taxonomy.json`: a new one needs no Bonk release.
 - Newer releases found at a publisher but not yet listed are reported in `v2/updates.json` and in an issue.
 - The catalog expires after 14 days: if publishing stops, Bonk refuses stale links.
 

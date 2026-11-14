@@ -2,11 +2,11 @@
  {
   "id": "ubuntu",
   "name": "Ubuntu",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "ubuntu.png",
   "icon_source": "https://assets.ubuntu.com/v1/8114528b-picto-ubuntu-orange.png",
   "uses": [
-   "desktop",
+   "office",
    "beginner",
    "server"
   ]
@@ -14,45 +14,45 @@
  {
   "id": "kubuntu",
   "name": "Kubuntu",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "kubuntu.png",
   "parent": "ubuntu",
   "homepage": "https://kubuntu.org/",
   "icon_source": "https://kubuntu.org/images/favicon.svg",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "xubuntu",
   "name": "Xubuntu",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "xubuntu.png",
   "parent": "ubuntu",
   "homepage": "https://xubuntu.org/",
   "icon_source": "https://github.com/Xubuntu/xubuntu-artwork/blob/master/usr/share/pixmaps/xubuntu-logo.svg",
   "uses": [
-   "desktop",
+   "office",
    "light"
   ]
  },
  {
   "id": "lubuntu",
   "name": "Lubuntu",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "lubuntu.png",
   "parent": "ubuntu",
   "homepage": "https://lubuntu.me/",
   "icon_source": "https://github.com/lubuntu-team/artwork/blob/ubuntu/plucky/src/usr/share/grub/themes/lubuntu-grub-theme/icons/lubuntu.png",
   "uses": [
-   "light",
-   "desktop"
+   "office",
+   "light"
   ]
  },
  {
   "id": "ubuntustudio",
   "name": "Ubuntu Studio",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "ubuntustudio.png",
   "parent": "ubuntu",
   "homepage": "https://ubuntustudio.org/",
@@ -64,13 +64,13 @@
  {
   "id": "ubuntu-mate",
   "name": "Ubuntu MATE",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "ubuntu-mate.png",
   "parent": "ubuntu",
   "homepage": "https://ubuntu-mate.org/",
   "icon_source": "https://ubuntu-mate.org/assets/favicon/256x256.png",
   "uses": [
-   "desktop"
+   "office"
   ],
   "ram_mb": 2048,
   "ram_source": "https://ubuntu-mate.org/about/requirements/"
@@ -78,73 +78,75 @@
  {
   "id": "ubuntu-budgie",
   "name": "Ubuntu Budgie",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "ubuntu-budgie.png",
   "parent": "ubuntu",
   "homepage": "https://ubuntubudgie.org/",
   "icon_source": "https://ubuntubudgie.org/apple-touch-icon.png",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "ubuntucinnamon",
   "name": "Ubuntu Cinnamon",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "ubuntucinnamon.png",
   "parent": "ubuntu",
   "homepage": "https://ubuntucinnamon.org/",
   "icon_source": "https://ubuntucinnamon.org/wp-content/uploads/2020/04/logo.png",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "ubuntu-unity",
   "name": "Ubuntu Unity",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "ubuntu-unity.png",
   "parent": "ubuntu",
   "homepage": "https://ubuntuunity.org/",
   "icon_source": "https://ubuntuunity.org/assets/logo.png",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "ubuntukylin",
   "name": "Ubuntu Kylin",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "ubuntukylin.png",
   "parent": "ubuntu",
   "homepage": "https://www.ubuntukylin.com/",
   "icon_source": "https://www.ubuntukylin.com/upload/logo-%E6%A9%98.png",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "edubuntu",
   "name": "Edubuntu",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "edubuntu.png",
   "parent": "ubuntu",
   "homepage": "https://edubuntu.org/",
   "icon_source": "https://edubuntu.org/assets/img/edubuntu-logo.svg",
   "uses": [
-   "desktop"
+   "office",
+   "education"
   ]
  },
  {
   "id": "debian",
   "name": "Debian",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "debian.png",
   "icon_source": "https://www.debian.org/Pics/debian-logo-1024x576.png",
   "uses": [
-   "desktop",
-   "server",
-   "light"
+   "office",
+   "light",
+   "education",
+   "server"
   ],
   "ram_mb": 512,
   "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html"
@@ -152,12 +154,12 @@
  {
   "id": "linuxmint",
   "name": "Linux Mint",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "linuxmint.png",
   "icon_source": "https://github.com/linuxmint/brand-logo/blob/master/ring-mono-green.svg",
   "uses": [
-   "beginner",
-   "desktop"
+   "office",
+   "beginner"
   ],
   "ram_mb": 2048,
   "ram_source": "https://linuxmint.com/faq.php"
@@ -165,11 +167,11 @@
  {
   "id": "popos",
   "name": "Pop!_OS",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "popos.png",
   "icon_source": "https://github.com/pop-os/icon-theme/blob/master/Pop/128x128/places/distributor-logo-pop-os.svg",
   "uses": [
-   "desktop"
+   "office"
   ],
   "ram_mb": 4096,
   "ram_source": "https://system76.com/support/articles/install-pop/"
@@ -177,12 +179,12 @@
  {
   "id": "zorin",
   "name": "Zorin OS",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "zorin.png",
   "icon_source": "https://zorin.com/favicon-32x32.png",
   "uses": [
-   "beginner",
-   "desktop"
+   "office",
+   "beginner"
   ],
   "ram_mb": 2048,
   "ram_source": "https://help.zorin.com/docs/getting-started/system-requirements/"
@@ -190,7 +192,7 @@
  {
   "id": "tails",
   "name": "Tails",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "tails.png",
   "uses": [
    "privacy"
@@ -201,29 +203,29 @@
  {
   "id": "qubes",
   "name": "Qubes OS",
-  "category": "Other systems",
+  "category": "independent",
   "icon": "qubes.png",
   "homepage": "https://www.qubes-os.org/",
   "icon_source": "https://github.com/QubesOS.png",
   "uses": [
-   "privacy",
-   "advanced"
+   "security",
+   "privacy"
   ]
  },
  {
   "id": "parrot",
   "name": "Parrot OS",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "parrot.png",
   "icon_source": "https://github.com/ParrotSec/parrot-themes/blob/master/icons/parrot-logo.svg",
   "uses": [
-   "privacy"
+   "security"
   ]
  },
  {
   "id": "raspios",
   "name": "Raspberry Pi OS",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "raspios.png",
   "icon_source": "https://github.com/raspberrypi/rpi-imager/blob/main/src/icons/app_icon_macos.icon/Assets/Logo.svg",
   "uses": [
@@ -233,11 +235,11 @@
  {
   "id": "kali",
   "name": "Kali Linux",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "kali.png",
   "icon_source": "https://www.kali.org/images/kali-dragon-icon.svg",
   "uses": [
-   "privacy"
+   "security"
   ],
   "ram_mb": 2048,
   "ram_source": "https://www.kali.org/docs/installation/hard-disk-install/"
@@ -245,40 +247,42 @@
  {
   "id": "fedora",
   "name": "Fedora",
-  "category": "Red Hat family",
+  "category": "fedora",
   "icon": "fedora.png",
   "icon_source": "https://fedoraproject.org/favicon.ico",
   "uses": [
-   "desktop",
+   "office",
    "server"
   ]
  },
  {
   "id": "fedora-coreos",
   "name": "Fedora CoreOS",
-  "category": "Red Hat family",
+  "category": "fedora",
   "icon": "fedora-coreos.png",
   "homepage": "https://fedoraproject.org/coreos/",
   "icon_source": "https://github.com/coreos.png",
   "uses": [
+   "immutable",
    "server"
   ]
  },
  {
   "id": "bluefin",
   "name": "Bluefin",
-  "category": "Red Hat family",
+  "category": "fedora",
   "icon": "bluefin.png",
   "homepage": "https://projectbluefin.io/",
   "icon_source": "https://projectbluefin.io/favicons/favicon.svg",
   "uses": [
-   "desktop"
+   "office",
+   "immutable"
   ]
  },
  {
   "id": "almalinux",
   "name": "AlmaLinux",
-  "category": "Red Hat family",
+  "category": "fedora",
   "icon": "almalinux.png",
   "icon_source": "https://github.com/AlmaLinux/almalinux.org/blob/master/static/branding/AlmaLinux%20Icon.svg",
   "uses": [
@@ -290,7 +294,7 @@
  {
   "id": "rockylinux",
   "name": "Rocky Linux",
-  "category": "Red Hat family",
+  "category": "fedora",
   "icon": "rockylinux.png",
   "icon_source": "https://rockylinux.org/favicon.png",
   "uses": [
@@ -300,89 +304,90 @@
  {
   "id": "arch",
   "name": "Arch Linux",
-  "category": "Arch family",
+  "category": "arch",
   "icon": "arch.png",
   "icon_source": "https://archlinux.org/static/archlinux_common_style/apple-touch-icon-114x114.png",
   "uses": [
-   "advanced"
+   "expert"
   ]
  },
  {
   "id": "artix",
   "name": "Artix Linux",
-  "category": "Arch family",
+  "category": "arch",
   "icon": "artix.png",
   "homepage": "https://artixlinux.org/",
   "icon_source": "https://artixlinux.org/favicons/apple-touch-icon-152x152.png",
   "uses": [
-   "desktop",
-   "advanced"
+   "office",
+   "expert"
   ]
  },
  {
   "id": "manjaro",
   "name": "Manjaro",
-  "category": "Arch family",
+  "category": "arch",
   "icon": "manjaro.png",
   "icon_source": "https://manjaro.org/logo.svg",
   "uses": [
-   "desktop",
+   "office",
    "boards"
   ]
  },
  {
   "id": "endeavouros",
   "name": "EndeavourOS",
-  "category": "Arch family",
+  "category": "arch",
   "icon": "endeavouros.png",
   "icon_source": "https://endeavouros.com/favicon.svg",
   "uses": [
-   "desktop",
-   "advanced"
+   "office",
+   "expert"
   ]
  },
  {
   "id": "opensuse",
   "name": "openSUSE",
-  "category": "SUSE family",
+  "category": "opensuse",
   "icon": "opensuse.png",
   "icon_source": "https://www.opensuse.org/assets/img/favicon-for-light-192.png",
   "uses": [
-   "desktop",
+   "office",
    "server"
   ]
  },
  {
   "id": "alpine",
   "name": "Alpine Linux",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "alpine.png",
   "icon_source": "https://alpinelinux.org/favicon.svg",
   "uses": [
-   "server",
    "light",
-   "advanced"
+   "expert",
+   "server"
   ]
  },
  {
   "id": "nixos",
   "name": "NixOS",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "nixos.png",
   "icon_source": "https://github.com/NixOS/nixos-artwork/blob/master/logo/nix-snowflake-colours.svg",
   "uses": [
-   "advanced"
+   "immutable",
+   "expert"
   ]
  },
  {
   "id": "void",
   "name": "Void Linux",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "void.png",
   "icon_source": "https://voidlinux.org/assets/img/favicon.png",
   "uses": [
-   "advanced",
-   "light"
+   "light",
+   "expert"
   ],
   "ram_mb": 520,
   "ram_source": "https://docs.voidlinux.org/installation/index.html"
@@ -390,17 +395,17 @@
  {
   "id": "gentoo",
   "name": "Gentoo",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "gentoo.png",
   "icon_source": "https://www.gentoo.org/assets/img/logo/gentoo-g.png",
   "uses": [
-   "advanced"
+   "expert"
   ]
  },
  {
   "id": "proxmox",
   "name": "Proxmox VE",
-  "category": "Servers",
+  "category": "debian",
   "icon": "proxmox.png",
   "icon_source": "https://www.proxmox.com/favicon.svg",
   "uses": [
@@ -412,7 +417,7 @@
  {
   "id": "truenas",
   "name": "TrueNAS",
-  "category": "Servers",
+  "category": "debian",
   "icon": "truenas.png",
   "icon_source": "https://www.truenas.com/wp-content/uploads/2020/08/cropped-TN-favicon-284x284.png",
   "uses": [
@@ -424,7 +429,7 @@
  {
   "id": "proxmox-backup",
   "name": "Proxmox Backup Server",
-  "category": "Servers",
+  "category": "debian",
   "icon": "proxmox.png",
   "homepage": "https://www.proxmox.com/",
   "icon_source": "https://www.proxmox.com/favicon.svg",
@@ -435,7 +440,7 @@
  {
   "id": "xcpng",
   "name": "XCP-ng",
-  "category": "Servers",
+  "category": "fedora",
   "icon": "xcpng.png",
   "homepage": "https://xcp-ng.org/",
   "icon_source": "https://xcp-ng.org/assets/img/mainlogo.png",
@@ -446,33 +451,34 @@
  {
   "id": "openwrt",
   "name": "OpenWrt",
-  "category": "Servers",
+  "category": "independent",
   "icon": "openwrt.png",
   "homepage": "https://openwrt.org/",
   "icon_source": "https://github.com/openwrt.png",
   "uses": [
-   "homelab"
+   "network"
   ]
  },
  {
   "id": "ipfire",
   "name": "IPFire",
-  "category": "Servers",
+  "category": "independent",
   "icon": "ipfire.png",
   "homepage": "https://www.ipfire.org/",
   "icon_source": "https://www.ipfire.org/static/img/apple-touch-icon-192x192-precomposed.png",
   "uses": [
-   "homelab"
+   "network"
   ]
  },
  {
   "id": "talos",
   "name": "Talos Linux",
-  "category": "Servers",
+  "category": "independent",
   "icon": "talos.png",
   "homepage": "https://www.talos.dev/",
   "icon_source": "https://github.com/siderolabs.png",
   "uses": [
+   "immutable",
    "server",
    "homelab"
   ]
@@ -480,19 +486,19 @@
  {
   "id": "yunohost",
   "name": "YunoHost",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "yunohost.png",
   "homepage": "https://yunohost.org/",
   "icon_source": "https://github.com/YunoHost.png",
   "uses": [
-   "homelab",
-   "server"
+   "server",
+   "homelab"
   ]
  },
  {
   "id": "freebsd",
   "name": "FreeBSD",
-  "category": "BSD",
+  "category": "bsd",
   "icon": "freebsd.png",
   "icon_source": "https://www.freebsd.org/logo/logo-full.png",
   "uses": [
@@ -504,7 +510,7 @@
  {
   "id": "openbsd",
   "name": "OpenBSD",
-  "category": "BSD",
+  "category": "bsd",
   "icon": "openbsd.png",
   "uses": [
    "server"
@@ -513,7 +519,7 @@
  {
   "id": "windows",
   "name": "Windows",
-  "category": "Windows",
+  "category": "windows",
   "icon": "windows.png",
   "uses": [
    "windows"
@@ -524,74 +530,76 @@
  {
   "id": "templeos",
   "name": "TempleOS",
-  "category": "Other systems",
+  "category": "independent",
   "icon": "templeos.png",
   "icon_source": "https://templeos.org/favicon.ico",
   "uses": [
-   "other"
+   "exotic"
   ]
  },
  {
   "id": "haiku",
   "name": "Haiku",
-  "category": "Other systems",
+  "category": "independent",
   "icon": "haiku.png",
   "uses": [
-   "other"
+   "exotic"
   ]
  },
  {
   "id": "omnios",
   "name": "OmniOS",
-  "category": "Other systems",
+  "category": "bsd",
   "icon": "omnios.png",
   "homepage": "https://omnios.org/",
   "icon_source": "https://github.com/omniosorg.png",
   "uses": [
+   "expert",
    "server",
-   "advanced"
+   "exotic"
   ]
  },
  {
   "id": "bazzite",
   "name": "Bazzite",
-  "category": "Red Hat family",
+  "category": "fedora",
   "icon": "bazzite.png",
   "homepage": "https://bazzite.gg/",
   "icon_source": "https://bazzite.gg/content/uploads/2024/02/icon.svg",
   "uses": [
+   "office",
    "gaming",
-   "desktop"
+   "immutable"
   ]
  },
  {
   "id": "cachyos",
   "name": "CachyOS",
-  "category": "Arch family",
+  "category": "arch",
   "icon": "cachyos.png",
   "homepage": "https://cachyos.org/",
   "icon_source": "https://cachyos.org/favicon.svg",
   "uses": [
-   "gaming",
-   "desktop"
+   "office",
+   "gaming"
   ]
  },
  {
   "id": "nobara",
   "name": "Nobara",
-  "category": "Red Hat family",
+  "category": "fedora",
   "icon": "nobara.png",
   "homepage": "https://nobaraproject.org/",
   "icon_source": "https://nobaraproject.org/img/nobara-icon.png",
   "uses": [
-   "gaming",
-   "desktop"
+   "office",
+   "gaming"
   ]
  },
  {
   "id": "lakka",
   "name": "Lakka",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "lakka.png",
   "homepage": "https://www.lakka.tv/",
   "icon_source": "https://www.lakka.tv/images/fav64.png",
@@ -602,34 +610,35 @@
  {
   "id": "libreelec",
   "name": "LibreELEC",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "libreelec.png",
   "homepage": "https://libreelec.tv/",
   "icon_source": "https://github.com/LibreELEC.png",
   "uses": [
-   "other"
+   "media"
   ]
  },
  {
   "id": "mxlinux",
   "name": "MX Linux",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "mxlinux.png",
   "homepage": "https://mxlinux.org/",
   "icon_source": "https://github.com/MX-Linux/mx-tools/blob/master/icons/logo.svg",
   "uses": [
-   "desktop",
+   "office",
    "light"
   ]
  },
  {
   "id": "linuxlite",
   "name": "Linux Lite",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "linuxlite.png",
   "homepage": "https://www.linuxliteos.com/",
   "icon_source": "https://www.linuxliteos.com/images/favicon.png",
   "uses": [
+   "office",
    "beginner",
    "light"
   ],
@@ -639,74 +648,74 @@
  {
   "id": "kdeneon",
   "name": "KDE neon",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "kdeneon.png",
   "homepage": "https://neon.kde.org/",
   "icon_source": "https://neon.kde.org/media/128x128.svg",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "deepin",
   "name": "deepin",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "deepin.png",
   "homepage": "https://www.deepin.org/en/",
   "icon_source": "https://www.deepin.org/index/assets/icons/deepin.png",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "solus",
   "name": "Solus",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "solus.png",
   "homepage": "https://getsol.us/",
   "icon_source": "https://github.com/getsolus/artwork/blob/main/icons/scalable/distributor-logo-solus.svg",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "mageia",
   "name": "Mageia",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "mageia.png",
   "homepage": "https://www.mageia.org/",
   "icon_source": "https://www.mageia.org/g/media/logo/mageia-2013.svg",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "openmandriva",
   "name": "OpenMandriva Lx",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "openmandriva.png",
   "homepage": "https://www.openmandriva.org/",
   "icon_source": "https://www.openmandriva.org/squelettes/icons/apple-touch-icon.png",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "peppermint",
   "name": "Peppermint OS",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "peppermint.png",
   "homepage": "https://peppermintos.com/",
   "icon_source": "https://peppermintos.com/wp-content/uploads/2020/07/cropped-Peppermint-OS-Logo-270x270.png",
   "uses": [
-   "light",
-   "desktop"
+   "office",
+   "light"
   ]
  },
  {
   "id": "bodhi",
   "name": "Bodhi Linux",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "bodhi.png",
   "homepage": "https://www.bodhilinux.com/",
   "icon_source": "https://www.bodhilinux.com/trial/wp-content/uploads/2020/12/cropped-LeafLogo_512x512-3-270x270.png",
@@ -717,13 +726,13 @@
  {
   "id": "q4os",
   "name": "Q4OS",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "q4os.png",
   "homepage": "https://www.q4os.org/",
   "icon_source": "https://github.com/q4os/q4os-base/blob/master/src/filesystem/usr/share/icons/breeze/apps/48/distributor-logo-q4os1.svg",
   "uses": [
-   "light",
-   "desktop"
+   "office",
+   "light"
   ],
   "ram_mb": 512,
   "ram_source": "https://www.q4os.org/downloads1.html"
@@ -731,19 +740,19 @@
  {
   "id": "sparky",
   "name": "SparkyLinux",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "sparky.png",
   "homepage": "https://sparkylinux.org/",
   "icon_source": "https://sparkylinux.org/wp-content/uploads/2022/04/sparky-baner-tekst450.webp",
   "uses": [
-   "desktop",
+   "office",
    "light"
   ]
  },
  {
   "id": "antix",
   "name": "antiX",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "antix.png",
   "homepage": "https://antixlinux.com/",
   "icon_source": "https://antixlinux.com/wp-content/uploads/2017/03/logo_antiX.png",
@@ -756,91 +765,93 @@
  {
   "id": "trisquel",
   "name": "Trisquel",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "trisquel.png",
   "homepage": "https://trisquel.info/",
   "icon_source": "https://trisquel.info/sites/default/themes/trisquel7/favicon.ico",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "devuan",
   "name": "Devuan",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "devuan.png",
   "homepage": "https://www.devuan.org/",
   "icon_source": "https://www.devuan.org/ui/img/devuan-emblem.svg",
   "uses": [
-   "desktop",
+   "office",
    "server"
   ]
  },
  {
   "id": "tuxedo",
   "name": "TUXEDO OS",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "tuxedo.png",
   "homepage": "https://www.tuxedocomputers.com/os",
   "icon_source": "https://os.tuxedocomputers.com/html/icon.svg",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "vanillaos",
   "name": "Vanilla OS",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "vanillaos.png",
   "homepage": "https://vanillaos.org/",
   "icon_source": "https://github.com/Vanilla-OS/vanilla-distrologo/blob/main/usr/share/icons/hicolor/scalable/apps/distributor-logo-vanilla.svg",
   "uses": [
-   "desktop"
+   "office",
+   "immutable"
   ]
  },
  {
   "id": "garuda",
   "name": "Garuda Linux",
-  "category": "Arch family",
+  "category": "arch",
   "icon": "garuda.png",
   "homepage": "https://garudalinux.org/",
   "icon_source": "https://garudalinux.org/apple-touch-icon.png",
   "uses": [
-   "gaming",
-   "desktop"
+   "office",
+   "gaming"
   ]
  },
  {
   "id": "ultramarine",
   "name": "Ultramarine Linux",
-  "category": "Red Hat family",
+  "category": "fedora",
   "icon": "ultramarine.png",
   "homepage": "https://ultramarine-linux.org/",
   "icon_source": "https://github.com/Ultramarine-Linux/logos/blob/lapis/icons/hicolor/scalable/apps/ultramarine.svg",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "rhino",
   "name": "Rhino Linux",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "rhino.png",
   "homepage": "https://rhinolinux.org/",
   "icon_source": "https://rhinolinux.org/img/logo.png",
   "uses": [
-   "desktop"
+   "office"
   ]
  },
  {
   "id": "nitrux",
   "name": "Nitrux",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "nitrux.png",
   "homepage": "https://nxos.org/",
   "icon_source": "https://nxos.org/wp-content/uploads/2018/08/nx_logo_footer-min.png",
   "uses": [
-   "desktop"
+   "office",
+   "immutable"
   ],
   "ram_mb": 4096,
   "ram_source": "https://nxos.org/documentation/getting-started/system-requirements/minimum/"
@@ -848,18 +859,18 @@
  {
   "id": "slackware",
   "name": "Slackware",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "slackware.png",
   "homepage": "https://www.slackware.com/",
   "icon_source": "https://mirrors.slackware.com/images/slackware.png",
   "uses": [
-   "advanced"
+   "expert"
   ]
  },
  {
   "id": "puppy",
   "name": "Puppy Linux",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "puppy.png",
   "homepage": "https://puppylinux-woof-ce.github.io/",
   "icon_source": "https://ftp.nluug.nl/os/Linux/distr/puppylinux/puppy-bookwormpup/puppylogo96.png",
@@ -870,7 +881,7 @@
  {
   "id": "centos",
   "name": "CentOS Stream",
-  "category": "Red Hat family",
+  "category": "fedora",
   "icon": "centos.png",
   "homepage": "https://www.centos.org/",
   "icon_source": "https://www.centos.org/assets/icons/favicon.svg",
@@ -881,7 +892,7 @@
  {
   "id": "oraclelinux",
   "name": "Oracle Linux",
-  "category": "Red Hat family",
+  "category": "fedora",
   "icon": "oraclelinux.png",
   "homepage": "https://www.oracle.com/linux/",
   "icon_source": "https://www.oracle.com/yum.oracle.com/a/yum/img/penguin-updated.png",
@@ -892,7 +903,7 @@
  {
   "id": "openeuler",
   "name": "openEuler",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "openeuler.png",
   "homepage": "https://www.openeuler.org/en/",
   "icon_source": "https://www.openeuler.org/assets/logo.XeUCiAZu.svg",
@@ -903,24 +914,24 @@
  {
   "id": "netbsd",
   "name": "NetBSD",
-  "category": "BSD",
+  "category": "bsd",
   "icon": "netbsd.png",
   "homepage": "https://www.netbsd.org/",
   "icon_source": "https://www.netbsd.org/images/NetBSD-smaller-tb.png",
   "uses": [
-   "server",
-   "advanced"
+   "expert",
+   "server"
   ]
  },
  {
   "id": "ghostbsd",
   "name": "GhostBSD",
-  "category": "BSD",
+  "category": "bsd",
   "icon": "ghostbsd.png",
   "homepage": "https://www.ghostbsd.org/",
   "icon_source": "https://www.ghostbsd.org/sites/default/files/glogo.ico",
   "uses": [
-   "desktop"
+   "office"
   ],
   "ram_mb": 8192,
   "ram_source": "https://www.ghostbsd.org/download"
@@ -928,31 +939,31 @@
  {
   "id": "dragonfly",
   "name": "DragonFly BSD",
-  "category": "BSD",
+  "category": "bsd",
   "icon": "dragonfly.png",
   "homepage": "https://www.dragonflybsd.org/",
   "icon_source": "https://www.dragonflybsd.org/images/small_logo.png",
   "uses": [
-   "server",
-   "advanced"
+   "expert",
+   "server"
   ]
  },
  {
   "id": "midnightbsd",
   "name": "MidnightBSD",
-  "category": "BSD",
+  "category": "bsd",
   "icon": "midnightbsd.png",
   "homepage": "https://www.midnightbsd.org/",
   "icon_source": "https://github.com/MidnightBSD.png",
   "uses": [
-   "desktop",
-   "advanced"
+   "expert",
+   "exotic"
   ]
  },
  {
   "id": "systemrescue",
   "name": "SystemRescue",
-  "category": "Rescue tools",
+  "category": "arch",
   "icon": "systemrescue.png",
   "homepage": "https://www.system-rescue.org/",
   "icon_source": "https://www.system-rescue.org/images/logo.png",
@@ -963,7 +974,7 @@
  {
   "id": "clonezilla",
   "name": "Clonezilla Live",
-  "category": "Rescue tools",
+  "category": "debian",
   "icon": "clonezilla.png",
   "homepage": "https://clonezilla.org/",
   "icon_source": "https://clonezilla.org/images/clonezilla_logo_transparent.gif",
@@ -974,7 +985,7 @@
  {
   "id": "gparted",
   "name": "GParted Live",
-  "category": "Rescue tools",
+  "category": "debian",
   "icon": "gparted.png",
   "homepage": "https://gparted.org/",
   "icon_source": "https://gitlab.gnome.org/GNOME/gparted/-/raw/master/data/icons/hicolor_apps_scalable_gparted.svg",
@@ -985,7 +996,7 @@
  {
   "id": "rescuezilla",
   "name": "Rescuezilla",
-  "category": "Rescue tools",
+  "category": "ubuntu",
   "icon": "rescuezilla.png",
   "homepage": "https://rescuezilla.com/",
   "icon_source": "https://github.com/rescuezilla/rescuezilla/blob/master/src/apps/rescuezilla/rescuezilla/usr/share/pixmaps/rescuezilla.svg",
@@ -996,31 +1007,30 @@
  {
   "id": "grml",
   "name": "Grml",
-  "category": "Rescue tools",
+  "category": "debian",
   "icon": "grml.png",
   "homepage": "https://grml.org/",
   "icon_source": "https://grml.org/favicon.svg",
   "uses": [
-   "rescue",
-   "advanced"
+   "expert",
+   "rescue"
   ]
  },
  {
   "id": "caine",
   "name": "CAINE",
-  "category": "Debian derivatives",
+  "category": "ubuntu",
   "icon": "caine.png",
   "homepage": "https://www.caine-live.net/",
   "icon_source": "https://www.caine-live.net/files/bannersite.png",
   "uses": [
-   "rescue",
-   "advanced"
+   "security"
   ]
  },
  {
   "id": "turnkey",
   "name": "TurnKey Linux",
-  "category": "Servers",
+  "category": "debian",
   "icon": "turnkey.png",
   "homepage": "https://www.turnkeylinux.org/",
   "icon_source": "https://www.turnkeylinux.org/favicon.svg",
@@ -1032,31 +1042,31 @@
  {
   "id": "freedombox",
   "name": "FreedomBox",
-  "category": "Servers",
+  "category": "debian",
   "icon": "freedombox.png",
   "homepage": "https://freedombox.org/",
   "icon_source": "https://freedombox.org/images/freedombox-logo-butterfly.png",
   "uses": [
-   "homelab",
-   "privacy"
+   "privacy",
+   "homelab"
   ]
  },
  {
   "id": "vyos",
   "name": "VyOS",
-  "category": "Servers",
+  "category": "debian",
   "icon": "vyos.png",
   "homepage": "https://vyos.io/",
   "icon_source": "https://github.com/vyos.png",
   "uses": [
-   "homelab",
-   "advanced"
+   "expert",
+   "network"
   ]
  },
  {
   "id": "batocera",
   "name": "Batocera",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "batocera.png",
   "homepage": "https://batocera.org/",
   "icon_source": "https://github.com/batocera-linux.png",
@@ -1068,19 +1078,19 @@
  {
   "id": "chimera",
   "name": "Chimera Linux",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "chimera.png",
   "homepage": "https://chimera-linux.org/",
   "icon_source": "https://github.com/chimera-linux.png",
   "uses": [
-   "desktop",
-   "advanced"
+   "expert",
+   "exotic"
   ]
  },
  {
   "id": "porteus",
   "name": "Porteus",
-  "category": "Independent Linux",
+  "category": "independent",
   "icon": "porteus.png",
   "homepage": "https://www.porteus.org/",
   "icon_source": "https://porteus.org/templates/ja_mendozite/images/logo.png",
@@ -1091,7 +1101,7 @@
  {
   "id": "minios",
   "name": "MiniOS",
-  "category": "Debian derivatives",
+  "category": "debian",
   "icon": "minios.png",
   "homepage": "https://minios.dev/",
   "icon_source": "https://minios.dev/assets/svg/minios_icon.svg",
