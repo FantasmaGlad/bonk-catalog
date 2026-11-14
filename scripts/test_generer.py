@@ -53,6 +53,14 @@ class Resolving(unittest.TestCase):
         with self.assertRaises(generer.SourceError):
             generer.resolve({**SOURCE, "base": "http://example.org/"}, None, None)
 
+    def test_an_official_page_redirected_out_of_https_is_refused(self):
+        answer = mock.MagicMock()
+        answer.__enter__.return_value = answer
+        answer.geturl.return_value = "http://h/p"
+        with mock.patch.object(generer, "request", return_value=answer):
+            with self.assertRaisesRegex(generer.SourceError, "redirected out of https"):
+                generer.reachable("https://h/p")
+
     def test_official_page_is_checked_not_downloaded(self):
         source = {
             "id": "w",
@@ -180,6 +188,16 @@ class Listing(unittest.TestCase):
         self.assertEqual(image["url"], "https://mirror/f-1.iso")
 
 
+class ListingOrder(unittest.TestCase):
+    def test_the_newest_hash_file_is_chosen_by_number(self):
+        listing = "F-9-CHECKSUM F-10-CHECKSUM F-10-CHECKSUM"
+        self.assertEqual(generer.find_in_listing(listing, r"F-\d+-CHECKSUM"), "F-10-CHECKSUM")
+
+    def test_a_listing_without_hash_file_is_refused(self):
+        with self.assertRaisesRegex(generer.SourceError, "no hash file matches"):
+            generer.find_in_listing("rien", r"F-\d+-CHECKSUM")
+
+
 class Read(unittest.TestCase):
     SOURCE = {"id": "r", "family": "f", "name": "F", "channel": "stable", "arch": "x86_64", "homepage": "https://h/"}
 
@@ -303,6 +321,38 @@ class Read(unittest.TestCase):
             with self.assertRaisesRegex(generer.SourceError, "redirected out of https"):
                 generer.hash_url("https://h/a.iso")
 
+    def test_a_kept_hash_is_reused_only_while_address_and_size_hold(self):
+        extra = {"page": "https://h/p", "pattern": r"https://h/a\.iso", "version": "1"}
+        fetch = lambda _: "https://h/a.iso"
+        kept = self.resolve(
+            extra, fetch, previous={"url": "https://h/a.iso", "size_bytes": 5, "sha256": HASH_B},
+            compute=lambda *_: self.fail("must not download again"),
+        )
+        changed = self.resolve(
+            extra, fetch, previous={"url": "https://h/a.iso", "size_bytes": 4, "sha256": HASH_B},
+            compute=lambda *_: HASH_A,
+        )
+        self.assertEqual((kept["sha256"], changed["sha256"]), (HASH_B, HASH_A))
+
+    def test_the_latest_redirect_names_the_file(self):
+        answer = mock.MagicMock()
+        answer.__enter__.return_value = answer
+        answer.geturl.return_value = "https://h/d/a-7.img.xz"
+        extra = {"latest": "https://h/latest", "pattern": r"https://h/d/a-(?P<version>\d+)\.img\.xz", "hash_suffix": ".sha256"}
+        with mock.patch.object(generer, "request", return_value=answer):
+            image = self.resolve(extra, lambda _: f"{HASH_A}  a-7.img.xz")
+            self.assertEqual((image["url"], image["version"], image["sha256"]), ("https://h/d/a-7.img.xz", "7", HASH_A))
+            with self.assertRaisesRegex(generer.SourceError, "no address matches"):
+                self.resolve({**extra, "pattern": r"autre"}, lambda _: "")
+
+    def test_prefix_size_and_fixed_version_from_the_source(self):
+        extra = {
+            "page": "https://h/j", "url_prefix": "https://h/d/", "version": "stable",
+            "pattern": r'"(?P<url>a\.img)","size":(?P<size>\d+),"sha":"(?P<sha256>\w+)"',
+        }
+        image = self.resolve(extra, lambda _: f'"a.img","size":9,"sha":"{HASH_A}"')
+        self.assertEqual((image["url"], image["size_bytes"], image["version"]), ("https://h/d/a.img", 9, "stable"))
+
     def test_plain_http_is_refused(self):
         with self.assertRaises(generer.SourceError):
             self.resolve({"page": "https://h/p", "pattern": r"http://h/a\.iso", "hash_suffix": ".s"}, lambda _: "http://h/a.iso")
@@ -340,6 +390,37 @@ class Windows(unittest.TestCase):
         self.assertEqual((first["sha256"], kept["sha256"]), (HASH_A, HASH_B))
         self.assertEqual(first["note"], "evaluation")
 
+    def test_a_changed_size_computes_the_hash_again(self):
+        url = "https://software-static.download.prss.microsoft.com/x/w.iso"
+        with mock.patch.object(generer, "request", return_value=self.response(url)):
+            image = generer.resolve(
+                self.SOURCE, previous={"url": url, "size_bytes": 4, "sha256": HASH_B}, compute=lambda _: HASH_A
+            )
+        self.assertEqual(image["sha256"], HASH_A)
+
+    def test_a_direct_address_is_hashed_and_dated(self):
+        source = {key: value for key, value in self.SOURCE.items() if key != "fwlink"} | {"direct": "https://t/T.ISO"}
+        with mock.patch.object(generer, "request", return_value=self.response("https://t/T.ISO")):
+            image = generer.resolve(source, compute=lambda _: HASH_A)
+        self.assertEqual(
+            (image["url"], image["sha256"], image["size_bytes"], image["released"]),
+            ("https://t/T.ISO", HASH_A, 5, "2026-09-17"),
+        )
+
+    def test_a_direct_address_leaving_https_or_iso_is_refused(self):
+        source = {key: value for key, value in self.SOURCE.items() if key != "fwlink"} | {"direct": "https://t/T.ISO"}
+        for final in ("http://t/T.ISO", "https://t/T.zip"):
+            with mock.patch.object(generer, "request", return_value=self.response(final)):
+                with self.assertRaisesRegex(generer.SourceError, "leads to"):
+                    generer.resolve(source, compute=lambda _: HASH_A)
+
+    def test_a_file_without_size_or_date_is_refused(self):
+        answer = self.response("https://software-static.download.prss.microsoft.com/x/w.iso")
+        answer.headers = {"Content-Length": "5"}
+        with mock.patch.object(generer, "request", return_value=answer):
+            with self.assertRaisesRegex(generer.SourceError, "no size or date"):
+                generer.resolve(self.SOURCE, compute=lambda _: HASH_A)
+
     def test_a_link_leaving_microsoft_is_refused(self):
         with mock.patch.object(generer, "request", return_value=self.response("https://evil.example/w.iso")):
             with self.assertRaises(generer.SourceError):
@@ -366,7 +447,7 @@ class Page(unittest.TestCase):
         self.assertIn("<h2>Ubuntu &lt;LTS&gt;</h2>", page)
         self.assertNotIn("<h2>Debian</h2>", page)
         self.assertIn("1970-01-02", page)
-        self.assertIn("stale since 1970-01-01", generer.index_page(dict(catalog, images=[dict(catalog["images"][0], status="stale", checked="1970-01-01")])))
+        self.assertIn("stale, last read 1970-01-01", generer.index_page(dict(catalog, images=[dict(catalog["images"][0], status="stale", checked="1970-01-01")])))
         self.assertNotIn("<script", page)
         update = {"family": "ubuntu", "version": "26.10", "where": "https://example.org/26.10/"}
         self.assertIn("ubuntu 26.10", generer.index_page(catalog, [update]))
