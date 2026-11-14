@@ -1040,5 +1040,29 @@
    "homelab",
    "privacy"
   ]
+ },
+ {
+  "id": "vyos",
+  "name": "VyOS",
+  "category": "Servers",
+  "icon": "vyos.png",
+  "homepage": "https://vyos.io/",
+  "icon_source": "https://github.com/vyos.png",
+  "uses": [
+   "homelab",
+   "advanced"
+  ]
+ },
+ {
+  "id": "batocera",
+  "name": "Batocera",
+  "category": "Independent Linux",
+  "icon": "batocera.png",
+  "homepage": "https://batocera.org/",
+  "icon_source": "https://github.com/batocera-linux.png",
+  "uses": [
+   "gaming",
+   "boards"
+  ]
  }
 ]
