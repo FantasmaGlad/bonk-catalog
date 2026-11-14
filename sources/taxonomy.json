@@ -1,0 +1,136 @@
+{
+ "uses": [
+  {
+   "id": "office",
+   "en": "Office and everyday",
+   "fr": "Bureautique"
+  },
+  {
+   "id": "beginner",
+   "en": "Beginners",
+   "fr": "Débutant"
+  },
+  {
+   "id": "gaming",
+   "en": "Gaming",
+   "fr": "Jeux"
+  },
+  {
+   "id": "creative",
+   "en": "Sound, image, video",
+   "fr": "Création"
+  },
+  {
+   "id": "light",
+   "en": "Older PCs",
+   "fr": "Vieux PC"
+  },
+  {
+   "id": "education",
+   "en": "Education",
+   "fr": "Éducation"
+  },
+  {
+   "id": "security",
+   "en": "Cybersecurity",
+   "fr": "Cybersécurité"
+  },
+  {
+   "id": "privacy",
+   "en": "Privacy",
+   "fr": "Vie privée"
+  },
+  {
+   "id": "immutable",
+   "en": "Immutable systems",
+   "fr": "Systèmes immuables"
+  },
+  {
+   "id": "expert",
+   "en": "Experts",
+   "fr": "Experts"
+  },
+  {
+   "id": "server",
+   "en": "Servers",
+   "fr": "Serveurs"
+  },
+  {
+   "id": "homelab",
+   "en": "NAS and virtualisation",
+   "fr": "NAS et virtualisation"
+  },
+  {
+   "id": "network",
+   "en": "Network and firewall",
+   "fr": "Réseau et pare-feu"
+  },
+  {
+   "id": "rescue",
+   "en": "Repair and backup",
+   "fr": "Dépannage et sauvegarde"
+  },
+  {
+   "id": "media",
+   "en": "Media centre",
+   "fr": "Médiacentre"
+  },
+  {
+   "id": "boards",
+   "en": "Raspberry Pi and ARM boards",
+   "fr": "Raspberry Pi et cartes ARM"
+  },
+  {
+   "id": "exotic",
+   "en": "Exotic",
+   "fr": "Exotique"
+  },
+  {
+   "id": "windows",
+   "en": "Windows",
+   "fr": "Windows"
+  }
+ ],
+ "bases": [
+  {
+   "id": "debian",
+   "en": "Debian",
+   "fr": "Debian"
+  },
+  {
+   "id": "ubuntu",
+   "en": "Ubuntu",
+   "fr": "Ubuntu"
+  },
+  {
+   "id": "arch",
+   "en": "Arch Linux",
+   "fr": "Arch Linux"
+  },
+  {
+   "id": "fedora",
+   "en": "Fedora and Red Hat",
+   "fr": "Fedora et Red Hat"
+  },
+  {
+   "id": "opensuse",
+   "en": "openSUSE",
+   "fr": "openSUSE"
+  },
+  {
+   "id": "independent",
+   "en": "Independent",
+   "fr": "Indépendant"
+  },
+  {
+   "id": "bsd",
+   "en": "BSD and Unix",
+   "fr": "BSD et Unix"
+  },
+  {
+   "id": "windows",
+   "en": "Windows",
+   "fr": "Windows"
+  }
+ ]
+}
