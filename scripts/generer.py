@@ -154,9 +154,9 @@ def hash_url(url, algorithm=None, expected=None):
     """The file's SHA-256, while checking the weaker or longer hash its publisher lists, if any."""
     digest = hashlib.sha256()
     check = hashlib.new(algorithm) if algorithm else None
-    with urllib.request.urlopen(
-        urllib.request.Request(url, headers={"User-Agent": USER_AGENT}), timeout=TIMEOUT_SECONDS
-    ) as response:
+    with request(url) as response:
+        if not response.geturl().startswith("https://"):
+            raise SourceError(f"{url}: redirected out of https")
         while chunk := response.read(1 << 20):
             digest.update(chunk)
             if check:
