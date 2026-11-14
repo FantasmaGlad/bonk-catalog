@@ -279,13 +279,29 @@ class Read(unittest.TestCase):
         self.resolve(extra, pages.__getitem__, compute=lambda *args: seen.append(args) or HASH_A)
         self.assertEqual(seen, [("https://h/d/a.img", "md5", "d" * 32)])
 
-    def test_a_wrong_publisher_hash_refuses_the_file(self):
+    @staticmethod
+    def served(final_url):
         body = mock.MagicMock()
         body.__enter__.return_value = body
+        body.geturl.return_value = final_url
         body.read.side_effect = [b"data", b""]
-        with mock.patch.object(generer.urllib.request, "urlopen", return_value=body):
-            with self.assertRaises(generer.SourceError):
+        return mock.patch.object(generer.urllib.request, "urlopen", return_value=body)
+
+    def test_a_file_is_hashed_and_checked_against_the_publisher_hash(self):
+        sha1 = "a17c9aaa61e80a1bf71d0d850af4e5baa9800bbd"
+        sha256 = "3a6eb0790f39ac87c94f3856b2dd2c5d110e6811602261a9a923d3bb23adc8b7"
+        with self.served("https://h/a.iso"):
+            self.assertEqual(generer.hash_url("https://h/a.iso", "sha1", sha1), sha256)
+
+    def test_a_wrong_publisher_hash_refuses_the_file(self):
+        with self.served("https://h/a.iso"):
+            with self.assertRaisesRegex(generer.SourceError, "does not match"):
                 generer.hash_url("https://h/a.iso", "sha1", "0" * 40)
+
+    def test_a_file_redirected_out_of_https_is_not_hashed(self):
+        with self.served("http://miroir/a.iso"):
+            with self.assertRaisesRegex(generer.SourceError, "redirected out of https"):
+                generer.hash_url("https://h/a.iso")
 
     def test_plain_http_is_refused(self):
         with self.assertRaises(generer.SourceError):
