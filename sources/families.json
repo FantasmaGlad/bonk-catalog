@@ -1064,5 +1064,39 @@
    "gaming",
    "boards"
   ]
+ },
+ {
+  "id": "chimera",
+  "name": "Chimera Linux",
+  "category": "Independent Linux",
+  "icon": "chimera.png",
+  "homepage": "https://chimera-linux.org/",
+  "icon_source": "https://github.com/chimera-linux.png",
+  "uses": [
+   "desktop",
+   "advanced"
+  ]
+ },
+ {
+  "id": "porteus",
+  "name": "Porteus",
+  "category": "Independent Linux",
+  "icon": "porteus.png",
+  "homepage": "https://www.porteus.org/",
+  "icon_source": "https://porteus.org/templates/ja_mendozite/images/logo.png",
+  "uses": [
+   "light"
+  ]
+ },
+ {
+  "id": "minios",
+  "name": "MiniOS",
+  "category": "Debian derivatives",
+  "icon": "minios.png",
+  "homepage": "https://minios.dev/",
+  "icon_source": "https://minios.dev/assets/svg/minios_icon.svg",
+  "uses": [
+   "light"
+  ]
  }
 ]
