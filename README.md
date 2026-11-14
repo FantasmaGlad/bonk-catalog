@@ -31,7 +31,7 @@
 
 ## How it works
 
-- No image is hosted here. Links and hashes are read every day from each publisher: its hash file, or, when it publishes none, the image downloaded and hashed once per address.
+- No image is hosted here. Links and hashes are read every day from each publisher: its hash file, or, when it publishes none, the image downloaded and hashed once per address. A system whose publisher gives no stable link is listed with its official page only, without a link or a hash.
 - Bonk checks the signature with keys built into it, downloads from the publisher, then checks the hash before writing.
 - Each image carries `status` and `checked`: `online` when its publisher was read on that date, `stale` when it could not be and the last entry was kept. An issue lists the sources that failed.
 - Usages and bases are listed with their English and French labels in `sources/taxonomy.json`: a new one needs no Bonk release.
