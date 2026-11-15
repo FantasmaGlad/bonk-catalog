@@ -197,9 +197,11 @@ def resolve_read(source, image, previous, fetch, stat, compute):
             text = response.geturl()
     else:
         text = fetch(source["page"])
-    match = re.search(source["pattern"], text, re.DOTALL)
-    if not match:
+    matches = list(re.finditer(source["pattern"], text, re.DOTALL))
+    if not matches:
         raise SourceError(f"no address matches {source['pattern']}")
+    # A listing that keeps every release names the newest anywhere: `newest` picks it by version.
+    match = max(matches, key=lambda m: version_key(m["version"])) if source.get("newest") else matches[0]
     groups = match.groupdict()
     url = source.get("url_prefix", "") + groups.get("url", match[0])
     if url.startswith("//"):
