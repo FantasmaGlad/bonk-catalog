@@ -238,6 +238,36 @@ class Sha512(unittest.TestCase):
         self.assertEqual(image["sha256"], HASH_B)
 
 
+class Signed(unittest.TestCase):
+    SOURCE = dict(SOURCE, signature={"suffix": ".gpg", "signer": "F" * 40})
+    SUMS = f"{HASH_A} *ubuntu-26.04.1-desktop-amd64.iso\n".encode()
+
+    def resolve(self, verify):
+        raw = {"https://example.org/26.04/SHA256SUMS": self.SUMS, "https://example.org/26.04/SHA256SUMS.gpg": b"sig"}
+        return generer.resolve(
+            self.SOURCE, fetch=None, stat=lambda _: (5, "2026-08-01"), fetch_raw=raw.__getitem__, verify=verify
+        )
+
+    def test_the_hash_file_is_read_only_after_its_signature(self):
+        seen = []
+        image = self.resolve(lambda data, signature, signer: seen.append((data, signature, signer)))
+        self.assertEqual(seen, [(self.SUMS, b"sig", "F" * 40)])
+        self.assertEqual(image["sha256"], HASH_A)
+
+    def test_a_bad_signature_refuses_the_source(self):
+        def refuse(*_):
+            raise generer.SourceError("hash file not signed")
+
+        with self.assertRaises(generer.SourceError):
+            self.resolve(refuse)
+
+    def test_a_pinned_key_exists_for_every_signer(self):
+        sources = generer.json.loads((Path(generer.__file__).resolve().parents[1] / "sources/images.json").read_text())
+        keys = Path(generer.__file__).resolve().parents[1] / "keys/editeurs"
+        for signer in {s["signature"]["signer"] for s in sources if "signature" in s}:
+            self.assertTrue((keys / f"{signer}.asc").is_file(), signer)
+
+
 class ListingOrder(unittest.TestCase):
     def test_the_newest_hash_file_is_chosen_by_number(self):
         listing = "F-9-CHECKSUM F-10-CHECKSUM F-10-CHECKSUM"
