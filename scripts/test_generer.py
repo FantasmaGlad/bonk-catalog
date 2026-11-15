@@ -212,6 +212,32 @@ class Folders(unittest.TestCase):
             generer.resolve(self.SOURCE, fetch=pages.__getitem__, stat=None)
 
 
+class Sha512(unittest.TestCase):
+    SOURCE = dict(SOURCE, id="k", family="k", base="https://k/18.2/", sums="k.iso.sha512sums", pattern=r"k-([\d.]+)\.iso")
+
+    def test_a_sha512_list_is_checked_while_computing_the_sha256(self):
+        computed = []
+        image = generer.resolve(
+            self.SOURCE,
+            fetch=lambda _: f"{'c' * 128}  k-18.2.iso",
+            stat=lambda _: (5, "2026-01-02"),
+            compute=lambda url, algorithm=None, expected=None: computed.append((algorithm, expected)) or HASH_A,
+        )
+        self.assertEqual(computed, [("sha512", "c" * 128)])
+        self.assertEqual(image["sha256"], HASH_A)
+
+    def test_an_unchanged_file_keeps_its_computed_hash(self):
+        previous = {"url": "https://k/18.2/k-18.2.iso", "size_bytes": 5, "sha256": HASH_B}
+        image = generer.resolve(
+            self.SOURCE,
+            fetch=lambda _: f"{'c' * 128}  k-18.2.iso",
+            stat=lambda _: (5, "2026-01-02"),
+            previous=previous,
+            compute=lambda *_: self.fail("downloaded again"),
+        )
+        self.assertEqual(image["sha256"], HASH_B)
+
+
 class ListingOrder(unittest.TestCase):
     def test_the_newest_hash_file_is_chosen_by_number(self):
         listing = "F-9-CHECKSUM F-10-CHECKSUM F-10-CHECKSUM"
