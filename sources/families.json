@@ -1142,5 +1142,42 @@
    "expert",
    "server"
   ]
+ },
+ {
+  "id": "armbian",
+  "name": "Armbian",
+  "category": "debian",
+  "icon": "armbian.png",
+  "homepage": "https://www.armbian.com/",
+  "icon_source": "https://github.com/armbian/build/blob/main/.github/armbian-logo.png",
+  "uses": [
+   "boards",
+   "server"
+  ]
+ },
+ {
+  "id": "dietpi",
+  "name": "DietPi",
+  "category": "debian",
+  "icon": "dietpi.png",
+  "homepage": "https://dietpi.com/",
+  "icon_source": "https://dietpi.com/images/dietpi-logo_720x720.png",
+  "uses": [
+   "boards",
+   "light",
+   "homelab"
+  ]
+ },
+ {
+  "id": "homeassistant",
+  "name": "Home Assistant OS",
+  "category": "independent",
+  "icon": "homeassistant.png",
+  "homepage": "https://www.home-assistant.io/",
+  "icon_source": "https://brands.home-assistant.io/homeassistant/icon.png",
+  "uses": [
+   "boards",
+   "homelab"
+  ]
  }
 ]

@@ -236,6 +236,15 @@ class Read(unittest.TestCase):
         )
         self.assertEqual((image["url"], image["version"], image["sha256"]), ("https://h/a-7.iso", "7", HASH_A))
 
+    def test_newest_takes_the_highest_version_of_a_listing(self):
+        listing = '<a href="a_9.2_x.img">a</a><a href="a_26.8.3_x.img">a</a><a href="a_26.2_x.img">a</a>'
+        image = self.resolve(
+            {"page": "https://h/l/", "pattern": r'href="(?P<url>a_(?P<version>[\d.]+)_x\.img)"', "url_prefix": "https://h/l/", "newest": True},
+            lambda _: listing,
+            compute=lambda *_: HASH_A,
+        )
+        self.assertEqual(image["url"], "https://h/l/a_26.8.3_x.img")
+
     def test_a_published_hash_that_is_not_sha256_is_refused(self):
         with self.assertRaises(generer.SourceError):
             self.resolve(
