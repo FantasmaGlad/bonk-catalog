@@ -310,7 +310,8 @@ def newer_releases(sources, fetch=fetch_text):
     groups = {}
     for source in sources:
         match = DATED_BASE.match(source.get("base", ""))
-        if not match or not ("sums" in source or "sums_pattern" in source):
+        # An archive keeps an old release on purpose: newer ones are the current channels' business.
+        if not match or source.get("channel") == "archive" or not ("sums" in source or "sums_pattern" in source):
             continue
         parent, version, rest = match.groups()
         key = (parent, rest, source.get("sums") or with_release(source["sums_pattern"], version, "{}"))

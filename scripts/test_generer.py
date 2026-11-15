@@ -661,6 +661,11 @@ class NewerNamed(unittest.TestCase):
         pages = {"https://r/": '<a href="10/">x</a><a href="10.2/">x</a>', "https://r/10.2/isos/x86_64/CHECKSUM": "ok"}
         self.assertEqual(generer.newer_releases([source], pages.__getitem__), [])
 
+    def test_an_archived_release_reports_nothing(self):
+        source = dict(SOURCE, id="d11", family="d", channel="archive", base="https://d/archive/11.11.0/amd64/", sums="S")
+        pages = {"https://d/archive/": '<a href="11.11.0/">x</a><a href="12.0.0/">x</a>', "https://d/archive/12.0.0/amd64/S": "ok"}
+        self.assertEqual(generer.newer_releases([source], pages.__getitem__), [])
+
     def test_a_release_number_inside_a_word_is_left_alone(self):
         self.assertEqual(generer.with_release("Rocky-8-x86_64-CHECKSUM", "8", "9"), "Rocky-9-x86_64-CHECKSUM")
 
