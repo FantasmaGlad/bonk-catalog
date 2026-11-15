@@ -275,18 +275,40 @@ def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url
     return image
 
 
-DATED_BASE = re.compile(r"^(https://.+/)(\d+(?:\.\d+)+)/(.*)$")
-LISTED_VERSION = re.compile(r'href="(\d+(?:\.\d+)+)/"')
+DATED_BASE = re.compile(r"^(https://.+/)(\d+(?:\.\d+)*)/(.*)$")
+LISTED_VERSION = re.compile(r'href="(?:\./)?(\d+(?:\.\d+)*)/"')
+
+
+def with_release(text, old, new):
+    """The release number swapped where it stands alone: `8` in `x86_64` is no release."""
+    return re.sub(rf"(?<![\w.]){re.escape(old)}(?![\d])", lambda _: new, text)
+
+
+def published(source, version, old, fetch):
+    """The hash file of another release, where this source would read it: a fixed name, or the one a
+    listing gives when the file name carries the release (Fedora, FreeBSD)."""
+    where = source["base"].replace(f"/{old}/", f"/{version}/")
+    if "sums" in source:
+        fetch(where + source["sums"])
+    else:
+        listing = source.get("listing", source["base"]).replace(f"/{old}/", f"/{version}/")
+        find_in_listing(fetch(listing), with_release(source["sums_pattern"], old, version))
+    return where
 
 
 def newer_releases(sources, fetch=fetch_text):
     groups = {}
     for source in sources:
         match = DATED_BASE.match(source.get("base", ""))
-        if not match or "sums" not in source:
+        if not match or not ("sums" in source or "sums_pattern" in source):
             continue
         parent, version, rest = match.groups()
-        group = groups.setdefault((parent, rest, source["sums"]), {"family": source["family"], "versions": []})
+        key = (parent, rest, source.get("sums") or with_release(source["sums_pattern"], version, "{}"))
+        # The parent folder is read where the listing is readable: a redirecting host may list nothing.
+        index = DATED_BASE.match(source.get("listing", "")) or match
+        group = groups.setdefault(
+            key, {"family": source["family"], "versions": [], "sample": (source, version), "index": index[1]}
+        )
         group["versions"].append(version)
     series = lambda version: version_key(version)[:2]
     newest = {}
@@ -294,21 +316,24 @@ def newer_releases(sources, fetch=fetch_text):
         for version in group["versions"]:
             newest[group["family"]] = max(newest.get(group["family"], []), series(version))
     found, listings = [], {}
-    for (parent, rest, sums), group in groups.items():
+    for group in groups.values():
+        index = group["index"]
         try:
-            if parent not in listings:
-                listings[parent] = set(LISTED_VERSION.findall(fetch(parent)))
-            listed = listings[parent]
+            if index not in listings:
+                listings[index] = set(LISTED_VERSION.findall(fetch(index)))
+            listed = listings[index]
         except (OSError, ValueError) as error:
-            print(f"{parent}: release listing unreadable: {error}", file=sys.stderr)
+            print(f"{index}: release listing unreadable: {error}", file=sys.stderr)
             continue
+        source, old = group["sample"]
+        tracked = newest[group["family"]]
         for version in sorted(listed, key=version_key):
-            if series(version) <= newest[group["family"]]:
+            # A folder named by the major release already follows its point releases (AlmaLinux `10/`).
+            if series(version) <= tracked or (len(tracked) == 1 and series(version)[0] == tracked[0]):
                 continue
-            where = f"{parent}{version}/{rest}"
             try:
-                fetch(where + sums)
-            except (OSError, ValueError):
+                where = published(source, version, old, fetch)
+            except (OSError, ValueError, SourceError):
                 continue
             found.append({"family": group["family"], "version": version, "where": where})
     return found

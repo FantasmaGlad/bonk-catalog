@@ -594,6 +594,41 @@ class SourceErrors(unittest.TestCase):
         image = generer.resolve(source, fetch=fetch, stat=lambda url: (1, "2026-01-01"))
         self.assertEqual((image["desktop"], image["kind"], image["ram_mb"]), ("gnome", "live", 6144))
 
+class NewerNamed(unittest.TestCase):
+    SOURCE = {
+        "id": "fedora-45-workstation-x86_64", "family": "fedora", "name": "Fedora", "channel": "stable",
+        "arch": "x86_64", "homepage": "https://h/",
+        "base": "https://m/releases/45/Workstation/x86_64/iso/",
+        "listing": "https://dl/releases/45/Workstation/x86_64/iso/",
+        "sums_pattern": r"Fedora-Workstation-45-[\d.]+-x86_64-CHECKSUM",
+        "pattern": r"Fedora-Workstation-Live-(45-[\d.]+)\.x86_64\.iso",
+    }
+
+    def test_a_release_named_in_its_hash_file_is_reported(self):
+        pages = {
+            "https://dl/releases/": '<a href="44/">x</a><a href="45/">x</a><a href="46/">x</a><a href="47/">x</a>',
+            "https://dl/releases/46/Workstation/x86_64/iso/": "Fedora-Workstation-46-1.2-x86_64-CHECKSUM",
+            "https://dl/releases/47/Workstation/x86_64/iso/": "rien encore",
+        }
+
+        def fetch(url):
+            if url not in pages:
+                raise OSError("404")
+            return pages[url]
+
+        self.assertEqual(
+            generer.newer_releases([self.SOURCE], fetch),
+            [{"family": "fedora", "version": "46", "where": "https://m/releases/46/Workstation/x86_64/iso/"}],
+        )
+
+    def test_a_point_release_of_a_followed_major_is_not_news(self):
+        source = dict(SOURCE, id="alma", family="alma", base="https://r/10/isos/x86_64/", sums="CHECKSUM")
+        pages = {"https://r/": '<a href="10/">x</a><a href="10.2/">x</a>', "https://r/10.2/isos/x86_64/CHECKSUM": "ok"}
+        self.assertEqual(generer.newer_releases([source], pages.__getitem__), [])
+
+    def test_a_release_number_inside_a_word_is_left_alone(self):
+        self.assertEqual(generer.with_release("Rocky-8-x86_64-CHECKSUM", "8", "9"), "Rocky-9-x86_64-CHECKSUM")
+
 
 if __name__ == "__main__":
     unittest.main()
