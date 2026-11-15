@@ -14,7 +14,11 @@
   "kind": "live",
   "ram_mb": 6144,
   "ram_source": "https://ubuntu.com/download/desktop",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-26.04-server-x86_64",
@@ -31,7 +35,11 @@
   "kind": "installer",
   "ram_mb": 1536,
   "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-26.10-desktop-x86_64",
@@ -48,7 +56,11 @@
   "kind": "live",
   "ram_mb": 6144,
   "ram_source": "https://ubuntu.com/download/desktop",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-26.10-server-x86_64",
@@ -65,7 +77,11 @@
   "kind": "installer",
   "ram_mb": 1536,
   "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-26.10-desktop-aarch64",
@@ -82,7 +98,11 @@
   "kind": "live",
   "ram_mb": 6144,
   "ram_source": "https://ubuntu.com/download/desktop",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-26.10-server-aarch64",
@@ -99,7 +119,11 @@
   "kind": "installer",
   "ram_mb": 1536,
   "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-26.10-server-riscv64",
@@ -116,7 +140,11 @@
   "kind": "installer",
   "ram_mb": 1536,
   "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-26.10-desktop-riscv64",
@@ -133,7 +161,11 @@
   "kind": "live",
   "ram_mb": 6144,
   "ram_source": "https://ubuntu.com/download/desktop",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-24.04-desktop-x86_64",
@@ -150,7 +182,11 @@
   "kind": "live",
   "ram_mb": 6144,
   "ram_source": "https://ubuntu.com/download/desktop",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-24.04-server-x86_64",
@@ -167,7 +203,11 @@
   "kind": "installer",
   "ram_mb": 1536,
   "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-22.04-desktop-x86_64",
@@ -184,7 +224,11 @@
   "kind": "live",
   "ram_mb": 6144,
   "ram_source": "https://ubuntu.com/download/desktop",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-22.04-server-x86_64",
@@ -201,7 +245,11 @@
   "kind": "installer",
   "ram_mb": 1536,
   "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-26.04-desktop-aarch64",
@@ -218,7 +266,11 @@
   "kind": "live",
   "ram_mb": 6144,
   "ram_source": "https://ubuntu.com/download/desktop",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-26.04-server-aarch64",
@@ -235,7 +287,11 @@
   "kind": "installer",
   "ram_mb": 1536,
   "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-26.04-server-riscv64",
@@ -252,7 +308,11 @@
   "kind": "installer",
   "ram_mb": 1536,
   "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-26.04-desktop-riscv64",
@@ -269,7 +329,11 @@
   "kind": "live",
   "ram_mb": 6144,
   "ram_source": "https://ubuntu.com/download/desktop",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "kubuntu-26.04-x86_64",
@@ -283,7 +347,11 @@
   "sums": "SHA256SUMS",
   "desktop": "kde",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "kubuntu-26.10-x86_64",
@@ -297,7 +365,11 @@
   "sums": "SHA256SUMS",
   "desktop": "kde",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "xubuntu-26.04-x86_64",
@@ -311,7 +383,11 @@
   "sums": "SHA256SUMS",
   "desktop": "xfce",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "xubuntu-26.10-x86_64",
@@ -325,7 +401,11 @@
   "sums": "SHA256SUMS",
   "desktop": "xfce",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "lubuntu-26.04-x86_64",
@@ -339,7 +419,11 @@
   "sums": "SHA256SUMS",
   "desktop": "lxqt",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "lubuntu-26.10-x86_64",
@@ -353,7 +437,11 @@
   "sums": "SHA256SUMS",
   "desktop": "lxqt",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntustudio-26.04-x86_64",
@@ -367,7 +455,11 @@
   "sums": "SHA256SUMS",
   "desktop": "kde",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntustudio-26.10-x86_64",
@@ -381,7 +473,11 @@
   "sums": "SHA256SUMS",
   "desktop": "kde",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-24.04-desktop-aarch64",
@@ -398,7 +494,11 @@
   "kind": "live",
   "ram_mb": 6144,
   "ram_source": "https://ubuntu.com/download/desktop",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-24.04-server-aarch64",
@@ -415,7 +515,11 @@
   "kind": "installer",
   "ram_mb": 1536,
   "ram_source": "https://ubuntu.com/server/docs/reference/installation/system-requirements/",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "kubuntu-24.04-x86_64",
@@ -429,7 +533,11 @@
   "sums": "SHA256SUMS",
   "desktop": "kde",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "xubuntu-24.04-x86_64",
@@ -443,7 +551,11 @@
   "sums": "SHA256SUMS",
   "desktop": "xfce",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "lubuntu-24.04-x86_64",
@@ -457,7 +569,11 @@
   "sums": "SHA256SUMS",
   "desktop": "lxqt",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-mate-24.04-x86_64",
@@ -471,7 +587,11 @@
   "sums": "SHA256SUMS",
   "desktop": "mate",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-mate-26.10-x86_64",
@@ -485,7 +605,11 @@
   "sums": "SHA256SUMS",
   "desktop": "mate",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntustudio-24.04-x86_64",
@@ -499,7 +623,11 @@
   "sums": "SHA256SUMS",
   "desktop": "kde",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-20.04-desktop-x86_64",
@@ -516,7 +644,11 @@
   "kind": "live",
   "ram_mb": 6144,
   "ram_source": "https://ubuntu.com/download/desktop",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-18.04-desktop-x86_64",
@@ -550,7 +682,11 @@
   "kind": "live",
   "ram_mb": 6144,
   "ram_source": "https://ubuntu.com/download/desktop",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "debian-13-netinst-x86_64",
@@ -565,7 +701,11 @@
   "sums": "SHA256SUMS",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-edu-13-netinst-x86_64",
@@ -580,7 +720,11 @@
   "sums": "SHA256SUMS",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-13-netinst-aarch64",
@@ -595,7 +739,11 @@
   "sums": "SHA256SUMS",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-13-netinst-riscv64",
@@ -610,7 +758,11 @@
   "sums": "SHA256SUMS",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-13-live-gnome-x86_64",
@@ -627,7 +779,11 @@
   "kind": "live",
   "ram_mb": 1024,
   "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-13-live-kde-x86_64",
@@ -644,7 +800,11 @@
   "kind": "live",
   "ram_mb": 1024,
   "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-13-live-xfce-x86_64",
@@ -661,7 +821,11 @@
   "kind": "live",
   "ram_mb": 1024,
   "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-13-live-cinnamon-x86_64",
@@ -678,7 +842,11 @@
   "kind": "live",
   "ram_mb": 1024,
   "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-13-live-mate-x86_64",
@@ -695,7 +863,11 @@
   "kind": "live",
   "ram_mb": 1024,
   "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-13-live-lxqt-x86_64",
@@ -712,7 +884,11 @@
   "kind": "live",
   "ram_mb": 1024,
   "ram_source": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-13-live-standard-x86_64",
@@ -727,7 +903,11 @@
   "sums": "SHA256SUMS",
   "desktop": "none",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-13-dvd-x86_64",
@@ -742,7 +922,11 @@
   "sums": "SHA256SUMS",
   "desktop": "choice",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-12-netinst-x86_64",
@@ -757,7 +941,11 @@
   "sums": "SHA256SUMS",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-11-netinst-x86_64",
@@ -772,7 +960,11 @@
   "sums": "SHA256SUMS",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-10-netinst-x86_64",
@@ -787,7 +979,11 @@
   "sums": "SHA256SUMS",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "debian-11-netinst-x86_64",
@@ -802,7 +998,11 @@
   "sums": "SHA256SUMS",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
  },
  {
   "id": "linuxmint-22.3-cinnamon-x86_64",
@@ -3150,7 +3350,11 @@
   "sums": "SHA256SUMS",
   "desktop": "budgie",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-budgie-26.10-x86_64",
@@ -3164,7 +3368,11 @@
   "sums": "SHA256SUMS",
   "desktop": "budgie",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-budgie-24.04-x86_64",
@@ -3178,7 +3386,11 @@
   "sums": "SHA256SUMS",
   "desktop": "budgie",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntucinnamon-26.04-x86_64",
@@ -3192,7 +3404,11 @@
   "sums": "SHA256SUMS",
   "desktop": "cinnamon",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntucinnamon-26.10-x86_64",
@@ -3206,7 +3422,11 @@
   "sums": "SHA256SUMS",
   "desktop": "cinnamon",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntucinnamon-24.04-x86_64",
@@ -3220,7 +3440,11 @@
   "sums": "SHA256SUMS",
   "desktop": "cinnamon",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-unity-26.04-x86_64",
@@ -3234,7 +3458,11 @@
   "sums": "SHA256SUMS",
   "desktop": "unity",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-unity-26.10-x86_64",
@@ -3248,7 +3476,11 @@
   "sums": "SHA256SUMS",
   "desktop": "unity",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntu-unity-24.04-x86_64",
@@ -3262,7 +3494,11 @@
   "sums": "SHA256SUMS",
   "desktop": "unity",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntukylin-26.04-x86_64",
@@ -3276,7 +3512,11 @@
   "sums": "SHA256SUMS",
   "desktop": "ukui",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntukylin-26.10-x86_64",
@@ -3290,7 +3530,11 @@
   "sums": "SHA256SUMS",
   "desktop": "ukui",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "ubuntukylin-24.04-x86_64",
@@ -3304,7 +3548,11 @@
   "sums": "SHA256SUMS",
   "desktop": "ukui",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "edubuntu-26.04-x86_64",
@@ -3318,7 +3566,11 @@
   "sums": "SHA256SUMS",
   "desktop": "gnome",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "edubuntu-26.10-x86_64",
@@ -3332,7 +3584,11 @@
   "sums": "SHA256SUMS",
   "desktop": "gnome",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "edubuntu-24.04-x86_64",
@@ -3346,7 +3602,11 @@
   "sums": "SHA256SUMS",
   "desktop": "gnome",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "edubuntu-26.04-raspi-aarch64",
@@ -3361,7 +3621,11 @@
   "sums": "SHA256SUMS",
   "desktop": "gnome",
   "kind": "preinstalled",
-  "media": "sd"
+  "media": "sd",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "edubuntu-26.10-raspi-aarch64",
@@ -3376,7 +3640,11 @@
   "sums": "SHA256SUMS",
   "desktop": "gnome",
   "kind": "preinstalled",
-  "media": "sd"
+  "media": "sd",
+  "signature": {
+   "suffix": ".gpg",
+   "signer": "843938DF228D22F7B3742BC0D94AA3F0EFE21092"
+  }
  },
  {
   "id": "bazzite-stable-x86_64",

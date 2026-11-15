@@ -136,6 +136,26 @@ def newest_folder(source, fetch):
     raise SourceError(f"{parent}: no folder holds a file matching {source['sums_pattern']}")
 
 
+def verify_signed(data, signature, signer):
+    """The publisher's signature over its hash file, by the key pinned in `keys/editeurs/<fingerprint>.asc`."""
+    key = Path(__file__).resolve().parents[1] / "keys" / "editeurs" / f"{signer}.asc"
+    with tempfile.TemporaryDirectory() as work:
+        folder = Path(work)
+        (folder / "sums").write_bytes(data)
+        (folder / "sums.sig").write_bytes(signature)
+        dearmored = subprocess.run(
+            ["gpg", "--batch", "--dearmor", "--output", str(folder / "keyring"), str(key)], capture_output=True
+        )
+        if dearmored.returncode != 0:
+            raise SourceError(f"{key.name}: pinned key unreadable")
+        status = subprocess.run(
+            ["gpgv", "--status-fd", "1", "--keyring", str(folder / "keyring"), str(folder / "sums.sig"), str(folder / "sums")],
+            capture_output=True, text=True,
+        )
+    if status.returncode != 0 or f"VALIDSIG {signer} " not in status.stdout:
+        raise SourceError(f"hash file not signed by {signer}")
+
+
 def resolve_computed(source, image, previous, compute):
     """The publisher lists no SHA-256 (Microsoft evaluation images, TempleOS): it is computed once from
     its own file, and kept as long as the address and the size do not change."""
@@ -241,7 +261,10 @@ def resolve_read(source, image, previous, fetch, stat, compute):
     return image
 
 
-def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url, reach=reachable):
+def resolve(
+    source, fetch=fetch_text, stat=head, previous=None, compute=hash_url, reach=reachable,
+    fetch_raw=fetch_bytes, verify=verify_signed,
+):
     image = {
         key: source[key]
         for key in IMAGE_KEPT
@@ -269,7 +292,13 @@ def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url
         sums = source.get("sums") or find_in_listing(
             fetch(source.get("listing", base)), source["sums_pattern"]
         )
-    name, version, published = pick_file(parse_sums(fetch(base + sums)), source["pattern"])
+    if "signature" in source:
+        data = fetch_raw(base + sums)
+        verify(data, fetch_raw(base + sums + source["signature"]["suffix"]), source["signature"]["signer"])
+        text = data.decode()
+    else:
+        text = fetch(base + sums)
+    name, version, published = pick_file(parse_sums(text), source["pattern"])
     url = base + name
     size, released = stat(url)
     version = source.get("version", version)
