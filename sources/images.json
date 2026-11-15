@@ -6362,5 +6362,21 @@
   "desktop": "none",
   "kind": "preinstalled",
   "media": "usb"
+ },
+ {
+  "id": "kicksecure-lxqt-x86_64",
+  "family": "kicksecure",
+  "name": "Kicksecure",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.kicksecure.com/",
+  "edition": "LXQt",
+  "folders": "https://download.kicksecure.com/iso/",
+  "folder_pattern": "\\d+(?:\\.\\d+)+",
+  "sums_pattern": "Kicksecure-LXQt-[\\d.]+\\.Intel_AMD64\\.iso\\.sha512sums",
+  "pattern": "Kicksecure-LXQt-([\\d.]+)\\.Intel_AMD64\\.iso",
+  "desktop": "lxqt",
+  "kind": "live",
+  "media": "usb"
  }
 ]

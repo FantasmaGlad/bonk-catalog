@@ -1179,5 +1179,17 @@
    "boards",
    "homelab"
   ]
+ },
+ {
+  "id": "kicksecure",
+  "name": "Kicksecure",
+  "category": "debian",
+  "icon": "kicksecure.png",
+  "homepage": "https://www.kicksecure.com/",
+  "icon_source": "https://www.kicksecure.com/favicon.svg",
+  "uses": [
+   "security",
+   "privacy"
+  ]
  }
 ]

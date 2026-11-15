@@ -43,7 +43,7 @@ WORKERS = 8
 USER_AGENT = "bonk-catalog"
 PUBLIC_KEYS = [Path(__file__).resolve().parent.parent / "keys" / name for name in ("courante.pub.pem", "secours.pub.pem")]
 TEXT_LIMIT = 4 << 20
-SUMS_LINE = re.compile(r"^([0-9a-fA-F]{64})\s+\*?(\S+)$")
+SUMS_LINE = re.compile(r"^([0-9a-fA-F]{128}|[0-9a-fA-F]{64})\s+\*?(\S+)$")
 SUMS_BSD = re.compile(r"^SHA256 \((.+)\) = ([0-9a-fA-F]{64})$")
 
 
@@ -269,10 +269,18 @@ def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url
         sums = source.get("sums") or find_in_listing(
             fetch(source.get("listing", base)), source["sums_pattern"]
         )
-    name, version, sha256 = pick_file(parse_sums(fetch(base + sums)), source["pattern"])
+    name, version, published = pick_file(parse_sums(fetch(base + sums)), source["pattern"])
     url = base + name
     size, released = stat(url)
     version = source.get("version", version)
+    previous = previous or {}
+    if len(published) == 64:
+        sha256 = published
+    elif previous.get("url") == url and previous.get("size_bytes") == size:
+        sha256 = previous["sha256"]
+    else:
+        # Only a SHA-512 list (Kicksecure): the SHA-256 is computed while checking it.
+        sha256 = compute(url, "sha512", published)
     image.update(version=version, released=released, url=url, sha256=sha256, size_bytes=size)
     return image
 
