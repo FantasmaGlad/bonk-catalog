@@ -188,6 +188,30 @@ class Listing(unittest.TestCase):
         self.assertEqual(image["url"], "https://mirror/f-1.iso")
 
 
+class Folders(unittest.TestCase):
+    SOURCE = {
+        "id": "oi", "family": "oi", "name": "OI", "channel": "stable", "arch": "x86_64", "homepage": "https://h/",
+        "folders": "https://h/hipster/", "folder_pattern": r"\d{8}",
+        "sums_pattern": r"oi-gui-\d{8}\.usb\.sha256sum", "pattern": r"oi-gui-(\d{8})\.usb",
+    }
+
+    def test_the_newest_folder_holding_the_image_is_chosen(self):
+        pages = {
+            "https://h/hipster/": '<a href="./20260430/">x</a><a href="./20261030/">x</a><a href="./20261107/">x</a><a href="./test/">x</a>',
+            "https://h/hipster/20261107/": "oi-cloud-20261107.img.zst.sha256sum",
+            "https://h/hipster/20261030/": "oi-gui-20261030.usb.sha256sum",
+            "https://h/hipster/20261030/oi-gui-20261030.usb.sha256sum": f"{HASH_A}  oi-gui-20261030.usb",
+        }
+        image = generer.resolve(self.SOURCE, fetch=pages.__getitem__, stat=lambda _: (5, "2026-10-30"))
+        self.assertEqual(image["url"], "https://h/hipster/20261030/oi-gui-20261030.usb")
+        self.assertEqual((image["version"], image["sha256"]), ("20261030", HASH_A))
+
+    def test_no_folder_with_the_image_is_an_error(self):
+        pages = {"https://h/hipster/": '<a href="./20261107/">x</a>', "https://h/hipster/20261107/": "autre"}
+        with self.assertRaisesRegex(generer.SourceError, "no folder holds"):
+            generer.resolve(self.SOURCE, fetch=pages.__getitem__, stat=None)
+
+
 class ListingOrder(unittest.TestCase):
     def test_the_newest_hash_file_is_chosen_by_number(self):
         listing = "F-9-CHECKSUM F-10-CHECKSUM F-10-CHECKSUM"

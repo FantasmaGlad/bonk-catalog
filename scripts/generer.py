@@ -122,6 +122,20 @@ def find_in_listing(listing, pattern):
     return max(names, key=lambda name: (version_key(name), name))
 
 
+def newest_folder(source, fetch):
+    """The newest folder of the publisher's listing that holds the hash file: a dated folder may receive
+    other images first (OpenIndiana opens its cloud images before its installers)."""
+    parent = source["folders"]
+    found = re.finditer(rf'href="(?:\./)?({source["folder_pattern"]})/"', fetch(parent))
+    for name in sorted({match[1] for match in found}, key=lambda name: (version_key(name), name), reverse=True):
+        base = f"{parent}{name}/"
+        try:
+            return base, find_in_listing(fetch(base), source["sums_pattern"])
+        except SourceError:
+            continue
+    raise SourceError(f"{parent}: no folder holds a file matching {source['sums_pattern']}")
+
+
 def resolve_computed(source, image, previous, compute):
     """The publisher lists no SHA-256 (Microsoft evaluation images, TempleOS): it is computed once from
     its own file, and kept as long as the address and the size do not change."""
@@ -243,12 +257,16 @@ def resolve(source, fetch=fetch_text, stat=head, previous=None, compute=hash_url
         return resolve_computed(source, image, previous or {}, compute)
     if "page" in source or "latest" in source:
         return resolve_read(source, image, previous or {}, fetch, stat, compute)
-    base = source["base"]
+    if "folders" in source:
+        base, sums = newest_folder(source, fetch)
+    else:
+        base = source["base"]
     if not base.startswith("https://"):
         raise SourceError(f"{base}: not https")
-    sums = source.get("sums") or find_in_listing(
-        fetch(source.get("listing", base)), source["sums_pattern"]
-    )
+    if "folders" not in source:
+        sums = source.get("sums") or find_in_listing(
+            fetch(source.get("listing", base)), source["sums_pattern"]
+        )
     name, version, sha256 = pick_file(parse_sums(fetch(base + sums)), source["pattern"])
     url = base + name
     size, released = stat(url)

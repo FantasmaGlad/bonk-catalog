@@ -1130,5 +1130,17 @@
   "uses": [
    "office"
   ]
+ },
+ {
+  "id": "openindiana",
+  "name": "OpenIndiana",
+  "category": "independent",
+  "icon": "openindiana.png",
+  "homepage": "https://www.openindiana.org/",
+  "icon_source": "https://www.openindiana.org/oi_small.svg",
+  "uses": [
+   "expert",
+   "server"
+  ]
  }
 ]
