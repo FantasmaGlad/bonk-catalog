@@ -11,6 +11,7 @@ import concurrent.futures
 import hashlib
 import html
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -57,7 +58,12 @@ class SourceError(Exception):
 
 
 def request(url, method="GET"):
-    req = urllib.request.Request(url, method=method, headers={"User-Agent": USER_AGENT})
+    headers = {"User-Agent": USER_AGENT}
+    # Without a token GitHub allows 60 API calls an hour per address, shared by every runner on it.
+    token = os.environ.get("GH_TOKEN")
+    if token and url.startswith("https://api.github.com/"):
+        headers["Authorization"] = f"Bearer {token}"
+    req = urllib.request.Request(url, method=method, headers=headers)
     return urllib.request.urlopen(req, timeout=TIMEOUT_SECONDS)
 
 
