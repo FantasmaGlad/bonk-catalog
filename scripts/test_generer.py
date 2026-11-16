@@ -268,6 +268,19 @@ class Signed(unittest.TestCase):
             self.assertTrue((keys / f"{signer}.asc").is_file(), signer)
 
 
+class Duplicates(unittest.TestCase):
+    def test_a_duplicate_identifier_is_refused(self):
+        family = {"id": "ubuntu", "name": "Ubuntu", "category": "ubuntu", "icon": "ubuntu.png", "uses": ["office"]}
+        taxonomy = {"uses": [{"id": "office"}], "bases": [{"id": "ubuntu"}]}
+        errors = generer.source_errors([family], [SOURCE, dict(SOURCE)], taxonomy)
+        self.assertIn(f"image {SOURCE['id']}: duplicate identifier", errors)
+
+    def test_the_published_sources_have_unique_identifiers(self):
+        sources = generer.json.loads((Path(generer.__file__).resolve().parents[1] / "sources/images.json").read_text())
+        ids = [source["id"] for source in sources]
+        self.assertEqual(len(ids), len(set(ids)))
+
+
 class ListingOrder(unittest.TestCase):
     def test_the_newest_hash_file_is_chosen_by_number(self):
         listing = "F-9-CHECKSUM F-10-CHECKSUM F-10-CHECKSUM"

@@ -580,6 +580,11 @@ def taxonomy_errors(taxonomy):
 def source_errors(families, sources, taxonomy):
     """Mistakes a reviewer would miss: unknown names in the closed lists, memory without its source."""
     errors, known = taxonomy_errors(taxonomy), {family["id"] for family in families}
+    seen = set()
+    for source in sources:
+        if source["id"] in seen:
+            errors.append(f"image {source['id']}: duplicate identifier")
+        seen.add(source["id"])
     uses = {term.get("id") for term in taxonomy.get("uses", [])}
     bases = {term.get("id") for term in taxonomy.get("bases", [])}
     for family in families:
