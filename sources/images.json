@@ -948,25 +948,6 @@
   }
  },
  {
-  "id": "debian-11-netinst-x86_64",
-  "family": "debian",
-  "name": "Debian",
-  "channel": "archive",
-  "arch": "x86_64",
-  "homepage": "https://www.debian.org/",
-  "base": "https://cdimage.debian.org/cdimage/archive/11.11.0/amd64/iso-cd/",
-  "pattern": "debian-(11\\.11\\.0)-amd64-netinst\\.iso",
-  "edition": "netinst",
-  "sums": "SHA256SUMS",
-  "desktop": "choice",
-  "kind": "netinst",
-  "media": "usb",
-  "signature": {
-   "suffix": ".sign",
-   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
-  }
- },
- {
   "id": "debian-10-netinst-x86_64",
   "family": "debian",
   "name": "Debian",
