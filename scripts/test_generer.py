@@ -314,6 +314,20 @@ class Read(unittest.TestCase):
         )
         self.assertEqual(image["url"], "https://h/l/a_26.8.3_x.img")
 
+    def test_a_share_listing_gives_the_address_and_the_hash_file_by_number(self):
+        listing = '{"data":[{"id":686,"name":"G-QUAKE.iso","type":"file"},{"id":687,"name":"G-QUAKE.iso.sha256sum"}]}'
+        pages = {"https://k/559": listing, "https://k/687/download": f"{HASH_A}  G-QUAKE.iso"}
+        image = self.resolve(
+            {
+                "page": "https://k/559",
+                "pattern": r'"id":(?P<iso>\d+),"name":"(?P<file>G-(?P<version>[A-Z]+)\.iso)",.*?"id":(?P<sums>\d+),"name":"G-[A-Z]+\.iso\.sha256sum"',
+                "url_template": "https://k/{iso}/download",
+                "hash_template": "https://k/{sums}/download",
+            },
+            pages.__getitem__,
+        )
+        self.assertEqual((image["url"], image["version"], image["sha256"]), ("https://k/686/download", "QUAKE", HASH_A))
+
     def test_a_published_hash_that_is_not_sha256_is_refused(self):
         with self.assertRaises(generer.SourceError):
             self.resolve(

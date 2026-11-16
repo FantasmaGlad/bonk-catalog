@@ -3813,6 +3813,20 @@
   "media": "usb"
  },
  {
+  "id": "glf-os-stable-x86_64",
+  "family": "glf-os",
+  "name": "GLF OS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.glfos.org/",
+  "page": "https://kdrive.infomaniak.com/2/app/280110/share/669a1cd6-21fd-4c5c-9ba0-c2f13b7bb18e/files/559/files",
+  "pattern": "\"id\":(?P<iso>\\d+),\"name\":\"(?P<file>GLF-OS-(?P<version>[A-Z]+(?:-[A-Z]+)*)\\.iso)\",.*?\"id\":(?P<sums>\\d+),\"name\":\"GLF-OS-[A-Z-]+\\.iso\\.sha256sum\"",
+  "url_template": "https://kdrive.infomaniak.com/2/app/280110/share/669a1cd6-21fd-4c5c-9ba0-c2f13b7bb18e/files/{iso}/download",
+  "hash_template": "https://kdrive.infomaniak.com/2/app/280110/share/669a1cd6-21fd-4c5c-9ba0-c2f13b7bb18e/files/{sums}/download",
+  "note": "Secure Boot must be disabled. The installation needs an internet connection.",
+  "media": "usb"
+ },
+ {
   "id": "lakka-generic-x86_64",
   "family": "lakka",
   "name": "Lakka",
