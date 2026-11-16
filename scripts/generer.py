@@ -23,6 +23,7 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 import grub
+from conformite import catalog_errors
 
 SCHEMA_VERSION = 2
 FAMILY_OPTIONAL = ("parent", "homepage", "icon_source", "uses", "ram_mb", "ram_source")
@@ -674,6 +675,11 @@ def main():
         add_grub(catalog, args.output, previous, failures)
     if not any("url" in image for image in catalog["images"]):
         print("no image could be read: nothing to publish", file=sys.stderr)
+        return 1
+    refused = catalog_errors(catalog)
+    for error in refused:
+        print(f"INVALID {error}", file=sys.stderr)
+    if refused:
         return 1
     write_site(root, args.output, catalog, sources, failures)
     for failure in failures:
