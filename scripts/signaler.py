@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-"""Keep one open issue describing the sources that failed, and close it when none do."""
-
 import json
 import subprocess
 import sys
