@@ -1191,5 +1191,16 @@
    "security",
    "privacy"
   ]
+ },
+ {
+  "id": "glf-os",
+  "name": "GLF OS",
+  "category": "independent",
+  "icon": "glf-os.png",
+  "homepage": "https://www.glfos.org/",
+  "icon_source": "https://framagit.org/gaming-linux-fr/glf-os/glf-os/-/blob/testing/modules/glf-apps/glfos-branding/assets/logo/logo-128.png",
+  "uses": [
+   "gaming"
+  ]
  }
 ]

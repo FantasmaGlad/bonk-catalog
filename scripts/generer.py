@@ -224,7 +224,11 @@ def resolve_read(source, image, previous, fetch, stat, compute):
     # A listing that keeps every release names the newest anywhere: `newest` picks it by version.
     match = max(matches, key=lambda m: version_key(m["version"])) if source.get("newest") else matches[0]
     groups = match.groupdict()
-    url = source.get("url_prefix", "") + groups.get("url", match[0])
+    # A share that names its files by number (kDrive) gives the address and the hash file from the listing.
+    if "url_template" in source:
+        url = source["url_template"].format(**groups)
+    else:
+        url = source.get("url_prefix", "") + groups.get("url", match[0])
     if url.startswith("//"):
         url = "https:" + url
     if not url.startswith("https://"):
@@ -238,6 +242,8 @@ def resolve_read(source, image, previous, fetch, stat, compute):
         sha256 = groups["sha256"].lower()
         if not re.fullmatch(r"[0-9a-f]{64}", sha256):
             raise SourceError(f"{url}: published SHA-256 is not 64 hexadecimal digits")
+    elif "hash_template" in source:
+        sha256 = first_hash(fetch(source["hash_template"].format(**groups)), 64, groups.get("file"))
     elif "hash_suffix" in source:
         sha256 = first_hash(fetch(hash_base + source["hash_suffix"]), 64, url.rsplit("/", 1)[-1])
     elif previous.get("url") == url and previous.get("size_bytes") == size_bytes:
