@@ -7,6 +7,8 @@ reported, so one publisher's outage neither removes an image nor publishes an un
 """
 
 import argparse
+import atexit
+import calendar
 import concurrent.futures
 import hashlib
 import html
@@ -40,6 +42,11 @@ DESKTOPS = (
 KINDS = ("live", "installer", "netinst", "preinstalled", "rescue")
 MEDIA = ("usb", "sd", "optical")
 LIFETIME_SECONDS = 14 * 24 * 3600
+# Past a month without one good read, the address has moved: the entry leaves rather than show a dead link.
+STALE_DAYS = 30
+PINNED_KEYS = Path(__file__).resolve().parents[1] / "keys" / "editeurs"
+FEDORA_SECURITY = "https://fedoraproject.org/security/"
+FEDORA_KEYS = "https://fedoraproject.org/fedora.gpg"
 TIMEOUT_SECONDS = 60
 WORKERS = 8
 USER_AGENT = "bonk-catalog"
@@ -143,11 +150,13 @@ def newest_folder(source, fetch):
     raise SourceError(f"{parent}: no folder holds a file matching {source['sums_pattern']}")
 
 
-def verify_signed(data, signature, signer, keys=Path(__file__).resolve().parents[1] / "keys" / "editeurs"):
+def verify_signed(data, signature, signer, keys=PINNED_KEYS):
     """The bytes the publisher's key certifies: `data` itself for a detached `signature`, the signed part of
     `data` when it is signed in clear (`signature` is None); text outside that part is never returned. The key
     is pinned in `keys/<fingerprint>.asc`; a signing subkey of that key is accepted."""
     key = keys / f"{signer}.asc"
+    if not key.is_file() and (FETCHED_KEYS / key.name).is_file():
+        key = FETCHED_KEYS / key.name
     with tempfile.TemporaryDirectory() as work:
         folder = Path(work)
         (folder / "sums").write_bytes(data)
@@ -175,16 +184,72 @@ def verify_signed(data, signature, signer, keys=Path(__file__).resolve().parents
         return (folder / "signed").read_bytes() if signature is None else data
 
 
+# Keys read from the publisher during this run; never written to the repository.
+FETCHED_KEYS = Path(tempfile.mkdtemp(prefix="bonk-cles-"))
+atexit.register(shutil.rmtree, FETCHED_KEYS, ignore_errors=True)
+
+
+def key_owners(keys):
+    """User id of each key in `keys`, by fingerprint."""
+    owners = {}
+    for key in sorted(keys.glob("*.asc")):
+        listing = subprocess.run(["gpg", "--show-keys", "--with-colons", str(key)], capture_output=True)
+        fingerprint = None
+        for line in listing.stdout.decode("utf-8", "replace").splitlines():
+            fields = line.split(":")
+            if fields[0] == "fpr" and fingerprint is None:
+                fingerprint = fields[9]
+            elif fields[0] == "uid" and fingerprint:
+                owners.setdefault(fingerprint, []).append(fields[9])
+    return owners
+
+
+def fedora_signer(release, fetch_text=fetch_text, fetch_raw=fetch_bytes, pinned=PINNED_KEYS):
+    """Fedora signs each release with its own key. A pinned key named `Fedora (N)` is used first; otherwise the
+    fingerprint printed under `Fedora N` on fedoraproject.org/security selects, in fedoraproject.org/fedora.gpg,
+    the key that carries both that fingerprint and that user id."""
+    owner = f"Fedora ({release}) <fedora-{release}-primary@fedoraproject.org>"
+    for fingerprint, uids in key_owners(pinned).items():
+        if owner in uids:
+            return fingerprint
+    page = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", fetch_text(FEDORA_SECURITY)))
+    found = re.search(rf"\bFedora {re.escape(release)} ID: \S+ \S+ Fingerprint: ((?:[0-9A-F]{{4}} ?){{10}})", page)
+    if not found:
+        raise SourceError(f"{FEDORA_SECURITY}: no fingerprint for Fedora {release}")
+    fingerprint = found[1].replace(" ", "")
+    with tempfile.TemporaryDirectory() as work:
+        home = Path(work)
+        home.chmod(0o700)
+        (home / "keys").write_bytes(fetch_raw(FEDORA_KEYS))
+        gpg = ["gpg", "--batch", "--homedir", str(home)]
+        subprocess.run(gpg + ["--import", str(home / "keys")], capture_output=True)
+        exported = subprocess.run(gpg + ["--armor", "--export", fingerprint], capture_output=True).stdout
+    candidate = FETCHED_KEYS / f"{fingerprint}.asc"
+    candidate.write_bytes(exported)
+    if owner not in key_owners(FETCHED_KEYS).get(fingerprint, []):
+        candidate.unlink()
+        raise SourceError(f"{FEDORA_KEYS}: no key {fingerprint} for {owner}")
+    return fingerprint
+
+
+def signer_of(signature):
+    if "signer" in signature:
+        return signature["signer"]
+    if signature.get("signer_from") == "fedora":
+        return fedora_signer(signature["release"])
+    raise SourceError("signature without a signer")
+
+
 def signed_text(source, address, fetch_raw, verify):
     """The hash file at `address`, read only once its signature holds. `clearsigned`: the file carries its
     own signature, or a signed copy is published at that address (FreeBSD, on its own website)."""
     signature = source["signature"]
     if signature.get("clearsigned") is True:
-        return verify(fetch_raw(address), None, signature["signer"]).decode()
+        return verify(fetch_raw(address), None, signer_of(signature)).decode()
     if "clearsigned" in signature:
-        return verify(fetch_raw(signature["clearsigned"]), None, signature["signer"]).decode()
+        return verify(fetch_raw(signature["clearsigned"]), None, signer_of(signature)).decode()
     data = fetch_raw(address)
-    return verify(data, fetch_raw(address + signature["suffix"]), signature["signer"]).decode()
+    return verify(data, fetch_raw(address + signature["suffix"]), signer_of(signature)).decode()
 
 
 def resolve_computed(source, image, previous, compute):
@@ -469,9 +534,14 @@ def build(sources, families, icon_hashes, previous, now, compute=hash_url):
         if image is not None:
             images.append(dict(image, status="online", checked=today))
             continue
+        old = kept.get(source["id"])
+        age = stale_days(old, now) if old else 0
+        if old and age > STALE_DAYS:
+            failures.append({"id": source["id"], "error": f"{error}; removed after {age} days without a good read"})
+            continue
         failures.append({"id": source["id"], "error": str(error)})
-        if source["id"] in kept:
-            images.append(dict(kept[source["id"]], status="stale"))
+        if old:
+            images.append(dict(old, status="stale"))
     catalog = {
         "schema_version": SCHEMA_VERSION,
         # The clock only moves forward between runs: a mirror cannot pass off an older file.
@@ -481,6 +551,15 @@ def build(sources, families, icon_hashes, previous, now, compute=hash_url):
         "images": images,
     }
     return catalog, failures
+
+
+def stale_days(image, now):
+    """Days since the last good read; an entry without that date counts from today."""
+    try:
+        checked = calendar.timegm(time.strptime(image["checked"], "%Y-%m-%d"))
+    except (KeyError, ValueError):
+        return 0
+    return int((now - checked) // 86400)
 
 
 def family_entry(family, icon_hashes):

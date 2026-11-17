@@ -32,9 +32,9 @@
 ## How it works
 
 - No image is hosted here. Links and hashes are read every day from each publisher: its hash file, or, when it publishes none, the image downloaded and hashed once per address. A system whose publisher gives no stable link is listed with its official page only, without a link or a hash.
-- When a publisher signs its hash file (Ubuntu, Debian, Fedora, openSUSE, Kicksecure, FreeBSD), the signature is checked with its key, pinned in `keys/editeurs/`, before any hash is read.
+- When a publisher signs its hash file (Ubuntu, Debian, Fedora, openSUSE, Kicksecure, FreeBSD), the signature is checked with its key, pinned in `keys/editeurs/`, before any hash is read. A Fedora release whose key is not pinned yet uses the key listed for it on fedoraproject.org/security.
 - Bonk checks the signature with keys built into it, downloads from the publisher, then checks the hash before writing.
-- Each image carries `status` and `checked`: `online` when its publisher was read on that date, `stale` when it could not be and the last entry was kept. An issue lists the sources that failed.
+- Each image carries `status` and `checked`: `online` when its publisher was read on that date, `stale` when it could not be and the last entry was kept. After 30 days without a good read the entry is removed. An issue lists the sources that failed.
 - Usages and bases are listed with their English and French labels in `sources/taxonomy.json`: a new one needs no Bonk release.
 - Newer releases found at a publisher but not yet listed are reported in `v2/updates.json` and in an issue.
 - The catalog expires after 14 days: if publishing stops, Bonk refuses stale links.
