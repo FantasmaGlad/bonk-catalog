@@ -967,6 +967,25 @@
   }
  },
  {
+  "id": "debian-9-netinst-x86_64",
+  "family": "debian",
+  "name": "Debian",
+  "channel": "archive",
+  "arch": "x86_64",
+  "homepage": "https://www.debian.org/",
+  "base": "https://cdimage.debian.org/cdimage/archive/9.13.0/amd64/iso-cd/",
+  "pattern": "debian-(9\\.13\\.0)-amd64-netinst\\.iso",
+  "edition": "netinst",
+  "sums": "SHA256SUMS",
+  "desktop": "choice",
+  "kind": "netinst",
+  "media": "usb",
+  "signature": {
+   "suffix": ".sign",
+   "signer": "DF9B9C49EAA9298432589D76DA87E80D6294BE9B"
+  }
+ },
+ {
   "id": "debian-11-netinst-x86_64",
   "family": "debian",
   "name": "Debian",
@@ -2504,6 +2523,25 @@
   }
  },
  {
+  "id": "freebsd-14.3-disc1-x86_64",
+  "family": "freebsd",
+  "name": "FreeBSD",
+  "channel": "archive",
+  "arch": "x86_64",
+  "homepage": "https://www.freebsd.org/",
+  "base": "https://archive.freebsd.org/old-releases/ISO-IMAGES/14.3/",
+  "pattern": "FreeBSD-(14\\.3)-RELEASE-amd64-disc1\\.iso",
+  "edition": "disc1",
+  "sums": "CHECKSUM.SHA256-FreeBSD-14.3-RELEASE-amd64",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "usb",
+  "signature": {
+   "clearsigned": "https://www.freebsd.org/releases/14.3R/checksums/CHECKSUM.SHA256-FreeBSD-14.3-RELEASE-amd64.asc",
+   "signer": "82563B84D0620EDC0DFB86413897F2E22E65AD3F"
+  }
+ },
+ {
   "id": "windows-11-enterprise-26h2-x86_64",
   "family": "windows",
   "name": "Windows",
@@ -2977,6 +3015,25 @@
   "note": "Hash computed from the publisher's file and checked against its SHA-512.",
   "desktop": "choice",
   "kind": "netinst",
+  "media": "usb",
+  "signature": {
+   "suffix": ".asc",
+   "signer": "AD485664E901B867051AB15F35A2F86E29B700A4"
+  }
+ },
+ {
+  "id": "opensuse-leap-15.6-dvd-x86_64",
+  "family": "opensuse",
+  "name": "openSUSE Leap",
+  "channel": "archive",
+  "arch": "x86_64",
+  "homepage": "https://www.opensuse.org/",
+  "base": "https://download.opensuse.org/distribution/leap/15.6/iso/",
+  "pattern": "openSUSE-Leap-(15\\.6)-DVD-x86_64-Build[\\d.]+-Media\\.iso",
+  "edition": "dvd",
+  "sums": "openSUSE-Leap-15.6-DVD-x86_64-Build710.3-Media.iso.sha256",
+  "desktop": "choice",
+  "kind": "installer",
   "media": "usb",
   "signature": {
    "suffix": ".asc",
