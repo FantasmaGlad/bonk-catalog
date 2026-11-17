@@ -3500,11 +3500,11 @@
   "arch": "x86_64",
   "homepage": "https://www.haiku-os.org/",
   "version": "R1 beta 6",
-  "page": "https://www.haiku-os.org/get-haiku/",
-  "pattern": "(?P<url>https://[^\\\"' ]+haiku-r1beta6-x86_64-anyboot\\.iso)",
+  "pattern": "(?P<url>https://\\S+/haiku-r1beta6-x86_64-anyboot\\.iso)",
   "hash_suffix": ".sha256",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "latest": "https://haiku-release.cdn.haiku-os.org/r1beta6/haiku-r1beta6-x86_64-anyboot.iso"
  },
  {
   "id": "omnios-stable-x86_64",
@@ -4126,13 +4126,14 @@
   "channel": "stable",
   "arch": "x86_64",
   "homepage": "https://www.linuxliteos.com/",
-  "page": "https://www.linuxliteos.com/download.php",
-  "pattern": "files/(?P<url>(?P<version>[\\d.]+)/linux-lite-[\\d.]+-64bit\\.iso)\\.torrent",
+  "page": "https://sourceforge.net/projects/linux-lite/rss?path=/",
+  "pattern": "files/(?P<url>(?P<version>[\\d.]+)/linux-lite-[\\d.]+-64bit\\.iso)/download",
   "url_prefix": "https://downloads.sourceforge.net/project/linux-lite/",
   "hash_suffix": ".sha256",
   "desktop": "xfce",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "newest": true
  },
  {
   "id": "kdeneon-user-x86_64",
@@ -5388,14 +5389,15 @@
   "channel": "stable",
   "arch": "x86_64",
   "homepage": "https://rhinolinux.org/",
-  "page": "https://rhinolinux.org/download",
+  "page": "https://sourceforge.net/projects/rhino-linux-builder/rss?path=/",
   "pattern": "files/(?P<url>(?P<version>[\\d.]+)/Rhino-Linux-[\\d.]+-amd64\\.iso)/download",
   "url_prefix": "https://downloads.sourceforge.net/project/rhino-linux-builder/",
   "edition": "unicorn",
   "hash_suffix": ".sha256",
   "desktop": "xfce",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "newest": true
  },
  {
   "id": "rhino-aarch64",
@@ -5404,14 +5406,15 @@
   "channel": "stable",
   "arch": "aarch64",
   "homepage": "https://rhinolinux.org/",
-  "page": "https://rhinolinux.org/download",
+  "page": "https://sourceforge.net/projects/rhino-linux-builder/rss?path=/",
   "pattern": "files/(?P<url>(?P<version>[\\d.]+)/Rhino-Linux-[\\d.]+-arm64\\.iso)/download",
   "url_prefix": "https://downloads.sourceforge.net/project/rhino-linux-builder/",
   "edition": "unicorn",
   "hash_suffix": ".sha256",
   "desktop": "xfce",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "newest": true
  },
  {
   "id": "nitrux-mesa-x86_64",
@@ -5537,8 +5540,8 @@
   "channel": "stable",
   "arch": "x86_64",
   "homepage": "https://www.q4os.org/",
-  "page": "https://www.q4os.org/downloads1.html",
-  "pattern": "[0-9a-f]{32} (?P<url>q4os-(?P<version>[\\d.]+)-x64\\.r\\d+\\.iso)<",
+  "page": "https://sourceforge.net/projects/q4os/rss?path=/stable",
+  "pattern": "files/stable/(?P<url>q4os-(?P<version>[\\d.]+)-x64\\.r\\d+\\.iso)/download",
   "url_prefix": "https://downloads.sourceforge.net/project/q4os/stable/",
   "edition": "plasma",
   "hash_replace": [
@@ -5551,7 +5554,8 @@
   "ram_mb": 2048,
   "ram_source": "https://www.q4os.org/downloads1.html",
   "media": "usb",
-  "desktop": "kde"
+  "desktop": "kde",
+  "newest": true
  },
  {
   "id": "q4os-trinity-x86_64",
@@ -5560,8 +5564,8 @@
   "channel": "stable",
   "arch": "x86_64",
   "homepage": "https://www.q4os.org/",
-  "page": "https://www.q4os.org/downloads1.html",
-  "pattern": "[0-9a-f]{32} (?P<url>q4os-(?P<version>[\\d.]+)-x64-tde\\.r\\d+\\.iso)<",
+  "page": "https://sourceforge.net/projects/q4os/rss?path=/stable",
+  "pattern": "files/stable/(?P<url>q4os-(?P<version>[\\d.]+)-x64-tde\\.r\\d+\\.iso)/download",
   "url_prefix": "https://downloads.sourceforge.net/project/q4os/stable/",
   "edition": "trinity",
   "hash_replace": [
@@ -5573,7 +5577,8 @@
   "kind": "live",
   "ram_mb": 512,
   "ram_source": "https://www.q4os.org/downloads1.html",
-  "media": "usb"
+  "media": "usb",
+  "newest": true
  },
  {
   "id": "q4os-trinity-install-cd-x86_64",
@@ -5582,8 +5587,8 @@
   "channel": "stable",
   "arch": "x86_64",
   "homepage": "https://www.q4os.org/",
-  "page": "https://www.q4os.org/downloads1.html",
-  "pattern": "[0-9a-f]{32} (?P<url>q4os-(?P<version>[\\d.]+)-x64-instcd\\.r\\d+\\.iso)<",
+  "page": "https://sourceforge.net/projects/q4os/rss?path=/stable",
+  "pattern": "files/stable/(?P<url>q4os-(?P<version>[\\d.]+)-x64-instcd\\.r\\d+\\.iso)/download",
   "url_prefix": "https://downloads.sourceforge.net/project/q4os/stable/",
   "edition": "trinity install-cd",
   "hash_replace": [
@@ -5595,7 +5600,8 @@
   "kind": "installer",
   "ram_mb": 512,
   "ram_source": "https://www.q4os.org/downloads1.html",
-  "media": "usb"
+  "media": "usb",
+  "newest": true
  },
  {
   "id": "q4os-trinity-install-cd-i686",
@@ -5604,8 +5610,8 @@
   "channel": "stable",
   "arch": "i686",
   "homepage": "https://www.q4os.org/",
-  "page": "https://www.q4os.org/downloads1.html",
-  "pattern": "[0-9a-f]{32} (?P<url>q4os-(?P<version>[\\d.]+)-i386-instcd\\.r\\d+\\.iso)<",
+  "page": "https://sourceforge.net/projects/q4os/rss?path=/stable",
+  "pattern": "files/stable/(?P<url>q4os-(?P<version>[\\d.]+)-i386-instcd\\.r\\d+\\.iso)/download",
   "url_prefix": "https://downloads.sourceforge.net/project/q4os/stable/",
   "edition": "trinity install-cd",
   "hash_replace": [
@@ -5617,7 +5623,8 @@
   "kind": "installer",
   "ram_mb": 512,
   "ram_source": "https://www.q4os.org/downloads1.html",
-  "media": "usb"
+  "media": "usb",
+  "newest": true
  },
  {
   "id": "centos-stream-10-dvd1-x86_64",
@@ -6257,13 +6264,14 @@
   "channel": "stable",
   "arch": "x86_64",
   "homepage": "https://www.ghostbsd.org/",
-  "page": "https://www.ghostbsd.org/download",
-  "pattern": "(?P<url>https://download\\.ghostbsd\\.org/releases/amd64/[\\w.]+/GhostBSD-(?P<version>[\\w.]+)\\.iso)\"",
+  "page": "https://download.ghostbsd.org/releases/amd64/latest/",
+  "pattern": "href=\"(?P<url>GhostBSD-(?P<version>[\\w.]+)\\.iso)\"",
   "edition": "mate",
   "hash_suffix": ".sha256",
   "desktop": "mate",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "url_prefix": "https://download.ghostbsd.org/releases/amd64/latest/"
  },
  {
   "id": "ghostbsd-xfce-x86_64",
@@ -6272,13 +6280,14 @@
   "channel": "stable",
   "arch": "x86_64",
   "homepage": "https://www.ghostbsd.org/",
-  "page": "https://www.ghostbsd.org/download",
-  "pattern": "(?P<url>https://download\\.ghostbsd\\.org/releases/amd64/[\\w.]+/GhostBSD-(?P<version>[\\w.]+)-XFCE\\.iso)\"",
+  "page": "https://download.ghostbsd.org/releases/amd64/latest/",
+  "pattern": "href=\"(?P<url>GhostBSD-(?P<version>[\\w.]+)-XFCE\\.iso)\"",
   "edition": "xfce",
   "hash_suffix": ".sha256",
   "desktop": "xfce",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "url_prefix": "https://download.ghostbsd.org/releases/amd64/latest/"
  },
  {
   "id": "dragonfly-img-x86_64",
@@ -6359,13 +6368,14 @@
   "channel": "stable",
   "arch": "x86_64",
   "homepage": "https://www.system-rescue.org/",
-  "page": "https://www.system-rescue.org/Download/",
+  "page": "https://sourceforge.net/projects/systemrescuecd/rss?path=/sysresccd-x86",
   "pattern": "sysresccd-x86/(?P<url>(?P<version>[\\d.]+)/systemrescue-[\\d.]+-amd64\\.iso)/download",
   "url_prefix": "https://downloads.sourceforge.net/project/systemrescuecd/sysresccd-x86/",
   "hash_suffix": ".sha256",
   "desktop": "xfce",
   "media": "usb",
-  "kind": "rescue"
+  "kind": "rescue",
+  "newest": true
  },
  {
   "id": "clonezilla-live-x86_64",
@@ -6611,13 +6621,14 @@
   "channel": "stable",
   "arch": "x86_64",
   "homepage": "https://batocera.org/download",
-  "page": "https://batocera.org/download",
-  "pattern": "(?P<url>https://mirrors\\.o2switch\\.fr/batocera/x86_64/stable/last/batocera-x86_64-(?P<version>[\\d.]+)-\\d+\\.img\\.gz)\\.md5",
+  "page": "https://mirrors.o2switch.fr/batocera/x86_64/stable/last/",
+  "pattern": "href=\"(?P<url>batocera-x86_64-(?P<version>[\\d.]+)-\\d+\\.img\\.gz)\"",
   "verify_suffix": ".md5",
   "note": "Hash computed from the publisher's file.",
   "desktop": "none",
   "kind": "preinstalled",
-  "media": "usb"
+  "media": "usb",
+  "url_prefix": "https://mirrors.o2switch.fr/batocera/x86_64/stable/last/"
  },
  {
   "id": "batocera-rpi4-aarch64",
@@ -6627,13 +6638,14 @@
   "arch": "aarch64",
   "homepage": "https://batocera.org/download",
   "edition": "Raspberry Pi 4",
-  "page": "https://batocera.org/download",
-  "pattern": "(?P<url>https://mirrors\\.o2switch\\.fr/batocera/bcm2711/stable/last/batocera-bcm2711-(?P<version>[\\d.]+)-\\d+\\.img\\.gz)\\.md5",
+  "page": "https://mirrors.o2switch.fr/batocera/bcm2711/stable/last/",
+  "pattern": "href=\"(?P<url>batocera-bcm2711-(?P<version>[\\d.]+)-\\d+\\.img\\.gz)\"",
   "verify_suffix": ".md5",
   "note": "Hash computed from the publisher's file.",
   "desktop": "none",
   "kind": "preinstalled",
-  "media": "sd"
+  "media": "sd",
+  "url_prefix": "https://mirrors.o2switch.fr/batocera/bcm2711/stable/last/"
  },
  {
   "id": "batocera-rpi5-aarch64",
@@ -6643,13 +6655,14 @@
   "arch": "aarch64",
   "homepage": "https://batocera.org/download",
   "edition": "Raspberry Pi 5",
-  "page": "https://batocera.org/download",
-  "pattern": "(?P<url>https://mirrors\\.o2switch\\.fr/batocera/bcm2712/stable/last/batocera-bcm2712-(?P<version>[\\d.]+)-\\d+\\.img\\.gz)\\.md5",
+  "page": "https://mirrors.o2switch.fr/batocera/bcm2712/stable/last/",
+  "pattern": "href=\"(?P<url>batocera-bcm2712-(?P<version>[\\d.]+)-\\d+\\.img\\.gz)\"",
   "verify_suffix": ".md5",
   "note": "Hash computed from the publisher's file.",
   "desktop": "none",
   "kind": "preinstalled",
-  "media": "sd"
+  "media": "sd",
+  "url_prefix": "https://mirrors.o2switch.fr/batocera/bcm2712/stable/last/"
  },
  {
   "id": "chimera-gnome-x86_64",
