@@ -250,7 +250,7 @@ class Signed(unittest.TestCase):
 
     def test_the_hash_file_is_read_only_after_its_signature(self):
         seen = []
-        image = self.resolve(lambda data, signature, signer: seen.append((data, signature, signer)))
+        image = self.resolve(lambda data, signature, signer: seen.append((data, signature, signer)) or data)
         self.assertEqual(seen, [(self.SUMS, b"sig", "F" * 40)])
         self.assertEqual(image["sha256"], HASH_A)
 
@@ -266,6 +266,121 @@ class Signed(unittest.TestCase):
         keys = Path(generer.__file__).resolve().parents[1] / "keys/editeurs"
         for signer in {s["signature"]["signer"] for s in sources if "signature" in s}:
             self.assertTrue((keys / f"{signer}.asc").is_file(), signer)
+
+
+class SignedElsewhere(unittest.TestCase):
+    def test_a_clearsigned_hash_file_is_read_from_its_signed_part(self):
+        source = dict(SOURCE, signature={"clearsigned": True, "signer": "F" * 40})
+        raw = {"https://example.org/26.04/SHA256SUMS": b"signed"}
+        seen = []
+
+        def verify(data, signature, signer):
+            seen.append((data, signature, signer))
+            return f"{HASH_A} *ubuntu-26.04.1-desktop-amd64.iso\n".encode()
+
+        image = generer.resolve(source, fetch=None, stat=lambda _: (5, "2026-08-01"), fetch_raw=raw.__getitem__, verify=verify)
+        self.assertEqual(seen, [(b"signed", None, "F" * 40)])
+        self.assertEqual(image["sha256"], HASH_A)
+
+    def test_a_signed_copy_on_another_site_replaces_the_mirror_file(self):
+        copy = "https://www.example.org/26.04/CHECKSUM.asc"
+        source = dict(SOURCE, signature={"clearsigned": copy, "signer": "F" * 40})
+        raw = {copy: b"signed copy"}
+        verify = lambda data, signature, signer: f"SHA256 (ubuntu-26.04.1-desktop-amd64.iso) = {HASH_A}".encode()
+        image = generer.resolve(source, fetch=None, stat=lambda _: (5, "2026-08-01"), fetch_raw=raw.__getitem__, verify=verify)
+        self.assertEqual(image["sha256"], HASH_A)
+
+    def test_a_hash_file_next_to_the_image_is_signed_too(self):
+        source = {
+            **Read.SOURCE,
+            "latest": "https://l/leap.iso",
+            "pattern": "(?P<url>https://\\S+\\.iso)",
+            "verify_suffix": ".sha512",
+            "signature": {"suffix": ".asc", "signer": "F" * 40},
+        }
+        raw = {"https://l/leap-1.iso.sha512": b"sums", "https://l/leap-1.iso.sha512.asc": b"sig"}
+        seen = []
+
+        def verify(data, signature, signer):
+            seen.append((data, signature))
+            return f"{'c' * 128}  leap-1.iso".encode()
+
+        with mock.patch.object(generer, "request") as request:
+            request.return_value.__enter__.return_value.geturl.return_value = "https://l/leap-1.iso"
+            image = generer.resolve(
+                source, fetch=None, stat=lambda _: (5, "2026-01-02"), fetch_raw=raw.__getitem__, verify=verify,
+                compute=lambda url, algorithm, expected: HASH_B if expected == "c" * 128 else self.fail(expected),
+            )
+        self.assertEqual(seen, [(b"sums", b"sig")])
+        self.assertEqual(image["sha256"], HASH_B)
+
+
+class GpgvStatus(unittest.TestCase):
+    def test_a_user_id_that_is_not_utf8_does_not_hide_a_valid_signature(self):
+        signer = "F" * 40
+        status = b"[GNUPG:] GOODSIG 00 Patrick \xc0 Schleizer\n[GNUPG:] VALIDSIG " + b"A" * 40 + b" 2026 0 0 4 0 1 10 00 " + signer.encode() + b"\n"
+        answers = iter([
+            subprocess.CompletedProcess([], 0, b"", b""),
+            subprocess.CompletedProcess([], 0, status, b""),
+        ])
+        with tempfile.TemporaryDirectory() as keys, mock.patch.object(generer.subprocess, "run", lambda *a, **k: next(answers)):
+            Path(keys, f"{signer}.asc").write_text("key")
+            self.assertEqual(generer.verify_signed(b"sums", b"sig", signer, keys=Path(keys)), b"sums")
+
+
+@unittest.skipUnless(subprocess.run(["which", "gpgv"], capture_output=True).returncode == 0, "gpgv absent")
+class RealSignatures(unittest.TestCase):
+    """A throwaway key whose signing subkey signs, as the publishers do."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.work = tempfile.TemporaryDirectory()
+        cls.home = Path(cls.work.name, "gnupg")
+        cls.home.mkdir(mode=0o700)
+        cls.keys = Path(cls.work.name, "keys")
+        cls.keys.mkdir()
+        cls.gpg("--quick-gen-key", "Editeur <e@example.org>", "ed25519", "cert", "never")
+        listing = cls.gpg("--with-colons", "--list-keys").stdout
+        cls.primary = next(line.split(":")[9] for line in listing.splitlines() if line.startswith("fpr"))
+        cls.gpg("--quick-add-key", cls.primary, "ed25519", "sign", "never")
+        (cls.keys / f"{cls.primary}.asc").write_bytes(cls.gpg("--armor", "--export", cls.primary, text=False).stdout)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.work.cleanup()
+
+    @classmethod
+    def gpg(cls, *args, data=None, text=True):
+        command = ["gpg", "--batch", "--homedir", str(cls.home), "--passphrase", "", "--pinentry-mode", "loopback"]
+        result = subprocess.run(command + list(args), input=data, capture_output=True, text=text, check=True)
+        return result
+
+    def clearsign(self, text):
+        return self.gpg("--clearsign", data=text).stdout.encode()
+
+    def test_only_the_signed_part_of_a_clearsigned_file_is_kept(self):
+        signed = self.clearsign(f"{HASH_A}  a.iso\n")
+        smuggled = f"{HASH_B}  b.iso\n".encode() + signed + f"{HASH_B}  c.iso\n".encode()
+        kept = generer.verify_signed(smuggled, None, self.primary, keys=self.keys)
+        self.assertEqual(kept.decode().strip(), f"{HASH_A}  a.iso")
+
+    def test_a_changed_clearsigned_file_is_refused(self):
+        signed = self.clearsign(f"{HASH_A}  a.iso\n").replace(HASH_A.encode(), HASH_B.encode())
+        with self.assertRaises(generer.SourceError):
+            generer.verify_signed(signed, None, self.primary, keys=self.keys)
+
+    def test_a_detached_signature_by_the_subkey_holds_for_its_primary_key(self):
+        data = f"{HASH_A}  a.iso\n".encode()
+        signature = self.gpg("--detach-sign", data=data, text=False).stdout
+        self.assertEqual(generer.verify_signed(data, signature, self.primary, keys=self.keys), data)
+        with self.assertRaises(generer.SourceError):
+            generer.verify_signed(data + b"x", signature, self.primary, keys=self.keys)
+
+    def test_another_key_is_refused(self):
+        other = "0" * 40
+        (self.keys / f"{other}.asc").write_bytes((self.keys / f"{self.primary}.asc").read_bytes())
+        with self.assertRaises(generer.SourceError):
+            generer.verify_signed(self.clearsign("x\n"), None, other, keys=self.keys)
 
 
 class Duplicates(unittest.TestCase):

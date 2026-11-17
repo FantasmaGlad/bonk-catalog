@@ -1269,7 +1269,11 @@
   "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/45/Workstation/x86_64/iso/",
   "desktop": "gnome",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "4F50A6114CD5C6976A7F1179655A4B02F577861E"
+  }
  },
  {
   "id": "fedora-45-kde-x86_64",
@@ -1285,7 +1289,11 @@
   "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/45/KDE/x86_64/iso/",
   "desktop": "kde",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "4F50A6114CD5C6976A7F1179655A4B02F577861E"
+  }
  },
  {
   "id": "fedora-45-server-x86_64",
@@ -1301,7 +1309,11 @@
   "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/45/Server/x86_64/iso/",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "4F50A6114CD5C6976A7F1179655A4B02F577861E"
+  }
  },
  {
   "id": "fedora-45-iot-x86_64",
@@ -1317,7 +1329,11 @@
   "listing": "https://dl.fedoraproject.org/pub/alt/iot/45/IoT/x86_64/iso/",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "4F50A6114CD5C6976A7F1179655A4B02F577861E"
+  }
  },
  {
   "id": "fedora-45-iot-aarch64",
@@ -1333,7 +1349,11 @@
   "listing": "https://dl.fedoraproject.org/pub/alt/iot/45/IoT/aarch64/iso/",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "4F50A6114CD5C6976A7F1179655A4B02F577861E"
+  }
  },
  {
   "id": "fedora-45-workstation-aarch64",
@@ -1349,7 +1369,11 @@
   "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/45/Workstation/aarch64/iso/",
   "desktop": "gnome",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "4F50A6114CD5C6976A7F1179655A4B02F577861E"
+  }
  },
  {
   "id": "fedora-42-workstation-x86_64",
@@ -1365,7 +1389,11 @@
   "sums_pattern": "Fedora-Workstation-42-[\\d.]+-x86_64-CHECKSUM",
   "desktop": "gnome",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "B0F4950458F69E1150C6C5EDC8AC4916105EF944"
+  }
  },
  {
   "id": "fedora-41-workstation-x86_64",
@@ -1381,7 +1409,11 @@
   "sums_pattern": "Fedora-Workstation-41-[\\d.]+-x86_64-CHECKSUM",
   "desktop": "gnome",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "466CF2D8B60BC3057AA9453ED0622462E99D6AD1"
+  }
  },
  {
   "id": "fedora-40-workstation-x86_64",
@@ -1397,7 +1429,11 @@
   "sums_pattern": "Fedora-Workstation-40-[\\d.]+-x86_64-CHECKSUM",
   "desktop": "gnome",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "115DF9AEF857853EE8445D0A0727707EA15B79CC"
+  }
  },
  {
   "id": "fedora-43-workstation-x86_64",
@@ -1413,7 +1449,11 @@
   "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Workstation/x86_64/iso/",
   "desktop": "gnome",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "C6E7F081CF80E13146676E88829B606631645531"
+  }
  },
  {
   "id": "fedora-43-kde-x86_64",
@@ -1429,7 +1469,11 @@
   "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/KDE/x86_64/iso/",
   "desktop": "kde",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "C6E7F081CF80E13146676E88829B606631645531"
+  }
  },
  {
   "id": "fedora-43-server-x86_64",
@@ -1445,7 +1489,11 @@
   "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Server/x86_64/iso/",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "C6E7F081CF80E13146676E88829B606631645531"
+  }
  },
  {
   "id": "fedora-43-workstation-aarch64",
@@ -1461,7 +1509,11 @@
   "listing": "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Workstation/aarch64/iso/",
   "desktop": "gnome",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": true,
+   "signer": "C6E7F081CF80E13146676E88829B606631645531"
+  }
  },
  {
   "id": "fedora-coreos-stable-x86_64",
@@ -2137,7 +2189,11 @@
   "sums": "openSUSE-Tumbleweed-DVD-x86_64-Current.iso.sha256",
   "desktop": "choice",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".asc",
+   "signer": "AD485664E901B867051AB15F35A2F86E29B700A4"
+  }
  },
  {
   "id": "opensuse-tumbleweed-net-x86_64",
@@ -2152,7 +2208,11 @@
   "sums": "openSUSE-Tumbleweed-NET-x86_64-Current.iso.sha256",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".asc",
+   "signer": "AD485664E901B867051AB15F35A2F86E29B700A4"
+  }
  },
  {
   "id": "opensuse-tumbleweed-dvd-aarch64",
@@ -2167,7 +2227,11 @@
   "sums": "openSUSE-Tumbleweed-DVD-aarch64-Current.iso.sha256",
   "desktop": "choice",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".asc",
+   "signer": "AD485664E901B867051AB15F35A2F86E29B700A4"
+  }
  },
  {
   "id": "opensuse-tumbleweed-dvd-riscv64",
@@ -2182,7 +2246,11 @@
   "sums": "openSUSE-Tumbleweed-DVD-riscv64-Current.iso.sha256",
   "desktop": "choice",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".asc",
+   "signer": "AD485664E901B867051AB15F35A2F86E29B700A4"
+  }
  },
  {
   "id": "alpine-latest-standard-x86_64",
@@ -2315,7 +2383,11 @@
   "sums": "CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-amd64",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": "https://www.freebsd.org/releases/15.1R/checksums/CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-amd64.asc",
+   "signer": "82563B84D0620EDC0DFB86413897F2E22E65AD3F"
+  }
  },
  {
   "id": "freebsd-15.1-dvd1-x86_64",
@@ -2330,7 +2402,11 @@
   "sums": "CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-amd64",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": "https://www.freebsd.org/releases/15.1R/checksums/CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-amd64.asc",
+   "signer": "82563B84D0620EDC0DFB86413897F2E22E65AD3F"
+  }
  },
  {
   "id": "freebsd-15.1-disc1-aarch64",
@@ -2345,7 +2421,11 @@
   "sums": "CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-arm64-aarch64",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": "https://www.freebsd.org/releases/15.1R/checksums/CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-arm64-aarch64.asc",
+   "signer": "82563B84D0620EDC0DFB86413897F2E22E65AD3F"
+  }
  },
  {
   "id": "freebsd-15.1-disc1-riscv64",
@@ -2360,7 +2440,11 @@
   "sums": "CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-riscv-riscv64",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": "https://www.freebsd.org/releases/15.1R/checksums/CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-riscv-riscv64.asc",
+   "signer": "82563B84D0620EDC0DFB86413897F2E22E65AD3F"
+  }
  },
  {
   "id": "freebsd-14.5-disc1-x86_64",
@@ -2375,7 +2459,11 @@
   "sums": "CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-amd64",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": "https://www.freebsd.org/releases/14.5R/checksums/CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-amd64.asc",
+   "signer": "82563B84D0620EDC0DFB86413897F2E22E65AD3F"
+  }
  },
  {
   "id": "freebsd-14.5-dvd1-x86_64",
@@ -2390,7 +2478,11 @@
   "sums": "CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-amd64",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": "https://www.freebsd.org/releases/14.5R/checksums/CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-amd64.asc",
+   "signer": "82563B84D0620EDC0DFB86413897F2E22E65AD3F"
+  }
  },
  {
   "id": "freebsd-14.5-disc1-aarch64",
@@ -2405,7 +2497,11 @@
   "sums": "CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-arm64-aarch64",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "clearsigned": "https://www.freebsd.org/releases/14.5R/checksums/CHECKSUM.SHA256-FreeBSD-14.5-RELEASE-arm64-aarch64.asc",
+   "signer": "82563B84D0620EDC0DFB86413897F2E22E65AD3F"
+  }
  },
  {
   "id": "windows-11-enterprise-26h2-x86_64",
@@ -2818,7 +2914,11 @@
   "note": "Hash computed from the publisher's file and checked against its SHA-512.",
   "desktop": "choice",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".asc",
+   "signer": "AD485664E901B867051AB15F35A2F86E29B700A4"
+  }
  },
  {
   "id": "opensuse-leap-16.0-offline-aarch64",
@@ -2835,7 +2935,11 @@
   "note": "Hash computed from the publisher's file and checked against its SHA-512.",
   "desktop": "choice",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".asc",
+   "signer": "AD485664E901B867051AB15F35A2F86E29B700A4"
+  }
  },
  {
   "id": "opensuse-leap-16.0-online-x86_64",
@@ -2852,7 +2956,11 @@
   "note": "Hash computed from the publisher's file and checked against its SHA-512.",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".asc",
+   "signer": "AD485664E901B867051AB15F35A2F86E29B700A4"
+  }
  },
  {
   "id": "opensuse-leap-16.0-online-aarch64",
@@ -2869,7 +2977,11 @@
   "note": "Hash computed from the publisher's file and checked against its SHA-512.",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".asc",
+   "signer": "AD485664E901B867051AB15F35A2F86E29B700A4"
+  }
  },
  {
   "id": "opensuse-microos-dvd-x86_64",
@@ -2884,7 +2996,11 @@
   "sums": "openSUSE-MicroOS-DVD-x86_64-Current.iso.sha256",
   "desktop": "none",
   "kind": "installer",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".asc",
+   "signer": "AD485664E901B867051AB15F35A2F86E29B700A4"
+  }
  },
  {
   "id": "endeavouros-x86_64",
@@ -6718,6 +6834,10 @@
   "pattern": "Kicksecure-LXQt-([\\d.]+)\\.Intel_AMD64\\.iso",
   "desktop": "lxqt",
   "kind": "live",
-  "media": "usb"
+  "media": "usb",
+  "signature": {
+   "suffix": ".asc",
+   "signer": "916B8D99C38EAF5E8ADC7A2A8D66066A2EEACCDA"
+  }
  }
 ]
