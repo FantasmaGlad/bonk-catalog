@@ -517,6 +517,18 @@
   ]
  },
  {
+  "id": "fuguita",
+  "name": "FuguIta",
+  "category": "bsd",
+  "icon": "fuguita.png",
+  "homepage": "https://fuguita.org/",
+  "icon_source": "https://fuguita.org/?plugin=attach&refer=%E6%B2%B3%E8%B1%9A%E6%9D%BF&openfile=FuguIta_t.png",
+  "uses": [
+   "light",
+   "expert"
+  ]
+ },
+ {
   "id": "windows",
   "name": "Windows",
   "category": "windows",
