@@ -143,24 +143,48 @@ def newest_folder(source, fetch):
     raise SourceError(f"{parent}: no folder holds a file matching {source['sums_pattern']}")
 
 
-def verify_signed(data, signature, signer):
-    """The publisher's signature over its hash file, by the key pinned in `keys/editeurs/<fingerprint>.asc`."""
-    key = Path(__file__).resolve().parents[1] / "keys" / "editeurs" / f"{signer}.asc"
+def verify_signed(data, signature, signer, keys=Path(__file__).resolve().parents[1] / "keys" / "editeurs"):
+    """The bytes the publisher's key certifies: `data` itself for a detached `signature`, the signed part of
+    `data` when it is signed in clear (`signature` is None); text outside that part is never returned. The key
+    is pinned in `keys/<fingerprint>.asc`; a signing subkey of that key is accepted."""
+    key = keys / f"{signer}.asc"
     with tempfile.TemporaryDirectory() as work:
         folder = Path(work)
         (folder / "sums").write_bytes(data)
-        (folder / "sums.sig").write_bytes(signature)
         dearmored = subprocess.run(
             ["gpg", "--batch", "--dearmor", "--output", str(folder / "keyring"), str(key)], capture_output=True
         )
         if dearmored.returncode != 0:
             raise SourceError(f"{key.name}: pinned key unreadable")
-        status = subprocess.run(
-            ["gpgv", "--status-fd", "1", "--keyring", str(folder / "keyring"), str(folder / "sums.sig"), str(folder / "sums")],
-            capture_output=True, text=True,
+        command = ["gpgv", "--status-fd", "1", "--keyring", str(folder / "keyring")]
+        if signature is None:
+            command += ["--output", str(folder / "signed"), str(folder / "sums")]
+        else:
+            (folder / "sums.sig").write_bytes(signature)
+            command += [str(folder / "sums.sig"), str(folder / "sums")]
+        status = subprocess.run(command, capture_output=True)
+        # User ids in the status lines need not be UTF-8; VALIDSIG <signing key> ... <primary key> is ASCII, and
+        # either key may be the pinned one.
+        valid = any(
+            line.split()[2] == signer or line.split()[-1] == signer
+            for line in status.stdout.decode("ascii", "replace").splitlines()
+            if line.startswith("[GNUPG:] VALIDSIG ")
         )
-    if status.returncode != 0 or f"VALIDSIG {signer} " not in status.stdout:
-        raise SourceError(f"hash file not signed by {signer}")
+        if status.returncode != 0 or not valid:
+            raise SourceError(f"hash file not signed by {signer}")
+        return (folder / "signed").read_bytes() if signature is None else data
+
+
+def signed_text(source, address, fetch_raw, verify):
+    """The hash file at `address`, read only once its signature holds. `clearsigned`: the file carries its
+    own signature, or a signed copy is published at that address (FreeBSD, on its own website)."""
+    signature = source["signature"]
+    if signature.get("clearsigned") is True:
+        return verify(fetch_raw(address), None, signature["signer"]).decode()
+    if "clearsigned" in signature:
+        return verify(fetch_raw(signature["clearsigned"]), None, signature["signer"]).decode()
+    data = fetch_raw(address)
+    return verify(data, fetch_raw(address + signature["suffix"]), signature["signer"]).decode()
 
 
 def resolve_computed(source, image, previous, compute):
@@ -216,7 +240,7 @@ def first_hash(text, length, name=None):
     return found[0].lower()
 
 
-def resolve_read(source, image, previous, fetch, stat, compute):
+def resolve_read(source, image, previous, fetch, stat, compute, fetch_raw=fetch_bytes, verify=verify_signed):
     """Publishers without a hash list for a directory: the address comes from a page, a JSON answer or
     a redirect to the latest file, and the hash from that answer or from a file next to the image."""
     if "latest" in source:
@@ -260,7 +284,9 @@ def resolve_read(source, image, previous, fetch, stat, compute):
             raise SourceError(f"{source['verify_suffix']}: no known hash algorithm in the name")
         algorithm = named[0]
         lengths = {"md5": 32, "sha1": 40, "sha512": 128}
-        expected = first_hash(fetch(hash_base + source["verify_suffix"]), lengths[algorithm], url.rsplit("/", 1)[-1])
+        address = hash_base + source["verify_suffix"]
+        text = signed_text(source, address, fetch_raw, verify) if "signature" in source else fetch(address)
+        expected = first_hash(text, lengths[algorithm], url.rsplit("/", 1)[-1])
         sha256 = compute(url, algorithm, expected)
     else:
         sha256 = compute(url)
@@ -294,7 +320,7 @@ def resolve(
     if "fwlink" in source or "direct" in source:
         return resolve_computed(source, image, previous or {}, compute)
     if "page" in source or "latest" in source:
-        return resolve_read(source, image, previous or {}, fetch, stat, compute)
+        return resolve_read(source, image, previous or {}, fetch, stat, compute, fetch_raw, verify)
     if "folders" in source:
         base, sums = newest_folder(source, fetch)
     else:
@@ -306,9 +332,7 @@ def resolve(
             fetch(source.get("listing", base)), source["sums_pattern"]
         )
     if "signature" in source:
-        data = fetch_raw(base + sums)
-        verify(data, fetch_raw(base + sums + source["signature"]["suffix"]), source["signature"]["signer"])
-        text = data.decode()
+        text = signed_text(source, base + sums, fetch_raw, verify)
     else:
         text = fetch(base + sums)
     name, version, published = pick_file(parse_sums(text), source["pattern"])
