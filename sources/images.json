@@ -3464,6 +3464,22 @@
   "media": "usb"
  },
  {
+  "id": "fuguita-x86_64",
+  "family": "fuguita",
+  "name": "FuguIta",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://fuguita.org/",
+  "base": "https://jp1.dl.fuguita.org/LiveUSB/",
+  "sums": "SHA256",
+  "pattern": "FuguIta-(\\d+\\.\\d+)-amd64-\\d+\\.img\\.gz",
+  "edition": "usb",
+  "desktop": "none",
+  "kind": "live",
+  "media": "usb",
+  "note": "Live OpenBSD; hash published by the author, without a signature."
+ },
+ {
   "id": "haiku-r1beta6-x86_64",
   "family": "haiku",
   "name": "Haiku",
