@@ -121,6 +121,17 @@ class Building(unittest.TestCase):
         self.assertEqual((len(calls), failures), (2, []))
         self.assertEqual(catalog["images"][0]["status"], "online")
 
+    def test_a_source_stale_for_more_than_a_month_leaves_the_catalog(self):
+        day = 86400
+        fresh = {"id": "a", "url": "https://a/", "checked": "1970-01-30"}
+        old = {"id": "b", "url": "https://b/", "checked": "1970-01-01"}
+        with mock.patch.object(generer, "resolve", side_effect=generer.SourceError("gone")):
+            catalog, failures = generer.build(
+                [dict(SOURCE, id="a"), dict(SOURCE, id="b")], [], {}, {"images": [fresh, old]}, 31 * day
+            )
+        self.assertEqual([image["id"] for image in catalog["images"]], ["a"])
+        self.assertEqual(failures[1], {"id": "b", "error": "gone; removed after 31 days without a good read"})
+
     def test_failed_source_without_history_is_left_out(self):
         with mock.patch.object(generer, "resolve", side_effect=OSError("down")):
             catalog, failures = generer.build([SOURCE], [], {}, {}, 100)
@@ -264,8 +275,11 @@ class Signed(unittest.TestCase):
     def test_a_pinned_key_exists_for_every_signer(self):
         sources = generer.json.loads((Path(generer.__file__).resolve().parents[1] / "sources/images.json").read_text())
         keys = Path(generer.__file__).resolve().parents[1] / "keys/editeurs"
-        for signer in {s["signature"]["signer"] for s in sources if "signature" in s}:
+        for signer in {s["signature"]["signer"] for s in sources if "signer" in s.get("signature", {})}:
             self.assertTrue((keys / f"{signer}.asc").is_file(), signer)
+        for source in sources:
+            if source.get("signature", {}).get("signer_from") == "fedora":
+                self.assertIn(f"/{source['signature']['release']}/", source["base"], source["id"])
 
 
 class SignedElsewhere(unittest.TestCase):
@@ -329,7 +343,7 @@ class GpgvStatus(unittest.TestCase):
 
 
 @unittest.skipUnless(subprocess.run(["which", "gpgv"], capture_output=True).returncode == 0, "gpgv absent")
-class RealSignatures(unittest.TestCase):
+class GpgHome(unittest.TestCase):
     """A throwaway key whose signing subkey signs, as the publishers do."""
 
     @classmethod
@@ -355,6 +369,8 @@ class RealSignatures(unittest.TestCase):
         result = subprocess.run(command + list(args), input=data, capture_output=True, text=text, check=True)
         return result
 
+
+class RealSignatures(GpgHome):
     def clearsign(self, text):
         return self.gpg("--clearsign", data=text).stdout.encode()
 
@@ -381,6 +397,50 @@ class RealSignatures(unittest.TestCase):
         (self.keys / f"{other}.asc").write_bytes((self.keys / f"{self.primary}.asc").read_bytes())
         with self.assertRaises(generer.SourceError):
             generer.verify_signed(self.clearsign("x\n"), None, other, keys=self.keys)
+
+
+class FedoraKeys(GpgHome):
+    """A release key the repository does not pin, read from fedoraproject.org."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.gpg("--quick-gen-key", "Fedora (46) <fedora-46-primary@fedoraproject.org>", "ed25519", "sign", "never")
+        listing = cls.gpg("--with-colons", "--list-keys", "fedora-46").stdout
+        cls.fedora = next(line.split(":")[9] for line in listing.splitlines() if line.startswith("fpr"))
+        cls.keyring = cls.gpg("--export", cls.fedora, text=False).stdout
+
+    def setUp(self):
+        self.fetched = tempfile.TemporaryDirectory()
+        patch = mock.patch.object(generer, "FETCHED_KEYS", Path(self.fetched.name))
+        patch.start()
+        self.addCleanup(patch.stop)
+        self.addCleanup(self.fetched.cleanup)
+
+    def page(self, release, fingerprint):
+        spaced = " ".join(fingerprint[i:i + 4] for i in range(0, 40, 4))
+        return f"<p>Fedora {release}</p><p>ID: rsa4096/00 2026-01-01</p><p>Fingerprint: {spaced}</p>"
+
+    def signer(self, release, page, pinned):
+        return generer.fedora_signer(release, fetch_text=lambda _: page, fetch_raw=lambda _: self.keyring, pinned=pinned)
+
+    def test_an_unpinned_release_key_is_taken_from_the_official_page_and_keyring(self):
+        self.assertEqual(self.signer("46", self.page("46", self.fedora), self.keys), self.fedora)
+        self.assertTrue((Path(self.fetched.name) / f"{self.fedora}.asc").is_file())
+
+    def test_a_pinned_key_is_used_without_reading_the_network(self):
+        pinned = Path(self.fetched.name, "pinned")
+        pinned.mkdir()
+        (pinned / f"{self.fedora}.asc").write_bytes(self.gpg("--armor", "--export", self.fedora, text=False).stdout)
+        self.assertEqual(generer.fedora_signer("46", fetch_text=self.fail, fetch_raw=self.fail, pinned=pinned), self.fedora)
+
+    def test_a_fingerprint_the_keyring_does_not_carry_is_refused(self):
+        with self.assertRaises(generer.SourceError):
+            self.signer("46", self.page("46", "A" * 40), self.keys)
+
+    def test_a_key_of_another_release_is_refused(self):
+        with self.assertRaises(generer.SourceError):
+            self.signer("47", self.page("47", self.fedora), self.keys)
 
 
 class Duplicates(unittest.TestCase):
