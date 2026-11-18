@@ -26,34 +26,48 @@ def status(image):
     return f"{state}, last read {checked}" if checked else state
 
 
-def index_page(catalog, updates=()):
-    """A readable view of the catalog, for people: Bonk itself only reads the signed JSON."""
+def image_row(image):
     e = html.escape
-    day = lambda unix: time.strftime("%Y-%m-%d", time.gmtime(unix))
+    link = image.get("url") or image.get("official_page", "")
+    label = link.rsplit("/", 1)[-1] or link
+    size = size_label(image["size_bytes"]) if "size_bytes" in image else ""
+    return (
+        f'<tr><td><a href="{e(image["homepage"])}">{e(image["name"])}</a></td>'
+        f"<td>{e(image['version'])}</td><td>{e(image.get('edition', ''))}</td>"
+        f"<td>{e(image['arch'])}</td><td>{size}</td>"
+        f'<td class="file"><a href="{e(link)}" title="{e(label)}">{e(label)}</a></td><td>{e(status(image))}</td></tr>'
+    )
+
+
+def base_section(title, images):
+    rows = "\n".join(image_row(image) for image in images)
+    return (
+        f"<section>\n<h2>{html.escape(title)}</h2>\n<table>\n<thead><tr><th>System</th><th>Version</th>"
+        "<th>Edition</th><th>Architecture</th><th>Size</th><th>Download</th><th>Link</th></tr></thead>\n"
+        "<tbody>\n" + rows + "\n</tbody>\n</table>\n</section>"
+    )
+
+
+def base_sections(catalog):
+    """One table per base, in the taxonomy's order, then bases it does not name."""
     names = {family["id"]: family for family in catalog["families"]}
     bases = {base["id"]: base["en"] for base in catalog.get("taxonomy", {}).get("bases", [])}
-    sections = []
     present = {family["category"] for family in catalog["families"]}
+    sections = []
     for category in [base for base in bases if base in present] + sorted(present - bases.keys()):
-        rows = []
-        for image in catalog["images"]:
-            family = names.get(image["family"])
-            if family is None or family["category"] != category:
-                continue
-            link = image.get("url") or image.get("official_page", "")
-            label = link.rsplit("/", 1)[-1] or link
-            size = size_label(image["size_bytes"]) if "size_bytes" in image else ""
-            rows.append(
-                f'<tr><td><a href="{e(image["homepage"])}">{e(image["name"])}</a></td>'
-                f"<td>{e(image['version'])}</td><td>{e(image.get('edition', ''))}</td>"
-                f"<td>{e(image['arch'])}</td><td>{size}</td>"
-                f'<td class="file"><a href="{e(link)}" title="{e(label)}">{e(label)}</a></td><td>{e(status(image))}</td></tr>'
-            )
-        sections.append(
-            f"<section>\n<h2>{e(bases.get(category, category))}</h2>\n<table>\n<thead><tr><th>System</th><th>Version</th>"
-            "<th>Edition</th><th>Architecture</th><th>Size</th><th>Download</th><th>Link</th></tr></thead>\n"
-            "<tbody>\n" + "\n".join(rows) + "\n</tbody>\n</table>\n</section>"
-        )
+        images = [
+            image
+            for image in catalog["images"]
+            if image["family"] in names and names[image["family"]]["category"] == category
+        ]
+        sections.append(base_section(bases.get(category, category), images))
+    return sections
+
+
+def index_page(catalog, updates=()):
+    """A readable view of the catalog, for people: Bonk itself only reads the signed JSON."""
+    day = lambda unix: time.strftime("%Y-%m-%d", time.gmtime(unix))
+    sections = base_sections(catalog)
     return f"""<!doctype html>
 <html lang="en">
 <head>
