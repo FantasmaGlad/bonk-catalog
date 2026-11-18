@@ -5,12 +5,13 @@ import argparse
 import hashlib
 import json
 import re
-import shutil
 import subprocess
 import sys
 import tempfile
 import urllib.request
 from pathlib import Path
+
+from catalogue.empreintes import version_key
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "sources/grub.json"
@@ -37,10 +38,6 @@ def download(url, limit=None):
 
 def sha256(data):
     return hashlib.sha256(data).hexdigest()
-
-
-def version_key(version):
-    return tuple(int(part) for part in version.split("."))
 
 
 def build_id():
