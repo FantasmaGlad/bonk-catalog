@@ -40,9 +40,8 @@ def resolve_computed(source, image, previous, compute):
     return image
 
 
-def resolve_read(source, image, previous, fetch, stat, compute, fetch_raw=fetch_bytes, verify=verify_signed):
-    """Publishers without a hash list for a directory: the address comes from a page, a JSON answer or
-    a redirect to the latest file, and the hash from that answer or from a file next to the image."""
+def read_address(source, fetch):
+    """The image address and the named groups of the pattern that found it."""
     if "latest" in source:
         with request(source["latest"], "HEAD") as response:
             text = response.geturl()
@@ -63,22 +62,24 @@ def resolve_read(source, image, previous, fetch, stat, compute, fetch_raw=fetch_
         url = "https:" + url
     if not url.startswith("https://"):
         raise SourceError(f"{url}: not https")
-    size_bytes, released = stat(url)
-    if groups.get("size"):
-        size_bytes = int(groups["size"])
+    return url, groups
+
+
+def read_hash(source, url, groups, known, fetch, compute, fetch_raw, verify):
     # Some publishers name the hash file after the image without its extension, or keep it in another folder.
     hash_base = re.sub(*source["hash_replace"], url) if "hash_replace" in source else url
     if groups.get("sha256"):
         sha256 = groups["sha256"].lower()
         if not re.fullmatch(r"[0-9a-f]{64}", sha256):
             raise SourceError(f"{url}: published SHA-256 is not 64 hexadecimal digits")
-    elif "hash_template" in source:
-        sha256 = first_hash(fetch(source["hash_template"].format(**groups)), 64, groups.get("file"))
-    elif "hash_suffix" in source:
-        sha256 = first_hash(fetch(hash_base + source["hash_suffix"]), 64, url.rsplit("/", 1)[-1])
-    elif previous.get("url") == url and previous.get("size_bytes") == size_bytes:
-        sha256 = previous["sha256"]
-    elif "verify_suffix" in source:
+        return sha256
+    if "hash_template" in source:
+        return first_hash(fetch(source["hash_template"].format(**groups)), 64, groups.get("file"))
+    if "hash_suffix" in source:
+        return first_hash(fetch(hash_base + source["hash_suffix"]), 64, url.rsplit("/", 1)[-1])
+    if known:
+        return known
+    if "verify_suffix" in source:
         named = re.search(r"sha(?:1|512)|md5", source["verify_suffix"].lower())
         if not named:
             raise SourceError(f"{source['verify_suffix']}: no known hash algorithm in the name")
@@ -87,9 +88,20 @@ def resolve_read(source, image, previous, fetch, stat, compute, fetch_raw=fetch_
         address = hash_base + source["verify_suffix"]
         text = signed_text(source, address, fetch_raw, verify) if "signature" in source else fetch(address)
         expected = first_hash(text, lengths[algorithm], url.rsplit("/", 1)[-1])
-        sha256 = compute(url, algorithm, expected)
-    else:
-        sha256 = compute(url)
+        return compute(url, algorithm, expected)
+    return compute(url)
+
+
+def resolve_read(source, image, previous, fetch, stat, compute, fetch_raw=fetch_bytes, verify=verify_signed):
+    """Publishers without a hash list for a directory: the address comes from a page, a JSON answer or
+    a redirect to the latest file, and the hash from that answer or from a file next to the image."""
+    url, groups = read_address(source, fetch)
+    size_bytes, released = stat(url)
+    if groups.get("size"):
+        size_bytes = int(groups["size"])
+    unchanged = previous.get("url") == url and previous.get("size_bytes") == size_bytes
+    known = previous["sha256"] if unchanged else None
+    sha256 = read_hash(source, url, groups, known, fetch, compute, fetch_raw, verify)
     image.update(
         version=source.get("version", groups.get("version")),
         released=released,
