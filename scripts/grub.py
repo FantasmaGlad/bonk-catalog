@@ -87,7 +87,6 @@ def asset(output, path):
 
 
 def files(entry):
-    """Every published file of an entry: one EFI image per architecture, then the source and its signature."""
     return [entry["efi"][arch] for arch in sorted(entry["efi"])] + [entry["source"], entry["source_signature"]]
 
 
@@ -172,7 +171,7 @@ def status_report(entry, output, error, today, published=PUBLISHED):
 
 
 def check_published(base=PUBLISHED.removesuffix("v2/")):
-    """After deployment: the public status page, then every file it names, downloaded and checked."""
+    """Fails unless the public status is ok, every file matches grub.json and the archive signature holds."""
     report = json.loads(download(base + "grub.json"))
     if report["status"] != "ok":
         raise GrubError(f"published GRUB status is {report['status']}: {report['error']}")
