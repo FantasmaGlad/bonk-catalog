@@ -228,6 +228,25 @@ class Read(unittest.TestCase):
             pages.__getitem__,
         )
         self.assertEqual((image["url"], image["version"], image["sha256"]), ("https://k/686/download", "QUAKE", HASH_A))
+        self.assertEqual(image["file_name"], "G-QUAKE.iso")
+
+    def test_an_address_ending_with_its_file_name_gets_no_file_name(self):
+        listing = '<a href="a_9.2_x.img">a</a>'
+        image = self.resolve(
+            {"page": "https://h/l/", "pattern": r'href="(?P<url>(?P<file>a_(?P<version>[\d.]+)_x\.img))"', "url_prefix": "https://h/l/"},
+            lambda _: listing,
+            compute=lambda *_: HASH_A,
+        )
+        self.assertNotIn("file_name", image)
+
+    def test_a_listed_name_that_is_not_a_plain_file_name_is_refused(self):
+        listing = '{"data":[{"id":686,"name":"../G.iso"}]}'
+        with self.assertRaises(reseau.SourceError):
+            self.resolve(
+                {"page": "https://k/559", "pattern": r'"id":(?P<iso>\d+),"name":"(?P<file>[^"]+)"', "url_template": "https://k/{iso}/download", "version": "1"},
+                lambda _: listing,
+                compute=lambda *_: HASH_A,
+            )
 
     def test_a_published_hash_that_is_not_sha256_is_refused(self):
         with self.assertRaises(reseau.SourceError):
