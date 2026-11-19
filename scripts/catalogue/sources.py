@@ -92,6 +92,16 @@ def read_hash(source, url, groups, known, fetch, compute, fetch_raw, verify):
     return compute(url)
 
 
+def file_name(url, groups):
+    """A share link names its file by number: the listing's name is kept for the download."""
+    named = groups.get("file")
+    if not named or url.rsplit("/", 1)[-1] == named:
+        return {}
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._+-]*", named):
+        raise SourceError(f"{named}: not a plain file name")
+    return {"file_name": named}
+
+
 def resolve_read(source, image, previous, fetch, stat, compute, fetch_raw=fetch_bytes, verify=verify_signed):
     """Publishers without a hash list for a directory: the address comes from a page, a JSON answer or
     a redirect to the latest file, and the hash from that answer or from a file next to the image."""
@@ -108,6 +118,7 @@ def resolve_read(source, image, previous, fetch, stat, compute, fetch_raw=fetch_
         url=url,
         sha256=sha256,
         size_bytes=size_bytes,
+        **file_name(url, groups),
     )
     return image
 
