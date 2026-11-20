@@ -239,6 +239,17 @@ class Read(unittest.TestCase):
         )
         self.assertNotIn("file_name", image)
 
+    def test_a_listed_name_with_spaces_is_encoded_and_kept_under_the_source_file_name(self):
+        listing = '"name":"tiny10 x64 23h2.iso","sha1":"' + "e" * 40 + '"'
+        image = self.resolve(
+            {"page": "https://a/m", "pattern": r'"name":"(?P<file>tiny10 x64 (?P<version>\w+)\.iso)","sha1":"(?P<sha1>\w{40})"',
+             "url_template": "https://a/d/{file}", "file_name": "tiny10-x64-{version}.iso"},
+            lambda _: listing,
+            compute=lambda *_: HASH_A,
+        )
+        self.assertEqual(image["url"], "https://a/d/tiny10%20x64%2023h2.iso")
+        self.assertEqual(image["file_name"], "tiny10-x64-23h2.iso")
+
     def test_a_listed_name_that_is_not_a_plain_file_name_is_refused(self):
         listing = '{"data":[{"id":686,"name":"../G.iso"}]}'
         with self.assertRaises(reseau.SourceError):
