@@ -1214,5 +1214,40 @@
   "uses": [
    "gaming"
   ]
+ },
+ {
+  "id": "tribblix",
+  "name": "Tribblix",
+  "category": "independent",
+  "icon": "bonk.png",
+  "homepage": "https://www.tribblix.org/",
+  "uses": [
+   "expert",
+   "server",
+   "exotic"
+  ]
+ },
+ {
+  "id": "tiny11",
+  "name": "tiny11",
+  "category": "windows",
+  "icon": "bonk.png",
+  "homepage": "https://github.com/ntdevlabs/tiny11builder",
+  "uses": [
+   "windows",
+   "light"
+  ],
+  "not_affiliated_with": "Microsoft"
+ },
+ {
+  "id": "genode",
+  "name": "Genode",
+  "category": "independent",
+  "icon": "bonk.png",
+  "homepage": "https://genode.org/",
+  "uses": [
+   "expert",
+   "exotic"
+  ]
  }
 ]

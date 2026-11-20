@@ -1,7 +1,7 @@
 import re
 
 
-FAMILY_OPTIONAL = ("parent", "homepage", "icon_source", "uses", "ram_mb", "ram_source")
+FAMILY_OPTIONAL = ("parent", "homepage", "icon_source", "uses", "ram_mb", "ram_source", "not_affiliated_with")
 
 
 # Closed lists: clients translate these names, so a typo would show as a raw identifier.

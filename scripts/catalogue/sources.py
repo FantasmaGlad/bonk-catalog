@@ -50,8 +50,10 @@ def read_address(source, fetch):
     matches = list(re.finditer(source["pattern"], text, re.DOTALL))
     if not matches:
         raise SourceError(f"no address matches {source['pattern']}")
-    # A listing that keeps every release names the newest anywhere: `newest` picks it by version.
-    match = max(matches, key=lambda m: version_key(m["version"])) if source.get("newest") else matches[0]
+    # A listing that keeps every release names the newest anywhere: `newest` picks it by version, or by the
+    # group `newest_by` names when versions do not sort (month names, upload times).
+    newest_by = source.get("newest_by", "version")
+    match = max(matches, key=lambda m: version_key(m[newest_by])) if source.get("newest") else matches[0]
     groups = match.groupdict()
     # A share that names its files by number (kDrive) gives the address and the hash file from the listing.
     if "url_template" in source:
@@ -73,6 +75,8 @@ def read_hash(source, url, groups, known, fetch, compute, fetch_raw, verify):
         if not re.fullmatch(r"[0-9a-f]{64}", sha256):
             raise SourceError(f"{url}: published SHA-256 is not 64 hexadecimal digits")
         return sha256
+    if groups.get("sha1"):
+        return compute(url, "sha1", groups["sha1"].lower())
     if "hash_template" in source:
         return first_hash(fetch(source["hash_template"].format(**groups)), 64, groups.get("file"))
     if "hash_suffix" in source:
