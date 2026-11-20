@@ -1249,5 +1249,29 @@
    "expert",
    "exotic"
   ]
+ },
+ {
+  "id": "atlasos",
+  "name": "AtlasOS",
+  "category": "windows",
+  "icon": "atlasos.png",
+  "homepage": "https://atlasos.net/",
+  "icon_source": "https://github.com/Atlas-OS.png",
+  "uses": [
+   "windows"
+  ],
+  "not_affiliated_with": "Microsoft"
+ },
+ {
+  "id": "revios",
+  "name": "ReviOS",
+  "category": "windows",
+  "icon": "revios.png",
+  "homepage": "https://www.revi.cc/",
+  "icon_source": "https://github.com/meetrevision.png",
+  "uses": [
+   "windows"
+  ],
+  "not_affiliated_with": "Microsoft"
  }
 ]
