@@ -1645,10 +1645,11 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "none",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "almalinux-10-dvd-aarch64",
@@ -1662,10 +1663,11 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "almalinux-10-boot-aarch64",
@@ -1679,10 +1681,11 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "almalinux-9-minimal-x86_64",
@@ -1741,10 +1744,11 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "none",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "almalinux-9-dvd-aarch64",
@@ -1758,10 +1762,11 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "almalinux-9-boot-aarch64",
@@ -1775,10 +1780,11 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "almalinux-8-minimal-x86_64",
@@ -1837,10 +1843,11 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "none",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "almalinux-8-dvd-aarch64",
@@ -1854,10 +1861,11 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "almalinux-8-boot-aarch64",
@@ -1871,10 +1879,11 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "rockylinux-10-minimal-x86_64",
@@ -1933,10 +1942,11 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "none",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "rockylinux-10-dvd-aarch64",
@@ -1950,10 +1960,11 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "rockylinux-10-boot-aarch64",
@@ -1967,10 +1978,11 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "rockylinux-9-minimal-x86_64",
@@ -2029,10 +2041,11 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "none",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "rockylinux-9-dvd-aarch64",
@@ -2046,10 +2059,11 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "rockylinux-9-boot-aarch64",
@@ -2063,10 +2077,11 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "rockylinux-8-minimal-x86_64",
@@ -2125,10 +2140,11 @@
   "edition": "minimal",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "none",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "rockylinux-8-dvd-aarch64",
@@ -2142,10 +2158,11 @@
   "edition": "dvd",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "rockylinux-8-boot-aarch64",
@@ -2159,10 +2176,11 @@
   "edition": "boot",
   "sums": "CHECKSUM",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: starts from a Bonk vault (bonk vault add).",
   "desktop": "choice",
   "kind": "netinst",
-  "media": "optical"
+  "media": "optical",
+  "vault": true
  },
  {
   "id": "arch-rolling-x86_64",
