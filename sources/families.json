@@ -1492,6 +1492,17 @@
   ]
  },
  {
+  "id": "blackarch",
+  "name": "BlackArch Linux",
+  "category": "arch",
+  "icon": "blackarch.png",
+  "homepage": "https://www.blackarch.org/",
+  "icon_source": "https://github.com/BlackArch.png",
+  "uses": [
+   "security"
+  ]
+ },
+ {
   "id": "chimeraos",
   "name": "ChimeraOS",
   "category": "arch",

@@ -259,6 +259,25 @@ class Read(unittest.TestCase):
         self.assertEqual(image["sha256"], HASH_A)
         self.assertEqual(seen, [("https://h/t-0m41.1.iso", "sha1", "3688c1ec893f61c3a5ebc54aa3896545f4db270f")])
 
+    def test_a_date_the_publisher_writes_in_its_page_wins_over_the_mirror_date(self):
+        page = '<a href="b-2023.04.01.iso">b</a> <td itemprop="datePublished">2023.04.01</td> <td>' + "d" * 40 + "</td>"
+        pattern = r'href="(?P<url>b-(?P<version>[\d.]+)\.iso)".*?datePublished">(?P<released>[\d.]+)<.*?<td>(?P<sha1>\w{40})'
+        image = self.resolve(
+            {"page": "https://h/d", "pattern": pattern, "url_prefix": "https://h/"},
+            lambda _: page,
+            compute=lambda *_: HASH_A,
+        )
+        self.assertEqual(image["released"], "2023-04-01")
+
+    def test_a_page_date_that_is_not_a_date_is_refused(self):
+        for written in ("2023.13.01", "April 2023"):
+            with self.subTest(written=written), self.assertRaises(reseau.SourceError):
+                self.resolve(
+                    {"page": "https://h/d", "pattern": r'href="(?P<url>b\.iso)" (?P<released>[^<]+)<', "url_prefix": "https://h/", "version": "1"},
+                    lambda _: f'href="b.iso" {written}<',
+                    compute=lambda *_: HASH_A,
+                )
+
     def test_newest_by_picks_the_latest_upload_when_names_do_not_sort(self):
         listing = (
             '{"name":"t_Nov25.iso","mtime":"1763000000","sha1":"' + "a" * 40 + '"},'

@@ -1,4 +1,5 @@
 import re
+from datetime import date
 from email.utils import parsedate_to_datetime
 
 from catalogue.empreintes import find_in_listing, first_hash, hash_url, newest_folder, parse_sums, pick_file, version_key
@@ -106,11 +107,24 @@ def file_name(url, groups):
     return {"file_name": named}
 
 
+def page_date(written):
+    """A mirror can rewrite file dates: the date the publisher writes in its page, `2023.04.01` or `2023-04-01`."""
+    match = re.fullmatch(r"(\d{4})[.-](\d{2})[.-](\d{2})", written.strip())
+    try:
+        return date(*map(int, match.groups())).isoformat() if match else None
+    except ValueError:
+        return None
+
+
 def resolve_read(source, image, previous, fetch, stat, compute, fetch_raw=fetch_bytes, verify=verify_signed):
     """Publishers without a hash list for a directory: the address comes from a page, a JSON answer or
     a redirect to the latest file, and the hash from that answer or from a file next to the image."""
     url, groups = read_address(source, fetch)
     size_bytes, released = stat(url)
+    if groups.get("released"):
+        released = page_date(groups["released"])
+        if released is None:
+            raise SourceError(f"{groups['released']!r}: not a date")
     if groups.get("size"):
         size_bytes = int(groups["size"])
     unchanged = previous.get("url") == url and previous.get("size_bytes") == size_bytes

@@ -7317,6 +7317,34 @@
   "kind": "installer"
  },
  {
+  "id": "blackarch-slim-x86_64",
+  "family": "blackarch",
+  "name": "BlackArch Linux",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.blackarch.org/",
+  "edition": "slim",
+  "page": "https://www.blackarch.org/downloads.html",
+  "pattern": "href=\"(?P<url>https://ftp\\.halifax\\.rwth-aachen\\.de/blackarch/iso/blackarch-linux-slim-(?P<version>[\\d.]+)-x86_64\\.iso)\".*?datePublished\">(?P<released>[\\d.]+)</td>.*?<td>(?P<sha1>[0-9a-f]{40})</td>",
+  "note": "Last image published in 2023. Hash computed from the file on a mirror the publisher lists, checked against its SHA-1.",
+  "kind": "live",
+  "media": "usb"
+ },
+ {
+  "id": "blackarch-netinst-x86_64",
+  "family": "blackarch",
+  "name": "BlackArch Linux",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.blackarch.org/",
+  "edition": "netinst",
+  "page": "https://www.blackarch.org/downloads.html",
+  "pattern": "href=\"(?P<url>https://ftp\\.halifax\\.rwth-aachen\\.de/blackarch/iso/blackarch-linux-netinst-(?P<version>[\\d.]+)-x86_64\\.iso)\".*?datePublished\">(?P<released>[\\d.]+)</td>.*?<td>(?P<sha1>[0-9a-f]{40})</td>",
+  "note": "Last image published in 2023. Hash computed from the file on a mirror the publisher lists, checked against its SHA-1.",
+  "kind": "netinst",
+  "media": "usb"
+ },
+ {
   "id": "chimeraos-x86_64",
   "family": "chimeraos",
   "name": "ChimeraOS",
