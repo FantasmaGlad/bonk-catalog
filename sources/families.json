@@ -1479,5 +1479,16 @@
    "homelab",
    "server"
   ]
+ },
+ {
+  "id": "hellosystem",
+  "name": "helloSystem",
+  "category": "bsd",
+  "icon": "hellosystem.png",
+  "homepage": "https://hellosystem.github.io/",
+  "icon_source": "https://github.com/helloSystem.png",
+  "uses": [
+   "exotic"
+  ]
  }
 ]
