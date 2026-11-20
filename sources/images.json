@@ -7199,6 +7199,19 @@
   "kind": "rescue"
  },
  {
+  "id": "memtest86-x86_64",
+  "family": "memtest86",
+  "name": "MemTest86",
+  "version": "11.7",
+  "channel": "stable",
+  "released": "2026-05-04",
+  "arch": "x86_64",
+  "homepage": "https://www.memtest86.com/",
+  "official_page": "https://www.memtest86.com/download.htm",
+  "note": "Served as a ZIP archive; download from the publisher's page.",
+  "kind": "rescue"
+ },
+ {
   "id": "kaspersky-rescue-disk-x86_64",
   "family": "kaspersky-rescue-disk",
   "name": "Kaspersky Rescue Disk",

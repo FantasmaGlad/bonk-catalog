@@ -1412,6 +1412,17 @@
   ]
  },
  {
+  "id": "memtest86",
+  "name": "MemTest86",
+  "category": "independent",
+  "icon": "memtest86.png",
+  "homepage": "https://www.memtest86.com/",
+  "icon_source": "https://www.memtest86.com/img/main-slide.webp",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
   "id": "kaspersky-rescue-disk",
   "name": "Kaspersky Rescue Disk",
   "category": "independent",
