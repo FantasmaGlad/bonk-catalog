@@ -1379,6 +1379,28 @@
   ]
  },
  {
+  "id": "oo-diskimage",
+  "name": "O&O DiskImage",
+  "category": "independent",
+  "icon": "oo-diskimage.png",
+  "homepage": "https://www.oo-software.com/en/oodiskimage",
+  "icon_source": "https://dl5.oo-software.com/files/oodiskimage23/232/OODiskImage23PremiumEnu.exe",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "hasleo-backup-suite",
+  "name": "Hasleo Backup Suite",
+  "category": "independent",
+  "icon": "hasleo-backup-suite.png",
+  "homepage": "https://www.easyuefi.com/backup-software/backup-suite-free.html",
+  "icon_source": "https://www.easyuefi.com/backup-software/downloads/Hasleo_Backup_Suite_Free.exe",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
   "id": "kaspersky-rescue-disk",
   "name": "Kaspersky Rescue Disk",
   "category": "independent",

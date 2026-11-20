@@ -7160,6 +7160,32 @@
   "kind": "rescue"
  },
  {
+  "id": "oo-diskimage-x86_64",
+  "family": "oo-diskimage",
+  "name": "O&O DiskImage",
+  "version": "23.2.26060",
+  "channel": "stable",
+  "released": "2026-11-11",
+  "arch": "x86_64",
+  "homepage": "https://www.oo-software.com/en/oodiskimage",
+  "official_page": "https://www.oo-software.com/en/oodiskimage",
+  "note": "Paid software; its rescue media is made by the publisher's application.",
+  "kind": "rescue"
+ },
+ {
+  "id": "hasleo-backup-suite-x86_64",
+  "family": "hasleo-backup-suite",
+  "name": "Hasleo Backup Suite",
+  "version": "6.0.2.0",
+  "channel": "stable",
+  "released": "2026-10-30",
+  "arch": "x86_64",
+  "homepage": "https://www.easyuefi.com/backup-software/backup-suite-free.html",
+  "official_page": "https://www.easyuefi.com/backup-software/backup-suite-free.html",
+  "note": "Its rescue media is made by the publisher's application.",
+  "kind": "rescue"
+ },
+ {
   "id": "kaspersky-rescue-disk-x86_64",
   "family": "kaspersky-rescue-disk",
   "name": "Kaspersky Rescue Disk",
