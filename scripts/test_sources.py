@@ -248,6 +248,31 @@ class Read(unittest.TestCase):
                 compute=lambda *_: HASH_A,
             )
 
+    def test_a_listed_sha1_is_checked_while_computing_the_sha256(self):
+        page = '<a href="t-0m41.1.iso">t</a> (sha1 hash: 3688C1EC893F61C3A5EBC54AA3896545F4DB270F)'
+        seen = []
+        image = self.resolve(
+            {"page": "https://h/d", "pattern": r'href="(?P<url>t-(?P<version>0m[\d.]+)\.iso)".*?sha1 hash: (?P<sha1>[0-9A-Fa-f]{40})', "url_prefix": "https://h/"},
+            lambda _: page,
+            compute=lambda *args: seen.append(args) or HASH_A,
+        )
+        self.assertEqual(image["sha256"], HASH_A)
+        self.assertEqual(seen, [("https://h/t-0m41.1.iso", "sha1", "3688c1ec893f61c3a5ebc54aa3896545f4db270f")])
+
+    def test_newest_by_picks_the_latest_upload_when_names_do_not_sort(self):
+        listing = (
+            '{"name":"t_Nov25.iso","mtime":"1763000000","sha1":"' + "a" * 40 + '"},'
+            '{"name":"t_Dec25.iso","mtime":"1765000000","sha1":"' + "b" * 40 + '"},'
+            '{"name":"t_Oct25.iso","mtime":"1760000000","sha1":"' + "c" * 40 + '"}'
+        )
+        image = self.resolve(
+            {"page": "https://a/m", "pattern": r'"name":"(?P<file>t_(?P<version>[A-Z][a-z]{2}\d{2})\.iso)","mtime":"(?P<mtime>\d+)","sha1":"(?P<sha1>[0-9a-f]{40})"',
+             "url_template": "https://a/d/{file}", "newest": True, "newest_by": "mtime"},
+            lambda _: listing,
+            compute=lambda *_: HASH_A,
+        )
+        self.assertEqual((image["url"], image["version"]), ("https://a/d/t_Dec25.iso", "Dec25"))
+
     def test_a_published_hash_that_is_not_sha256_is_refused(self):
         with self.assertRaises(reseau.SourceError):
             self.resolve(

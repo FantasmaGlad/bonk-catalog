@@ -6960,5 +6960,62 @@
    "suffix": ".asc",
    "signer": "916B8D99C38EAF5E8ADC7A2A8D66066A2EEACCDA"
   }
+ },
+ {
+  "id": "tribblix-x86_64",
+  "family": "tribblix",
+  "name": "Tribblix",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.tribblix.org/",
+  "page": "https://www.tribblix.org/download.html",
+  "pattern": "href=\"(?P<url>https://iso\\.tribblix\\.org/iso/tribblix-(?P<version>0m\\d+\\.\\d+)\\.iso)\".*?sha1 hash: (?P<sha1>[0-9a-fA-F]{40})",
+  "kind": "live",
+  "media": "usb"
+ },
+ {
+  "id": "tiny11-25h2-x86_64",
+  "family": "tiny11",
+  "name": "tiny11",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://github.com/ntdevlabs/tiny11builder",
+  "page": "https://archive.org/metadata/tiny11_25H2",
+  "pattern": "\"name\":\"(?P<file>tiny11_(?P<version>25H2_[A-Z][a-z]{2}\\d{2})\\.iso)\",\"source\":\"original\",\"mtime\":\"(?P<mtime>\\d+)\",\"size\":\"(?P<size>\\d+)\",\"md5\":\"[0-9a-f]{32}\",\"crc32\":\"[0-9a-f]+\",\"sha1\":\"(?P<sha1>[0-9a-f]{40})\"",
+  "url_template": "https://archive.org/download/tiny11_25H2/{file}",
+  "newest": true,
+  "newest_by": "mtime",
+  "note": "Unofficial Windows 11 build by NTDEV; Windows licence and activation remain the user's.",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "tiny11core-25h2-x86_64",
+  "family": "tiny11",
+  "name": "tiny11",
+  "edition": "core",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://github.com/ntdevlabs/tiny11builder",
+  "page": "https://archive.org/metadata/tiny11_25H2",
+  "pattern": "\"name\":\"(?P<file>tiny11core_(?P<version>25H2_[A-Z][a-z]{2}\\d{2})\\.iso)\",\"source\":\"original\",\"mtime\":\"(?P<mtime>\\d+)\",\"size\":\"(?P<size>\\d+)\",\"md5\":\"[0-9a-f]{32}\",\"crc32\":\"[0-9a-f]+\",\"sha1\":\"(?P<sha1>[0-9a-f]{40})\"",
+  "url_template": "https://archive.org/download/tiny11_25H2/{file}",
+  "newest": true,
+  "newest_by": "mtime",
+  "note": "Unofficial Windows 11 build by NTDEV; Windows licence and activation remain the user's. Core: no Windows Update or recovery, Defender disabled, meant for test virtual machines.",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
+  "id": "genode-sculpt-x86_64",
+  "family": "genode",
+  "name": "Sculpt OS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://genode.org/",
+  "page": "https://genode.org/download/sculpt",
+  "pattern": "href=\"(?P<url>https://genode\\.org/files/sculpt/sculpt-(?P<version>\\d+-\\d+)\\.img)\".*?SHA256 (?P<sha256>[0-9a-f]{64})",
+  "kind": "live",
+  "media": "usb"
  }
 ]
