@@ -7345,6 +7345,19 @@
   "media": "usb"
  },
  {
+  "id": "chimeraos-x86_64",
+  "family": "chimeraos",
+  "name": "ChimeraOS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://chimeraos.org/",
+  "page": "https://api.github.com/repos/ChimeraOS/install-media/releases/latest",
+  "pattern": "(?P<url>https://github\\.com/ChimeraOS/install-media/releases/download/(?P<tag>[^/\"]+)/chimeraos-(?P<version>[\\d.]+)-x86_64\\.iso)\"",
+  "hash_template": "https://github.com/ChimeraOS/install-media/releases/download/{tag}/sha256sum.txt",
+  "kind": "installer",
+  "media": "usb"
+ },
+ {
   "id": "aerynos-gnome-x86_64",
   "family": "aerynos",
   "name": "AerynOS",
