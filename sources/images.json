@@ -7208,6 +7208,23 @@
   "kind": "rescue"
  },
  {
+  "id": "unraid-x86_64",
+  "family": "unraid",
+  "name": "Unraid",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://unraid.net/",
+  "page": "https://api.github.com/repos/unraid/bootable-unraid-installer/releases/latest",
+  "pattern": "(?P<url>https://github\\.com/unraid/bootable-unraid-installer/releases/download/[^\"]*/unraid-installer-(?P<version>\\d+\\.\\d+\\.\\d+)-online\\.iso)\"",
+  "hash_suffix": ".sha256",
+  "usb_boot": false,
+  "note": "Paid software with a free 30-day trial. No USB disk boot of its own: Bonk writes it as a hybrid image.",
+  "desktop": "none",
+  "kind": "installer",
+  "media": "optical",
+  "hybrid": true
+ },
+ {
   "id": "kaspersky-rescue-disk-x86_64",
   "family": "kaspersky-rescue-disk",
   "name": "Kaspersky Rescue Disk",
