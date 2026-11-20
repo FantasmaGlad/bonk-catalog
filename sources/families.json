@@ -1490,5 +1490,16 @@
   "uses": [
    "exotic"
   ]
+ },
+ {
+  "id": "chimeraos",
+  "name": "ChimeraOS",
+  "category": "arch",
+  "icon": "chimeraos.png",
+  "homepage": "https://chimeraos.org/",
+  "icon_source": "https://chimeraos.org/logo.svg",
+  "uses": [
+   "gaming"
+  ]
  }
 ]
