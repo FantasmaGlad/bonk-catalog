@@ -1490,5 +1490,27 @@
   "uses": [
    "exotic"
   ]
+ },
+ {
+  "id": "aerynos",
+  "name": "AerynOS",
+  "category": "independent",
+  "icon": "aerynos.png",
+  "homepage": "https://aerynos.com/",
+  "icon_source": "https://aerynos.com/favicon.svg",
+  "uses": [
+   "exotic"
+  ]
+ },
+ {
+  "id": "recalbox",
+  "name": "Recalbox",
+  "category": "independent",
+  "icon": "recalbox.png",
+  "homepage": "https://www.recalbox.com/",
+  "icon_source": "https://www.recalbox.com/favicon-512x512.png",
+  "uses": [
+   "gaming"
+  ]
  }
 ]

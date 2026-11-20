@@ -7315,5 +7315,36 @@
   "official_page": "https://fydeos.io/download/pc/",
   "note": "Served as a ZIP archive; download from the publisher's page.",
   "kind": "installer"
+ },
+ {
+  "id": "aerynos-gnome-x86_64",
+  "family": "aerynos",
+  "name": "AerynOS",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://aerynos.com/",
+  "edition": "gnome",
+  "page": "https://aerynos.com/download/",
+  "pattern": "(?P<url>https://cdn\\.aerynos\\.dev/isos/aerynOS-(?P<version>\\d{4}\\.\\d{2})-GNOME-live-x86_64\\.iso)",
+  "hash_suffix": ".sha256sum",
+  "note": "Alpha.",
+  "desktop": "gnome",
+  "kind": "live",
+  "media": "usb"
+ },
+ {
+  "id": "recalbox-x86_64",
+  "family": "recalbox",
+  "name": "Recalbox",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.recalbox.com/",
+  "page": "https://upgrade.recalbox.com/latest/x86_64/recalbox.version",
+  "pattern": "^(?P<version>\\d+\\.\\d+(?:\\.\\d+)?)\\s",
+  "url_template": "https://upgrade.recalbox.com/latest/download/x86_64/recalbox-x86_64.img.xz",
+  "verify_suffix": ".sha1",
+  "note": "Hash computed from the publisher's file and checked against its SHA-1. Starts in BIOS only.",
+  "kind": "live",
+  "media": "usb"
  }
 ]
