@@ -7017,5 +7017,29 @@
   "pattern": "href=\"(?P<url>https://genode\\.org/files/sculpt/sculpt-(?P<version>\\d+-\\d+)\\.img)\".*?SHA256 (?P<sha256>[0-9a-f]{64})",
   "kind": "live",
   "media": "usb"
+ },
+ {
+  "id": "atlasos-x86_64",
+  "family": "atlasos",
+  "name": "AtlasOS",
+  "version": "0.5.0-hotfix",
+  "channel": "stable",
+  "released": "2025-10-21",
+  "arch": "x86_64",
+  "homepage": "https://atlasos.net/",
+  "official_page": "https://atlasos.net/",
+  "note": "Applied to an official Windows installation with the publisher's tool; no image to write."
+ },
+ {
+  "id": "revios-x86_64",
+  "family": "revios",
+  "name": "ReviOS",
+  "version": "26.10",
+  "channel": "stable",
+  "released": "2026-10-09",
+  "arch": "x86_64",
+  "homepage": "https://www.revi.cc/",
+  "official_page": "https://www.revi.cc/",
+  "note": "Applied to an official Windows installation with the publisher's tool; no image to write."
  }
 ]
