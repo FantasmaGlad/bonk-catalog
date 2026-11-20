@@ -1219,8 +1219,9 @@
   "id": "tribblix",
   "name": "Tribblix",
   "category": "independent",
-  "icon": "bonk.png",
+  "icon": "tribblix.png",
   "homepage": "https://www.tribblix.org/",
+  "icon_source": "https://github.com/tribblix.png",
   "uses": [
    "expert",
    "server",
@@ -1231,8 +1232,9 @@
   "id": "tiny11",
   "name": "tiny11",
   "category": "windows",
-  "icon": "bonk.png",
+  "icon": "tiny11.png",
   "homepage": "https://github.com/ntdevlabs/tiny11builder",
+  "icon_source": "https://tiny11.net/wp-content/uploads/2025/11/Tiny11-Logo-Short.png",
   "uses": [
    "windows",
    "light"
@@ -1243,8 +1245,9 @@
   "id": "genode",
   "name": "Genode",
   "category": "independent",
-  "icon": "bonk.png",
+  "icon": "genode.png",
   "homepage": "https://genode.org/",
+  "icon_source": "https://github.com/genodelabs.png",
   "uses": [
    "expert",
    "exotic"
