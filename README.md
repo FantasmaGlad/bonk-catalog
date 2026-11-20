@@ -74,8 +74,10 @@ Report a vulnerability as described in [SECURITY.md](SECURITY.md). Contributions
 
 ## Related repositories
 
-- [Bonk](https://github.com/FantasmaGlad/Bonk): application
-- [BonkWeb](https://github.com/FantasmaGlad/BonkWeb): website
-- [bonk-packages](https://github.com/FantasmaGlad/bonk-packages): package repositories
-- [homebrew-bonk](https://github.com/FantasmaGlad/homebrew-bonk): Homebrew tap
-- [bonk-security](https://github.com/FantasmaGlad/bonk-security): security site
+| Repository | Content |
+| :--- | :--- |
+| <img src="docs/icons/bonk.png" width="20" height="20" valign="middle" alt="Bonk">&nbsp;**[Bonk](https://github.com/FantasmaGlad/Bonk)** | application |
+| <img src="docs/icons/bonk.png" width="20" height="20" valign="middle" alt="BonkWeb">&nbsp;**[BonkWeb](https://github.com/FantasmaGlad/BonkWeb)** | website |
+| <img src="docs/icons/linux.svg" width="20" height="20" valign="middle" alt="bonk-packages">&nbsp;**[bonk-packages](https://github.com/FantasmaGlad/bonk-packages)** | package repositories |
+| <img src="docs/icons/homebrew.svg" width="20" height="20" valign="middle" alt="homebrew-bonk">&nbsp;**[homebrew-bonk](https://github.com/FantasmaGlad/homebrew-bonk)** | Homebrew tap |
+| <img src="docs/icons/bonk.png" width="20" height="20" valign="middle" alt="bonk-security">&nbsp;**[bonk-security](https://github.com/FantasmaGlad/bonk-security)** | security site |
