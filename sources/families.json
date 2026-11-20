@@ -1276,5 +1276,152 @@
    "windows"
   ],
   "not_affiliated_with": "Microsoft"
+ },
+ {
+  "id": "sergei-strelec",
+  "name": "Sergei Strelec WinPE",
+  "category": "windows",
+  "icon": "sergei-strelec.png",
+  "homepage": "https://sergeistrelec.name/",
+  "icon_source": "https://sergeistrelec.name/templates/sstr/images/favicon.ico",
+  "uses": [
+   "rescue"
+  ],
+  "not_affiliated_with": "Microsoft"
+ },
+ {
+  "id": "nhvboot",
+  "name": "NHV BOOT",
+  "category": "windows",
+  "icon": "nhvboot.png",
+  "homepage": "https://nhvboot.com/en/",
+  "icon_source": "https://nhvboot.com/wp-content/uploads/2023/10/nhvboot-300x300.png",
+  "uses": [
+   "rescue"
+  ],
+  "not_affiliated_with": "Microsoft"
+ },
+ {
+  "id": "acronis-true-image",
+  "name": "Acronis True Image",
+  "category": "independent",
+  "icon": "acronis-true-image.png",
+  "homepage": "https://www.acronis.com/en/products/true-image/",
+  "icon_source": "https://www.acronis.com/public/favicon/favicon-180x180.png",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "macrium-reflect",
+  "name": "Macrium Reflect",
+  "category": "independent",
+  "icon": "macrium-reflect.png",
+  "homepage": "https://www.macrium.com/products/home",
+  "icon_source": "https://www.macrium.com/apple-touch-icon.png",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "easeus-todo-backup",
+  "name": "EaseUS Todo Backup",
+  "category": "independent",
+  "icon": "easeus-todo-backup.png",
+  "homepage": "https://www.easeus.com/backup-software/tb-free.html",
+  "icon_source": "https://www.easeus.com/images_2019/product/all_icon/todobackup.svg",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "aomei-backupper",
+  "name": "AOMEI Backupper",
+  "category": "independent",
+  "icon": "aomei-backupper.png",
+  "homepage": "https://www.aomeitech.com/ab/",
+  "icon_source": "https://www.aomeitech.com/resources/images/logo/ab.svg",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "diskgenius",
+  "name": "DiskGenius",
+  "category": "independent",
+  "icon": "diskgenius.png",
+  "homepage": "https://www.diskgenius.com/",
+  "icon_source": "https://www.diskgenius.com/public/images/dg-logo.png",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "r-drive-image",
+  "name": "R-Drive Image",
+  "category": "independent",
+  "icon": "r-drive-image.png",
+  "homepage": "https://www.drive-image.com/",
+  "icon_source": "https://www.drive-image.com/images/rtt.png",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "active-boot-disk",
+  "name": "Active@ Boot Disk",
+  "category": "independent",
+  "icon": "active-boot-disk.png",
+  "homepage": "https://www.boot-disk.com/",
+  "icon_source": "https://www.boot-disk.com/images/icons/boot-disk.png",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
+  "id": "kaspersky-rescue-disk",
+  "name": "Kaspersky Rescue Disk",
+  "category": "independent",
+  "icon": "kaspersky-rescue-disk.png",
+  "homepage": "https://www.kaspersky.com/downloads/free-rescue-disk",
+  "icon_source": "https://github.com/KasperskyLab.png",
+  "uses": [
+   "rescue",
+   "security"
+  ]
+ },
+ {
+  "id": "rhel",
+  "name": "Red Hat Enterprise Linux",
+  "category": "fedora",
+  "icon": "rhel.png",
+  "homepage": "https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux",
+  "icon_source": "https://www.redhat.com/rhdc/managed-files/rhel-tech-icon-2x.png",
+  "uses": [
+   "server"
+  ]
+ },
+ {
+  "id": "sles",
+  "name": "SUSE Linux Enterprise Server",
+  "category": "opensuse",
+  "icon": "sles.png",
+  "homepage": "https://www.suse.com/products/server/",
+  "icon_source": "https://github.com/SUSE.png",
+  "uses": [
+   "server"
+  ]
+ },
+ {
+  "id": "fydeos",
+  "name": "FydeOS",
+  "category": "independent",
+  "icon": "fydeos.png",
+  "homepage": "https://fydeos.io/",
+  "icon_source": "https://fydeos.io/assets/apple-touch-icon.png",
+  "uses": [
+   "office",
+   "light"
+  ]
  }
 ]
