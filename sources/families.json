@@ -1481,6 +1481,61 @@
   ]
  },
  {
+  "id": "hellosystem",
+  "name": "helloSystem",
+  "category": "bsd",
+  "icon": "hellosystem.png",
+  "homepage": "https://hellosystem.github.io/",
+  "icon_source": "https://github.com/helloSystem.png",
+  "uses": [
+   "exotic"
+  ]
+ },
+ {
+  "id": "blackarch",
+  "name": "BlackArch Linux",
+  "category": "arch",
+  "icon": "blackarch.png",
+  "homepage": "https://www.blackarch.org/",
+  "icon_source": "https://github.com/BlackArch.png",
+  "uses": [
+   "security"
+  ]
+ },
+ {
+  "id": "chimeraos",
+  "name": "ChimeraOS",
+  "category": "arch",
+  "icon": "chimeraos.png",
+  "homepage": "https://chimeraos.org/",
+  "icon_source": "https://chimeraos.org/logo.svg",
+  "uses": [
+   "gaming"
+  ]
+ },
+ {
+  "id": "aerynos",
+  "name": "AerynOS",
+  "category": "independent",
+  "icon": "aerynos.png",
+  "homepage": "https://aerynos.com/",
+  "icon_source": "https://aerynos.com/favicon.svg",
+  "uses": [
+   "exotic"
+  ]
+ },
+ {
+  "id": "recalbox",
+  "name": "Recalbox",
+  "category": "independent",
+  "icon": "recalbox.png",
+  "homepage": "https://www.recalbox.com/",
+  "icon_source": "https://www.recalbox.com/favicon-512x512.png",
+  "uses": [
+   "gaming"
+  ]
+ },
+ {
   "id": "mikrotik-routeros",
   "name": "MikroTik RouterOS",
   "category": "independent",
