@@ -67,4 +67,7 @@ def source_errors(families, sources, taxonomy):
             if key in source and source[key] not in allowed:
                 errors.append(f"{where}: unknown {key} {source[key]}")
         errors += memory_errors(where, source)
+        # Bonk reads `vault` as a boolean: a quoted "true" would leave the image unwritable.
+        if "vault" in source and not isinstance(source["vault"], bool):
+            errors.append(f"{where}: vault must be true or false")
     return errors

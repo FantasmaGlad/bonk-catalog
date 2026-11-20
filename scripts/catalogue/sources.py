@@ -7,7 +7,7 @@ from catalogue.signatures import signed_text, verify_signed
 
 
 IMAGE_KEPT = (
-    "id", "family", "name", "channel", "arch", "homepage", "edition", "note", "usb_boot",
+    "id", "family", "name", "channel", "arch", "homepage", "edition", "note", "usb_boot", "vault",
     "desktop", "kind", "media", "ram_mb", "ram_source",
 )
 

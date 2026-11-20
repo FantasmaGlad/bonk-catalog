@@ -44,6 +44,12 @@ class SourceErrors(unittest.TestCase):
                              {"desktop": "plasma", "kind": "iso", "media": "cd"})
         self.assertEqual(len(errors), 5)
 
+    def test_vault_is_a_boolean(self):
+        self.assertEqual(self.errors(image={"vault": True}), [])
+        errors = self.errors(image={"vault": "true"})
+        self.assertEqual(len(errors), 1)
+        self.assertTrue(errors[0].endswith(": vault must be true or false"))
+
     def test_a_term_without_a_label_or_listed_twice_is_refused(self):
         uses = [{"id": "office", "en": "Office", "fr": ""}, {"id": "office", "en": "Office", "fr": "Bureautique"}]
         errors = self.errors(taxonomy=dict(self.TAXONOMY, uses=uses))
