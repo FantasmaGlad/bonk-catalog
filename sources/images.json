@@ -6970,6 +6970,20 @@
   "media": "usb"
  },
  {
+  "id": "hellosystem-x86_64",
+  "family": "hellosystem",
+  "name": "helloSystem",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://hellosystem.github.io/",
+  "page": "https://api.github.com/repos/helloSystem/ISO/releases/latest",
+  "pattern": "(?P<url>https://github\\.com/helloSystem/ISO/releases/download/[^\"]*/hello-(?P<version>\\d+\\.\\d+\\.\\d+)_[0-9A-Z]+-FreeBSD-[\\d.]+-amd64\\.iso)\"",
+  "verify_suffix": ".md5",
+  "note": "Last image published in 2023. Hash computed from the publisher's file and checked against its MD5.",
+  "kind": "live",
+  "media": "usb"
+ },
+ {
   "id": "tiny11-25h2-x86_64",
   "family": "tiny11",
   "name": "tiny11",
