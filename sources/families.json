@@ -1534,5 +1534,17 @@
   "uses": [
    "gaming"
   ]
+ },
+ {
+  "id": "mikrotik-routeros",
+  "name": "MikroTik RouterOS",
+  "category": "independent",
+  "icon": "mikrotik-routeros.png",
+  "homepage": "https://mikrotik.com/software",
+  "icon_source": "https://mikrotik.com/web-app-manifest-512x512.png",
+  "uses": [
+   "network",
+   "homelab"
+  ]
  }
 ]
