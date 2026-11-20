@@ -3133,10 +3133,11 @@
   "pattern": "(?P<url>https://\\S+nixos-minimal-(?P<version>26.05\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
   "hash_suffix": ".sha256",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: Bonk writes it as a hybrid image.",
   "desktop": "none",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "hybrid": true
  },
  {
   "id": "nixos-26.05-graphical-x86_64",
@@ -3165,10 +3166,11 @@
   "pattern": "(?P<url>https://\\S+nixos-graphical-(?P<version>26.05\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
   "hash_suffix": ".sha256",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: Bonk writes it as a hybrid image.",
   "desktop": "choice",
   "kind": "live",
-  "media": "optical"
+  "media": "optical",
+  "hybrid": true
  },
  {
   "id": "nixos-25.11-minimal-x86_64",
@@ -3197,10 +3199,11 @@
   "pattern": "(?P<url>https://\\S+nixos-minimal-(?P<version>25.11\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
   "hash_suffix": ".sha256",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: Bonk writes it as a hybrid image.",
   "desktop": "none",
   "kind": "installer",
-  "media": "optical"
+  "media": "optical",
+  "hybrid": true
  },
  {
   "id": "nixos-25.11-graphical-x86_64",
@@ -3229,10 +3232,11 @@
   "pattern": "(?P<url>https://\\S+nixos-graphical-(?P<version>25.11\\.\\d+)\\.\\w+-aarch64-linux\\.iso)",
   "hash_suffix": ".sha256",
   "usb_boot": false,
-  "note": "DVD or virtual machine only: this file has no USB disk boot.",
+  "note": "No USB disk boot of its own: Bonk writes it as a hybrid image.",
   "desktop": "choice",
   "kind": "live",
-  "media": "optical"
+  "media": "optical",
+  "hybrid": true
  },
  {
   "id": "truenas-scale-x86_64",
