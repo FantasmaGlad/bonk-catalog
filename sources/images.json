@@ -4622,18 +4622,14 @@
   "arch": "x86_64",
   "homepage": "https://peppermintos.com/",
   "page": "https://sourceforge.net/projects/peppermintos/files/isos/XFCE/",
-  "pattern": "<tr title=\"(?P<url>PeppermintOS-Debian-64\\.iso)\".*?<abbr title=\"(?P<version>\\d{4}-\\d{2}-\\d{2})",
+  "pattern": "<tr title=\"(?P<url>peppermint_debian-amd64\\.iso)\".*?<abbr title=\"(?P<version>\\d{4}-\\d{2}-\\d{2})",
   "url_prefix": "https://downloads.sourceforge.net/project/peppermintos/isos/XFCE/",
   "edition": "debian",
   "note": "Hash computed from the publisher's file and checked against its SHA-512.",
   "desktop": "xfce",
   "kind": "live",
   "media": "usb",
-  "hash_replace": [
-   "\\.iso$",
-   ""
-  ],
-  "verify_suffix": "-sha512.checksum"
+  "verify_suffix": ".sha512"
  },
  {
   "id": "peppermint-devuan-x86_64",
