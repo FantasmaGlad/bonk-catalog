@@ -1467,5 +1467,17 @@
    "office",
    "light"
   ]
+ },
+ {
+  "id": "unraid",
+  "name": "Unraid",
+  "category": "independent",
+  "icon": "unraid.png",
+  "homepage": "https://unraid.net/",
+  "icon_source": "https://github.com/unraid.png",
+  "uses": [
+   "homelab",
+   "server"
+  ]
  }
 ]
