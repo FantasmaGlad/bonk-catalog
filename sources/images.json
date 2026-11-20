@@ -7186,6 +7186,19 @@
   "kind": "rescue"
  },
  {
+  "id": "minitool-partition-wizard-x86_64",
+  "family": "minitool-partition-wizard",
+  "name": "MiniTool Partition Wizard",
+  "version": "13.9",
+  "channel": "stable",
+  "released": "2026-07-07",
+  "arch": "x86_64",
+  "homepage": "https://www.partitionwizard.com/free-partition-manager.html",
+  "official_page": "https://www.partitionwizard.com/free-partition-manager.html",
+  "note": "Its rescue media is made by the publisher's application.",
+  "kind": "rescue"
+ },
+ {
   "id": "kaspersky-rescue-disk-x86_64",
   "family": "kaspersky-rescue-disk",
   "name": "Kaspersky Rescue Disk",

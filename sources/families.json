@@ -1401,6 +1401,17 @@
   ]
  },
  {
+  "id": "minitool-partition-wizard",
+  "name": "MiniTool Partition Wizard",
+  "category": "independent",
+  "icon": "minitool-partition-wizard.png",
+  "homepage": "https://www.partitionwizard.com/free-partition-manager.html",
+  "icon_source": "https://cdn2.minitool.com/?p=pw&e=pw-free-offline",
+  "uses": [
+   "rescue"
+  ]
+ },
+ {
   "id": "kaspersky-rescue-disk",
   "name": "Kaspersky Rescue Disk",
   "category": "independent",
