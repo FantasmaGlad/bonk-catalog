@@ -19,6 +19,7 @@ import grub
 from conformite import catalog_errors
 
 from catalogue.construction import build, previous_catalog
+from catalogue.banc import bench_errors
 from catalogue.controles import source_errors
 from catalogue.empreintes import hash_url
 from catalogue.page import index_page
@@ -73,22 +74,26 @@ def main():
         help="check links only: do not download images to compute a missing hash",
     )
     parser.add_argument("--grub", action="store_true", help="add GRUB for the vault (built or reused)")
+    parser.add_argument("--proofs", type=Path, help="boot proofs written by the weekly bench")
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parent.parent
     sources = json.loads((root / "sources/images.json").read_text())
     families = json.loads((root / "sources/families.json").read_text())
     taxonomy = json.loads((root / "sources/taxonomy.json").read_text())
-    errors = source_errors(families, sources, taxonomy)
+    bench = json.loads((root / "sources/banc.json").read_text())
+    errors = source_errors(families, sources, taxonomy) + list(bench_errors(bench, {source["id"] for source in sources}))
     for error in errors:
         print(f"INVALID {error}", file=sys.stderr)
     if errors:
         return 1
     hashes = copy_icons(root, families, args.output)
     previous = previous_catalog(args.previous)
+    proofs = json.loads(args.proofs.read_text()) if args.proofs else {}
     catalog, failures = build(
         sources, families, hashes, previous, int(time.time()),
         (lambda *_: "0" * 64) if args.no_compute else hash_url,
+        proofs,
     )
     catalog["taxonomy"] = taxonomy
     if args.grub:

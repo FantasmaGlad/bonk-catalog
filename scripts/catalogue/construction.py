@@ -62,7 +62,8 @@ def previous_catalog(urls, keys=PUBLIC_KEYS):
     return {}
 
 
-def build(sources, families, icon_hashes, previous, now, compute=hash_url):
+def build(sources, families, icon_hashes, previous, now, compute=hash_url, proofs=None):
+    proofs = proofs or {}
     kept = {image["id"]: image for image in previous.get("images", [])}
     images, failures = [], []
     today = time.strftime("%Y-%m-%d", time.gmtime(now))
@@ -84,7 +85,7 @@ def build(sources, families, icon_hashes, previous, now, compute=hash_url):
         results = list(pool.map(attempt, sources))
     for source, (image, error) in zip(sources, results):
         if image is not None:
-            images.append(dict(image, status="online", checked=today))
+            images.append(dict(image, status="online", checked=today, **boot_of(proofs, source["id"])))
             continue
         old = kept.get(source["id"])
         age = stale_days(old, now) if old else 0
@@ -103,6 +104,10 @@ def build(sources, families, icon_hashes, previous, now, compute=hash_url):
         "images": images,
     }
     return catalog, failures
+
+
+def boot_of(proofs, image_id):
+    return {"boot": proofs[image_id]} if image_id in proofs else {}
 
 
 def stale_days(image, now):

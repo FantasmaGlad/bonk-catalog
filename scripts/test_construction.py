@@ -30,6 +30,14 @@ class Building(unittest.TestCase):
         self.assertEqual(catalog["images"][0]["status"], "online")
         self.assertEqual(catalog["images"][0]["checked"], "1970-01-03")
 
+    def test_an_image_proved_by_the_bench_carries_its_boot(self):
+        proof = {"firmware": ["bios", "uefi"], "proved": {"date": "2026-11-23", "bench": "https://run"}}
+        with mock.patch.object(construction, "resolve", return_value={"id": SOURCE["id"], "url": "https://new/"}):
+            catalog, _ = construction.build([SOURCE], [], {}, {}, 100, proofs={SOURCE["id"]: proof})
+            unproved, _ = construction.build([SOURCE], [], {}, {}, 100, proofs={"autre": proof})
+        self.assertEqual(catalog["images"][0]["boot"], proof)
+        self.assertNotIn("boot", unproved["images"][0])
+
     def test_sources_keep_their_order_when_read_side_by_side(self):
         sources = [dict(SOURCE, id=f"s{n}") for n in range(20)]
 

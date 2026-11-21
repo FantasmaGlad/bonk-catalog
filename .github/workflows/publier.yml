@@ -64,12 +64,23 @@ jobs:
           persist-credentials: false
       - name: Outils de construction de GRUB
         run: sudo apt-get install -y --no-install-recommends bison flex gawk gcc-aarch64-linux-gnu
+      # Written by the weekly bench only, on its own branch; absent before its first run.
+      - name: Preuves du banc
+        run: |
+          statut=0
+          git ls-remote --exit-code --heads origin preuves > /dev/null || statut=$?
+          case $statut in
+            0) git fetch --depth 1 origin preuves && git show FETCH_HEAD:boot.json > "$RUNNER_TEMP/boot.json" ;;
+            2) echo '{}' > "$RUNNER_TEMP/boot.json" ;;
+            *) exit "$statut" ;;
+          esac
       - name: Générer
         env:
           GH_TOKEN: ${{ github.token }}
         run: >-
           python3 scripts/generer.py --grub --output site/v2
           --previous https://catalog.bonk-os.app/v2/catalog.json
+          --proofs "$RUNNER_TEMP/boot.json"
       - name: Signer et relire la signature
         env:
           CLE: ${{ secrets.CATALOG_SIGNING_KEY }}
