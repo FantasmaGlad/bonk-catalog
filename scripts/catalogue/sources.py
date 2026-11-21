@@ -1,6 +1,7 @@
 import re
 from datetime import date
 from email.utils import parsedate_to_datetime
+from urllib.parse import quote
 
 from catalogue.empreintes import find_in_listing, first_hash, hash_url, newest_folder, parse_sums, pick_file, version_key
 from catalogue.reseau import SourceError, fetch_bytes, fetch_text, head, reachable, request
@@ -58,7 +59,7 @@ def read_address(source, fetch):
     groups = match.groupdict()
     # A share that names its files by number (kDrive) gives the address and the hash file from the listing.
     if "url_template" in source:
-        url = source["url_template"].format(**groups)
+        url = source["url_template"].format(**{key: quote(value) if value else value for key, value in groups.items()})
     else:
         url = source.get("url_prefix", "") + groups.get("url", match[0])
     if url.startswith("//"):
@@ -97,9 +98,10 @@ def read_hash(source, url, groups, known, fetch, compute, fetch_raw, verify):
     return compute(url)
 
 
-def file_name(url, groups):
-    """A share link names its file by number: the listing's name is kept for the download."""
-    named = groups.get("file")
+def file_name(source, url, groups):
+    """A share link names its file by number, a listing may name it with spaces: the download keeps the listing's
+    name, or the source's `file_name` template."""
+    named = source["file_name"].format(**groups) if "file_name" in source else groups.get("file")
     if not named or url.rsplit("/", 1)[-1] == named:
         return {}
     if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._+-]*", named):
@@ -136,7 +138,7 @@ def resolve_read(source, image, previous, fetch, stat, compute, fetch_raw=fetch_
         url=url,
         sha256=sha256,
         size_bytes=size_bytes,
-        **file_name(url, groups),
+        **file_name(source, url, groups),
     )
     return image
 
