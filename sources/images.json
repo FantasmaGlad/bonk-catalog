@@ -7421,5 +7421,33 @@
   "note": "Hash computed from the publisher's file and checked against its SHA-1. Starts in BIOS only.",
   "kind": "live",
   "media": "usb"
+ },
+ {
+  "id": "hirens-bootcd-pe-x86_64",
+  "family": "hirens-bootcd",
+  "name": "Hiren's BootCD PE",
+  "channel": "stable",
+  "arch": "x86_64",
+  "homepage": "https://www.hirensbootcd.org/",
+  "page": "https://www.hirensbootcd.org/download/",
+  "pattern": "BootCD PE x64 \\(v(?P<version>[\\d.]+)\\).*?(?P<url>https://www\\.hirensbootcd\\.org/files/HBCD_PE_x64\\.iso).*?ISO SHA-256</strong></td>\\s*<td[^>]*>(?P<sha256>[0-9a-f]{64})</td>",
+  "note": "Rescue environment built on Windows 10 PE; Bonk writes it as a Windows drive.",
+  "kind": "rescue",
+  "media": "usb"
+ },
+ {
+  "id": "tiny10-23h2-x86_64",
+  "family": "tiny10",
+  "name": "tiny10",
+  "channel": "end_of_life",
+  "arch": "x86_64",
+  "homepage": "https://archive.org/details/tiny-10-23-h2",
+  "page": "https://archive.org/metadata/tiny-10-23-h2",
+  "pattern": "\"name\":\"(?P<file>tiny10 x64 (?P<version>23h2)\\.iso)\",\"source\":\"original\",\"mtime\":\"\\d+\",\"size\":\"(?P<size>\\d+)\",\"md5\":\"[0-9a-f]{32}\",\"crc32\":\"[0-9a-f]+\",\"sha1\":\"(?P<sha1>[0-9a-f]{40})\"",
+  "url_template": "https://archive.org/download/tiny-10-23-h2/{file}",
+  "file_name": "tiny10-x64-{version}.iso",
+  "note": "Unofficial Windows 10 build by NTDEV; Windows 10 support has ended. Windows licence and activation remain the user's.",
+  "kind": "installer",
+  "media": "usb"
  }
 ]
