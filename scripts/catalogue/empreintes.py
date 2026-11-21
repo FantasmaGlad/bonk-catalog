@@ -61,13 +61,19 @@ def hash_url(url, algorithm=None, expected=None):
     """The file's SHA-256, while checking the weaker or longer hash its publisher lists, if any."""
     digest = hashlib.sha256()
     check = hashlib.new(algorithm) if algorithm else None
+    received = 0
     with request(url) as response:
         if not response.geturl().startswith("https://"):
             raise SourceError(f"{url}: redirected out of https")
+        announced = response.headers.get("Content-Length")
         while chunk := response.read(1 << 20):
+            received += len(chunk)
             digest.update(chunk)
             if check:
                 check.update(chunk)
+    # A connection closed early ends the stream without error: an OSError gets the network retry.
+    if announced and received != int(announced):
+        raise ConnectionError(f"{url}: download cut at {received} of {announced} bytes")
     if check and check.hexdigest() != expected:
         raise SourceError(f"{url}: does not match the publisher's {algorithm}")
     return digest.hexdigest()
