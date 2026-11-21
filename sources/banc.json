@@ -1,0 +1,68 @@
+[
+ {
+  "image": "debian-13-netinst-x86_64",
+  "firmware": [
+   "bios",
+   "uefi",
+   "secureboot"
+  ],
+  "loader": {
+   "bios": "isolinux",
+   "uefi": "grub"
+  },
+  "proof": "\\[!!\\]",
+  "options": [
+   "--entree",
+   "1",
+   "--memoire",
+   "2048",
+   "--delai",
+   "300"
+  ]
+ },
+ {
+  "image": "fedora-45-server-x86_64",
+  "firmware": [
+   "bios",
+   "uefi",
+   "secureboot"
+  ],
+  "loader": {
+   "bios": "grub",
+   "uefi": "grub"
+  },
+  "proof": "[Aa]naconda",
+  "options": [
+   "--ligne",
+   "2",
+   "--attente",
+   "4",
+   "--memoire",
+   "3072",
+   "--delai",
+   "300"
+  ]
+ },
+ {
+  "image": "arch-rolling-x86_64",
+  "firmware": [
+   "bios",
+   "uefi"
+  ],
+  "loader": {
+   "bios": "isolinux",
+   "uefi": "systemd-boot"
+  },
+  "proof": "login:",
+  "options": [
+   "--attente",
+   "2",
+   "--delai",
+   "300"
+  ],
+  "bios_options": [
+   "--attente",
+   "8"
+  ]
+ }
+]

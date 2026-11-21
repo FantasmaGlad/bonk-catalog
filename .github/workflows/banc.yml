@@ -1,0 +1,205 @@
+name: banc
+
+on:
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/banc.yml"
+      - "scripts/banc.py"
+      - "scripts/catalogue/banc.py"
+      - "sources/banc.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: banc-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  liste:
+    name: liste
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      matrice: ${{ steps.matrice.outputs.matrice }}
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - id: matrice
+        name: Images et micrologiciels
+        working-directory: scripts
+        run: echo "matrice=$(python3 banc.py matrice ../sources/banc.json ../sources/images.json)" >> "$GITHUB_OUTPUT"
+      - id: version
+        name: Dernière release de Bonk
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: echo "version=$(gh release view --repo FantasmaGlad/Bonk --json tagName --jq .tagName)" >> "$GITHUB_OUTPUT"
+
+  demarrer:
+    name: ${{ matrix.image }} (${{ matrix.firmware }})
+    needs: liste
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.liste.outputs.matrice) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # The bench of the published release, as the users' Bonk writes the image.
+      - name: Banc de démarrage de Bonk
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: FantasmaGlad/Bonk
+          ref: ${{ needs.liste.outputs.version }}
+          path: bonk-source
+          sparse-checkout: .github/scripts
+          persist-credentials: false
+      - name: Bonk publié, empreinte et attestation contrôlées
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.liste.outputs.version }}
+        run: |
+          archive="bonk-${VERSION#v}-linux-x86_64.tar.gz"
+          dossier="$RUNNER_TEMP/bonk"
+          gh release download "$VERSION" --repo FantasmaGlad/Bonk --pattern "$archive" --pattern SHA256SUMS --dir "$dossier"
+          (cd "$dossier" && sha256sum --check --ignore-missing SHA256SUMS)
+          gh attestation verify "$dossier/$archive" --repo FantasmaGlad/Bonk
+          tar -xzf "$dossier/$archive" -C "$dossier"
+          bonk=$(find "$dossier" -type f -name bonk -perm -u+x | head -n 1)
+          test -n "$bonk"
+          echo "BONK=$bonk" >> "$GITHUB_ENV"
+      - name: Installer QEMU, SeaBIOS et OVMF
+        timeout-minutes: 15
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends qemu-system-x86 ovmf
+      # Without KVM, software emulation would exceed the timeout on a desktop image.
+      - name: Ouvrir KVM à l'exécuteur
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - id: demarrage
+        name: Écrire et démarrer sous QEMU
+        env:
+          IMAGE: ${{ matrix.image }}
+          FIRMWARE: ${{ matrix.firmware }}
+          LOADER: ${{ matrix.loader }}
+          PROOF: ${{ matrix.proof }}
+          OPTIONS: ${{ matrix.options }}
+        run: |
+          travail="$RUNNER_TEMP/banc"
+          mkdir -p "$travail"
+          "$BONK" catalog download "$IMAGE" --cache-dir "$travail/cache" --json --progress none > "$travail/telechargement.json"
+          image=$(python3 -c 'import json, sys; print(json.load(open(sys.argv[1]))["download"]["path"])' "$travail/telechargement.json")
+          # A release without `bonk info <image>` proves the boot all the same.
+          "$BONK" info "$image" --json > "$travail/info.json" || rm -f "$travail/info.json"
+          "$BONK" write --simulate "$travail/cle.img" --image "$IMAGE" --cache-dir "$travail/cache" --yes --progress none
+          read -r -a options <<< "$OPTIONS"
+          python3 bonk-source/.github/scripts/demarrage-qemu.py "$travail/cle.img" "$FIRMWARE" "$LOADER" "$PROOF" "$travail" "${options[@]}"
+      - name: Résultat
+        if: always()
+        working-directory: scripts
+        env:
+          IMAGE: ${{ matrix.image }}
+          FIRMWARE: ${{ matrix.firmware }}
+          OK: ${{ steps.demarrage.outcome == 'success' }}
+        run: |
+          mkdir -p ../resultat
+          python3 banc.py resultat --image "$IMAGE" --firmware "$FIRMWARE" --ok "$OK" \
+            --info "$RUNNER_TEMP/banc/info.json" --out "../resultat/$IMAGE-$FIRMWARE.json"
+      - name: Conserver le résultat
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: resultat-${{ matrix.image }}-${{ matrix.firmware }}
+          path: resultat/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Conserver la trace et les écrans
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: trace-${{ matrix.image }}-${{ matrix.firmware }}
+          path: |
+            ${{ runner.temp }}/banc/serie.log
+            ${{ runner.temp }}/banc/*.png
+          retention-days: 7
+
+  preuves:
+    name: preuves
+    needs: [liste, demarrer]
+    if: always() && needs.liste.result == 'success' && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: resultat-*
+          path: resultats
+          merge-multiple: true
+      - name: Preuves précédentes
+        run: |
+          statut=0
+          git ls-remote --exit-code --heads origin preuves > /dev/null || statut=$?
+          case $statut in
+            0) git fetch --depth 1 origin preuves && git show FETCH_HEAD:boot.json > "$RUNNER_TEMP/precedentes.json" ;;
+            2) echo '{}' > "$RUNNER_TEMP/precedentes.json" ;;
+            *) exit "$statut" ;;
+          esac
+      - name: Rassembler les preuves
+        working-directory: scripts
+        env:
+          RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python3 banc.py preuves --bench ../sources/banc.json --results ../resultats \
+            --previous "$RUNNER_TEMP/precedentes.json" --run "$RUN" --date "$(date -u +%F)" \
+            --out "$RUNNER_TEMP/boot.json" --failures "$RUNNER_TEMP/echecs.json"
+      # Its own branch: main asks for a review and a check that a workflow's commit never triggers.
+      - name: Écrire sur la branche preuves
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh auth setup-git
+          dossier=$(mktemp -d)
+          git -C "$dossier" init -q
+          git -C "$dossier" remote add origin "https://github.com/$REPO"
+          if git -C "$dossier" fetch -q --depth 1 origin preuves; then
+            git -C "$dossier" checkout -q -b preuves FETCH_HEAD
+          else
+            git -C "$dossier" checkout -q --orphan preuves
+          fi
+          cp "$RUNNER_TEMP/boot.json" "$dossier/boot.json"
+          git -C "$dossier" add boot.json
+          if git -C "$dossier" diff --cached --quiet; then
+            exit 0
+          fi
+          git -C "$dossier" -c user.name="github-actions[bot]" \
+            -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "chore(preuves): relever les démarrages du banc"
+          git -C "$dossier" push -q origin HEAD:preuves
+      - name: Signaler les démarrages en échec
+        working-directory: scripts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: python3 signaler.py "$RUNNER_TEMP/echecs.json" "Démarrages du banc en échec"
