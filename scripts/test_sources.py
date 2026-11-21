@@ -378,10 +378,11 @@ class Read(unittest.TestCase):
         self.assertEqual(seen, [("https://h/d/a.img", "md5", "d" * 32)])
 
     @staticmethod
-    def served(final_url):
+    def served(final_url, length="4"):
         body = mock.MagicMock()
         body.__enter__.return_value = body
         body.geturl.return_value = final_url
+        body.headers = {"Content-Length": length} if length else {}
         body.read.side_effect = [b"data", b""]
         return mock.patch.object(reseau.urllib.request, "urlopen", return_value=body)
 
@@ -395,6 +396,15 @@ class Read(unittest.TestCase):
         with self.served("https://h/a.iso"):
             with self.assertRaisesRegex(reseau.SourceError, "does not match"):
                 empreintes.hash_url("https://h/a.iso", "sha1", "0" * 40)
+
+    def test_a_download_cut_short_is_a_network_error_not_a_wrong_hash(self):
+        with self.served("https://h/a.iso", length="1396197376"):
+            with self.assertRaisesRegex(ConnectionError, "cut at 4 of 1396197376 bytes"):
+                empreintes.hash_url("https://h/a.iso", "sha1", "0" * 40)
+
+    def test_a_download_without_length_is_hashed_as_served(self):
+        with self.served("https://h/a.iso", length=None):
+            self.assertEqual(len(empreintes.hash_url("https://h/a.iso")), 64)
 
     def test_a_file_redirected_out_of_https_is_not_hashed(self):
         with self.served("http://miroir/a.iso"):
