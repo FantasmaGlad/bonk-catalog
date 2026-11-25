@@ -1,0 +1,77 @@
+[
+ {
+  "id": "debian_live",
+  "name": "Debian live",
+  "detect": [
+   [
+    "live/vmlinuz",
+    "live/initrd.img"
+   ]
+  ],
+  "kernel": "live/vmlinuz",
+  "initrd": "live/initrd.img",
+  "options": "boot=live components findiso={path}"
+ },
+ {
+  "id": "ubuntu",
+  "name": "Ubuntu",
+  "detect": [
+   [
+    "casper/vmlinuz",
+    "casper/initrd"
+   ]
+  ],
+  "kernel": "casper/vmlinuz",
+  "initrd": "casper/initrd",
+  "options": "bonk.offset={offset} ---",
+  "location": true,
+  "initrd_extra": "newc:scripts/casper-premount/20iso_scan:{bonk}/casper/20iso_scan"
+ },
+ {
+  "id": "arch",
+  "name": "Arch Linux",
+  "detect": [
+   [
+    "arch/boot/x86_64/vmlinuz-linux",
+    "arch/boot/x86_64/initramfs-linux.img"
+   ]
+  ],
+  "kernel": "arch/boot/x86_64/vmlinuz-linux",
+  "initrd": "arch/boot/x86_64/initramfs-linux.img",
+  "options": "archisobasedir=arch img_label={vault} img_loop={path}"
+ },
+ {
+  "id": "fedora_live",
+  "name": "Fedora live",
+  "detect": [
+   [
+    "boot/x86_64/loader/linux",
+    "boot/x86_64/loader/initrd"
+   ],
+   [
+    "boot/aarch64/loader/linux",
+    "boot/aarch64/loader/initrd"
+   ]
+  ],
+  "label_prefix": "Fedora-",
+  "kernel": "boot/{cpu}/loader/linux",
+  "initrd": "boot/{cpu}/loader/initrd",
+  "options": "iso-scan/filename={path} root=live:CDLABEL={label} rd.live.image"
+ },
+ {
+  "id": "anaconda",
+  "name": "Anaconda installer",
+  "detect": [
+   [
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "images/install.img"
+   ]
+  ],
+  "kernel": "images/pxeboot/vmlinuz",
+  "initrd": "images/pxeboot/initrd.img",
+  "options": "inst.stage2=hd:LABEL={label} bonk.offset={offset} ro",
+  "location": true,
+  "initrd_extra": "newc:etc/udev/rules.d/99-bonk-vault-iso.rules:{bonk}/udev/99-bonk-vault-iso.rules"
+ }
+]
