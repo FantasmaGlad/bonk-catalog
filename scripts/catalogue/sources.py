@@ -77,14 +77,14 @@ def read_hash(source, url, groups, known, fetch, compute, fetch_raw, verify):
         if not re.fullmatch(r"[0-9a-f]{64}", sha256):
             raise SourceError(f"{url}: published SHA-256 is not 64 hexadecimal digits")
         return sha256
-    if groups.get("sha1"):
-        return compute(url, "sha1", groups["sha1"].lower())
     if "hash_template" in source:
         return first_hash(fetch(source["hash_template"].format(**groups)), 64, groups.get("file"))
     if "hash_suffix" in source:
         return first_hash(fetch(hash_base + source["hash_suffix"]), 64, url.rsplit("/", 1)[-1])
     if known:
         return known
+    if groups.get("sha1"):
+        return compute(url, "sha1", groups["sha1"].lower())
     if "verify_suffix" in source:
         named = re.search(r"sha(?:1|512)|md5", source["verify_suffix"].lower())
         if not named:

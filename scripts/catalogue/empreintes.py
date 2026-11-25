@@ -1,7 +1,12 @@
 import hashlib
 import re
+import time
 
 from catalogue.reseau import SourceError, request
+
+
+# A slow mirror fails its own source, kept from the last catalog, instead of the whole publication.
+DOWNLOAD_SECONDS = 60 * 60
 
 
 SUMS_LINE = re.compile(r"^([0-9a-fA-F]{128}|[0-9a-fA-F]{64})\s+\*?(\S+)$")
@@ -62,11 +67,14 @@ def hash_url(url, algorithm=None, expected=None):
     digest = hashlib.sha256()
     check = hashlib.new(algorithm) if algorithm else None
     received = 0
+    deadline = time.monotonic() + DOWNLOAD_SECONDS
     with request(url) as response:
         if not response.geturl().startswith("https://"):
             raise SourceError(f"{url}: redirected out of https")
         announced = response.headers.get("Content-Length")
         while chunk := response.read(1 << 20):
+            if time.monotonic() > deadline:
+                raise ConnectionError(f"{url}: still downloading after {DOWNLOAD_SECONDS // 60} minutes")
             received += len(chunk)
             digest.update(chunk)
             if check:
