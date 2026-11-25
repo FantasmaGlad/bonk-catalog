@@ -91,6 +91,7 @@ def main():
         (lambda *_: "0" * 64) if args.no_compute else hash_url,
     )
     catalog["taxonomy"] = taxonomy
+    catalog["vault_families"] = json.loads((root / "sources/vault.json").read_text())
     if args.grub:
         add_grub(catalog, args.output, previous, failures)
     if not any("url" in image for image in catalog["images"]):

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
+import json
 import unittest
+from pathlib import Path
 
 from conformite import catalog_errors
 
@@ -42,6 +44,35 @@ class Reader(unittest.TestCase):
         page = {key: IMAGE[key] for key in ("id", "family", "released", "homepage")}
         image = dict(IMAGE, mirrors=["http://abc.onion/x.iso"])
         self.assertEqual(errors(images=(image, dict(page, id="w", official_page="https://w/"))), [])
+
+
+
+VAULT = json.loads((Path(__file__).resolve().parent.parent / "sources/vault.json").read_text())
+
+
+def vault_errors(families):
+    return catalog_errors({"families": [FAMILY], "images": [IMAGE], "vault_families": families})
+
+
+class VaultFamilies(unittest.TestCase):
+    def test_the_published_families_pass(self):
+        self.assertEqual(vault_errors(VAULT), [])
+
+    def test_a_value_that_could_leave_the_menu_is_refused(self):
+        debian = VAULT[0]
+        cases = {
+            "identifier": dict(debian, id="Debian"),
+            "name": dict(debian, name='Debian" ; reboot'),
+            "detect": dict(debian, detect=[["../live/vmlinuz"]]),
+            "label prefix": dict(debian, label_prefix="Fedora.*"),
+            "kernel": dict(debian, kernel="/live/vmlinuz"),
+            "options": dict(debian, options="boot=live $root"),
+            "initrd extra": dict(debian, initrd_extra="a b"),
+        }
+        for reason, family in cases.items():
+            with self.subTest(reason):
+                self.assertTrue(any(reason in error for error in vault_errors([family])), vault_errors([family]))
+        self.assertTrue(any("duplicate" in error for error in vault_errors([debian, debian])))
 
 
 if __name__ == "__main__":

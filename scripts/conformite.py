@@ -5,6 +5,12 @@ import re
 IMAGE_ID = re.compile(r"[a-z0-9._][a-z0-9._-]{0,127}")
 DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 SHA256 = re.compile(r"[0-9a-fA-F]{64}")
+FAMILY_ID = re.compile(r"[a-z][a-z0-9_]{0,31}")
+FAMILY_NAME = re.compile(r"[A-Za-z0-9 ,.()+_-]{1,48}")
+LABEL_PREFIX = re.compile(r"[A-Za-z0-9_-]{1,32}")
+PATH_PART = re.compile(r"[A-Za-z0-9._-]+")
+TOKEN = re.compile(r"[A-Za-z0-9._:/=+,-]{1,200}")
+PLACEHOLDERS = ("{path}", "{label}", "{offset}", "{vault}", "{bonk}", "{cpu}")
 
 
 def relative(path):
@@ -46,6 +52,37 @@ def image_errors(image):
             yield "sha256 must be 64 hexadecimal characters"
 
 
+def vault_path(path, cpu):
+    plain = path.replace("{cpu}", "x") if cpu else path
+    return bool(plain) and all(part != ".." and PATH_PART.fullmatch(part) for part in plain.split("/"))
+
+
+def vault_token(token):
+    for placeholder in PLACEHOLDERS:
+        token = token.replace(placeholder, "x")
+    return bool(TOKEN.fullmatch(token))
+
+
+def vault_family_errors(family):
+    """Same rules as bonk_core::vault::family_errors: these values are written into the GRUB menu."""
+    if not FAMILY_ID.fullmatch(family.get("id", "")):
+        yield "identifier must be lowercase letters, digits and _"
+    if not FAMILY_NAME.fullmatch(family.get("name", "")):
+        yield "name has a character the menu cannot show"
+    detect = family.get("detect") or []
+    if not detect or not all(paths and all(vault_path(path, False) for path in paths) for paths in detect):
+        yield "detect needs sets of plain paths"
+    if "label_prefix" in family and not LABEL_PREFIX.fullmatch(family["label_prefix"]):
+        yield "label prefix must be letters, digits, - or _"
+    if not (vault_path(family.get("kernel", ""), True) and vault_path(family.get("initrd", ""), True)):
+        yield "kernel and initrd need plain paths"
+    options = family.get("options", "")
+    if not options or not all(vault_token(token) for token in options.split(" ")):
+        yield "options need single-spaced plain tokens"
+    if "initrd_extra" in family and not vault_token(family["initrd_extra"]):
+        yield "initrd extra must be one plain token"
+
+
 def catalog_errors(catalog):
     errors, families, images = [], set(), set()
     for family in catalog["families"]:
@@ -60,4 +97,10 @@ def catalog_errors(catalog):
         if image["id"] in images:
             errors.append(f"image {image['id']}: duplicate identifier")
         images.add(image["id"])
+    families = set()
+    for family in catalog.get("vault_families", []):
+        errors += [f"vault family {family.get('id')}: {reason}" for reason in vault_family_errors(family)]
+        if family.get("id") in families:
+            errors.append(f"vault family {family.get('id')}: duplicate identifier")
+        families.add(family.get("id"))
     return errors
