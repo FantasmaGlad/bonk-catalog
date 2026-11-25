@@ -270,6 +270,25 @@ class Read(unittest.TestCase):
         self.assertEqual(image["sha256"], HASH_A)
         self.assertEqual(seen, [("https://h/t-0m41.1.iso", "sha1", "3688c1ec893f61c3a5ebc54aa3896545f4db270f")])
 
+    def test_an_unchanged_file_with_a_listed_sha1_is_not_downloaded_again(self):
+        page = '<a href="t-0m41.1.iso">t</a> (sha1 hash: 3688C1EC893F61C3A5EBC54AA3896545F4DB270F)'
+        source = {"page": "https://h/d", "pattern": r'href="(?P<url>t-(?P<version>0m[\d.]+)\.iso)".*?sha1 hash: (?P<sha1>[0-9A-Fa-f]{40})', "url_prefix": "https://h/"}
+        seen = []
+        image = self.resolve(
+            source,
+            lambda _: page,
+            previous={"url": "https://h/t-0m41.1.iso", "size_bytes": 5, "sha256": HASH_B},
+            compute=lambda *args: seen.append(args) or HASH_A,
+        )
+        self.assertEqual((image["sha256"], seen), (HASH_B, []))
+        changed = self.resolve(
+            source,
+            lambda _: page,
+            previous={"url": "https://h/t-0m41.1.iso", "size_bytes": 4, "sha256": HASH_B},
+            compute=lambda *args: seen.append(args) or HASH_A,
+        )
+        self.assertEqual((changed["sha256"], len(seen)), (HASH_A, 1))
+
     def test_a_date_the_publisher_writes_in_its_page_wins_over_the_mirror_date(self):
         page = '<a href="b-2023.04.01.iso">b</a> <td itemprop="datePublished">2023.04.01</td> <td>' + "d" * 40 + "</td>"
         pattern = r'href="(?P<url>b-(?P<version>[\d.]+)\.iso)".*?datePublished">(?P<released>[\d.]+)<.*?<td>(?P<sha1>\w{40})'
@@ -412,6 +431,13 @@ class Read(unittest.TestCase):
         with self.served("https://h/a.iso", length="1396197376"):
             with self.assertRaisesRegex(ConnectionError, "cut at 4 of 1396197376 bytes"):
                 empreintes.hash_url("https://h/a.iso", "sha1", "0" * 40)
+
+    def test_a_download_past_its_deadline_is_a_network_error(self):
+        with self.served("https://h/a.iso"), mock.patch.object(
+            empreintes.time, "monotonic", side_effect=[0, empreintes.DOWNLOAD_SECONDS + 1]
+        ):
+            with self.assertRaisesRegex(ConnectionError, "still downloading after 60 minutes"):
+                empreintes.hash_url("https://h/a.iso")
 
     def test_a_download_without_length_is_hashed_as_served(self):
         with self.served("https://h/a.iso", length=None):
