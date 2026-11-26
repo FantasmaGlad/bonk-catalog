@@ -1,0 +1,50 @@
+{
+ "debian-13-netinst-x86_64": {
+  "firmware": [
+   "bios",
+   "uefi",
+   "secureboot"
+  ],
+  "proved": {
+   "date": "2026-11-26",
+   "bench": "https://github.com/FantasmaGlad/bonk-catalog/actions/runs/45786785627"
+  },
+  "route": "raw",
+  "secure_boot": {
+   "microsoft_uefi_ca": [
+    "Microsoft Corporation UEFI CA 2011",
+    "Microsoft UEFI CA 2023"
+   ]
+  }
+ },
+ "fedora-45-server-x86_64": {
+  "firmware": [
+   "bios",
+   "uefi",
+   "secureboot"
+  ],
+  "proved": {
+   "date": "2026-11-26",
+   "bench": "https://github.com/FantasmaGlad/bonk-catalog/actions/runs/45786785627"
+  },
+  "route": "raw",
+  "secure_boot": {
+   "microsoft_uefi_ca": [
+    "Microsoft Corporation UEFI CA 2011",
+    "Microsoft UEFI CA 2023"
+   ]
+  }
+ },
+ "arch-rolling-x86_64": {
+  "firmware": [
+   "bios",
+   "uefi"
+  ],
+  "proved": {
+   "date": "2026-11-26",
+   "bench": "https://github.com/FantasmaGlad/bonk-catalog/actions/runs/45786785627"
+  },
+  "route": "raw",
+  "secure_boot": "unsigned"
+ }
+}
