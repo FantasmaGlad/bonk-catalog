@@ -6984,22 +6984,6 @@
   "media": "usb"
  },
  {
-  "id": "tiny11-25h2-x86_64",
-  "family": "tiny11",
-  "name": "tiny11",
-  "channel": "stable",
-  "arch": "x86_64",
-  "homepage": "https://github.com/ntdevlabs/tiny11builder",
-  "page": "https://archive.org/metadata/tiny11_25H2",
-  "pattern": "\"name\":\"(?P<file>tiny11_(?P<version>25H2_[A-Z][a-z]{2}\\d{2})\\.iso)\",\"source\":\"original\",\"mtime\":\"(?P<mtime>\\d+)\",\"size\":\"(?P<size>\\d+)\",\"md5\":\"[0-9a-f]{32}\",\"crc32\":\"[0-9a-f]+\",\"sha1\":\"(?P<sha1>[0-9a-f]{40})\"",
-  "url_template": "https://archive.org/download/tiny11_25H2/{file}",
-  "newest": true,
-  "newest_by": "mtime",
-  "note": "Unofficial Windows 11 build by NTDEV; Windows licence and activation remain the user's.",
-  "kind": "installer",
-  "media": "usb"
- },
- {
   "id": "tiny11core-25h2-x86_64",
   "family": "tiny11",
   "name": "tiny11",
