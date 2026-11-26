@@ -73,5 +73,20 @@
   "options": "inst.stage2=hd:LABEL={label} bonk.offset={offset} ro",
   "location": true,
   "initrd_extra": "newc:etc/udev/rules.d/99-bonk-vault-iso.rules:{bonk}/udev/99-bonk-vault-iso.rules"
+ },
+ {
+  "id": "mint",
+  "name": "Linux Mint",
+  "detect": [
+   [
+    "casper/vmlinuz",
+    "casper/initrd.lz"
+   ]
+  ],
+  "kernel": "casper/vmlinuz",
+  "initrd": "casper/initrd.lz",
+  "options": "boot=casper username=mint hostname=mint bonk.offset={offset}",
+  "location": true,
+  "initrd_extra": "newc:scripts/casper-premount/20iso_scan:{bonk}/casper/20iso_scan"
  }
 ]
