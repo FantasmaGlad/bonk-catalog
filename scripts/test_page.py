@@ -27,6 +27,14 @@ class Page(unittest.TestCase):
         self.assertIn("1970-01-02", page)
         self.assertIn("stale, last read 1970-01-01", catalogue_page.index_page(dict(catalog, images=[dict(catalog["images"][0], status="stale", checked="1970-01-01")])))
         self.assertNotIn("<script", page)
+        recognised = dict(catalog["images"][0], vault_family="ubuntu")
+        vault_page = catalogue_page.index_page(
+            dict(catalog, images=[recognised, dict(recognised, id="x", url="https://example.org/x.iso", vault_family=None)],
+                 vault_families=[{"id": "ubuntu", "name": "Ubuntu"}])
+        )
+        self.assertIn("1 of 2 ISO images", vault_page)
+        self.assertIn("<td>Ubuntu</td>", vault_page)
+        self.assertIn("<td>not recognised</td>", vault_page)
         update = {"family": "ubuntu", "version": "26.10", "where": "https://example.org/26.10/"}
         self.assertIn("ubuntu 26.10", catalogue_page.index_page(catalog, [update]))
 

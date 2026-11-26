@@ -1,6 +1,8 @@
 import html
 import time
 
+from catalogue.couverture import is_iso, summary
+
 
 def newer_section(updates):
     if not updates:
@@ -26,7 +28,14 @@ def status(image):
     return f"{state}, last read {checked}" if checked else state
 
 
-def image_row(image):
+def vault_cell(image, names):
+    if not is_iso(image):
+        return ""
+    family = image.get("vault_family")
+    return names.get(family, family) if family else "not recognised"
+
+
+def image_row(image, names):
     e = html.escape
     link = image.get("url") or image.get("official_page", "")
     label = link.rsplit("/", 1)[-1] or link
@@ -35,15 +44,16 @@ def image_row(image):
         f'<tr><td><a href="{e(image["homepage"])}">{e(image["name"])}</a></td>'
         f"<td>{e(image['version'])}</td><td>{e(image.get('edition', ''))}</td>"
         f"<td>{e(image['arch'])}</td><td>{size}</td>"
-        f'<td class="file"><a href="{e(link)}" title="{e(label)}">{e(label)}</a></td><td>{e(status(image))}</td></tr>'
+        f'<td class="file"><a href="{e(link)}" title="{e(label)}">{e(label)}</a></td><td>{e(status(image))}</td>'
+        f"<td>{e(vault_cell(image, names))}</td></tr>"
     )
 
 
-def base_section(title, images):
-    rows = "\n".join(image_row(image) for image in images)
+def base_section(title, images, names):
+    rows = "\n".join(image_row(image, names) for image in images)
     return (
         f"<section>\n<h2>{html.escape(title)}</h2>\n<table>\n<thead><tr><th>System</th><th>Version</th>"
-        "<th>Edition</th><th>Architecture</th><th>Size</th><th>Download</th><th>Link</th></tr></thead>\n"
+        "<th>Edition</th><th>Architecture</th><th>Size</th><th>Download</th><th>Link</th><th>Vault</th></tr></thead>\n"
         "<tbody>\n" + rows + "\n</tbody>\n</table>\n</section>"
     )
 
@@ -51,6 +61,7 @@ def base_section(title, images):
 def base_sections(catalog):
     """One table per base, in the taxonomy's order, then bases it does not name."""
     names = {family["id"]: family for family in catalog["families"]}
+    vault_names = {family["id"]: family["name"] for family in catalog.get("vault_families", [])}
     bases = {base["id"]: base["en"] for base in catalog.get("taxonomy", {}).get("bases", [])}
     present = {family["category"] for family in catalog["families"]}
     sections = []
@@ -60,7 +71,7 @@ def base_sections(catalog):
             for image in catalog["images"]
             if image["family"] in names and names[image["family"]]["category"] == category
         ]
-        sections.append(base_section(bases.get(category, category), images))
+        sections.append(base_section(bases.get(category, category), images, vault_names))
     return sections
 
 
@@ -68,6 +79,7 @@ def index_page(catalog, updates=()):
     """A readable view of the catalog, for people: Bonk itself only reads the signed JSON."""
     day = lambda unix: time.strftime("%Y-%m-%d", time.gmtime(unix))
     sections = base_sections(catalog)
+    recognised, isos = summary(catalog)
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -95,6 +107,7 @@ def index_page(catalog, updates=()):
 <dt>Published</dt><dd>{day(catalog["sequence"])}</dd>
 <dt>Expires</dt><dd>{day(catalog["expires_unix"])}</dd>
 <dt>Content</dt><dd>{len(catalog["images"])} images, {len(catalog["families"])} systems</dd>
+<dt>Vault</dt><dd>{recognised} of {isos} ISO images start from a Bonk vault (structure read by the published Bonk at each weekly bench)</dd>
 <dt>Links</dt><dd>{sum(i.get("status") == "online" for i in catalog["images"])} online, {sum(i.get("status") == "stale" for i in catalog["images"])} stale (checked at each daily run)</dd>
 </dl>
 </section>

@@ -75,6 +75,7 @@ def main():
     )
     parser.add_argument("--grub", action="store_true", help="add GRUB for the vault (built or reused)")
     parser.add_argument("--proofs", type=Path, help="boot proofs written by the weekly bench")
+    parser.add_argument("--coverage", type=Path, help="vault families of the ISOs, measured by the weekly bench")
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parent.parent
@@ -90,10 +91,12 @@ def main():
     hashes = copy_icons(root, families, args.output)
     previous = previous_catalog(args.previous)
     proofs = json.loads(args.proofs.read_text()) if args.proofs else {}
+    coverage = json.loads(args.coverage.read_text()) if args.coverage else {}
     catalog, failures = build(
         sources, families, hashes, previous, int(time.time()),
         (lambda *_: "0" * 64) if args.no_compute else hash_url,
         proofs,
+        coverage,
     )
     catalog["taxonomy"] = taxonomy
     catalog["vault_families"] = json.loads((root / "sources/vault.json").read_text())

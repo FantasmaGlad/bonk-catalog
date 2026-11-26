@@ -10,6 +10,7 @@ from pathlib import Path
 from catalogue.controles import FAMILY_OPTIONAL
 from catalogue.empreintes import hash_url
 from catalogue.reseau import SourceError, fetch_bytes
+from catalogue.couverture import vault_of
 from catalogue.sources import resolve
 
 
@@ -62,8 +63,8 @@ def previous_catalog(urls, keys=PUBLIC_KEYS):
     return {}
 
 
-def build(sources, families, icon_hashes, previous, now, compute=hash_url, proofs=None):
-    proofs = proofs or {}
+def build(sources, families, icon_hashes, previous, now, compute=hash_url, proofs=None, coverage=None):
+    proofs, coverage = proofs or {}, coverage or {}
     kept = {image["id"]: image for image in previous.get("images", [])}
     images, failures = [], []
     today = time.strftime("%Y-%m-%d", time.gmtime(now))
@@ -85,7 +86,9 @@ def build(sources, families, icon_hashes, previous, now, compute=hash_url, proof
         results = list(pool.map(attempt, sources))
     for source, (image, error) in zip(sources, results):
         if image is not None:
-            images.append(dict(image, status="online", checked=today, **boot_of(proofs, source["id"])))
+            images.append(
+                dict(image, status="online", checked=today, **boot_of(proofs, source["id"]), **vault_of(coverage, source["id"]))
+            )
             continue
         old = kept.get(source["id"])
         age = stale_days(old, now) if old else 0
