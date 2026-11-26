@@ -22,6 +22,7 @@ PUBLISHED = "https://catalog.bonk-os.app/v2/"
 ARCHIVE = re.compile(r"grub-(\d+\.\d+(?:\.\d+)?)\.tar\.xz(?![.\w])")
 # Removable-media names: the firmware of each processor loads its own.
 ARCHITECTURES = {"x86_64": "BOOTX64.EFI", "aarch64": "BOOTAA64.EFI"}
+BIOS = {"boot": "bios/boot.img", "core": "bios/core.img"}
 TIMEOUT_SECONDS = 120
 LISTING_LIMIT = 4 << 20
 
@@ -87,7 +88,8 @@ def asset(output, path):
 
 
 def files(entry):
-    return [entry["efi"][arch] for arch in sorted(entry["efi"])] + [entry["source"], entry["source_signature"]]
+    bios = [entry["bios"][key] for key in sorted(entry.get("bios", {}))]
+    return [entry["efi"][arch] for arch in sorted(entry["efi"])] + bios + [entry["source"], entry["source_signature"]]
 
 
 def reuse(previous, output, published):
@@ -110,11 +112,12 @@ def prepare(output, previous, published=PUBLISHED, build=None):
         "released": source["released"],
         "build": build_id(),
         "efi": {arch: {"path": folder + name} for arch, name in ARCHITECTURES.items()},
+        "bios": {key: {"path": folder + name} for key, name in BIOS.items()},
         "source": {"path": folder + source["archive"]},
         "source_signature": {"path": folder + source["archive"] + ".sig"},
     }
     same = previous and all(previous.get(k) == entry[k] for k in ("version", "build"))
-    if same and set(previous.get("efi", {})) == set(ARCHITECTURES):
+    if same and set(previous.get("efi", {})) == set(ARCHITECTURES) and set(previous.get("bios", {})) == set(BIOS):
         try:
             reuse(previous, output, published)
             return previous, None
@@ -125,6 +128,7 @@ def prepare(output, previous, published=PUBLISHED, build=None):
         fetch_archive(source, output / folder)
         for arch, item in entry["efi"].items():
             (build or run_build)(output / entry["source"]["path"], arch, output / item["path"])
+        (build or run_build)(output / entry["source"]["path"], "bios", output / folder / "bios")
     except (OSError, GrubError, subprocess.CalledProcessError) as error:
         # A mirror outage must not take GRUB out of the catalog: the last published one stays.
         if not previous:
@@ -133,13 +137,14 @@ def prepare(output, previous, published=PUBLISHED, build=None):
         reuse(previous, output, published)
         return previous, f"GRUB {source['version']} not built: {error}"
     entry["efi"] = {arch: asset(output, item["path"]) for arch, item in entry["efi"].items()}
+    entry["bios"] = {key: asset(output, item["path"]) for key, item in entry["bios"].items()}
     for key in ("source", "source_signature"):
         entry[key] = asset(output, entry[key]["path"])
     return entry, None
 
 
-def run_build(archive, arch, efi):
-    subprocess.run(["sh", str(BUILD), str(archive), str(EARLY), arch, str(efi)], check=True)
+def run_build(archive, arch, output):
+    subprocess.run(["sh", str(BUILD), str(archive), str(EARLY), arch, str(output)], check=True)
 
 
 def check(entry, output, signer):
@@ -165,6 +170,8 @@ def status_report(entry, output, error, today, published=PUBLISHED):
                   signature_verified=signed is not None, signed=signed)
     with_url = lambda item: dict(item, url=published + item["path"])
     report["efi"] = {arch: with_url(item) for arch, item in entry["efi"].items()}
+    if "bios" in entry:
+        report["bios"] = {key: with_url(item) for key, item in entry["bios"].items()}
     for key in ("source", "source_signature"):
         report[key] = with_url(entry[key])
     return report
