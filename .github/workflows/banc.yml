@@ -11,7 +11,7 @@ on:
       - "scripts/catalogue/banc.py"
       - "scripts/couverture.py"
       - "scripts/catalogue/couverture.py"
-      - ".github/actions/bonk-publie/action.yml"
+      - "scripts/bonk-publie.sh"
       - "sources/banc.json"
 
 permissions:
@@ -70,10 +70,13 @@ jobs:
           sparse-checkout: .github/scripts
           persist-credentials: false
       - id: bonk
-        uses: ./.github/actions/bonk-publie
-        with:
-          version: ${{ needs.liste.outputs.version }}
-          token: ${{ github.token }}
+        name: Bonk publié, empreinte et attestation contrôlées
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.liste.outputs.version }}
+        run: |
+          bonk=$(scripts/bonk-publie.sh "$VERSION")
+          echo "bonk=$bonk" >> "$GITHUB_OUTPUT"
       - name: Installer QEMU, SeaBIOS et OVMF
         timeout-minutes: 15
         run: |
@@ -143,10 +146,13 @@ jobs:
         with:
           persist-credentials: false
       - id: bonk
-        uses: ./.github/actions/bonk-publie
-        with:
-          version: ${{ needs.liste.outputs.version }}
-          token: ${{ github.token }}
+        name: Bonk publié, empreinte et attestation contrôlées
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.liste.outputs.version }}
+        run: |
+          bonk=$(scripts/bonk-publie.sh "$VERSION")
+          echo "bonk=$bonk" >> "$GITHUB_OUTPUT"
       - name: Mesures précédentes
         run: |
           statut=0
