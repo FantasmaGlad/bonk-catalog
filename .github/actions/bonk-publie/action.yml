@@ -1,0 +1,32 @@
+name: Bonk publié
+description: Télécharge le Bonk de Linux x86_64 d'une release, contrôle son empreinte et son attestation, et donne son chemin.
+inputs:
+  version:
+    description: Tag de la release.
+    required: true
+  token:
+    description: Jeton de lecture de GitHub.
+    required: true
+outputs:
+  bonk:
+    description: Chemin de l'exécutable.
+    value: ${{ steps.bonk.outputs.bonk }}
+runs:
+  using: composite
+  steps:
+    - id: bonk
+      name: Bonk publié, empreinte et attestation contrôlées
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        VERSION: ${{ inputs.version }}
+      run: |
+        archive="bonk-${VERSION#v}-linux-x86_64.tar.gz"
+        dossier="$RUNNER_TEMP/bonk"
+        gh release download "$VERSION" --repo FantasmaGlad/Bonk --pattern "$archive" --pattern SHA256SUMS --dir "$dossier"
+        (cd "$dossier" && sha256sum --check --ignore-missing SHA256SUMS)
+        gh attestation verify "$dossier/$archive" --repo FantasmaGlad/Bonk
+        tar -xzf "$dossier/$archive" -C "$dossier"
+        bonk=$(find "$dossier" -type f -name bonk -perm -u+x | head -n 1)
+        test -n "$bonk"
+        echo "bonk=$bonk" >> "$GITHUB_OUTPUT"

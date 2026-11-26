@@ -38,6 +38,14 @@ class Building(unittest.TestCase):
         self.assertEqual(catalog["images"][0]["boot"], proof)
         self.assertNotIn("boot", unproved["images"][0])
 
+    def test_an_iso_a_vault_family_starts_carries_it(self):
+        coverage = {SOURCE["id"]: {"family": "debian_live", "checked": "2026-11-30"}}
+        with mock.patch.object(construction, "resolve", return_value={"id": SOURCE["id"], "url": "https://new/"}):
+            catalog, _ = construction.build([SOURCE], [], {}, {}, 100, coverage=coverage)
+            unmeasured, _ = construction.build([SOURCE], [], {}, {}, 100)
+        self.assertEqual(catalog["images"][0]["vault_family"], "debian_live")
+        self.assertNotIn("vault_family", unmeasured["images"][0])
+
     def test_sources_keep_their_order_when_read_side_by_side(self):
         sources = [dict(SOURCE, id=f"s{n}") for n in range(20)]
 

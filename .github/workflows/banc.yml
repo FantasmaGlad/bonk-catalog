@@ -9,6 +9,9 @@ on:
       - ".github/workflows/banc.yml"
       - "scripts/banc.py"
       - "scripts/catalogue/banc.py"
+      - "scripts/couverture.py"
+      - "scripts/catalogue/couverture.py"
+      - ".github/actions/bonk-publie/action.yml"
       - "sources/banc.json"
 
 permissions:
@@ -66,20 +69,11 @@ jobs:
           path: bonk-source
           sparse-checkout: .github/scripts
           persist-credentials: false
-      - name: Bonk publié, empreinte et attestation contrôlées
-        env:
-          GH_TOKEN: ${{ github.token }}
-          VERSION: ${{ needs.liste.outputs.version }}
-        run: |
-          archive="bonk-${VERSION#v}-linux-x86_64.tar.gz"
-          dossier="$RUNNER_TEMP/bonk"
-          gh release download "$VERSION" --repo FantasmaGlad/Bonk --pattern "$archive" --pattern SHA256SUMS --dir "$dossier"
-          (cd "$dossier" && sha256sum --check --ignore-missing SHA256SUMS)
-          gh attestation verify "$dossier/$archive" --repo FantasmaGlad/Bonk
-          tar -xzf "$dossier/$archive" -C "$dossier"
-          bonk=$(find "$dossier" -type f -name bonk -perm -u+x | head -n 1)
-          test -n "$bonk"
-          echo "BONK=$bonk" >> "$GITHUB_ENV"
+      - id: bonk
+        uses: ./.github/actions/bonk-publie
+        with:
+          version: ${{ needs.liste.outputs.version }}
+          token: ${{ github.token }}
       - name: Installer QEMU, SeaBIOS et OVMF
         timeout-minutes: 15
         run: |
@@ -99,6 +93,7 @@ jobs:
           LOADER: ${{ matrix.loader }}
           PROOF: ${{ matrix.proof }}
           OPTIONS: ${{ matrix.options }}
+          BONK: ${{ steps.bonk.outputs.bonk }}
         run: |
           travail="$RUNNER_TEMP/banc"
           mkdir -p "$travail"
@@ -138,9 +133,47 @@ jobs:
             ${{ runner.temp }}/banc/*.png
           retention-days: 7
 
+  couverture:
+    name: couverture du coffre
+    needs: liste
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - id: bonk
+        uses: ./.github/actions/bonk-publie
+        with:
+          version: ${{ needs.liste.outputs.version }}
+          token: ${{ github.token }}
+      - name: Mesures précédentes
+        run: |
+          statut=0
+          git ls-remote --exit-code --heads origin preuves > /dev/null || statut=$?
+          case $statut in
+            0) git fetch --depth 1 origin preuves && { git show FETCH_HEAD:vault.json > "$RUNNER_TEMP/precedentes.json" || echo '{}' > "$RUNNER_TEMP/precedentes.json"; } ;;
+            2) echo '{}' > "$RUNNER_TEMP/precedentes.json" ;;
+            *) exit "$statut" ;;
+          esac
+      # Each ISO is read by range requests: only its directories and boot images travel.
+      - name: Familles du coffre de chaque ISO publiée
+        working-directory: scripts
+        env:
+          BONK: ${{ steps.bonk.outputs.bonk }}
+        run: |
+          curl -fsS --retry 5 --retry-all-errors -o "$RUNNER_TEMP/catalog.json" https://catalog.bonk-os.app/v2/catalog.json
+          python3 couverture.py --catalog "$RUNNER_TEMP/catalog.json" --bonk "$BONK" \
+            --previous "$RUNNER_TEMP/precedentes.json" --date "$(date -u +%F)" --out "$RUNNER_TEMP/vault.json"
+      - name: Conserver la mesure
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: couverture
+          path: ${{ runner.temp }}/vault.json
+
   preuves:
     name: preuves
-    needs: [liste, demarrer]
+    needs: [liste, demarrer, couverture]
     if: always() && needs.liste.result == 'success' && github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -156,6 +189,11 @@ jobs:
           pattern: resultat-*
           path: resultats
           merge-multiple: true
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        if: needs.couverture.result == 'success'
+        with:
+          name: couverture
+          path: couverture
       - name: Preuves précédentes
         run: |
           statut=0
@@ -190,12 +228,16 @@ jobs:
           fi
           cp "$RUNNER_TEMP/boot.json" "$dossier/boot.json"
           git -C "$dossier" add boot.json
+          if [ -f couverture/vault.json ]; then
+            cp couverture/vault.json "$dossier/vault.json"
+            git -C "$dossier" add vault.json
+          fi
           if git -C "$dossier" diff --cached --quiet; then
             exit 0
           fi
           git -C "$dossier" -c user.name="github-actions[bot]" \
             -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-            commit -q -m "chore(preuves): relever les démarrages du banc"
+            commit -q -m "chore(preuves): relever les démarrages et la couverture du coffre"
           git -C "$dossier" push -q origin HEAD:preuves
       - name: Signaler les démarrages en échec
         working-directory: scripts

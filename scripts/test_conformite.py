@@ -35,6 +35,7 @@ class Reader(unittest.TestCase):
             "sha256 must be 64 hexadecimal characters": dict(images=(dict(IMAGE, sha256="0"),)),
             "mirror must be https or an onion address": dict(images=(dict(IMAGE, mirrors=["http://m/x.iso"]),)),
             "icon must be a relative path": dict(families=(dict(FAMILY, icon="/etc/x.png"),)),
+            "unknown vault family": dict(images=(dict(IMAGE, vault_family="arch"),)),
         }
         for reason, catalog in cases.items():
             with self.subTest(reason):

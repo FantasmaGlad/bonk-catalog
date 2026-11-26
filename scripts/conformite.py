@@ -103,4 +103,7 @@ def catalog_errors(catalog):
         if family.get("id") in families:
             errors.append(f"vault family {family.get('id')}: duplicate identifier")
         families.add(family.get("id"))
+    for image in catalog["images"]:
+        if "vault_family" in image and image["vault_family"] not in families:
+            errors.append(f"image {image['id']}: unknown vault family")
     return errors
