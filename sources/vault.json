@@ -88,5 +88,35 @@
   "options": "boot=casper username=mint hostname=mint bonk.offset={offset}",
   "location": true,
   "initrd_extra": "newc:scripts/casper-premount/20iso_scan:{bonk}/casper/20iso_scan"
+ },
+ {
+  "id": "garuda",
+  "name": "Garuda Linux",
+  "detect": [
+   [
+    "boot/vmlinuz-x86_64",
+    "boot/initramfs-x86_64.img",
+    "garuda/x86_64/rootfs.sfs"
+   ]
+  ],
+  "kernel": "boot/vmlinuz-x86_64",
+  "initrd": "boot/initramfs-x86_64.img",
+  "options": "misobasedir=garuda root=miso:LABEL={label} rd.driver.pre=loop bonk.offset={offset}",
+  "location": true,
+  "initrd_extra": "newc:etc/udev/rules.d/99-bonk-vault-iso.rules:{bonk}/udev/99-bonk-vault-iso.rules"
+ },
+ {
+  "id": "manjaro",
+  "name": "Manjaro",
+  "detect": [
+   [
+    "boot/vmlinuz-x86_64",
+    "boot/initramfs-x86_64.img",
+    "manjaro/x86_64/rootfs.sfs"
+   ]
+  ],
+  "kernel": "boot/vmlinuz-x86_64",
+  "initrd": "boot/initramfs-x86_64.img",
+  "options": "misobasedir=manjaro misolabel={label} img_label={vault} img_loop={path}"
  }
 ]
