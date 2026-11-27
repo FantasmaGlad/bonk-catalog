@@ -169,6 +169,8 @@ jobs:
           BONK: ${{ steps.bonk.outputs.bonk }}
         run: |
           curl -fsS --retry 5 --retry-all-errors -o "$RUNNER_TEMP/catalog.json" https://catalog.bonk-os.app/v2/catalog.json
+          # Saves the signed catalog: bonk info then reads the vault families it serves, not only its own.
+          "$BONK" catalog list > /dev/null
           python3 couverture.py --catalog "$RUNNER_TEMP/catalog.json" --bonk "$BONK" \
             --previous "$RUNNER_TEMP/precedentes.json" --date "$(date -u +%F)" --out "$RUNNER_TEMP/vault.json"
       - name: Conserver la mesure
