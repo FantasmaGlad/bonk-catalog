@@ -15,6 +15,10 @@
 </p>
 
 <p align="center">
+  <img src="docs/icons/gitlab.svg" width="16" height="16" valign="middle" alt="GitLab">&nbsp;Backup copy: <a href="https://gitlab.com/FantasmaGlad/bonk-catalog">gitlab.com/FantasmaGlad/bonk-catalog</a>
+</p>
+
+<p align="center">
   <a href="https://github.com/FantasmaGlad/bonk-catalog/actions/workflows/publier.yml"><img src="https://github.com/FantasmaGlad/bonk-catalog/actions/workflows/publier.yml/badge.svg?branch=main" alt="Publish"></a>
 </p>
 
