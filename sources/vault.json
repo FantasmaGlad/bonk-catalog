@@ -132,5 +132,34 @@
   "kernel": "antiX/vmlinuz",
   "initrd": "antiX/initrd.gz",
   "options": "blab={vault} fromiso={path}"
+ },
+ {
+  "id": "casper_gz",
+  "name": "Ubuntu-based live (casper)",
+  "detect": [
+   [
+    "casper/vmlinuz",
+    "casper/initrd.gz"
+   ]
+  ],
+  "kernel": "casper/vmlinuz",
+  "initrd": "casper/initrd.gz",
+  "options": "boot=casper bonk.offset={offset}",
+  "location": true,
+  "initrd_extra": "newc:scripts/casper-premount/20iso_scan:{bonk}/casper/20iso_scan"
+ },
+ {
+  "id": "fedora_lorax",
+  "name": "Fedora live (lorax)",
+  "detect": [
+   [
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "LiveOS/squashfs.img"
+   ]
+  ],
+  "kernel": "images/pxeboot/vmlinuz",
+  "initrd": "images/pxeboot/initrd.img",
+  "options": "iso-scan/filename={path} root=live:CDLABEL={label} rd.live.image"
  }
 ]
