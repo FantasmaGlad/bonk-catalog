@@ -1,0 +1,1490 @@
+{
+ "almalinux-10-boot-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-10-boot-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-10-dvd-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-10-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-10-minimal-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-10-minimal-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-8-boot-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-8-boot-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-8-dvd-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-8-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-8-minimal-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-8-minimal-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-9-boot-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-9-boot-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-9-dvd-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-9-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-9-minimal-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "almalinux-9-minimal-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "alpine-latest-extended-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "alpine-latest-standard-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "alpine-latest-standard-riscv64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "alpine-latest-standard-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "alpine-latest-virt-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "alpine-latest-virt-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "altlinux-workstation-11-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "antix-core-i686": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "antix-core-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "antix-full-i686": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "antix-full-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "arch-rolling-x86_64": {
+  "checked": "2026-11-27",
+  "family": "arch"
+ },
+ "artix-plasma-openrc-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "artix-xfce-openrc-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "bazzite-deck-gnome-stable-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "bazzite-deck-stable-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "bazzite-gnome-stable-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "bazzite-nvidia-open-stable-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "bazzite-stable-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "blackarch-netinst-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "blackarch-slim-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "bluefin-stable-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "bodhi-apppack-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "bodhi-hwe-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "bodhi-s76-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "bodhi-standard-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "cachyos-desktop-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "caine-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "centos-stream-10-boot-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "centos-stream-10-boot-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "centos-stream-10-dvd1-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "centos-stream-10-dvd1-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "centos-stream-9-boot-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "centos-stream-9-boot-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "centos-stream-9-dvd1-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "centos-stream-9-dvd1-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "chimera-gnome-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "chimera-gnome-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "chimera-plasma-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "chimera-plasma-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "chimeraos-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "clonezilla-live-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "debian-10-netinst-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "debian-11-netinst-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "debian-12-netinst-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "debian-13-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "debian-13-live-cinnamon-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "debian-13-live-gnome-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "debian-13-live-kde-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "debian-13-live-lxqt-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "debian-13-live-mate-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "debian-13-live-standard-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "debian-13-live-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "debian-13-netinst-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "debian-13-netinst-riscv64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "debian-13-netinst-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "debian-9-netinst-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "debian-edu-13-netinst-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "deepin-25-aarch64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "deepin-25-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "devuan-6-desktop-live-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "devuan-6-desktop-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "devuan-6-minimal-live-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "devuan-6-netinstall-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "devuan-6-server-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "edubuntu-24.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "edubuntu-26.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "edubuntu-26.10-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "endeavouros-x86_64": {
+  "checked": "2026-11-27",
+  "family": "arch"
+ },
+ "fedora-40-workstation-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "fedora-41-workstation-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "fedora-42-workstation-x86_64": {
+  "checked": "2026-11-27",
+  "family": "fedora_live"
+ },
+ "fedora-43-kde-x86_64": {
+  "checked": "2026-11-27",
+  "family": "fedora_live"
+ },
+ "fedora-43-server-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "fedora-43-workstation-aarch64": {
+  "checked": "2026-11-27",
+  "family": "fedora_live"
+ },
+ "fedora-43-workstation-x86_64": {
+  "checked": "2026-11-27",
+  "family": "fedora_live"
+ },
+ "fedora-45-iot-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "fedora-45-iot-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "fedora-45-kde-x86_64": {
+  "checked": "2026-11-27",
+  "family": "fedora_live"
+ },
+ "fedora-45-server-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "fedora-45-workstation-aarch64": {
+  "checked": "2026-11-27",
+  "family": "fedora_live"
+ },
+ "fedora-45-workstation-x86_64": {
+  "checked": "2026-11-27",
+  "family": "fedora_live"
+ },
+ "fedora-coreos-stable-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "fedora-coreos-stable-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "freebsd-14.3-disc1-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "freebsd-14.5-disc1-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "freebsd-14.5-disc1-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "freebsd-14.5-dvd1-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "freebsd-15.1-disc1-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "freebsd-15.1-disc1-riscv64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "freebsd-15.1-disc1-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "freebsd-15.1-dvd1-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "garuda-cinnamon-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "garuda-dr460nized-gaming-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "garuda-dr460nized-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "garuda-gnome-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "garuda-hyprland-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "garuda-i3-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "garuda-kde-lite-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "garuda-mokka-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "garuda-sway-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "garuda-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "gentoo-minimal-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ghostbsd-mate-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ghostbsd-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "gparted-live-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "grml-full-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "grml-full-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "grml-small-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "grml-small-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "haiku-r1beta6-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "hellosystem-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "hirens-bootcd-pe-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ipfire-2-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ipfire-2-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "kali-rolling-installer-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "kali-rolling-installer-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "kali-rolling-netinst-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "kdeneon-user-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "kicksecure-lxqt-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "kubuntu-24.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "kubuntu-26.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "kubuntu-26.10-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "linuxlite-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "linuxmint-21.3-cinnamon-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-21.3-mate-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-21.3-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22-cinnamon-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22-mate-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22.1-cinnamon-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22.1-mate-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22.1-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22.2-cinnamon-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22.2-mate-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22.2-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22.3-cinnamon-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22.3-mate-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "linuxmint-22.3-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "lubuntu-24.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "lubuntu-26.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "lubuntu-26.10-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "mageia-10-dvd-i686": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mageia-10-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mageia-10-live-gnome-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mageia-10-live-plasma-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mageia-10-live-xfce-i686": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mageia-10-live-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mageia-10-netinstall-i686": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mageia-10-netinstall-nonfree-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mageia-10-netinstall-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "manjaro-gnome-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "manjaro-kde-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "manjaro-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mikrotik-routeros-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mikrotik-routeros-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "minios-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mxlinux-fluxbox-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mxlinux-kde-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mxlinux-xfce-ahs-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "mxlinux-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "nitrux-mesa-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "nitrux-nvopen-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "nixos-25.11-graphical-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "nixos-25.11-graphical-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "nixos-25.11-minimal-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "nixos-25.11-minimal-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "nixos-26.05-graphical-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "nixos-26.05-graphical-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "nixos-26.05-minimal-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "nixos-26.05-minimal-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "nobara-official-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openeuler-24.03-lts-sp4-dvd-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openeuler-24.03-lts-sp4-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openeuler-24.03-lts-sp4-everything-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openeuler-24.03-lts-sp4-everything-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openeuler-24.03-lts-sp4-netinst-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openeuler-24.03-lts-sp4-netinst-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openeuler-26.09-devstation-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openeuler-26.09-devstation-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openeuler-26.09-dvd-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openeuler-26.09-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openeuler-26.09-everything-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openeuler-26.09-everything-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openeuler-26.09-netinst-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openeuler-26.09-netinst-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "openmandriva-6.0-cosmic-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openmandriva-6.0-gnome-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openmandriva-6.0-lxqt-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openmandriva-6.0-plasma-wayland-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openmandriva-6.0-plasma-x11-slim-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openmandriva-6.0-plasma-x11-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openmandriva-6.0-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openmandriva-rome-gnome-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openmandriva-rome-plasma-wayland-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "openmandriva-rome-plasma-x11-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "opensuse-leap-15.6-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "opensuse-leap-16.0-offline-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "opensuse-leap-16.0-offline-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "opensuse-leap-16.0-online-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "opensuse-leap-16.0-online-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "opensuse-microos-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "opensuse-tumbleweed-dvd-riscv64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "opensuse-tumbleweed-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "opensuse-tumbleweed-net-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "oraclelinux-10-boot-uek-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "oraclelinux-10-boot-uek-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "oraclelinux-10-boot-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "oraclelinux-10-dvd-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "oraclelinux-10-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "oraclelinux-9-boot-uek-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "oraclelinux-9-boot-uek-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "oraclelinux-9-boot-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "oraclelinux-9-dvd-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "oraclelinux-9-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "parrot-home-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "peppermint-debian-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "peppermint-devuan-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "popos-24.04-intel-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "popos-24.04-nvidia-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "porteus-kde-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "porteus-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "proxmox-ve-8-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "proxmox-ve-9-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "puppy-bookwormpup64-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "puppy-trixiepup64-legacy-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "puppy-trixiepup64-wayland-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "q4os-plasma-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "q4os-trinity-install-cd-i686": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "q4os-trinity-install-cd-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "q4os-trinity-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "qubes-4-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rescuezilla-noble-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "rescuezilla-oracular-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "rescuezilla-questing-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "rescuezilla-resolute-x86_64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "rhino-aarch64": {
+  "checked": "2026-11-27",
+  "family": "mint"
+ },
+ "rhino-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "rockylinux-10-boot-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-10-boot-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-10-dvd-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-10-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-10-minimal-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-10-minimal-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-8-boot-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-8-boot-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-8-dvd-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-8-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-8-minimal-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-8-minimal-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-9-boot-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-9-boot-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-9-dvd-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-9-dvd-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-9-minimal-aarch64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "rockylinux-9-minimal-x86_64": {
+  "checked": "2026-11-27",
+  "family": "anaconda"
+ },
+ "slackware-15.0-i686": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "slackware-15.0-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "slax-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "solus-budgie-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "solus-gnome-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "solus-plasma-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "solus-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "sparky-kde-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "sparky-lxqt-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "sparky-mate-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "sparky-minimalcli-i686": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "sparky-minimalcli-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "sparky-minimalgui-i686": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "sparky-minimalgui-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "sparky-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "systemrescue-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "talos-amd64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "talos-arm64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "templeos-5.03-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "tiny10-23h2-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "tiny11core-25h2-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "tribblix-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "trisquel-12-mini-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "trisquel-12-netinst-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "trisquel-12-netinst-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "trisquel-12-sugar-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "trisquel-12-triskel-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "trisquel-12-trisquel-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "truenas-scale-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "turnkey-core-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "tuxedo-os-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ubuntu-16.04-desktop-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-18.04-desktop-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-20.04-desktop-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-22.04-desktop-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-22.04-server-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-24.04-desktop-aarch64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-24.04-desktop-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-24.04-server-aarch64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-24.04-server-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-26.04-desktop-aarch64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-26.04-desktop-riscv64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ubuntu-26.04-desktop-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-26.04-server-aarch64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-26.04-server-riscv64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ubuntu-26.04-server-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-26.10-desktop-aarch64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-26.10-desktop-riscv64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ubuntu-26.10-desktop-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-26.10-server-aarch64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-26.10-server-riscv64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ubuntu-26.10-server-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-budgie-24.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-budgie-26.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-budgie-26.10-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-mate-24.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-mate-26.10-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-unity-24.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-unity-26.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntu-unity-26.10-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntucinnamon-24.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntucinnamon-26.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntucinnamon-26.10-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntukylin-24.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntukylin-26.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntukylin-26.10-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntustudio-24.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntustudio-26.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ubuntustudio-26.10-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "ultramarine-44-budgie-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ultramarine-44-budgie-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ultramarine-44-gnome-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ultramarine-44-gnome-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ultramarine-44-plasma-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ultramarine-44-plasma-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ultramarine-44-xfce-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "ultramarine-44-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "unraid-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "vanillaos-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "vanillaos-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "void-base-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "void-xfce-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "vyos-stream-x86_64": {
+  "checked": "2026-11-27",
+  "family": "debian_live"
+ },
+ "windows-10-enterprise-ltsc-2021-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "windows-11-enterprise-26h2-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "windows-11-enterprise-ltsc-2024-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "windows-11-iot-ltsc-2024-aarch64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "windows-11-iot-ltsc-2024-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "windows-server-2022-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "windows-server-2025-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "xcpng-8.3-netinstall-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "xcpng-8.3-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "xubuntu-24.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "xubuntu-26.04-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "xubuntu-26.10-x86_64": {
+  "checked": "2026-11-27",
+  "family": "ubuntu"
+ },
+ "yunohost-12-amd64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "zorin-17-core-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ },
+ "zorin-18-core-x86_64": {
+  "checked": "2026-11-27",
+  "family": null
+ }
+}

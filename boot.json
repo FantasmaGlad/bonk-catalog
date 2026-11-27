@@ -6,8 +6,8 @@
    "secureboot"
   ],
   "proved": {
-   "date": "2026-11-26",
-   "bench": "https://github.com/FantasmaGlad/bonk-catalog/actions/runs/45786785627"
+   "date": "2026-11-27",
+   "bench": "https://github.com/FantasmaGlad/bonk-catalog/actions/runs/46006389572"
   },
   "route": "raw",
   "secure_boot": {
@@ -24,8 +24,8 @@
    "secureboot"
   ],
   "proved": {
-   "date": "2026-11-26",
-   "bench": "https://github.com/FantasmaGlad/bonk-catalog/actions/runs/45786785627"
+   "date": "2026-11-27",
+   "bench": "https://github.com/FantasmaGlad/bonk-catalog/actions/runs/46006389572"
   },
   "route": "raw",
   "secure_boot": {
@@ -41,8 +41,8 @@
    "uefi"
   ],
   "proved": {
-   "date": "2026-11-26",
-   "bench": "https://github.com/FantasmaGlad/bonk-catalog/actions/runs/45786785627"
+   "date": "2026-11-27",
+   "bench": "https://github.com/FantasmaGlad/bonk-catalog/actions/runs/46006389572"
   },
   "route": "raw",
   "secure_boot": "unsigned"
