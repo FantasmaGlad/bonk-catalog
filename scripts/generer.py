@@ -62,7 +62,7 @@ def write_site(root, output, catalog, sources, failures):
     (output.parent / "failures.json").write_text(json.dumps(failures, indent=1) + "\n")
 
 
-def main():
+def arguments():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=Path("site/v2"))
     parser.add_argument(
@@ -76,17 +76,24 @@ def main():
     parser.add_argument("--grub", action="store_true", help="add GRUB for the vault (built or reused)")
     parser.add_argument("--proofs", type=Path, help="boot proofs written by the weekly bench")
     parser.add_argument("--coverage", type=Path, help="vault families of the ISOs, measured by the weekly bench")
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def invalid(errors):
+    for error in errors:
+        print(f"INVALID {error}", file=sys.stderr)
+    return bool(errors)
+
+
+def main():
+    args = arguments()
 
     root = Path(__file__).resolve().parent.parent
     sources = json.loads((root / "sources/images.json").read_text())
     families = json.loads((root / "sources/families.json").read_text())
     taxonomy = json.loads((root / "sources/taxonomy.json").read_text())
     bench = json.loads((root / "sources/banc.json").read_text())
-    errors = source_errors(families, sources, taxonomy) + list(bench_errors(bench, {source["id"] for source in sources}))
-    for error in errors:
-        print(f"INVALID {error}", file=sys.stderr)
-    if errors:
+    if invalid(source_errors(families, sources, taxonomy) + list(bench_errors(bench, {source["id"] for source in sources}))):
         return 1
     hashes = copy_icons(root, families, args.output)
     previous = previous_catalog(args.previous)
@@ -105,10 +112,7 @@ def main():
     if not any("url" in image for image in catalog["images"]):
         print("no image could be read: nothing to publish", file=sys.stderr)
         return 1
-    refused = catalog_errors(catalog)
-    for error in refused:
-        print(f"INVALID {error}", file=sys.stderr)
-    if refused:
+    if invalid(catalog_errors(catalog)):
         return 1
     write_site(root, args.output, catalog, sources, failures)
     for failure in failures:
