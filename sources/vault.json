@@ -118,5 +118,19 @@
   "kernel": "boot/vmlinuz-x86_64",
   "initrd": "boot/initramfs-x86_64.img",
   "options": "misobasedir=manjaro misolabel={label} img_label={vault} img_loop={path}"
+ },
+ {
+  "id": "antix",
+  "name": "antiX and MX Linux",
+  "detect": [
+   [
+    "antiX/vmlinuz",
+    "antiX/initrd.gz",
+    "antiX/linuxfs"
+   ]
+  ],
+  "kernel": "antiX/vmlinuz",
+  "initrd": "antiX/initrd.gz",
+  "options": "blab={vault} fromiso={path}"
  }
 ]
