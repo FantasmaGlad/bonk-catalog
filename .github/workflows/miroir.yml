@@ -1,0 +1,33 @@
+name: miroir
+
+# Pushes made with the workflow token start no workflow: the schedule catches them.
+on:
+  push:
+  delete:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: miroir
+  cancel-in-progress: false
+
+jobs:
+  gitlab:
+    name: copie vers GitLab
+    if: github.repository_owner == 'FantasmaGlad' && github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      # A fresh clone of every branch and tag: the copy never depends on the ref that started the run.
+      - name: Copier les branches et les tags
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          DEPOT: ${{ github.event.repository.name }}
+        run: |
+          git clone --bare --quiet "https://github.com/${GITHUB_REPOSITORY}.git" depot.git
+          git -C depot.git push --prune "https://oauth2:${GITLAB_TOKEN}@gitlab.com/FantasmaGlad/${DEPOT}.git" \
+            '+refs/heads/*:refs/heads/*' '+refs/tags/*:refs/tags/*'
