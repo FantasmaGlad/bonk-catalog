@@ -120,6 +120,70 @@
   "options": "misobasedir=manjaro misolabel={label} img_label={vault} img_loop={path}"
  },
  {
+  "id": "openmandriva",
+  "name": "OpenMandriva",
+  "detect": [
+   [
+    "boot/vmlinuz0",
+    "boot/liveinitrd.img",
+    "LiveOS/squashfs.img"
+   ]
+  ],
+  "kernel": "boot/vmlinuz0",
+  "initrd": "boot/liveinitrd.img",
+  "options": "root=live:LABEL={label} rd.live.image bonk.offset={offset}",
+  "location": true,
+  "initrd_extra": "newc:etc/udev/rules.d/99-bonk-vault-iso.rules:{bonk}/udev/99-bonk-vault-iso.rules"
+ },
+ {
+  "id": "mageia",
+  "name": "Mageia Live",
+  "detect": [
+   [
+    "boot/vmlinuz",
+    "boot/initrd.img",
+    "loopbacks/distrib.sqfs"
+   ]
+  ],
+  "kernel": "boot/vmlinuz",
+  "initrd": "boot/initrd.img",
+  "options": "root=mgalive:LABEL={label} bonk.offset={offset}",
+  "location": true,
+  "initrd_extra": "newc:etc/udev/rules.d/99-bonk-vault-iso.rules:{bonk}/udev/99-bonk-vault-iso.rules"
+ },
+ {
+  "id": "agama",
+  "name": "openSUSE installer (Agama)",
+  "detect": [
+   [
+    "boot/x86_64/loader/linux",
+    "boot/x86_64/loader/initrd"
+   ],
+   [
+    "boot/aarch64/loader/linux",
+    "boot/aarch64/loader/initrd"
+   ]
+  ],
+  "label_prefix": "Install-",
+  "kernel": "boot/{cpu}/loader/linux",
+  "initrd": "boot/{cpu}/loader/initrd",
+  "options": "iso-scan/filename={path} root=live:CDLABEL={label} rd.live.image"
+ },
+ {
+  "id": "livemedia",
+  "name": "Fedora-based live",
+  "detect": [
+   [
+    "boot/vmlinuz",
+    "boot/initramfs.img",
+    "LiveOS/squashfs.img"
+   ]
+  ],
+  "kernel": "boot/vmlinuz",
+  "initrd": "boot/initramfs.img",
+  "options": "iso-scan/filename={path} root=live:CDLABEL={label} rd.live.image"
+ },
+ {
   "id": "antix",
   "name": "antiX and MX Linux",
   "detect": [
