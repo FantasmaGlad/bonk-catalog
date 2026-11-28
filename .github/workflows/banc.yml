@@ -188,6 +188,7 @@ jobs:
     permissions:
       contents: write
       issues: write
+      actions: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -247,6 +248,11 @@ jobs:
             -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "chore(preuves): relever les démarrages et la couverture du coffre"
           git -C "$dossier" push -q origin HEAD:preuves
+      # A push made with the workflow token starts no workflow: the copy to GitLab is asked for here.
+      - name: Copier vers GitLab
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run miroir.yml --repo "$GITHUB_REPOSITORY" --ref main
       - name: Signaler les démarrages en échec
         working-directory: scripts
         env:
