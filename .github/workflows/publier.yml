@@ -45,7 +45,9 @@ jobs:
         with:
           persist-credentials: false
       - name: Outils de construction
-        run: sudo apt-get install -y --no-install-recommends bison flex gawk gcc-aarch64-linux-gnu
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends bison flex gawk gcc-aarch64-linux-gnu
       - name: Vérifier l'archive GNU et construire
         run: python3 scripts/grub.py build --output "$RUNNER_TEMP/grub"
 
@@ -64,7 +66,9 @@ jobs:
         with:
           persist-credentials: false
       - name: Outils de construction de GRUB
-        run: sudo apt-get install -y --no-install-recommends bison flex gawk gcc-aarch64-linux-gnu
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends bison flex gawk gcc-aarch64-linux-gnu
       # Written by the weekly bench only, on its own branch; absent before its first run.
       - name: Preuves du banc
         run: |
